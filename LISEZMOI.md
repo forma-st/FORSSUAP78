@@ -7,7 +7,7 @@ Elle reprend le moteur de l'application Eval (UDPS 28, version 2.14) dans un pro
 **En cours d'adaptation** : les grilles, fiches et scénarios PSE hérités d'Eval sont remplacés progressivement par ceux du SDIS 78.
 
 - Application : https://forma-st.github.io/FORSSUAP78/app/
-- Logo : `brand/logo-sdis78-source.png` (provisoire, extrait du programme) ; mettre le logo officiel en haute définition à sa place puis lancer `python3 tools/brand.py` et `python3 build.py`.
+- Logo : `brand/logo-sdis78-source.png` (Groupement Formation, extrait du RIOFE) ; pour le changer, remplacer ce fichier puis lancer `python3 tools/brand.py` et `python3 build.py`.
 
 ---
 ## Historique hérité d'Eval (UDPS 28)
