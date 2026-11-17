@@ -1,0 +1,7 @@
+{
+  "appId": "fr.sdis78.forssuap",
+  "appName": "FORSSUAP 78",
+  "webDir": "../docs/app",
+  "android": { "allowMixedContent": false },
+  "plugins": {}
+}
