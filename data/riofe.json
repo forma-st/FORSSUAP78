@@ -1,0 +1,2245 @@
+{
+ "SUAP": {
+  "auto": {
+   "pages": [
+    {
+     "n": 28,
+     "boxes": [
+      [
+       109.96,
+       114.86
+      ],
+      [
+       155.26,
+       160.3
+      ],
+      [
+       196.22,
+       201.12
+      ]
+     ],
+     "rows": [
+      [
+       86.68,
+       121.13
+      ],
+      [
+       121.28,
+       145.43
+      ],
+      [
+       145.59,
+       162.84
+      ],
+      [
+       163.02,
+       180.24
+      ],
+      [
+       180.41,
+       201.07
+      ],
+      [
+       201.22,
+       225.38
+      ],
+      [
+       225.53,
+       247.35
+      ],
+      [
+       247.51,
+       271.64
+      ]
+     ],
+     "fields": {
+      "nom": [
+       55.89,
+       35.65
+      ],
+      "prenom": [
+       115.34,
+       35.65
+      ],
+      "cis": [
+       53.06,
+       45.81
+      ],
+      "date": [
+       120.23,
+       45.81
+      ],
+      "theme": [
+       43.4,
+       50.17,
+       43.57,
+       57.41
+      ],
+      "missions": [
+       43.4,
+       57.58,
+       43.57,
+       67.06
+      ],
+      "ref": [
+       179.3,
+       54.25,
+       200.47,
+       64.13
+      ]
+     }
+    },
+    {
+     "n": 29,
+     "boxes": [
+      [
+       109.96,
+       114.86
+      ],
+      [
+       155.26,
+       160.3
+      ],
+      [
+       196.22,
+       201.12
+      ]
+     ],
+     "rows": [
+      [
+       10.2,
+       31.97
+      ],
+      [
+       32.14,
+       59.91
+      ],
+      [
+       60.08,
+       81.88
+      ],
+      [
+       82.06,
+       103.86
+      ],
+      [
+       104.03,
+       125.83
+      ],
+      [
+       126.01,
+       140.99
+      ],
+      [
+       141.15,
+       161.82
+      ]
+     ],
+     "fields": {
+      "pos": [
+       9.4,
+       179.5,
+       104.13,
+       218.43
+      ],
+      "neg": [
+       106.95,
+       179.5,
+       202.49,
+       218.43
+      ],
+      "form": [
+       9.4,
+       227.97,
+       104.13,
+       244.59
+      ],
+      "app": [
+       106.95,
+       227.97,
+       202.49,
+       244.59
+      ],
+      "dform": [
+       9.4,
+       252.02,
+       104.13,
+       271.77
+      ],
+      "dapp": [
+       106.95,
+       252.02,
+       202.49,
+       271.77
+      ]
+     }
+    }
+   ],
+   "rows": [
+    {
+     "sa": "Mettre en œuvre les mesures conservatoires en qualité d’équipier du VSAV",
+     "NA": "La mise en œuvre des mesures conservatoires n’ont pas permis la suppression de l’exposition des personnes, à un danger immédiat avec une conformité partielle à la doctrine impliquant un enjeu de sécurité important.",
+     "ECA": "La mise en œuvre des mesures conservatoires ont permis la suppression de l’exposition des personnes, à un danger immédiat, avec une conformité partielle à la doctrine mais sans enjeu de sécurité important ou dans un délai inadapté à la situation.",
+     "A": "La mise en œuvre des mesures conservatoires ont permis la suppression de l’exposition des personnes, à un danger immédiat, conformément à la doctrine et dans un délai adapté à la situation",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Assurer la sécurité immédiate adaptée et permanente des intervenants, de la victime et des autres personnes",
+     "NA": "Aucun moyen n’a été utilisé pour veiller au respect des règles l’hygiène et l’asepsie",
+     "ECA": "L’utilisation des moyens à disposition ne permet pas de veiller au respect des règles l’hygiène et l’asepsie",
+     "A": "L’utilisation des moyens à disposition permet de veiller au respect des règles l’hygiène et l’asepsie",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Se positionner au sein de l’équipe VSAV",
+     "NA": "Le positionnement de l’équipier vis-à-vis de l’équipage et de la victime ne facilite pas le déroulement de l’intervention.",
+     "ECA": "Le positionnement de l’équipier vis-à-vis de l’équipage et de la victime facilite partiellement le déroulement de l’intervention.",
+     "A": "Le positionnement de l’équipier vis-à-vis de l’équipage et de la victime facilite le déroulement de l’intervention.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Collaborer avec les personnels médicaux, paramédicaux",
+     "NA": "La collaboration avec les personnels médicaux et paramédicaux ne facilite pas le déroulement de l’intervention.",
+     "ECA": "La collaboration avec les personnels médicaux et paramédicaux facilite partiellement le déroulement de l’intervention.",
+     "A": "La collaboration avec les personnels médicaux et paramédicaux facilite le déroulement de l’intervention.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Réaliser les bilans en vigueur",
+     "NA": "Les bilans ne sont pas réalisés ou sans matrise du matériel et des techniques ou sans lien avec les ordres et la doctrine.",
+     "ECA": "Les bilans sont réalisés en mettant en œuvre les techniques et le matériel conformément aux ordres et à la doctrine avec l’aide d’un personnel du VSAV.",
+     "A": "Les bilans sont réalisés en mettant en œuvre les techniques et le matériel conformément aux ordres et à la doctrine en autonomie.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Détecter les situations de violences familiales, adapter sa conduite, signaler les faits, indices",
+     "NA": "Les faits et indices d’une suspicion de violence familiale ne sont pas signalés dans l’équipe ou auprès des autorités. Et/ou le comportement n’est pas adapté.",
+     "ECA": "Les faits et indices d’une suspicion de violence familiale sont détectés et signalés dans l’équipe ou auprès des autorités. Le comportement n’est pas adapté.",
+     "A": "Les faits et indices d’une suspicion de violence familiale sont détectés et signalés dans l’équipe ou auprès des autorités. Le comportement est adapté.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge en urgence une personne victime d’une détresse vitale",
+     "NA": "La prise en charge de la détresse vitale n’est pas conforme aux ordres et à la doctrine et/ou est réalisée avec sans efficacité.",
+     "ECA": "La prise en charge de la détresse vitale est conforme aux ordres et à la doctrine et est réalisée avec efficacité avec l’aide d’un autre personnel.",
+     "A": "La prise en charge de la détresse vitale est conforme aux ordres et à la doctrine et est réalisée avec efficacité en autonomie.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge victimes d’accidents spécifiques",
+     "NA": "La prise en charge d’une victime d’accident spécifique n’est pas conforme aux ordres et à la doctrine et/ou est réalisée sans efficacité.",
+     "ECA": "La prise en charge d’une victime d’accident spécifique est conforme aux ordres et à la doctrine et est réalisée avec efficacité avec l’aide d’un autre personnel.",
+     "A": "La prise en charge d’une victime d’accident spécifique est conforme aux ordres et à la doctrine et est réalisée avec efficacité en autonomie.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge les victimes de malaises ou de maladies",
+     "NA": "La prise en charge d’une victime de malaises ou de maladies n’est pas conforme aux ordres et à la doctrine et/ou est réalisée sans efficacité.",
+     "ECA": "La prise en charge d’une victime de malaises ou de maladies est conforme aux ordres et à la doctrine et est réalisée avec efficacité avec l’aide d’un autre personnel.",
+     "A": "La prise en charge de malaises ou de maladies est conforme aux ordres et à la doctrine et est réalisée avec efficacité en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Réaliser l’immobilisation partielle ou totale d’une personne victime d’un accident traumatique de squelette.",
+     "NA": "L’immobilisation n’est pas réussie ou sans respect des ordres et de la doctrine.",
+     "ECA": "L’immobilisation est réussie en mettant en œuvre le matériel et les techniques conformément aux ordres et à la doctrine avec l’aide d’un autre personnel.",
+     "A": "L’immobilisation est réussie en mettant en œuvre le matériel et les techniques conformément aux ordres et à la doctrine, en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Assurer le relevage d’une victime",
+     "NA": "relevage n’est pas réussie ou sans respect des ordres et de la doctrine.",
+     "ECA": "Le relevage est réussie et conforme aux ordres et doctrine avec une mise en œuvre de technique et matériels nécessitant de l’aide.",
+     "A": "Le relevage est réussie en mettant en œuvre le matériel et les techniques conformément aux ordres et à la doctrine, en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Participer à la désincarcération et à l’extraction d’une victime.",
+     "NA": "L’extraction n’est pas réussie ou sans respect des ordres et doctrine, avec des enjeux de sécurité.",
+     "ECA": "L’extraction est réussie et conforme aux ordres et doctrine en mettant en œuvre des techniques et matériel, avec de l’aide.",
+     "A": "L’extraction est réussie et conforme aux ordres et doctrine en mettant en œuvre des techniques et matériel, en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Assurer la surveillance d’une victime lors de sa prise en charge ou de son transport.",
+     "NA": "La surveillance ne permet pas d’identifier l’évolution de l’état de la victime.",
+     "ECA": "La surveillance permet d’identifier les évolutions de l’état de la victime sur demande d’un personnel.",
+     "A": "La surveillance permet d’identifier des évolutions de l’état de la victime en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Travailler en respectant les règles d’hygiène et d’asepsie",
+     "NA": "Lors des actions de secours, les règles d’hygiène et d’asepsie ne sont pas respectées.",
+     "ECA": "Lors des actions de secours, les règles d’hygiène et d’asepsie sont respectées sur demande.",
+     "A": "Lors des actions de secours, les règles d’hygiène et d’asepsie sont respectées avec autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Contrôler, reconditionner les matériels et équipements",
+     "NA": "La capacité opérationnelle des matériels et équipement n’est pas maintenue et/ou sans en respecter la doctrine et les règles d’hygiène et d’asepsie.",
+     "ECA": "La capacité opérationnelle des matériels et équipement est maintenue en respectant partiellement la doctrine et les règles d’hygiène et d’asepsie.",
+     "A": "La capacité opérationnelle des matériels et équipement est maintenue en respectant la doctrine et les règles d’hygiène et d’asepsie.",
+     "comp": "",
+     "page": 1
+    }
+   ]
+  },
+  "crit": {
+   "pages": [
+    {
+     "n": 30,
+     "boxes": [
+      [
+       109.96,
+       114.86
+      ],
+      [
+       155.26,
+       160.3
+      ],
+      [
+       196.22,
+       201.12
+      ]
+     ],
+     "rows": [
+      [
+       84.07,
+       118.55
+      ],
+      [
+       118.71,
+       142.85
+      ],
+      [
+       143.02,
+       160.26
+      ],
+      [
+       160.44,
+       177.66
+      ],
+      [
+       177.84,
+       198.53
+      ],
+      [
+       198.68,
+       222.79
+      ],
+      [
+       222.96,
+       244.76
+      ],
+      [
+       244.93,
+       269.06
+      ]
+     ],
+     "fields": {
+      "nom": [
+       55.89,
+       37.56
+      ],
+      "prenom": [
+       115.34,
+       37.56
+      ],
+      "cis": [
+       53.06,
+       47.72
+      ],
+      "date": [
+       120.23,
+       47.72
+      ],
+      "theme": [
+       43.4,
+       52.08,
+       43.57,
+       59.32
+      ],
+      "missions": [
+       43.4,
+       59.49,
+       43.57,
+       68.97
+      ],
+      "ref": [
+       179.3,
+       56.16,
+       200.47,
+       66.04
+      ]
+     }
+    },
+    {
+     "n": 31,
+     "boxes": [
+      [
+       109.96,
+       114.86
+      ],
+      [
+       155.26,
+       160.3
+      ],
+      [
+       196.22,
+       201.12
+      ]
+     ],
+     "rows": [
+      [
+       10.2,
+       31.97
+      ],
+      [
+       32.14,
+       59.91
+      ],
+      [
+       60.08,
+       81.88
+      ],
+      [
+       82.06,
+       103.86
+      ],
+      [
+       104.03,
+       125.83
+      ],
+      [
+       126.01,
+       140.99
+      ],
+      [
+       141.15,
+       161.82
+      ]
+     ],
+     "fields": {
+      "pos": [
+       9.4,
+       179.5,
+       104.13,
+       218.43
+      ],
+      "neg": [
+       106.95,
+       179.5,
+       202.49,
+       218.43
+      ],
+      "form": [
+       9.4,
+       227.97,
+       104.13,
+       244.59
+      ],
+      "app": [
+       106.95,
+       227.97,
+       202.49,
+       244.59
+      ],
+      "dform": [
+       9.4,
+       252.02,
+       104.13,
+       271.77
+      ],
+      "dapp": [
+       106.95,
+       252.02,
+       202.49,
+       271.77
+      ]
+     }
+    }
+   ],
+   "rows": [
+    {
+     "sa": "Mettre en œuvre les mesures conservatoires en qualité d’équipier du VSAV",
+     "NA": "La mise en œuvre des mesures conservatoires n’ont pas permis la suppression de l’exposition des personnes, à un danger immédiat avec une conformité partielle à la doctrine impliquant un enjeu de sécurité important.",
+     "ECA": "La mise en œuvre des mesures conservatoires ont permis la suppression de l’exposition des personnes, à un danger immédiat, avec une conformité partielle à la doctrine mais sans enjeu de sécurité important ou dans un délai inadapté à la situation.",
+     "A": "La mise en œuvre des mesures conservatoires ont permis la suppression de l’exposition des personnes, à un danger immédiat, conformément à la doctrine et dans un délai adapté à la situation",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Assurer la sécurité immédiate adaptée et permanente des intervenants, de la victime et des autres personnes",
+     "NA": "Aucun moyen n’a été utilisé pour veiller au respect des règles l’hygiène et l’asepsie",
+     "ECA": "L’utilisation des moyens à disposition ne permet pas de veiller au respect des règles l’hygiène et l’asepsie",
+     "A": "L’utilisation des moyens à disposition permet de veiller au respect des règles l’hygiène et l’asepsie",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Se positionner au sein de l’équipe VSAV",
+     "NA": "Le positionnement de l’équipier vis-à-vis de l’équipage et de la victime ne facilite pas le déroulement de l’intervention.",
+     "ECA": "Le positionnement de l’équipier vis-à-vis de l’équipage et de la victime facilite partiellement le déroulement de l’intervention.",
+     "A": "Le positionnement de l’équipier vis-à-vis de l’équipage et de la victime facilite le déroulement de l’intervention.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Collaborer avec les personnels médicaux, paramédicaux",
+     "NA": "La collaboration avec les personnels médicaux et paramédicaux ne facilite pas le déroulement de l’intervention.",
+     "ECA": "La collaboration avec les personnels médicaux et paramédicaux facilite partiellement le déroulement de l’intervention.",
+     "A": "La collaboration avec les personnels médicaux et paramédicaux facilite le déroulement de l’intervention.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Réaliser les bilans en vigueur",
+     "NA": "Les bilans ne sont pas réalisés ou sans matrise du matériel et des techniques ou sans lien avec les ordres et la doctrine.",
+     "ECA": "Les bilans sont réalisés en mettant en œuvre les techniques et le matériel conformément aux ordres et à la doctrine avec l’aide d’un personnel du VSAV.",
+     "A": "Les bilans sont réalisés en mettant en œuvre les techniques et le matériel conformément aux ordres et à la doctrine en autonomie.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Détecter les situations de violences familiales, adapter sa conduite, signaler les faits, indices",
+     "NA": "Les faits et indices d’une suspicion de violence familiale ne sont pas signalés dans l’équipe ou auprès des autorités. Et/ou le comportement n’est pas adapté.",
+     "ECA": "Les faits et indices d’une suspicion de violence familiale sont détectés et signalés dans l’équipe ou auprès des autorités. Le comportement n’est pas adapté.",
+     "A": "Les faits et indices d’une suspicion de violence familiale sont détectés et signalés dans l’équipe ou auprès des autorités. Le comportement est adapté.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge en urgence une personne victime d’une détresse vitale",
+     "NA": "La prise en charge de la détresse vitale n’est pas conforme aux ordres et à la doctrine et/ou est réalisée avec sans efficacité.",
+     "ECA": "La prise en charge de la détresse vitale est conforme aux ordres et à la doctrine et est réalisée avec efficacité avec l’aide d’un autre personnel.",
+     "A": "La prise en charge de la détresse vitale est conforme aux ordres et à la doctrine et est réalisée avec efficacité en autonomie.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge victimes d’accidents spécifiques",
+     "NA": "La prise en charge d’une victime d’accident spécifique n’est pas conforme aux ordres et à la doctrine et/ou est réalisée sans efficacité.",
+     "ECA": "La prise en charge d’une victime d’accident spécifique est conforme aux ordres et à la doctrine et est réalisée avec efficacité avec l’aide d’un autre personnel.",
+     "A": "La prise en charge d’une victime d’accident spécifique est conforme aux ordres et à la doctrine et est réalisée avec efficacité en autonomie.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge les victimes de malaises ou de maladies",
+     "NA": "La prise en charge d’une victime de malaises ou de maladies n’est pas conforme aux ordres et à la doctrine et/ou est réalisée sans efficacité.",
+     "ECA": "La prise en charge d’une victime de malaises ou de maladies est conforme aux ordres et à la doctrine et est réalisée avec efficacité avec l’aide d’un autre personnel.",
+     "A": "La prise en charge de malaises ou de maladies est conforme aux ordres et à la doctrine et est réalisée avec efficacité en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Réaliser l’immobilisation partielle ou totale d’une personne victime d’un accident traumatique de squelette.",
+     "NA": "L’immobilisation n’est pas réussie ou sans respect des ordres et de la doctrine.",
+     "ECA": "L’immobilisation est réussie en mettant en œuvre le matériel et les techniques conformément aux ordres et à la doctrine avec l’aide d’un autre personnel.",
+     "A": "L’immobilisation est réussie en mettant en œuvre le matériel et les techniques conformément aux ordres et à la doctrine, en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Assurer le relevage d’une victime",
+     "NA": "relevage n’est pas réussie ou sans respect des ordres et de la doctrine.",
+     "ECA": "Le relevage est réussie et conforme aux ordres et doctrine avec une mise en œuvre de technique et matériels nécessitant de l’aide.",
+     "A": "Le relevage est réussie en mettant en œuvre le matériel et les techniques conformément aux ordres et à la doctrine, en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Participer à la désincarcération et à l’extraction d’une victime.",
+     "NA": "L’extraction n’est pas réussie ou sans respect des ordres et doctrine, avec des enjeux de sécurité.",
+     "ECA": "L’extraction est réussie et conforme aux ordres et doctrine en mettant en œuvre des techniques et matériel, avec de l’aide.",
+     "A": "L’extraction est réussie et conforme aux ordres et doctrine en mettant en œuvre des techniques et matériel, en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Assurer la surveillance d’une victime lors de sa prise en charge ou de son transport.",
+     "NA": "La surveillance ne permet pas d’identifier l’évolution de l’état de la victime.",
+     "ECA": "La surveillance permet d’identifier les évolutions de l’état de la victime sur demande d’un personnel.",
+     "A": "La surveillance permet d’identifier des évolutions de l’état de la victime en autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Travailler en respectant les règles d’hygiène et d’asepsie",
+     "NA": "Lors des actions de secours, les règles d’hygiène et d’asepsie ne sont pas respectées.",
+     "ECA": "Lors des actions de secours, les règles d’hygiène et d’asepsie sont respectées sur demande.",
+     "A": "Lors des actions de secours, les règles d’hygiène et d’asepsie sont respectées avec autonomie.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Contrôler, reconditionner les matériels et équipements",
+     "NA": "La capacité opérationnelle des matériels et équipement n’est pas maintenue et/ou sans en respecter la doctrine et les règles d’hygiène et d’asepsie.",
+     "ECA": "La capacité opérationnelle des matériels et équipement est maintenue en respectant partiellement la doctrine et les règles d’hygiène et d’asepsie.",
+     "A": "La capacité opérationnelle des matériels et équipement est maintenue en respectant la doctrine et les règles d’hygiène et d’asepsie.",
+     "comp": "",
+     "page": 1
+    }
+   ]
+  },
+  "trans": {
+   "pages": [
+    {
+     "n": 32,
+     "boxes": [
+      [
+       137.44,
+       141.5
+      ],
+      [
+       168.13,
+       172.19
+      ],
+      [
+       197.1,
+       202.53
+      ]
+     ],
+     "rows": [
+      [
+       93.63,
+       107.29
+      ],
+      [
+       107.46,
+       119.82
+      ],
+      [
+       119.98,
+       133.37
+      ],
+      [
+       133.53,
+       146.96
+      ],
+      [
+       147.11,
+       161.23
+      ],
+      [
+       161.4,
+       171.14
+      ],
+      [
+       171.31,
+       181.47
+      ],
+      [
+       181.65,
+       194.08
+      ],
+      [
+       194.24,
+       208.86
+      ],
+      [
+       214.7,
+       229.31
+      ],
+      [
+       229.48,
+       244.09
+      ],
+      [
+       244.26,
+       254.04
+      ],
+      [
+       254.21,
+       268.85
+      ]
+     ],
+     "fields": {
+      "nom": [
+       53.35,
+       37.56
+      ],
+      "prenom": [
+       113.01,
+       37.56
+      ],
+      "cis": [
+       50.52,
+       49.11
+      ],
+      "date": [
+       117.9,
+       49.11
+      ],
+      "theme": [
+       40.86,
+       54.91,
+       41.03,
+       62.11
+      ],
+      "missions": [
+       40.86,
+       62.28,
+       41.03,
+       71.8
+      ],
+      "ref": [
+       180.95,
+       59.0,
+       202.12,
+       68.87
+      ]
+     }
+    },
+    {
+     "n": 33,
+     "boxes": [
+      [
+       137.44,
+       141.5
+      ],
+      [
+       168.13,
+       172.19
+      ],
+      [
+       197.1,
+       202.53
+      ]
+     ],
+     "rows": [
+      [
+       10.2,
+       24.81
+      ],
+      [
+       24.98,
+       35.1
+      ],
+      [
+       35.28,
+       45.01
+      ],
+      [
+       45.19,
+       55.08
+      ],
+      [
+       55.24,
+       65.07
+      ],
+      [
+       65.23,
+       79.85
+      ],
+      [
+       80.01,
+       90.18
+      ],
+      [
+       99.38,
+       113.98
+      ],
+      [
+       114.16,
+       128.8
+      ],
+      [
+       128.98,
+       143.57
+      ],
+      [
+       143.72,
+       158.35
+      ],
+      [
+       158.5,
+       173.13
+      ]
+     ],
+     "fields": {
+      "pos": [
+       9.4,
+       198.47,
+       99.18,
+       227.87
+      ],
+      "neg": [
+       102.0,
+       198.47,
+       202.49,
+       227.87
+      ],
+      "form": [
+       9.4,
+       237.41,
+       99.18,
+       254.04
+      ],
+      "app": [
+       102.0,
+       237.41,
+       202.49,
+       254.04
+      ],
+      "dform": [
+       9.4,
+       261.46,
+       99.18,
+       281.21
+      ],
+      "dapp": [
+       102.0,
+       261.46,
+       202.49,
+       281.21
+      ]
+     }
+    }
+   ],
+   "rows": [
+    {
+     "sa": "Autoévaluer ses compétences et connaissances",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Identifier les axes d’amélioration à développer",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Développer ses compétences et connaissances",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Rechercher les sources ou personnes ressources pour Améliorer ses compétences et connaissances",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Utiliser les moyens de communication à disposition",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Comprendre les documents écrits",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Élaborer des écrits",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Agir conformément aux missions du service public",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Se comporter avec l’usager conformément aux valeurs du service public",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Mesurer les limites d’actions de l’engagement citoyen",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Diffuser et partager les limites d’action de la mission du SIS",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Analyser les forces et faiblesses du collectif",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Développer la notion de collectif",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "mises en",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "public",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "matériels et",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "et",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "d’un",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "matériels et",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "véhicules",
+     "NA": "",
+     "ECA": "",
+     "A": "",
+     "comp": "",
+     "page": 1
+    }
+   ]
+  },
+  "somm": [
+   {
+    "n": 34,
+    "cols": [
+     [
+      126.24,
+      134.83
+     ],
+     [
+      134.83,
+      143.42
+     ],
+     [
+      143.39,
+      151.98
+     ],
+     [
+      151.98,
+      160.57
+     ],
+     [
+      160.54,
+      169.13
+     ],
+     [
+      169.13,
+      177.72
+     ],
+     [
+      177.69,
+      186.28
+     ],
+     [
+      186.28,
+      194.87
+     ],
+     [
+      194.96,
+      203.55
+     ]
+    ],
+    "rows": [
+     {
+      "sa": "Mettre en œuvre les mesures conservatoires en qualité d’équipier du VSAV",
+      "min": "A",
+      "y": [
+       77.79,
+       87.84
+      ]
+     },
+     {
+      "sa": "Assurer la sécurité immédiate, adaptée et permanente des intervenants, de la victime et des autres personnes",
+      "min": "A",
+      "y": [
+       88.02,
+       97.9
+      ]
+     },
+     {
+      "sa": "Se positionner au sein de l’équipe VSAV",
+      "min": "A",
+      "y": [
+       103.36,
+       113.24
+      ]
+     },
+     {
+      "sa": "Collaborer avec les personnels médicaux, paramédicaux",
+      "min": "A",
+      "y": [
+       113.42,
+       123.47
+      ]
+     },
+     {
+      "sa": "Réaliser les bilans en vigueur",
+      "min": "A",
+      "y": [
+       128.76,
+       138.82
+      ]
+     },
+     {
+      "sa": "Détecter les situations de violences familiales, adapter sa conduite, signaler les faits, indices",
+      "min": "A",
+      "y": [
+       138.99,
+       149.05
+      ]
+     },
+     {
+      "sa": "Prendre en charge en urgence une personne victime d’une détresse vitale",
+      "min": "A",
+      "y": [
+       154.34,
+       164.39
+      ]
+     },
+     {
+      "sa": "Prendre en charge les victimes d’accidents spécifiques",
+      "min": "A",
+      "y": [
+       164.57,
+       174.45
+      ]
+     },
+     {
+      "sa": "Prendre en charge les victimes de malaises ou maladies",
+      "min": "A",
+      "y": [
+       174.62,
+       184.68
+      ]
+     },
+     {
+      "sa": "Réaliser l’immobilisation partielle ou totale d’une personne d’un accident traumatique du squelette",
+      "min": "A",
+      "y": [
+       190.15,
+       200.02
+      ]
+     },
+     {
+      "sa": "Assurer le relevage d’une victime",
+      "min": "A",
+      "y": [
+       205.32,
+       215.37
+      ]
+     },
+     {
+      "sa": "Participer à la désincarcération et à l’extraction d’une victime",
+      "min": "A",
+      "y": [
+       215.55,
+       225.6
+      ]
+     },
+     {
+      "sa": "Assurer la surveillance d’une victime lors de sa prise en charge de son transport",
+      "min": "A",
+      "y": [
+       225.78,
+       235.83
+      ]
+     },
+     {
+      "sa": "Travailler en respectant les règles d’hygiène, d’asepsie des équipements",
+      "min": "A",
+      "y": [
+       241.12,
+       251.18
+      ]
+     },
+     {
+      "sa": "Contrôler, reconditionner les matériels et équipements",
+      "min": "A",
+      "y": [
+       251.35,
+       261.23
+      ]
+     }
+    ],
+    "heads": [
+     [
+      68.29,
+      "VEILLER À LA SÉCURITÉ IMMÉDIATE, ADAPTÉE ET PERMANENTE DES INTERVENANTS, DE LA VICTIME ET DES AUTRES PERSONNES"
+     ],
+     [
+      72.57,
+      "EN UTILISANT LES MOYENS À SA DISPOSITION"
+     ],
+     [
+      98.15,
+      "S’INTÉGRER DANS LA CHAINE DU SECOURS D’URGENCE AUX PERSONNES EN QUALITÉ D’ÉQUIPIER"
+     ],
+     [
+      123.63,
+      "RÉALISER UN BILAN CONFORMÉMENT AUX PROTOCOLES EN VIGUEUR"
+     ],
+     [
+      149.16,
+      "RÉALISER DES GESTES TECHNIQUES ADAPTES A L’ÉTAT D’UNE VICTIME"
+     ],
+     [
+      184.89,
+      "CONDITIONNER UNE PERSONNE VICTIME D’UN ACCIDENT TRAUMATIQUE DU SQUELETTE"
+     ],
+     [
+      200.22,
+      "TRANSPORTER UNE VICTIME"
+     ],
+     [
+      235.96,
+      "VEILLER AU RESPECT DES RÈGLES D’HYGIÈNE ET D’ASEPSIE"
+     ]
+    ],
+    "fields": {
+     "nom": [
+      58.35,
+      37.56
+     ],
+     "prenom": [
+      118.17,
+      37.56
+     ],
+     "cis": [
+      55.51,
+      47.72
+     ],
+     "date": [
+      123.07,
+      47.72
+     ]
+    }
+   },
+   {
+    "n": 35,
+    "cols": [
+     [
+      122.29,
+      131.16
+     ],
+     [
+      131.14,
+      140.01
+     ],
+     [
+      139.99,
+      148.85
+     ],
+     [
+      148.84,
+      157.7
+     ],
+     [
+      157.69,
+      166.56
+     ],
+     [
+      166.58,
+      175.45
+     ],
+     [
+      175.43,
+      184.3
+     ],
+     [
+      184.28,
+      193.14
+     ],
+     [
+      193.21,
+      202.08
+     ]
+    ],
+    "rows": [
+     {
+      "sa": "Autoévaluer ses compétences et connaissances",
+      "min": "ECA",
+      "y": [
+       32.46,
+       39.33
+      ]
+     },
+     {
+      "sa": "Identifier les axes d’amélioration à développer",
+      "min": "ECA",
+      "y": [
+       39.51,
+       46.57
+      ]
+     },
+     {
+      "sa": "Développer ses compétences et connaissances",
+      "min": "ECA",
+      "y": [
+       52.03,
+       58.91
+      ]
+     },
+     {
+      "sa": "Rechercher les sources ou personnes ressources pour Améliorer ses compétences et connaissances",
+      "min": "ECA",
+      "y": [
+       59.09,
+       66.15
+      ]
+     },
+     {
+      "sa": "Utiliser les moyens de communication à disposition",
+      "min": "ECA",
+      "y": [
+       71.44,
+       78.49
+      ]
+     },
+     {
+      "sa": "Comprendre les documents écrits",
+      "min": "ECA",
+      "y": [
+       78.67,
+       85.72
+      ]
+     },
+     {
+      "sa": "Élaborer des écrits",
+      "min": "ECA",
+      "y": [
+       85.9,
+       92.78
+      ]
+     },
+     {
+      "sa": "Agir conformément aux missions du service public",
+      "min": "ECA",
+      "y": [
+       98.25,
+       105.3
+      ]
+     },
+     {
+      "sa": "Se comporter avec l’usager conformément aux valeurs du service public",
+      "min": "ECA",
+      "y": [
+       105.3,
+       112.36
+      ]
+     },
+     {
+      "sa": "Mesurer les limites d’actions de l’engagement citoyen",
+      "min": "ECA",
+      "y": [
+       117.65,
+       124.71
+      ]
+     },
+     {
+      "sa": "Diffuser et partager les limites d’action de la mission du SIS",
+      "min": "ECA",
+      "y": [
+       124.88,
+       131.94
+      ]
+     },
+     {
+      "sa": "Analyser les forces et faiblesses du collectif",
+      "min": "ECA",
+      "y": [
+       137.23,
+       144.29
+      ]
+     },
+     {
+      "sa": "Développer la notion de collectif",
+      "min": "ECA",
+      "y": [
+       144.46,
+       151.52
+      ]
+     },
+     {
+      "sa": "Se comporter de façon adaptée lors des mises en activités",
+      "min": "ECA",
+      "y": [
+       151.69,
+       158.57
+      ]
+     },
+     {
+      "sa": "Partager l’intérêt commun",
+      "min": "ECA",
+      "y": [
+       163.87,
+       170.92
+      ]
+     },
+     {
+      "sa": "Favoriser la bienveillance",
+      "min": "ECA",
+      "y": [
+       171.1,
+       178.15
+      ]
+     },
+     {
+      "sa": "Échanger avec bienveillance et attention",
+      "min": "ECA",
+      "y": [
+       183.44,
+       190.5
+      ]
+     },
+     {
+      "sa": "Partager en s’assurant d’être compris",
+      "min": "ECA",
+      "y": [
+       190.68,
+       197.73
+      ]
+     },
+     {
+      "sa": "Agir dans le cadre de sa mission de service public",
+      "min": "ECA",
+      "y": [
+       197.91,
+       204.79
+      ]
+     },
+     {
+      "sa": "Rendre compte des situations rencontrées",
+      "min": "ECA",
+      "y": [
+       204.96,
+       212.02
+      ]
+     },
+     {
+      "sa": "Analyser l’état et le fonctionnement des matériels et véhicules avant et durant l’intervention",
+      "min": "ECA",
+      "y": [
+       217.31,
+       224.37
+      ]
+     },
+     {
+      "sa": "Contrôler après l’intervention l’état et le fonctionnement des équipements, matériels et véhicules",
+      "min": "ECA",
+      "y": [
+       224.54,
+       231.6
+      ]
+     },
+     {
+      "sa": "Mesurer l’impact d’une anomalie et d’un dysfonctionnement",
+      "min": "ECA",
+      "y": [
+       231.77,
+       238.83
+      ]
+     },
+     {
+      "sa": "Rendre opérationnel les équipements, matériels et véhicule",
+      "min": "ECA",
+      "y": [
+       244.12,
+       251.0
+      ]
+     },
+     {
+      "sa": "Signaler les équipements, matériels et véhicules défectueux",
+      "min": "ECA",
+      "y": [
+       251.18,
+       258.23
+      ]
+     }
+    ],
+    "heads": [
+     [
+      27.26,
+      "DÉVELOPPER LA RÉFLEXIVITÉ"
+     ],
+     [
+      46.79,
+      "ENGAGER UNE DÉMARCHE DE DÉVELOPPEMENT PERMANENT"
+     ],
+     [
+      66.3,
+      "COMPRENDRE ET RÉDIGER DES ÉCRITS"
+     ],
+     [
+      93.02,
+      "EXERCER EN QUALITÉ D'ACTEUR DU SERVICE PUBLIC"
+     ],
+     [
+      112.54,
+      "DIFFUSER LA CULTURE DU SERVICE PUBLIC"
+     ],
+     [
+      132.1,
+      "S'INTÉGRER AU SEIN DU COLLECTIF"
+     ],
+     [
+      158.77,
+      "TRAVAILLER AVEC ET POUR LE COLLECTIF"
+     ],
+     [
+      178.33,
+      "ÉCHANGER ET PARTAGER LES INFORMATIONS"
+     ],
+     [
+      212.2,
+      "CONTRÔLER LES MATÉRIELS ET VÉHICULES"
+     ],
+     [
+      238.92,
+      "RECONDITIONNER LES ÉQUIPEMENTS, MATÉRIELS ET VÉHICULES"
+     ]
+    ],
+    "fields": {}
+   }
+  ]
+ },
+ "PS": {
+  "auto": {
+   "pages": [
+    {
+     "n": 28,
+     "boxes": [
+      [
+       103.89,
+       108.48
+      ],
+      [
+       148.87,
+       153.78
+      ],
+      [
+       193.92,
+       200.66
+      ]
+     ],
+     "rows": [
+      [
+       81.49,
+       100.9
+      ],
+      [
+       101.07,
+       135.53
+      ],
+      [
+       135.68,
+       166.73
+      ],
+      [
+       166.9,
+       183.71
+      ],
+      [
+       183.87,
+       205.68
+      ],
+      [
+       205.85,
+       229.1
+      ],
+      [
+       229.27,
+       251.07
+      ]
+     ],
+     "fields": {
+      "nom": [
+       53.49,
+       30.49
+      ],
+      "prenom": [
+       113.07,
+       30.49
+      ],
+      "cis": [
+       50.64,
+       40.65
+      ],
+      "date": [
+       117.88,
+       40.65
+      ],
+      "theme": [
+       40.86,
+       45.01,
+       41.03,
+       52.25
+      ],
+      "missions": [
+       40.86,
+       52.42,
+       41.03,
+       61.9
+      ],
+      "ref": [
+       179.09,
+       49.09,
+       200.26,
+       58.97
+      ]
+     }
+    },
+    {
+     "n": 29,
+     "boxes": [
+      [
+       105.55,
+       110.14
+      ],
+      [
+       150.0,
+       154.94
+      ],
+      [
+       194.98,
+       201.68
+      ]
+     ],
+     "rows": [
+      [
+       18.98,
+       46.53
+      ],
+      [
+       46.71,
+       77.73
+      ],
+      [
+       77.89,
+       99.71
+      ],
+      [
+       99.87,
+       121.68
+      ]
+     ],
+     "fields": {
+      "pos": [
+       9.4,
+       139.36,
+       104.13,
+       187.73
+      ],
+      "neg": [
+       106.95,
+       139.36,
+       202.49,
+       187.73
+      ],
+      "form": [
+       9.4,
+       197.27,
+       104.13,
+       213.9
+      ],
+      "app": [
+       106.95,
+       197.27,
+       202.49,
+       213.9
+      ],
+      "dform": [
+       9.4,
+       221.33,
+       104.13,
+       241.08
+      ],
+      "dapp": [
+       106.95,
+       221.33,
+       202.49,
+       241.08
+      ]
+     }
+    }
+   ],
+   "rows": [
+    {
+     "sa": "Mettre en œuvre les mesures conservatoires en d’équipier isolé",
+     "NA": "La mise en œuvre des mesures conservatoires ne permet pas de respecter les règles d’hygiène et d’asepsie",
+     "ECA": "La mise en œuvre des mesures conservatoires permet un respect partiel des règles l’hygiène et l’asepsie",
+     "A": "La mise en œuvre des mesures conservatoires permet de respecter les règles d’hygiène et d’asepsie",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "la sécurité immédiate de la victime et des personnes utilisant les moyens à disposition",
+     "NA": "L’utilisation des moyens à disposition ne permet pas d’assurer efficacement la sécurité immédiate de la victime et des autres personnes en s l’u ep xpp ori sm ita ion nt o u nré dd au nis ga en rt à u.",
+     "ECA": "L’utilisation des moyens à disposition permet d’assurer efficacement la sécurité immédiate de la victime et des autres personnes en l’exs pu op sp ir ti im ona n t o nu r aé nd gu eis ra n mt à u d, a is en s’y exposant.",
+     "A": "L’utilisation des moyens à disposition permet d’assurer efficacement la sécurité immédiate de la victime et des autres personnes en supprimant ou réduisant l’exposition à un danger, sans s’y exposer.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Alerter, informer",
+     "NA": "L’alerte ou la demande d’alerte par un témoin n’est pas réalisée ou ne permet pas d’informer les secours adaptés avec des informations représentatives de la situation.",
+     "ECA": "L’alerte ou la demande d’alerte par un témoin permet de prévenir les secours adaptés en transmettant des informations partiellement représentatives de la situation en lien avec la doctrine",
+     "A": "L’alerte ou la demande d’alerte par un témoin permet de prévenir les secours adaptés en transmettant des informations représentatives de la situation en lien avec la doctrine",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Réaliser les bilans",
+     "NA": "Les bilans ne permettent pas d’identifier les techniques de secours à mettre en œuvre.",
+     "ECA": "Les bilans permettent d’identifier les techniques de secours mais ne sont pas conformes à la doctrine.",
+     "A": "Les bilans permettent d’identifier les techniques de secours à mettre en œuvre en conformité avec la doctrine.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge urgence une personne victime d’une détresse vitale",
+     "NA": "Le choix du protocole de prise en charge de la détresse vitale n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de prise en charge de la détresse vitale est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de prise en charge de la détresse vitale est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Assurer seul une prise en charge adaptée de victimes d’accidents spécifiques",
+     "NA": "Le choix du protocole de prise en charge de l’accident spécifique n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de prise en charge de l’accident spécifique est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de prise en charge de l’accident spécifique est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Assurer seul une prise en charge de victime malaises ou de maladies",
+     "NA": "Le choix du protocole de prise en charge du malaise ou de la maladie n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de prise en charge du malaise ou de la maladie est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de prise en charge du malaise ou de la maladie est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Réaliser seul les techniques de premiers secours sur une victime ne présentant pas de détresse vitale",
+     "NA": "Le choix du protocole de la prise en charge d’une victime ne présentant pas de détresse vitale n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de la prise de la prise en charge d’une victime ne présentant pas de détresse vitale est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de la prise de la prise en charge d’une victime ne présentant pas de détresse vitale est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Réaliser l’immobilisation partielle ou totale d’une personne victime d’un accident traumatique de squelette.",
+     "NA": "La technique d’immobilisation de la victime n’est pas adaptée au traumatisme. Et/ou ne permet pas une immobilisation partielle ou totale.",
+     "ECA": "La et e lach vn iciq tiu me d e’i sm m ado ab pi tli és ea t aio un d e t traumatisme. mais ne permet pas une immobilisation partielle ou totale.",
+     "A": "La technique d’immobilisation de la victime est adaptée au traumatisme. Et permet une immobilisation partielle ou totale.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Surveiller une victime dans l’attente de sa prise en charge ou de son transfert",
+     "NA": "La surveillance ne permet pas d’identifier l’évolution de l’état de la victime.",
+     "ECA": "La surveillance permet d’identifier tardivement l’évolution de l’état de la victime.",
+     "A": "La surveillance permet d’identifier rapidement une évolution de la l’état de la victime.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "S’intégrer dans la chaine du secours à personne",
+     "NA": "L’intégration dans le dispositif de secours mis en place par les renforts ne facilite pas la prise en charge de la victime",
+     "ECA": "L’intégration dans le dispositif de secours mis en place par les renforts facilite partiellement la prise en charge de la victime",
+     "A": "L’intégration dans le dispositif de secours mis en place par les renforts facilite efficacement la prise en charge de la victime",
+     "comp": "",
+     "page": 1
+    }
+   ]
+  },
+  "crit": {
+   "pages": [
+    {
+     "n": 30,
+     "boxes": [
+      [
+       103.89,
+       108.48
+      ],
+      [
+       148.87,
+       153.78
+      ],
+      [
+       193.92,
+       200.66
+      ]
+     ],
+     "rows": [
+      [
+       81.49,
+       100.9
+      ],
+      [
+       101.07,
+       135.53
+      ],
+      [
+       135.68,
+       166.73
+      ],
+      [
+       166.9,
+       183.71
+      ],
+      [
+       183.87,
+       205.68
+      ],
+      [
+       205.85,
+       229.1
+      ],
+      [
+       229.27,
+       251.07
+      ]
+     ],
+     "fields": {
+      "nom": [
+       53.49,
+       30.49
+      ],
+      "prenom": [
+       113.07,
+       30.49
+      ],
+      "cis": [
+       50.64,
+       40.65
+      ],
+      "date": [
+       117.88,
+       40.65
+      ],
+      "theme": [
+       40.86,
+       45.01,
+       41.03,
+       52.25
+      ],
+      "missions": [
+       40.86,
+       52.42,
+       41.03,
+       61.9
+      ],
+      "ref": [
+       179.09,
+       49.09,
+       200.26,
+       58.97
+      ]
+     }
+    },
+    {
+     "n": 31,
+     "boxes": [
+      [
+       105.55,
+       110.14
+      ],
+      [
+       150.0,
+       154.94
+      ],
+      [
+       194.98,
+       201.68
+      ]
+     ],
+     "rows": [
+      [
+       18.98,
+       46.53
+      ],
+      [
+       46.71,
+       77.73
+      ],
+      [
+       77.89,
+       99.71
+      ],
+      [
+       99.87,
+       121.68
+      ]
+     ],
+     "fields": {
+      "pos": [
+       9.4,
+       139.36,
+       104.13,
+       187.73
+      ],
+      "neg": [
+       106.95,
+       139.36,
+       202.49,
+       187.73
+      ],
+      "form": [
+       9.4,
+       197.27,
+       104.13,
+       213.9
+      ],
+      "app": [
+       106.95,
+       197.27,
+       202.49,
+       213.9
+      ],
+      "dform": [
+       9.4,
+       221.33,
+       104.13,
+       241.08
+      ],
+      "dapp": [
+       106.95,
+       221.33,
+       202.49,
+       241.08
+      ]
+     }
+    }
+   ],
+   "rows": [
+    {
+     "sa": "Mettre en œuvre les mesures conservatoires en d’équipier isolé",
+     "NA": "La mise en œuvre des mesures conservatoires ne permet pas de respecter les règles d’hygiène et d’asepsie",
+     "ECA": "La mise en œuvre des mesures conservatoires permet un respect partiel des règles l’hygiène et l’asepsie",
+     "A": "La mise en œuvre des mesures conservatoires permet de respecter les règles d’hygiène et d’asepsie",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "la sécurité immédiate de la victime et des personnes utilisant les moyens à disposition",
+     "NA": "L’utilisation des moyens à disposition ne permet pas d’assurer efficacement la sécurité immédiate de la victime et des autres personnes en s l’u ep xpp ori sm ita ion nt o u nré dd au nis ga en rt à u.",
+     "ECA": "L’utilisation des moyens à disposition permet d’assurer efficacement la sécurité immédiate de la victime et des autres personnes en l’exs pu op sp ir ti im ona n t o nu r aé nd gu eis ra n mt à u d, a is en s’y exposant.",
+     "A": "L’utilisation des moyens à disposition permet d’assurer efficacement la sécurité immédiate de la victime et des autres personnes en supprimant ou réduisant l’exposition à un danger, sans s’y exposer.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Alerter, informer",
+     "NA": "L’alerte ou la demande d’alerte par un témoin n’est pas réalisée ou ne permet pas d’informer les secours adaptés avec des informations représentatives de la situation.",
+     "ECA": "L’alerte ou la demande d’alerte par un témoin permet de prévenir les secours adaptés en transmettant des informations partiellement représentatives de la situation en lien avec la doctrine",
+     "A": "L’alerte ou la demande d’alerte par un témoin permet de prévenir les secours adaptés en transmettant des informations représentatives de la situation en lien avec la doctrine",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Réaliser les bilans",
+     "NA": "Les bilans ne permettent pas d’identifier les techniques de secours à mettre en œuvre.",
+     "ECA": "Les bilans permettent d’identifier les techniques de secours mais ne sont pas conformes à la doctrine.",
+     "A": "Les bilans permettent d’identifier les techniques de secours à mettre en œuvre en conformité avec la doctrine.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Prendre en charge urgence une personne victime d’une détresse vitale",
+     "NA": "Le choix du protocole de prise en charge de la détresse vitale n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de prise en charge de la détresse vitale est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de prise en charge de la détresse vitale est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Assurer seul une prise en charge adaptée de victimes d’accidents spécifiques",
+     "NA": "Le choix du protocole de prise en charge de l’accident spécifique n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de prise en charge de l’accident spécifique est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de prise en charge de l’accident spécifique est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Assurer seul une prise en charge de victime malaises ou de maladies",
+     "NA": "Le choix du protocole de prise en charge du malaise ou de la maladie n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de prise en charge du malaise ou de la maladie est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de prise en charge du malaise ou de la maladie est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 0
+    },
+    {
+     "sa": "Réaliser seul les techniques de premiers secours sur une victime ne présentant pas de détresse vitale",
+     "NA": "Le choix du protocole de la prise en charge d’une victime ne présentant pas de détresse vitale n’est pas adapté et/ou la technique n’est pas efficace",
+     "ECA": "Le choix du protocole de la prise de la prise en charge d’une victime ne présentant pas de détresse vitale est adapté mais la technique est partiellement efficace",
+     "A": "Le choix du protocole de la prise de la prise en charge d’une victime ne présentant pas de détresse vitale est adapté et la technique est efficace.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Réaliser l’immobilisation partielle ou totale d’une personne victime d’un accident traumatique de squelette.",
+     "NA": "La technique d’immobilisation de la victime n’est pas adaptée au traumatisme. Et/ou ne permet pas une immobilisation partielle ou totale.",
+     "ECA": "La et e lach vn iciq tiu me d e’i sm m ado ab pi tli és ea t aio un d e t traumatisme. mais ne permet pas une immobilisation partielle ou totale.",
+     "A": "La technique d’immobilisation de la victime est adaptée au traumatisme. Et permet une immobilisation partielle ou totale.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "Surveiller une victime dans l’attente de sa prise en charge ou de son transfert",
+     "NA": "La surveillance ne permet pas d’identifier l’évolution de l’état de la victime.",
+     "ECA": "La surveillance permet d’identifier tardivement l’évolution de l’état de la victime.",
+     "A": "La surveillance permet d’identifier rapidement une évolution de la l’état de la victime.",
+     "comp": "",
+     "page": 1
+    },
+    {
+     "sa": "S’intégrer dans la chaine du secours à personne",
+     "NA": "L’intégration dans le dispositif de secours mis en place par les renforts ne facilite pas la prise en charge de la victime",
+     "ECA": "L’intégration dans le dispositif de secours mis en place par les renforts facilite partiellement la prise en charge de la victime",
+     "A": "L’intégration dans le dispositif de secours mis en place par les renforts facilite efficacement la prise en charge de la victime",
+     "comp": "",
+     "page": 1
+    }
+   ]
+  },
+  "somm": [
+   {
+    "n": 33,
+    "cols": [
+     [
+      145.44,
+      153.73
+     ],
+     [
+      153.75,
+      162.04
+     ],
+     [
+      162.0,
+      170.29
+     ],
+     [
+      170.3,
+      178.59
+     ],
+     [
+      178.6,
+      186.89
+     ],
+     [
+      186.89,
+      195.19
+     ],
+     [
+      195.19,
+      203.48
+     ]
+    ],
+    "rows": [
+     {
+      "sa": "Mettre en œuvre les mesures conservatoires en qualité d’équipier isolé",
+      "min": "A",
+      "y": [
+       40.04,
+       49.92
+      ]
+     },
+     {
+      "sa": "Assurer la sécurité immédiate de la victime et des autres personnes en utilisant les moyens à sa disposition",
+      "min": "A",
+      "y": [
+       50.27,
+       60.15
+      ]
+     },
+     {
+      "sa": "Alerter, informer",
+      "min": "A",
+      "y": [
+       60.32,
+       70.38
+      ]
+     },
+     {
+      "sa": "Réaliser les bilans",
+      "min": "A",
+      "y": [
+       70.56,
+       80.61
+      ]
+     },
+     {
+      "sa": "Prendre en charge en urgence une personne victime d’une détresse vitale",
+      "min": "A",
+      "y": [
+       85.9,
+       95.96
+      ]
+     },
+     {
+      "sa": "Assurer seul une prise en charge adaptée de victime d’accidents spécifiques",
+      "min": "A",
+      "y": [
+       96.13,
+       106.19
+      ]
+     },
+     {
+      "sa": "Assurer seul une prise en charge adaptée de victime de malaises ou maladies",
+      "min": "A",
+      "y": [
+       106.19,
+       116.24
+      ]
+     },
+     {
+      "sa": "Réaliser seul les techniques de premiers secours sur une victime ne présentant pas de détresse vitale",
+      "min": "A",
+      "y": [
+       121.53,
+       131.59
+      ]
+     },
+     {
+      "sa": "Réaliser l’immobilisation partielle ou totale d’une personne victime d’un accident traumatique du squelette",
+      "min": "A",
+      "y": [
+       131.76,
+       141.82
+      ]
+     },
+     {
+      "sa": "Surveiller une victime dans l’attente de sa prise en charge ou de son transfert",
+      "min": "A",
+      "y": [
+       147.11,
+       157.16
+      ]
+     },
+     {
+      "sa": "S’intégrer dans la chaîne du secours à personne",
+      "min": "A",
+      "y": [
+       157.34,
+       167.39
+      ]
+     }
+    ],
+    "heads": [
+     [
+      34.85,
+      "ASSURER UNE PROTECTION IMMÉDIATE DE LA VICTIME, ALERTER LES SECOURS ET RÉALISER LES BILANS"
+     ],
+     [
+      80.74,
+      "ASSURER SEUL LA PRISE EN CHARGE EN URGENCE D’UNE PERSONNE VICTIME D’UNE DÉTRESSE VITALE"
+     ],
+     [
+      116.43,
+      "APPLIQUER SEUL LES TECHNIQUES DE PREMIERS SECOURS SUR UNE VICTIME NE PRÉSENTANT PAS DE DÉTRESSE VITALE"
+     ],
+     [
+      141.96,
+      "ASSURER LA SURVEILLANCE D’UNE VICTIME DANS L’ATTENTE DE SA PRISE EN CHARGE OU DE SON TRANSFERT"
+     ]
+    ],
+    "fields": {}
+   },
+   {
+    "n": 33,
+    "cols": [
+     [
+      144.44,
+      152.86
+     ],
+     [
+      152.87,
+      161.29
+     ],
+     [
+      160.22,
+      168.64
+     ],
+     [
+      169.73,
+      178.15
+     ],
+     [
+      178.11,
+      186.53
+     ],
+     [
+      186.53,
+      194.95
+     ],
+     [
+      194.96,
+      203.38
+     ]
+    ],
+    "rows": [
+     {
+      "sa": "Observer la situation, le contexte, l’environnement",
+      "min": "ECA",
+      "y": [
+       205.67,
+       215.37
+      ]
+     },
+     {
+      "sa": "Analyser et identifier les risques, les dangers et les enjeux liés aux risques et aux personnes",
+      "min": "ECA",
+      "y": [
+       215.55,
+       225.42
+      ]
+     },
+     {
+      "sa": "Adapter son comportement aux circonstances, aux enjeux et aux risques",
+      "min": "ECA",
+      "y": [
+       230.54,
+       240.42
+      ]
+     },
+     {
+      "sa": "Anticiper sur les évolutions de la situation",
+      "min": "ECA",
+      "y": [
+       240.59,
+       250.47
+      ]
+     }
+    ],
+    "heads": [
+     [
+      200.6,
+      "ANALYSER LE CONTEXTE, IDENTIFIER LES SITUATIONS COMPLEXES ET/OU A RISQUES"
+     ],
+     [
+      225.63,
+      "S’ADAPTER EN FONCTION DES CIRCONSTANCES ET DES ÉVOLUTIONS"
+     ]
+    ],
+    "fields": {}
+   }
+  ]
+ }
+}

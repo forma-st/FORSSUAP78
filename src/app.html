@@ -151,6 +151,10 @@ button.line:hover{background:var(--surface-2)}
 .seg{display:flex;gap:6px;flex-wrap:wrap}
 .lv{min-width:52px;height:46px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);font-weight:800;font-size:1rem;color:var(--tone);padding:0 10px}
 .lv.on{background:var(--tone);border-color:var(--tone);color:#fff}
+.lv.selfmk{outline:3px dashed var(--tone);outline-offset:2px;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--tone) 32%,transparent) 0 5px,transparent 5px 10px)}
+.lv.selfmk.on{background:var(--tone)}
+.crit.bloc{background:var(--brand);color:#fff}.crit.bloc .cl{color:#fff;font-weight:800;font-size:.85rem;letter-spacing:.02em}
+details.desc{margin-top:4px;font-weight:500;font-size:.8rem}details.desc summary{cursor:pointer;color:var(--muted)}details.desc div{margin-top:3px;padding-left:6px;border-left:3px solid var(--tone)}
 .t-vertf{--tone:var(--t-vertf)} .t-vert{--tone:var(--t-vert)} .t-orange{--tone:var(--t-orange)} .t-rouge{--tone:var(--t-rouge)} .t-bleu{--tone:var(--t-bleu)} .t-gris{--tone:var(--t-gris)}
 .legend{display:grid;gap:8px}
 .legend div{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
@@ -211,6 +215,7 @@ button.line:hover{background:var(--surface-2)}
 .ed-row{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px}
 .ed-row.lvl{grid-template-columns:70px minmax(0,1fr) 130px}
 .ed-row.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:center}
+.ed-row.two.gr{grid-template-columns:76px minmax(0,1fr) minmax(0,1fr) auto}
 @media (max-width:560px){.ed-row.lvl{grid-template-columns:70px minmax(0,1fr)}.ed-row.lvl select{grid-column:1 / -1}}
 .ed-tools{display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap}
 .subs{display:grid;gap:6px;padding-left:14px;border-left:2px solid var(--line)}
@@ -247,7 +252,7 @@ input[type=color]{width:52px;height:40px;border:1px solid var(--line);border-rad
    Constantes et utilitaires
    ========================================================= */
 const KEY='forssuap78-v1';
-const APP_VERSION='1.0.0';
+const APP_VERSION='1.1.0';
 const LOGO='__LOGO__', MARK='__MARK__';
 const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
@@ -306,6 +311,116 @@ const FORM_HEADER=r=>({left:'EPN ANPS',center:'Conception des formations',title:
 const g=(title,items)=>({id:slug(title).toLowerCase(),title,items:items.map((l,i)=>({id:slug(title).toLowerCase().slice(0,14)+'-'+(i+1),label:l}))});
 /* Fiches d'évaluation des techniques pédagogiques (PIC F, PAE FPSE) extraites des référentiels (tools/fiches.py) */
 const FICHES=__FICHES__;
+/* =========================================================
+   Référentiels du SDIS 78 (RIOFE) : grilles, contenu et géométrie extraits des PDF d'origine (tools/riofe.py)
+   Niveaux : A acquis (vert) · ECA en cours d'acquisition (orange) · NA non acquis (rouge).
+   Validation : un savoir-agir est validé quand il a été observé au moins deux fois au niveau minimal requis ;
+   un savoir-agir non validé fait échouer tout son bloc (et donc la formation).
+   ========================================================= */
+const RIOFE=__RIOFE__;
+const RIOFE_COURSES={
+  PS:{key:'PS',name:'Prompt Secours',full:'Équipier SPV · Module transverse · Prompt Secours',days:5,h:8,cols:7,
+      blocs:[{fam:'main',page:0,code:22,prefix:'C',title:'AGIR EN QUALITÉ D’ÉQUIPIER PROMPT-SECOURS'},{fam:'adapt',page:1,code:33,prefix:'C',title:'S’ADAPTER À SON ENVIRONNEMENT'}],
+      sheets:{auto:'auto',crit:'crit'},bgKey:'ps',attest:'Équipier SPV – Module Transverse (Prompt Secours)'},
+  EQSUAP:{key:'SUAP',name:'Équipier SUAP',full:'Équipier SPV / SPP · Secours d’urgence aux personnes',days:5,h:8,cols:9,
+      blocs:[{fam:'main',page:0,code:1,prefix:'C',title:'AGIR EN QUALITÉ D’ÉQUIPIER SECOURS D’URGENCE AUX PERSONNES'},{fam:'trans',page:1,code:1,prefix:'T',title:'COMPÉTENCES TRANSVERSALES',
+        sub:[[0,'A – S’IMPLIQUER DANS SON ACTIVITÉ'],[4,'B – AGIR AU SEIN D’UN COLLECTIF'],[8,'C – MAINTENIR LA CAPACITÉ OPÉRATIONNELLE DES ÉQUIPEMENTS, VÉHICULES ET MATÉRIELS']]}],
+      sheets:{auto:'auto',crit:'crit',trans:'trans'},bgKey:'suap',attest:'Équipier SPV – Secours d’urgence aux personnes'}};
+const isRiofe=cur=>!!RIOFE_COURSES[cur];
+const SC_RIOFE=()=>[{code:'A',label:'Acquis',desc:'Réalisé complètement',tone:'vert',result:'ok'},
+  {code:'ECA',label:'En cours d’acquisition',desc:'Réalisé partiellement',tone:'orange',result:'ok'},
+  {code:'NA',label:'Non acquis',desc:'Non réalisé et/ou dangereux',tone:'rouge',result:'ko'}];
+const capFirst=s=>{s=String(s||'').toLowerCase();return s.charAt(0).toUpperCase()+s.slice(1)};
+/* savoirs-agir d'un bloc : intitulés et niveau requis de la grille sommative, descripteurs de la fiche formative */
+function riofeItems(cur,bl){
+  const R=RIOFE[RIOFE_COURSES[cur].key],pg=R.somm[bl.page];
+  const desc=bl.fam==='main'?(R.crit||{rows:[]}).rows:[];
+  return pg.rows.map((r,i)=>{const head=[...pg.heads].reverse().find(h=>h[0]<=r.y[0]+1);const hi=head?pg.heads.indexOf(head):-1;
+    const d=desc[i]||{};return {n:i,code:bl.prefix+(bl.code+i),label:r.sa,min:r.min,head:head?head[1]:'',hi,desc:d.NA?{NA:d.NA,ECA:d.ECA,A:d.A}:null}})}
+function riofeCriteria(cur,fams){const C=RIOFE_COURSES[cur],out=[];
+  C.blocs.filter(b=>fams.includes(b.fam)).forEach((bl,bi)=>{out.push({id:'b'+bi,sec:true,bloc:true,label:bl.title,children:[]});let last=null;
+    riofeItems(cur,bl).forEach(it=>{const sub=(bl.sub||[]).find(s=>s[0]===it.hi);if(sub&&it.hi!==last)out.push({id:'b'+bi+'s'+it.hi,sec:true,bloc:true,label:sub[1],children:[]});
+      if(it.hi!==last){out.push({id:'s'+bi+'-'+it.hi,sec:true,label:capFirst(it.head),children:[]});last=it.hi}
+      out.push({id:it.code.toLowerCase(),code:it.code,label:it.label,feeds:[it.code],desc:it.desc,row:it.n,children:[]})})});
+  return out}
+function riofeTemplates(){const out=[];
+  Object.entries(RIOFE_COURSES).forEach(([cur,C])=>{
+    const hdr=n=>({left:'SDIS 78',center:'Groupement Formation',title:n,ref:C.full});
+    out.push({id:cur.toLowerCase()+'-auto',builtin:true,rev:1,cursus:cur,kind:'formative',riofe:'auto',sheet:'auto',learners:1,scale:SC_RIOFE(),
+      name:`${C.name} · Grille d’autoévaluation accompagnée (MSP)`,header:hdr('Grille d’autoévaluation accompagnée'),criteria:riofeCriteria(cur,['main'])});
+    out.push({id:cur.toLowerCase()+'-crit',builtin:true,rev:1,cursus:cur,kind:'formative',riofe:'crit',sheet:'crit',learners:1,scale:SC_RIOFE(),
+      name:`${C.name} · Évaluation formative critériée (MSP)`,header:hdr('Évaluation formative critériée'),criteria:riofeCriteria(cur,['main'])});
+    if(C.sheets.trans)out.push({id:cur.toLowerCase()+'-trans',builtin:true,rev:1,cursus:cur,kind:'formative',riofe:'crit',sheet:'trans',learners:1,scale:SC_RIOFE(),
+      name:`${C.name} · Évaluation des compétences transversales`,header:hdr('Évaluation formative critériée · compétences transversales'),criteria:riofeCriteria(cur,['trans'])});
+    const crit=[];C.blocs.forEach(bl=>riofeItems(cur,bl).forEach(it=>crit.push({id:'k'+it.code.toLowerCase(),code:it.code,label:it.label,expected:'2'+it.min,fam:bl.fam,page:bl.page,row:it.n,head:capFirst(it.head),bloc:bl.title})));
+    out.push({id:cur.toLowerCase()+'-somm',builtin:true,rev:1,cursus:cur,kind:'certificative',riofe:true,name:`${C.name} · Évaluation sommative et certificative`,
+      header:{title:'Évaluation sommative et certificative',ref:C.full},theme:{band:'#1f3864',light:'#d9e2f3'},passages:{min:2,max:C.cols},scale:SC_RIOFE(),criteria:crit,
+      checks:[{id:'B',label:'Valider l’ensemble des compétences : chaque savoir-agir observé au moins deux fois au niveau minimal requis (un savoir-agir non validé fait échouer son bloc).',auto:true},
+              {id:'C',label:'Avoir suivi l’ensemble de la formation (assiduité).',auto:'presence'}]});
+  });
+  return out}
+/* grille sommative : colonnes MSP propres à chaque famille de fiches (MSP SUAP / compétences transversales) */
+function riofeGrid(c,sess){const t=c.tpl,all=passagesFor(sess,c.pid),fam={};
+  all.forEach(a=>{const f=a.e.tpl.sheet==='trans'?'trans':'main';(fam[f]=fam[f]||[]).push(a)});
+  let dropped=0;Object.keys(fam).forEach(f=>{if(fam[f].length>t.passages.max){dropped+=fam[f].length-t.passages.max;fam[f]=fam[f].slice(-t.passages.max)}});
+  const P=Math.min(t.passages.max,Math.max(t.passages.min,0,...Object.values(fam).map(a=>a.length))+(c.extra||0));
+  const cells={},manual={};
+  t.criteria.forEach(k=>{const L=fam[k.fam]||[];cells[k.id]=[];manual[k.id]=[];for(let p=0;p<P;p++){
+    const a=L[p]?feedValue(L[p],k.code,t):'';const o=(c.overrides[k.id]||{})[p];cells[k.id][p]=o!==undefined?o:a;manual[k.id][p]=o!==undefined&&o!==a}});
+  return {P,auto:all,cells,manual,dropped,fam}}
+/* ---- PDF des RIOFE sur le fond des pages d'origine (géométrie mesurée par tools/riofe.py) ---- */
+const ptmm=v=>v*25.4/72;
+/* attestation d'assiduité (page scannée) : zones des champs, en points, communes aux RIOFE TRA et SUAP */
+const RIOFE_ATTEST={name:[338,376,522,392],dates1:[304,433,522,448],dates2:[117,449,364,464],duree:[330,497,362,511],assid:[276,513,309,527],fait:[389,578,466,594]};
+const LVL_BOX={NA:0,ECA:1,A:2};
+const LVL_RGB={A:[34,139,34],ECA:[214,120,0],NA:[200,16,46]};
+const whiteBox=(doc,b)=>{doc.setFillColor(255,255,255);doc.rect(ptmm(b[0]),ptmm(b[1]),ptmm(b[2]-b[0]),ptmm(b[3]-b[1]),'F')};
+const hhmm=h=>{const m=Math.round((+h||0)*60);return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};
+const frLong=iso=>{if(!iso)return '';const d=new Date(iso+'T12:00:00');return d.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})};
+function riofeRowPos(R,r){let n=r;for(let i=0;i<R.pages.length;i++){const L=R.pages[i].rows;if(n<L.length)return {pi:i,y:L[n]};n-=L.length}return null}
+const trainerFull=id=>{const tr=trainer(id);return tr?[tr.grade,tr.prenom,(tr.nom||'').toUpperCase()].filter(Boolean).join(' '):''};
+/* case du stagiaire : hachures et cadre en pointillés ; case du formateur : croix pleine */
+function hatchBox(doc,x0,y0,x1,y1){doc.setDrawColor(40,40,40);doc.setLineWidth(.2);const w=x1-x0,h=y1-y0;
+  for(let s=-h;s<w;s+=1.1){const u0=Math.max(0,-s),u1=Math.min(h,w-s);if(u1>u0)doc.line(x0+s+u0,y1-u0,x0+s+u1,y1-u1)}
+  doc.setLineDashPattern([.9,.6],0);doc.setLineWidth(.45);doc.rect(x0+.35,y0+.35,w-.7,h-.7);doc.setLineDashPattern([],0);doc.setLineWidth(.25)}
+function drawRiofeSheet(doc,e,sess,li,pi){
+  const t=e.tpl,C=RIOFE_COURSES[t.cursus],R=RIOFE[C.key][t.sheet],pg=R.pages[pi],l=e.learners[li],p=participant(sess,l.pid)||{},P=pen(doc),F=pg.fields||{};
+  bgPage(doc,`riofe-${C.bgKey}-${t.sheet}-${pg.n}`,'p');
+  const at=(f,txt,w=52,o={})=>{if(f&&txt)fit(doc,P,txt,f[0],f[1]-2.6,f[0]+w,f[1]+2.6,Object.assign({s:9.5,b:true,pad:.3},o))};
+  at(F.nom,(p.nom||'').toUpperCase());at(F.prenom,p.prenom||'');at(F.cis,p.cis||'',48);at(F.date&&[F.date[0]+14.6,F.date[1]],fmtDate(e.date),30);
+  const xr=F.ref?F.ref[0]-1.8:180;
+  if(F.theme&&e.theme)fit(doc,P,e.theme,F.theme[0],F.theme[1],xr,F.theme[3],{s:9.5,pad:1.5});
+  if(F.missions&&e.missions)fitBlock(doc,P,e.missions,F.missions[0],F.missions[1],xr,F.missions[3],{s:8.5,pad:1.2});
+  if(F.ref&&e.ref)fit(doc,P,e.ref,F.ref[0],F.ref[1],F.ref[2],F.ref[1]+6,{s:9.5,b:true,a:'center'});
+  t.criteria.filter(c=>!c.sec&&c.row!==undefined).forEach(c=>{const pos=riofeRowPos(R,c.row);if(!pos||pos.pi!==pi)return;const [y0,y1]=pos.y;
+    const self=t.riofe==='auto'?(l.self||{})[c.id]:'';if(self&&LVL_BOX[self]!==undefined){const b=pg.boxes[LVL_BOX[self]];hatchBox(doc,b[0],y0,b[1],y1)}
+    const m=l.marks[c.id];if(m&&LVL_BOX[m]!==undefined){const b=pg.boxes[LVL_BOX[m]];P.cross((b[0]+b[1])/2,(y0+y1)/2,Math.min(2.1,(b[1]-b[0])/2-.6))}});
+  if(F.pos&&l.obs)fitBlock(doc,P,l.obs,F.pos[0],F.pos[1],F.pos[2],F.pos[3],{s:9,pad:1.5});
+  if(F.neg&&l.obs2)fitBlock(doc,P,l.obs2,F.neg[0],F.neg[1],F.neg[2],F.neg[3],{s:9,pad:1.5});
+  if(F.form){const n=(e.evaluatorIds||[]).filter(Boolean).map(trainerFull).filter(Boolean).join(', ');if(n)fitBlock(doc,P,n,F.form[0],F.form[1],F.form[2],F.form[3],{s:9.5,pad:1.5})}
+  if(F.app)fitBlock(doc,P,[p.grade,p.prenom,(p.nom||'').toUpperCase()].filter(Boolean).join(' '),F.app[0],F.app[1],F.app[2],F.app[3],{s:9.5,pad:1.5});
+  if(F.dform)fit(doc,P,fmtDate(e.date),F.dform[0],F.dform[1],F.dform[2],F.dform[1]+6,{s:9.5,pad:1.5});
+  if(F.dapp)fit(doc,P,fmtDate(e.date),F.dapp[0],F.dapp[1],F.dapp[2],F.dapp[1]+6,{s:9.5,pad:1.5});
+  if(pi===R.pages.length-1){P.font(false,6.5,GREY);doc.text(PT(stamp()),14,292)}}
+function riofeSheetPages(e,sess,onlyPid){const C=RIOFE_COURSES[e.tpl.cursus],R=RIOFE[C.key][e.tpl.sheet];
+  return e.learners.map((l,i)=>({l,i})).filter(o=>!onlyPid||o.l.pid===onlyPid).flatMap(o=>R.pages.map((pg,pi)=>({orient:'p',draw:doc=>drawRiofeSheet(doc,e,sess,o.i,pi)})))}
+function riofeSommPages(c,sess){const t=c.tpl,C=RIOFE_COURSES[t.cursus],S=RIOFE[C.key].somm,G=certGrid(c,sess),p=participant(sess,c.pid)||{};
+  return [...new Set(S.map(x=>x.n))].map(n=>({orient:'p',draw:doc=>{const P=pen(doc);bgPage(doc,`riofe-${C.bgKey}-somm-${n}`,'p');
+    const F=Object.assign({},...S.filter(x=>x.n===n).map(x=>x.fields||{}));
+    const at=(f,txt,w=52)=>{if(f&&txt)fit(doc,P,txt,f[0],f[1]-2.6,f[0]+w,f[1]+2.6,{s:9.5,b:true,pad:.3})};
+    if(F.nom){at(F.nom,(p.nom||'').toUpperCase());at(F.prenom,p.prenom||'');at(F.cis,p.cis||'',48);at([F.date[0]+14.6,F.date[1]],fmtDate(sess.end||today()),30)}
+    else{P.font(true,9,BLACK);doc.text(PT(`${C.name} · ${(p.nom||'').toUpperCase()} ${p.prenom||''}${p.cis?' · '+p.cis:''} · ${fmtDate(sess.end||today())}`),105,6.5,{align:'center'})}
+    t.criteria.forEach(k=>{const part=S[k.page];if(!part||part.n!==n)return;const row=part.rows[k.row];if(!row)return;const yc=(row.y[0]+row.y[1])/2;
+      (G.cells[k.id]||[]).forEach((v,pi)=>{if(!v||pi>=part.cols.length)return;const [x0,x1]=part.cols[pi];P.font(true,v==='ECA'?6.5:8,LVL_RGB[v]||BLACK);doc.text(v,(x0+x1)/2,yc,{align:'center',baseline:'middle'})})});
+    P.font(false,6.5,GREY);doc.text(PT(stamp()),14,292)}}))}
+function riofeAttestPages(s,pids){const C=RIOFE_COURSES[s.cursus],days=ensureDays(s),A=RIOFE_ATTEST;
+  return pids.map(pid=>({orient:'p',draw:doc=>{const P=pen(doc),p=participant(s,pid)||{},pr=presenceOf(s,pid);bgPage(doc,`riofe-${C.bgKey}-attest`,'p');
+    Object.values(A).forEach(b=>whiteBox(doc,b));const box=(b,txt,o)=>fit(doc,P,txt,ptmm(b[0]),ptmm(b[1]),ptmm(b[2]),ptmm(b[3]),Object.assign({s:11,b:true,pad:.2},o||{}));
+    box(A.name,`${p.prenom||''} ${(p.nom||'').toUpperCase()} né(e) le ${p.birthDate?fmtDate(p.birthDate):'…………'}`);
+    const ds=days.filter(d=>d.date).map(d=>'le '+fmtDate(d.date));box(A.dates1,ds.slice(0,2).join(' et ')+(ds.length>2?' et':''));box(A.dates2,ds.slice(2).join(' et '));
+    box(A.duree,hhmm(hoursOf(s,days.map(d=>d.id))));box(A.assid,hhmm(hoursOf(s,days.filter(d=>pr[d.id]).map(d=>d.id))));
+    box(A.fait,frLong(s.end||today()),{b:false})}}))}
+
 /* Scénarios de cas concrets PSE1 / PSE2 (tools/scenarios_pse1.py, scenarios_pse2.py) */
 const SCENARIOS=__SCENARIOS__;
 const SC_AB=()=>[{code:'A',label:'Acquis',desc:'Correspond à une maîtrise particulièrement affirmée des compétences qui permet de valider.',tone:'vert',result:'ok'},{code:'B',label:'En cours d’acquisition',desc:'Correspond à des savoirs ou des compétences qui doivent encore être étayés mais qui permet de valider.',tone:'orange',result:'ok'}];
@@ -317,7 +432,8 @@ function ficheTemplates(cur){const F=FICHES[cur]||[];return F.map(f=>({id:f.id,b
   criteria:f.rows.map((r,i)=>r.sec?{id:'s'+i,sec:true,label:r.sec,code:'',children:[]}:{id:'r'+i,code:(r.comp||[]).join(' · '),label:r.label,feeds:r.comp||[],ne:!!r.ne,children:[]})}))}
 const PICF_COMPS=[['1','Est capable d’évaluer le niveau de connaissances acquises et celles restant à acquérir'],['2.1','Est capable d’utiliser avec efficacité un support pédagogique'],['2.2','Est capable de s’appuyer sur les acquis des apprenants dans la progression pédagogique'],['2.3','Est capable de démontrer, diriger, expliquer et justifier'],['3','Est capable d’organiser l’apprentissage des apprenants par groupe'],['4','Est capable de placer les apprenants dans une situation proche de la réalité lors d’une simulation et utiliser une évaluation formative'],['5','Est capable de placer l’apprenant dans une situation de travail de groupe'],['6','Est capable de suivre un RIF et adapter si nécessaire les activités'],['7','Est capable d’évaluer l’apprenant'],['8','Est capable de s’auto évaluer dans son rôle de formateur'],['9','Est capable d’établir une communication dans le cadre de la formation'],['10','Est capable d’adapter sa posture, en maîtrisant le cadre juridique et celui de son autorité d’emploi'],['11','Est capable de gérer la mise en place d’une formation : aspects logistique, administratifs…'],['12','Est capable de faciliter l’acquisition des savoirs en positionnant le groupe dans une situation respectant les conditions d’apprentissage chez l’adulte'],['13','Est capable de gérer les comportements et les attitudes au sein du groupe'],['14','Est capable d’utiliser les outils de communication et créer les supports pédagogiques adaptés']];
 const PAE_COMPS=[['1','Dispenser les enseignements pratiques et théoriques de la sensibilisation aux « gestes qui sauvent »','AB'],['2.1','Dispenser les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours Citoyen »','AB'],['2.2','Évaluer les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours Citoyen »','AB'],['3.1','Dispenser les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 1 »','AB'],['3.2','Évaluer les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 1 »','AB'],['4.1','Dispenser les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 2 »','AB'],['4.2','Évaluer les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 2 »','AB'],['5.1','Maîtriser les techniques des recommandations « Citoyen Sauveteur »','A'],['5.2','Maîtriser les procédures des recommandations « Citoyen Sauveteur »','A'],['6.1','Maîtriser les techniques des recommandations « Premiers Secours en Équipe »','A'],['6.2','Maîtriser les procédures des recommandations « Premiers Secours en Équipe »','A']];
-function builtinTemplates(){return [
+function builtinTemplates(){return riofeTemplates()}
+function builtinTemplatesPSE(){return [
  {id:'pse1-formative',builtin:true,rev:4,cursus:'PSE1',kind:'formative',name:'PSE1 · Évaluation formative (cas concret)',learners:2,header:FORM_HEADER('PSE1'),
   scale:FORMATIVE_SCALE(),situations:SITUATIONS_PSE1(),criteria:[
    {id:'c1',code:'C1',label:'Possède un comportement adapté à la situation',feeds:'1',children:[]},
@@ -552,7 +668,7 @@ function compStatus(c,G,k){
   st.auto=st.count>=req.n&&st.condOk?'oui':'';return st;
 }
 function validOf(c,k,G){const m=c.valid[k.id];if(m)return m;const s=sessById(c.sessionId);if(!s)return '';return compStatus(c,G||certGrid(c,s),k).auto}
-const DUREE={PSE1:5,PSE2:4,PICF:4,PAEFPSE:6,CE:3};const HEURES={PAEFPSE:[8,8,8,8,8.5,8.5]};
+const DUREE={PSE1:5,PSE2:4,PICF:4,PAEFPSE:6,CE:3,PS:5,EQSUAP:5};const HEURES={PAEFPSE:[8,8,8,8,8.5,8.5],PS:[8,8,8,8,8],EQSUAP:[8,8,8,8,8]};
 function defaultDays(s){const n=s.type==='FC'?1:(DUREE[s.cursus]||1);const out=[];let d=s.start?new Date(s.start+'T12:00:00'):null;
   for(let i=0;i<n;i++){let iso='';if(d){while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);iso=d.toISOString().slice(0,10);if(s.end&&iso>s.end)iso='';d.setDate(d.getDate()+1)}out.push({id:'J'+(i+1),date:iso,h:(HEURES[s.cursus]||[])[i]||7})}return out}
 /* journées de formation : J1, J2… avec date et heures ; migration de l'ancienne présence par date */
@@ -567,6 +683,7 @@ const presenceOf=(s,pid)=>((s.presence||{})[pid])||{};
 const thOf=c=>{const t=c&&c.tpl&&c.tpl.theory;return t?{max:t.max||20,pass:t.pass||12,retake:t.retake??null}:{max:20,pass:12,retake:10}};
 const theoryNote=c=>{const n=parseFloat(String((c.theory||{}).score??'').replace(',','.'));return isNaN(n)?null:n};
 function certGrid(c,sess){
+  if(c.tpl.riofe)return riofeGrid(c,sess);
   const t=c.tpl;let auto=passagesFor(sess,c.pid);const over=Math.max(0,auto.length-t.passages.max);if(over)auto=auto.slice(over);
   const P=Math.min(t.passages.max,Math.max(t.passages.min,auto.length+(c.extra||0)));
   const cells={},manual={};
@@ -593,6 +710,11 @@ const evaluatorNames=e=>(e.evaluatorIds||[]).filter(Boolean).map(tName).filter(B
    Données d'exemple (supprimables dans Réglages)
    ========================================================= */
 function seedSamples(d){
+  d.settings.trainers.push({id:'t-ex1',nom:'Exemple',prenom:'Formateur',sample:true},{id:'t-ex2',nom:'Démo',prenom:'Formatrice',sample:true});
+  const s={id:'s-ex1',sample:true,cursus:'PS',title:'Prompt Secours · Session exemple',start:'2026-11-16',end:'2026-11-20',lieu:'CFD Yvelines',trainerIds:['t-ex1','t-ex2'],
+    participants:[{id:'p1',nom:'Exemple',prenom:'Camille',cis:'CIS Exemple'},{id:'p2',nom:'Exemple',prenom:'Louis',cis:'CIS Exemple'},{id:'p3',nom:'Démo',prenom:'Inès',cis:'CIS Démo'}],createdAt:Date.now(),updatedAt:Date.now()};
+  d.sessions.push(s)}
+function seedSamplesPSE(d){
   const T=d.templates;
   d.settings.trainers.push({id:'t-ex1',nom:'Exemple',prenom:'Formateur',sample:true},{id:'t-ex2',nom:'Démo',prenom:'Formatrice',sample:true});
   const s={id:'s-ex1',sample:true,cursus:'PSE1',title:'PSE1 · Session exemple',start:'2026-11-09',end:'2026-11-14',lieu:'Chartres',trainerIds:['t-ex1','t-ex2'],
@@ -651,7 +773,7 @@ function renderTop(){
     right=`<button class="ibtn" data-act="export-menu" aria-label="Exporter et envoyer">${I.share}<span class="lbl small">Envoyer</span></button><button class="ibtn" data-act="edit-session" aria-label="Modifier la formation">${I.edit}</button>`}
   else if(v==='person'){left=back('session');title=`${esc(pName(s,S.pid))}<small>${esc(s.title||s.cursus)}</small>`;right=pdfBtn('pick-export','Exporter')}
   else if(v==='sessionEdit'){left=`<button class="ibtn" data-act="session-cancel" aria-label="Annuler">${I.x}</button>`;title=`${S.draftNew?'Nouvelle formation':'Modifier la formation'}<small>Participants et formateurs</small>`;right=`<button class="ibtn solid" data-act="session-save">Enregistrer</button>`}
-  else if(v==='formative'){const e=curEval();left=back(S.pid?'person':'session');title=`${e.tpl.fiche?esc(e.tpl.ref.replace(/^FE\/(PICF|PAE FPSE)\//,'Fiche n°')):'Cas concret'} · ${esc(fmtDate(e.date))}<small>${esc(e.learners.map(l=>pName(s,l.pid)).join(' · '))}</small>`;right=pdfBtn('pdf-formative')}
+  else if(v==='formative'){const e=curEval();left=back(S.pid?'person':'session');title=`${e.tpl.riofe?'MSP'+(e.ref?' '+esc(e.ref):''):e.tpl.fiche?esc(e.tpl.ref.replace(/^FE\/(PICF|PAE FPSE)\//,'Fiche n°')):'Cas concret'} · ${esc(fmtDate(e.date))}<small>${esc(e.learners.map(l=>pName(s,l.pid)).join(' · '))}</small>`;right=pdfBtn('pdf-formative')}
   else if(v==='cert'){const c=curEval();left=back('person');title=`Certification · ${esc(pName(s,c.pid))}<small>${esc(c.tpl.name)}</small>`;right=pdfBtn('pdf-cert')}
   else if(v==='tech'){const x=curEval();left=back('person');title=`Technicité · ${esc(pName(s,x.pid))}<small>${esc(x.tpl.name)}</small>`;right=pdfBtn('pdf-tech')}
   else if(v==='suivi'){const x=curEval();left=back('person');title=`Suivi · ${esc(pName(s,x.pid))}<small>${esc(x.tpl.name)}</small>`;right=pdfBtn('pdf-suivi')}
@@ -675,8 +797,8 @@ function renderNav(){
 const bind=(path,scope='eval')=>`data-bind="${path}" data-scope="${scope}"`;
 const chip=(act,k,cur,l)=>`<button class="chip ${cur===k?'on':''}" data-act="${act}" data-v="${esc(k)}">${l}</button>`;
 const isFicheCursus=c=>formTpls(c).some(t=>t.fiche);
-const evalWord=s=>isFicheCursus(s.cursus)?'fiche d’évaluation':'cas concret';
-const evalWords=s=>isFicheCursus(s.cursus)?'fiches d’évaluation':'cas concrets';
+const evalWord=s=>isRiofe(s.cursus)?'fiche MSP':isFicheCursus(s.cursus)?'fiche d’évaluation':'cas concret';
+const evalWords=s=>isRiofe(s.cursus)?'fiches MSP':isFicheCursus(s.cursus)?'fiches d’évaluation':'cas concrets';
 const badge=c=>`<span class="badge ${/2/.test(c)?'pse2':''}">${esc(c)}</span>`;
 
 /* =========================================================
@@ -728,7 +850,7 @@ function viewSession(){
       <div class="row">${badge(s.cursus)}<span class="small muted grow">${esc(fmtDate(s.start))}${s.end?' → '+esc(fmtDate(s.end)):''}${s.lieu?' · '+esc(s.lieu):''}</span></div>
       <div class="small"><span class="muted">Formateurs :</span> <b>${esc(sessTrainers(s)||'—')}</b></div>
     </div></div>
-    <div class="row"><button class="btn red grow" data-act="new-formative">${I.plus}${isFicheCursus(s.cursus)?'Nouvelle fiche d’évaluation':'Nouveau cas concret'}</button>${techTpl(s.cursus)?`<button class="btn" data-act="go" data-v="techs">Fiches de technicité</button>`:''}<button class="btn" data-act="export-menu">${I.share}Exporter / envoyer</button></div>
+    <div class="row"><button class="btn red grow" data-act="new-formative">${I.plus}${isRiofe(s.cursus)?'Nouvelle fiche MSP':isFicheCursus(s.cursus)?'Nouvelle fiche d’évaluation':'Nouveau cas concret'}</button>${techTpl(s.cursus)?`<button class="btn" data-act="go" data-v="techs">Fiches de technicité</button>`:''}<button class="btn" data-act="export-menu">${I.share}Exporter / envoyer</button></div>
     ${scList(s.cursus).length?viewScPanel(s):''}
     ${(()=>{const dj=ensureDays(s).find(x=>x.date===today());if(!dj||!parts.length)return '';const all=parts.every(p=>presenceOf(s,p.id)[dj.id]);
       return `<div class="panel"><div class="bd row"><span class="grow"><b>Présence du jour · ${esc(dj.id)}</b> <span class="small muted">${esc(fmtDate(dj.date))} · ${parts.filter(p=>presenceOf(s,p.id)[dj.id]).length}/${parts.length} présents</span></span><button class="btn ${all?'primary':'red'}" data-act="presence-all" data-d="${dj.id}">${all?'✓ Tous présents (annuler)':'Pointer tout le groupe présent'}</button></div></div>`})()}
@@ -740,12 +862,16 @@ function viewSession(){
         <tr style="border-top:1px solid var(--line);background:var(--surface-2)"><td style="padding:6px 14px;font-weight:700;font-size:.82rem">Tous les participants</td>${sessDays(s).map(d=>{const all=parts.every(p=>presenceOf(s,p.id)[d]);return `<td style="text-align:center;padding:4px"><button class="btn sm ${all?'primary':''}" style="min-width:56px;padding:0 8px" data-act="presence-all" data-d="${d}" aria-pressed="${all}" aria-label="${all?'Retirer':'Pointer'} tous les participants en ${esc(d)}">${all?'✓ Tous':'Tous'}</button></td>`}).join('')}<td></td></tr>
         ${parts.map(p=>{const pr=presenceOf(s,p.id);return `<tr style="border-top:1px solid var(--line)"><td style="padding:6px 14px;white-space:nowrap;font-weight:600">${esc(fullName(p))}</td>${sessDays(s).map(d=>`<td style="text-align:center;padding:4px"><button class="chip ${pr[d]?'on':''}" style="min-width:44px;justify-content:center" data-act="presence" data-pid="${p.id}" data-d="${d}" aria-label="${esc(fullName(p))} ${esc(d)}" aria-pressed="${!!pr[d]}">${pr[d]?'✓':'·'}</button></td>`).join('')}<td class="num small" style="text-align:center;font-weight:700">${hoursOf(s,sessDays(s).filter(d=>pr[d]))}/${hoursOf(s,sessDays(s))} h</td></tr>`}).join('')}
       </table></div></details>`:''}
-    ${parts.length&&certTpl(s.cursus)?`<details class="panel" data-panel="theo" ${S.open.theo?'open':''}><summary class="hd" style="cursor:pointer;list-style:none"><h3>Évaluation théorique (D)</h3><span class="small muted">note /20 · 12 minimum · rattrapage 10-11</span></summary>
+    ${parts.length&&certTpl(s.cursus)&&certTpl(s.cursus).checks.some(x=>x.auto==='theory')?`<details class="panel" data-panel="theo" ${S.open.theo?'open':''}><summary class="hd" style="cursor:pointer;list-style:none"><h3>Évaluation théorique (D)</h3><span class="small muted">note /20 · 12 minimum · rattrapage 10-11</span></summary>
       <div class="lines">${parts.map(p=>{const c=certFor(s,p.id),n=c?theoryNote(c):null,ch=c?c.tpl.checks.find(x=>x.auto==='theory'):null,v=c&&c.id&&ch?checkVal(c,ch):(n===null?'':n>=12?'oui':n<10?'non':'');
         return `<div class="line" style="min-height:52px"><span class="grow"><b>${esc(fullName(p))}</b></span><input type="text" inputmode="decimal" style="width:84px;min-height:40px" id="th-${p.id}" value="${esc((c&&c.theory||{}).score??'')}" placeholder="/20" aria-label="Note de ${esc(fullName(p))}" data-bind="score" data-scope="theory" data-pid="${p.id}">
           ${v==='oui'?'<span class="pill ok">D : OUI</span>':v==='non'?'<span class="pill ko">D : NON</span>':n!==null&&n>=10?'<span class="pill wait">Rattrapage</span>':'<span class="pill neutral">À saisir</span>'}</div>`}).join('')}</div></details>`:''}
-    <section class="panel"><div class="hd"><h3>Fin de formation</h3><span class="small muted">${s.type==='FC'?'Formation continue':'Formation initiale'}${s.pvNum?' · PV n°'+esc(s.pvNum):''}</span></div><div class="bd stack" style="gap:10px">
-      ${(()=>{const R=parts.map(p=>resultOfPerson(s,p));const ap=R.filter(v=>v==='apte').length,ko=R.filter(v=>v==='inapte').length;
+    <section class="panel"><div class="hd"><h3>Fin de formation</h3><span class="small muted">${isRiofe(s.cursus)?'Commission de validation':(s.type==='FC'?'Formation continue':'Formation initiale')+(s.pvNum?' · PV n°'+esc(s.pvNum):'')}</span></div><div class="bd stack" style="gap:10px">
+      ${isRiofe(s.cursus)?(()=>{const R=parts.map(p=>resultOfPerson(s,p));const ok=R.filter(v=>v==='apte').length,ko=R.filter(v=>v==='inapte').length;const C=RIOFE_COURSES[s.cursus];
+        return `<div class="small"><b class="num">${ok}</b> formation(s) validée(s) · <b class="num">${ko}</b> non validée(s) · <b class="num">${parts.length-ok-ko}</b> en attente</div>
+        ${EMBED?'':`<div class="row"><button class="btn sm" data-act="doc" data-v="riofe-attest" ${parts.length?'':'disabled'}>${I.pdf}Attestations d’assiduité (${parts.length})</button>
+          ${C.diplome?`<button class="btn sm" data-act="doc" data-v="riofe-dipl" ${ok?'':'disabled'}>${I.pdf}Diplômes (${ok})</button>`:''}
+          <button class="btn sm" data-act="doc" data-v="riofe-somm" ${parts.length?'':'disabled'}>${I.pdf}Grilles sommatives (${parts.length})</button></div>`}`})():(()=>{const R=parts.map(p=>resultOfPerson(s,p));const ap=R.filter(v=>v==='apte').length,ko=R.filter(v=>v==='inapte').length;
         return `<div class="small"><b class="num">${ap}</b> ${s.type==='FC'?'favorable(s)':'apte(s)'} · <b class="num">${ko}</b> ${s.type==='FC'?'défavorable(s)':'inapte(s)'} · <b class="num">${parts.length-ap-ko}</b> en attente${s.pvNum?'':' · <span style="color:var(--t-orange)">n° de PV à saisir (« Modifier la formation »)</span>'}</div>
         ${EMBED?'':`<div class="row">
           <button class="btn sm" data-act="doc" data-v="pv">${I.pdf}Procès-verbal</button>
@@ -754,7 +880,7 @@ function viewSession(){
           <button class="btn sm" data-act="number-certs" ${ap?'':'disabled'}>Numéroter les ${s.type==='FC'?'attestations':'certificats'}</button></div>`}`})()}
       <div class="row"><span class="small grow">Questionnaire de satisfaction : <b class="num">${(s.surveys||[]).length}</b> réponse${(s.surveys||[]).length>1?'s':''}</span><button class="btn sm red" data-act="survey-start">Faire remplir</button><button class="btn sm" data-act="go" data-v="satis">Synthèse</button></div>
     </div></section>
-    <section class="panel"><div class="hd"><h3>Cas concrets (fiches formatives)</h3><span class="small muted num">${F.length}</span></div>
+    <section class="panel"><div class="hd"><h3>${isRiofe(s.cursus)?'Mises en situation professionnelle (fiches MSP)':'Cas concrets (fiches formatives)'}</h3><span class="small muted num">${F.length}</span></div>
       <div class="lines">${flines||`<div class="empty" style="margin:14px">Aucun cas concret. Chaque fiche enregistrée alimente la certification des participants évalués.</div>`}</div></section>
   </div>`;
 }
@@ -778,29 +904,31 @@ function viewPerson(){
   return `<div class="stack">
     <div class="tiles">
       ${tt?`<button class="tile" data-act="open-tech"><span class="eyebrow">A · Fiche de technicité</span><span class="big">${ts.n}/${ts.tot}</span><span class="small muted">${ts.ok?'Toutes les techniques sont faites : ligne A validée':'techniques faites'}</span><div class="bar"><i style="width:${ts.tot?Math.round(ts.n/ts.tot*100):0}%"></i></div></button>`:''}
-      ${ct?`<button class="tile" data-act="open-cert"><span class="eyebrow">Certification individuelle</span><span class="big" style="color:${v==='apte'?'var(--t-vert)':v==='inapte'?'var(--t-rouge)':'var(--brand)'}">${v==='apte'?'APTE':v==='inapte'?'INAPTE':'En cours'}</span><span class="small muted num">${cs.n}/${cs.tot} compétences validées · ${Math.min(pass.length,ct.passages.max)} passage${pass.length>1?'s':''} (${ct.passages.min} à ${ct.passages.max})</span></button>`:''}
+      ${ct?`<button class="tile" data-act="open-cert"><span class="eyebrow">${ct.riofe?'Évaluation sommative et certificative':'Certification individuelle'}</span><span class="big" style="color:${v==='apte'?'var(--t-vert)':v==='inapte'?'var(--t-rouge)':'var(--brand)'}">${v==='apte'?(ct.riofe?'VALIDÉE':'APTE'):v==='inapte'?(ct.riofe?'NON VALIDÉE':'INAPTE'):'En cours'}</span><span class="small muted num">${cs.n}/${cs.tot} compétences validées · ${Math.min(pass.length,ct.passages.max)} passage${pass.length>1?'s':''} (${ct.passages.min} à ${ct.passages.max})</span></button>`:''}
     </div>
-    <div class="row"><button class="btn red grow" data-act="new-formative" data-pid="${p.id}">${I.plus}${isFicheCursus(s.cursus)?'Nouvelle fiche d’évaluation pour':'Nouveau cas concret avec'} ${esc(p.prenom||fullName(p))}</button>${EMBED?'':`<button class="btn primary" data-act="pick-export">${I.pdf}Exporter des fiches</button>`}</div>
+    <div class="row"><button class="btn red grow" data-act="new-formative" data-pid="${p.id}">${I.plus}${isRiofe(s.cursus)?'Nouvelle fiche MSP pour':isFicheCursus(s.cursus)?'Nouvelle fiche d’évaluation pour':'Nouveau cas concret avec'} ${esc(p.prenom||fullName(p))}</button>${EMBED?'':`<button class="btn primary" data-act="pick-export">${I.pdf}Exporter des fiches</button>`}</div>
     ${suiviTpl(s.cursus)?(()=>{const x=suiviOf(s.id,p.id)||{tpl:suiviTpl(s.cursus),pid:p.id,overrides:{},final:{},checks:{},notes:{}};const G=suiviGrid(x,s),n=x.tpl.comps.filter(k=>G.ok[k.code]).length,vv=suiviVerdict(x,s);
       return `<button class="tile" data-act="open-suivi"><span class="eyebrow">Fiche de suivi${x.tpl.avis?' et avis final':''}</span><span class="big" style="color:${vv==='apte'?'var(--t-vert)':vv==='inapte'?'var(--t-rouge)':'var(--brand)'}">${vv==='apte'?(x.tpl.avis?'APTE':'VALIDÉE'):vv==='inapte'?(x.tpl.avis?'INAPTE':'NON VALIDÉE'):'En cours'}</span><span class="small muted num">${n}/${x.tpl.comps.length} ${x.tpl.rule==='any'?'capacités visées':'compétences atteintes'} · ${sessFormatives(s.id).filter(e=>e.learners.some(l=>l.pid===p.id)).length} fiche(s) d’évaluation</span></button>`})():''}
     ${cs?`<section class="panel"><div class="hd"><h3>B · Compétences (référentiel)</h3><span class="small muted num">${cs.n}/${cs.tot}</span></div><div class="lines">${compRows}</div></section>`:''}
     ${sits.length?`<section class="panel"><div class="hd"><h3>Situations rencontrées</h3><span class="small muted num">${sits.filter(x=>seen(x.id)).length}/${sits.length}</span></div><div class="bd chips">${sits.map(x=>`<span class="chip ${seen(x.id)?'on':''}" style="cursor:default">${seen(x.id)?'✓ ':''}${esc(x.label)}</span>`).join('')}</div></section>`:''}
-    ${ct?(()=>{const n=c?theoryNote(c):null;const ch=ct.checks.find(x=>x.auto==='theory');const dv=c&&c.id&&ch?checkVal(c,ch):'';return `<section class="panel"><div class="hd"><h3>D · Évaluation théorique</h3><span class="small muted">12/20 minimum</span></div><div class="bd row">
+    ${ct&&ct.checks.some(x=>x.auto==='theory')?(()=>{const n=c?theoryNote(c):null;const ch=ct.checks.find(x=>x.auto==='theory');const dv=c&&c.id&&ch?checkVal(c,ch):'';return `<section class="panel"><div class="hd"><h3>D · Évaluation théorique</h3><span class="small muted">12/20 minimum</span></div><div class="bd row">
       <label class="f" style="width:120px">Note /20<input type="text" inputmode="decimal" id="pth-${p.id}" value="${esc((c&&c.theory||{}).score??'')}" placeholder="ex. 14,5" data-bind="score" data-scope="theory" data-pid="${p.id}"></label>
       <span class="grow small">${dv==='oui'?'<b style="color:var(--t-vert)">Validée (OUI)</b>':dv==='non'?'<b style="color:var(--t-rouge)">Non validée (NON)</b>':n!==null&&n>=10&&n<12?'<b style="color:var(--t-orange)">Entretien de rattrapage à faire</b>':'<span class="muted">OUI / NON modifiable sur la fiche de certification</span>'}</span>
       ${qcmFor(s.cursus)?`<button class="btn sm" data-act="person-qcm">Corriger le QCM</button>`:''}</div></section>`})():''}
     ${days.length?`<section class="panel"><div class="hd"><h3>C · Présence</h3><span class="small muted num">${days.filter(d=>pr[d]).length}/${days.length} jours · ${hoursOf(s,days.filter(d=>pr[d]))}/${hoursOf(s,days)} h</span></div><div class="bd chips">${days.map(d=>`<button class="chip ${pr[d]?'on':''}" data-act="presence" data-pid="${p.id}" data-d="${d}" aria-pressed="${!!pr[d]}">${pr[d]?'✓ ':''}${esc(dayLabel(s,d))}</button>`).join('')}</div></section>`:''}
-    <details class="panel" ${p.birthDate?'':'open'}><summary class="hd" style="cursor:pointer;list-style:none"><h3>État civil (certificat, notification)</h3><span class="small muted">${p.birthDate?esc(neLe(p)):'à compléter'}</span></summary><div class="bd fields">
+    <details class="panel" ${p.birthDate?'':'open'}><summary class="hd" style="cursor:pointer;list-style:none"><h3>${isRiofe(s.cursus)?'Identité (fiches, attestation)':'État civil (certificat, notification)'}</h3><span class="small muted">${p.birthDate?esc(neLe(p)):'à compléter'}</span></summary><div class="bd fields">
+      ${isRiofe(s.cursus)?`<label class="f">Grade<input type="text" id="pc-grade" value="${esc(p.grade||'')}" ${bind('grade','part')}></label><label class="f">CIS<input type="text" id="pc-cis" value="${esc(p.cis||'')}" ${bind('cis','part')}></label>`:''}
       <label class="f">Civilité<select id="pc-civ" ${bind('civ','part')}><option value="">—</option><option ${p.civ==='Madame'?'selected':''}>Madame</option><option ${p.civ==='Monsieur'?'selected':''}>Monsieur</option></select></label>
       <label class="f">Date de naissance<input type="date" id="pc-bd" value="${esc(p.birthDate||'')}" ${bind('birthDate','part')}></label>
       <label class="f">Lieu de naissance<input type="text" id="pc-bp" value="${esc(p.birthPlace||'')}" ${bind('birthPlace','part')}></label>
       <label class="f">Département<input type="text" id="pc-dep" value="${esc(p.birthDept||'')}" placeholder="ex. 28" ${bind('birthDept','part')}></label>
       <label class="f">N° de ${s.type==='FC'?'l’attestation':'certificat'}<input type="text" id="pc-num" value="${esc(p.certNo||'')}" placeholder="attribué au PV" ${bind('certNo','part')}></label></div></details>
     ${EMBED||!c||!c.id?'':`<section class="panel"><div class="hd"><h3>Documents</h3></div><div class="bd row">
+      ${isRiofe(s.cursus)?`<button class="btn sm" data-act="pdoc" data-v="riofe-somm">${I.pdf}Grille sommative</button><button class="btn sm" data-act="pdoc" data-v="riofe-attest">${I.pdf}Attestation d’assiduité</button>`:`
       ${v==='apte'?`<button class="btn sm primary" data-act="pdoc" data-v="cert">${I.pdf}${s.type==='FC'?'Attestation de formation continue':'Certificat de compétences'}</button>`:''}
       ${v==='inapte'?`<button class="btn sm danger" data-act="pdoc" data-v="notif">${I.pdf}Notification défavorable</button>`:''}
       ${qcmFor(s.cursus)&&qcmState(c,s).done?`<button class="btn sm" data-act="pdoc" data-v="qcm">${I.pdf}Questionnaire corrigé</button>`:''}
-      ${v?'':'<span class="small muted">Le certificat ou la notification apparaît quand la validation finale est connue.</span>'}</div></section>`}
+      ${v?'':'<span class="small muted">Le certificat ou la notification apparaît quand la validation finale est connue.</span>'}`}</div></section>`}
     <section class="panel"><div class="hd"><h3>Cas concrets</h3><span class="small muted num">${F.length}</span></div><div class="lines">
       ${F.map(e=>{const l=e.learners.find(l=>l.pid===p.id);return `<button class="line" data-act="open-formative" data-id="${e.id}"><span class="grow"><b>${esc(fmtDate(e.date))}</b> · ${esc(e.theme||'Thème non renseigné')}<span class="small muted" style="display:block">Cas n°${esc(l.caseNo||'—')}${evaluatorNames(e)?' · '+esc(evaluatorNames(e)):''}</span></span>${e.counts===false?'<span class="pill neutral">Hors certif.</span>':''}${I.chev}</button>`}).join('')||'<div class="empty" style="margin:14px">Aucun cas concret pour ce participant.</div>'}
     </div></section>
@@ -813,7 +941,7 @@ function viewPerson(){
 function viewSessionEdit(){
   const d=S.draft,tr=activeTrainers().concat(DB.settings.trainers.filter(t=>t.archived&&d.trainerIds.includes(t.id)));
   const db=p=>bind(p,'sdraft');
-  const parts=d.participants.map((p,i)=>p.archived?'':`<div class="ed-row two"><input type="text" id="p-${i}-nom" value="${esc(p.nom)}" placeholder="NOM" aria-label="Nom" autocapitalize="characters" ${db('participants.'+i+'.nom')}><input type="text" id="p-${i}-prenom" value="${esc(p.prenom)}" placeholder="Prénom" aria-label="Prénom" autocapitalize="words" ${db('participants.'+i+'.prenom')}><button class="btn sm danger" data-act="rm-part" data-i="${i}" aria-label="Retirer">${I.trash}</button></div>`).join('');
+  const parts=d.participants.map((p,i)=>p.archived?'':`<div class="ed-row two gr"><input type="text" id="p-${i}-grade" value="${esc(p.grade||'')}" placeholder="Grade" aria-label="Grade" ${db('participants.'+i+'.grade')}><input type="text" id="p-${i}-nom" value="${esc(p.nom)}" placeholder="NOM" aria-label="Nom" autocapitalize="characters" ${db('participants.'+i+'.nom')}><input type="text" id="p-${i}-prenom" value="${esc(p.prenom)}" placeholder="Prénom" aria-label="Prénom" autocapitalize="words" ${db('participants.'+i+'.prenom')}><button class="btn sm danger" data-act="rm-part" data-i="${i}" aria-label="Retirer">${I.trash}</button><input type="text" id="p-${i}-cis" style="grid-column:2/4" value="${esc(p.cis||'')}" placeholder="CIS (centre d’incendie et de secours)" aria-label="CIS" ${db('participants.'+i+'.cis')}></div>`).join('');
   return `<div class="stack">
     <section class="panel"><div class="hd"><h3>Formation</h3></div><div class="bd stack">
       <div class="fields">
@@ -884,23 +1012,26 @@ function viewFormative(){
   const used=e.learners.map(l=>l.pid);
   const slots=e.learners.map((l,i)=>{const opts=s.participants.filter(p=>!p.archived||p.id===l.pid);
     return `<div class="slot"><div class="r"><label class="f">Apprenant n°${i+1}<select id="fl-${i}" ${bind('learners.'+i+'.pid')}><option value="">— Choisir un participant —</option>${opts.map(p=>`<option value="${p.id}" ${l.pid===p.id?'selected':''} ${used.includes(p.id)&&l.pid!==p.id?'disabled':''}>${esc(fullName(p))}</option>`).join('')}</select></label>
-      ${t.fiche?'<span></span>':`<label class="f">Cas n°<input type="text" inputmode="numeric" id="fc-${i}" value="${esc(l.caseNo)}" ${bind('learners.'+i+'.caseNo')}></label>`}
+      ${t.fiche||t.riofe?'<span></span>':`<label class="f">Cas n°<input type="text" inputmode="numeric" id="fc-${i}" value="${esc(l.caseNo)}" ${bind('learners.'+i+'.caseNo')}></label>`}
       ${n>1?`<button class="btn danger" data-act="rm-learner" data-i="${i}" aria-label="Retirer l’apprenant ${i+1}">${I.trash}</button>`:'<span></span>'}</div></div>`}).join('');
   const feedsLabel=code=>{if(!ct||!code)return '';const k=ct.criteria.find(k=>String(k.code)===String(code));return k?`Alimente la compétence ${esc(k.code)} de la certification`:''};
   const secRows=new Set(t.criteria.filter(c=>c.sec||c.ne).map(c=>c.id));
-  const allRows=t.fiche?t.criteria.filter(shown).flatMap(c=>c.sec?[{sec:true,label:c.label}]:c.ne?[{ne:true,label:c.label,code:c.code}]:it.filter(x=>x.id===c.id)):it;
-  const rows=allRows.map(x=>{if(x.sec)return `<div class="crit" style="background:var(--brand-soft)"><div class="cl" style="color:var(--brand)">${esc(x.label)}</div></div>`;
+  const allRows=(t.fiche||t.riofe)?t.criteria.filter(shown).flatMap(c=>c.sec?[{sec:true,label:c.label,bloc:c.bloc}]:c.ne?[{ne:true,label:c.label,code:c.code}]:it.filter(x=>x.id===c.id)):it;
+  const who=t.riofe==='auto'?(S.who||'app'):'form';
+  const rows=allRows.map(x=>{if(x.sec)return x.bloc?`<div class="crit bloc"><div class="cl">${esc(x.label)}</div></div>`:`<div class="crit" style="background:var(--brand-soft)"><div class="cl" style="color:var(--brand)">${esc(x.label)}</div></div>`;
     if(x.ne)return `<div class="crit"><div class="cl">${x.code?`<span class="code">${esc(x.code)}</span>`:''}${esc(x.label)}<span class="feeds">Non évalué sur cette fiche</span></div></div>`;
     const c=x.c;const sits=c&&c.subMode==='check'&&(c.children||[]).length?`<div class="sits">${c.children.map(ch=>`<label class="cb"><input type="checkbox" data-act="sit" data-c="${ch.id}" ${e.situations[ch.id]?'checked':''}>${esc(ch.label)}</label>`).join('')}</div>`:'';
     return `<div class="crit ${x.sub?'sub':''}">
-      <div class="cl">${x.code?`<span class="code">${esc(x.code)}</span>`:''}${esc(x.label)}${!x.sub&&x.feeds&&!t.fiche?`<span class="feeds">${feedsLabel(x.feeds)}</span>`:''}${sits}</div>
-      ${e.learners.map((l,i)=>`<div class="mk ${i===S.lt?'':'off'}"><div class="seg" role="group" aria-label="${esc(x.label)} — apprenant ${i+1}">${t.scale.map(sc=>`<button class="lv t-${sc.tone} ${l.marks[x.id]===sc.code?'on':''}" data-act="mark" data-i="${i}" data-c="${x.id}" data-v="${esc(sc.code)}" title="${esc(sc.label)}" aria-pressed="${l.marks[x.id]===sc.code}">${esc(sc.code)}</button>`).join('')}</div></div>`).join('')}
+      <div class="cl">${x.code?`<span class="code">${esc(x.code)}</span>`:''}${esc(x.label)}${!x.sub&&x.feeds&&!t.fiche&&!t.riofe?`<span class="feeds">${feedsLabel(x.feeds)}</span>`:''}${sits}${t.riofe&&x.c&&x.c.desc?`<details class="desc"><summary>Critères</summary>${[...t.scale].reverse().map(sc=>`<div class="t-${sc.tone}"><b>${esc(sc.code)}</b> ${esc(x.c.desc[sc.code]||'')}</div>`).join('')}</details>`:''}</div>
+      ${e.learners.map((l,i)=>`<div class="mk ${i===S.lt?'':'off'}"><div class="seg" role="group" aria-label="${esc(x.label)} — apprenant ${i+1}">${(t.riofe?[...t.scale].reverse():t.scale).map(sc=>`<button class="lv t-${sc.tone} ${l.marks[x.id]===sc.code?'on':''} ${t.riofe==='auto'&&(l.self||{})[x.id]===sc.code?'selfmk':''}" data-act="${who==='app'?'self':'mark'}" data-i="${i}" data-c="${x.id}" data-v="${esc(sc.code)}" title="${esc(sc.label)}" aria-pressed="${(who==='app'?(l.self||{})[x.id]:l.marks[x.id])===sc.code}">${esc(sc.code)}</button>`).join('')}</div></div>`).join('')}
     </div>`}).join('');
   const p=Math.round(formProgress(e)*100);
   return `<div class="stack">
-    <section class="panel"><div class="hd"><h3>${t.fiche?esc(t.ref.replace(/^FE\//,'Fiche ')+' · '+t.title):'Cas concret'}</h3><span class="small muted">${esc(t.name)}</span></div>
+    <section class="panel"><div class="hd"><h3>${t.riofe?'Fiche MSP · '+esc(t.header.title):t.fiche?esc(t.ref.replace(/^FE\//,'Fiche ')+' · '+t.title):'Cas concret'}</h3><span class="small muted">${esc(t.name)}</span></div>
       <div class="bd stack">
-        <label class="f">${t.fiche?'Thème':'Thème du cas concret'}<input type="text" id="f-theme" value="${esc(e.theme)}" placeholder="Ex. : hémorragie externe sur un lieu de travail" ${bind('theme')}></label>
+        <label class="f">${t.riofe?'Thème de la MSP':t.fiche?'Thème':'Thème du cas concret'}<input type="text" id="f-theme" value="${esc(e.theme)}" placeholder="Ex. : hémorragie externe sur un lieu de travail" ${bind('theme')}></label>
+        ${t.riofe?`<div class="fields"><label class="f">Missions commandées<input type="text" id="f-missions" value="${esc(e.missions||'')}" placeholder="Ex. : prendre en charge la victime, rendre compte au chef d’agrès" ${bind('missions')}></label>
+          <label class="f">Réf. fiche MSP<input type="text" id="f-ref" value="${esc(e.ref||'')}" placeholder="Ex. : MSP 03" ${bind('ref')}></label></div>`:''}
         <div class="fields">
           <label class="f">Date<input type="date" id="f-date" value="${esc(e.date)}" ${bind('date')}></label>
           <label class="f">Formateur évaluateur<select id="f-ev0" ${bind('evaluatorIds.0')}>${trainerOptions(e.evaluatorIds[0],s)}</select></label>
@@ -912,8 +1043,10 @@ function viewFormative(){
     ${e.scenarioId&&scById(e.scenarioId)?viewScLink(e):''}
     <section class="panel"><div class="hd"><h3>Apprenants</h3>${n<6?`<button class="btn sm" data-act="add-learner">${I.plus}Ajouter</button>`:''}</div>
       <div class="bd stack">${slots}
-        <label class="cb"><input type="checkbox" id="f-counts" ${e.counts!==false?'checked':''} ${bind('counts')}>${t.fiche?'Reportée sur la fiche de suivi (journée de la date ci-dessus)':'Compte comme passage pour la certification'}</label></div></section>
-    <section class="panel"><div class="hd"><h3>Critères d’évaluation</h3><span class="small muted num">${p} % renseigné</span></div>
+        <label class="cb"><input type="checkbox" id="f-counts" ${e.counts!==false?'checked':''} ${bind('counts')}>${t.riofe?'Reportée dans la grille sommative (colonne MSP)':t.fiche?'Reportée sur la fiche de suivi (journée de la date ci-dessus)':'Compte comme passage pour la certification'}</label></div></section>
+    ${t.riofe==='auto'?`<section class="panel"><div class="bd stack" style="gap:8px"><div class="row"><b class="grow">Qui coche ?</b>${[['app','1. Le stagiaire s’autoévalue'],['form','2. Le formateur valide']].map(([k,l])=>`<button class="chip ${who===k?'on':''}" data-act="who" data-v="${k}">${l}</button>`).join('')}</div>
+      <p class="small muted" style="margin:0">${who==='app'?'Le stagiaire touche le niveau qu’il pense avoir atteint : sa case apparaît hachurée et entourée.':'Le formateur touche le niveau retenu (case pleine) : il valide le choix du stagiaire ou en retient un autre.'}</p></div></section>`:''}
+    <section class="panel"><div class="hd"><h3>${t.riofe?'Savoirs-agir':'Critères d’évaluation'}</h3><span class="small muted num">${p} % renseigné</span></div>
       ${n>1?`<div class="bd lt" style="padding-bottom:0">${e.learners.map((l,i)=>`<button class="${i===S.lt?'on':''}" data-act="lt" data-i="${i}">Apprenant ${i+1}<span>${esc(l.pid?pName(s,l.pid):'—')}</span></button>`).join('')}</div>`:''}
       <div style="--n:${n};--colw:${colw}">
         <div class="gh"><span>Critère</span>${e.learners.map((l,i)=>`<span>${esc(l.pid?pName(s,l.pid):'Apprenant '+(i+1))}</span>`).join('')}</div>
@@ -921,15 +1054,17 @@ function viewFormative(){
       </div></section>
     ${(t.situations||[]).length?`<section class="panel"><div class="hd"><h3>Situations travaillées dans ce cas</h3><span class="small muted">Compétence 4 du référentiel</span></div><div class="bd" style="display:grid;gap:2px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))">
       ${t.situations.map(x=>`<label class="cb" style="font-weight:500"><input type="checkbox" data-act="case" data-c="${x.id}" ${(e.cases||{})[x.id]?'checked':''}>${esc(x.label)}</label>`).join('')}</div></section>`:''}
-    ${s.type==='FC'?`<section class="panel"><div class="hd"><h3>Auto-évaluation des apprenants</h3><span class="small muted">Formation continue : le référentiel favorise l’auto-évaluation</span></div>
+    ${s.type==='FC'&&!t.riofe?`<section class="panel"><div class="hd"><h3>Auto-évaluation des apprenants</h3><span class="small muted">Formation continue : le référentiel favorise l’auto-évaluation</span></div>
       ${n>1?`<div class="bd lt" style="padding-bottom:0">${e.learners.map((l,i)=>`<button class="${i===S.lt?'on':''}" data-act="lt" data-i="${i}">Apprenant ${i+1}<span>${esc(l.pid?pName(s,l.pid):'—')}</span></button>`).join('')}</div>`:''}
       <div style="--n:${n};--colw:${colw}">${it.filter(x=>!x.sub).map(x=>`<div class="crit"><div class="cl">${x.code?`<span class="code">${esc(x.code)}</span>`:''}${esc(x.label)}</div>
         ${e.learners.map((l,i)=>`<div class="mk ${i===S.lt?'':'off'}"><div class="seg">${t.scale.map(sc=>`<button class="lv t-${sc.tone} ${(l.self||{})[x.id]===sc.code?'on':''}" data-act="self" data-i="${i}" data-c="${x.id}" data-v="${esc(sc.code)}" aria-pressed="${(l.self||{})[x.id]===sc.code}">${esc(sc.code)}</button>`).join('')}</div></div>`).join('')}</div>`).join('')}</div>
       <div class="bd small muted" style="padding-top:0">L’auto-évaluation est reprise dans la case Observations du PDF, sans modifier le format de la fiche.</div></section>`:''}
+    ${t.riofe?`<section class="panel"><div class="hd"><h3>Observations</h3></div><div class="bd stack">${e.learners.map((l,i)=>`<label class="f">Points positifs<textarea id="f-pos-${i}" placeholder="Ce qui a été bien réalisé" ${bind('learners.'+i+'.obs')}>${esc(l.obs||'')}</textarea></label>
+      <label class="f">Points à améliorer<textarea id="f-neg-${i}" placeholder="Axes de progression, prochaines étapes" ${bind('learners.'+i+'.obs2')}>${esc(l.obs2||'')}</textarea></label>`).join('')}</div></section>`:`
     <section class="panel"><div class="hd"><h3>${t.fiche?'Observations et impression générale':'Observations'}</h3></div><div class="bd stack">
       ${t.fiche?`<label class="f">Observations (colonne de la fiche)<textarea id="f-obscol" placeholder="Points forts, axes d’amélioration, éléments observés…" ${bind('obsCol')}>${esc(e.obsCol||'')}</textarea></label>`:''}
       ${e.learners.map((l,i)=>`<label class="f">${t.fiche?'Impression générale':esc(l.pid?pName(s,l.pid):'Apprenant '+(i+1))}<textarea id="f-obs-${i}" placeholder="${t.fiche?'Impression générale sur la prestation':'Points forts, axes de progression…'}" ${bind('learners.'+i+'.obs')}>${esc(l.obs||'')}</textarea></label>`).join('')}
-    </div></section>
+    </div></section>`}
     <section class="panel"><div class="hd"><h3>Degré d’atteinte de l’objectif</h3></div><div class="bd legend">${t.scale.map(sc=>`<div class="t-${sc.tone}"><b class="lvb">${esc(sc.code)}</b><span><b>${esc(sc.label)}</b>${sc.desc?' — '+esc(sc.desc):''}</span></div>`).join('')}</div></section>
     <div class="row">
       <button class="btn primary grow" data-act="toggle-done">${e.done?'Rouvrir la fiche':'Enregistrer la fiche'}</button>
@@ -1191,7 +1326,7 @@ function viewTplEdit(){
    Réglages
    ========================================================= */
 function viewSettings(){
-  const T=DB.settings.trainers.map((t,i)=>t.archived?'':`<div class="ed-row two"><input type="text" id="tr-${i}-prenom" value="${esc(t.prenom)}" placeholder="Prénom" aria-label="Prénom" ${bind('trainers.'+i+'.prenom','settings')}><input type="text" id="tr-${i}-nom" value="${esc(t.nom)}" placeholder="NOM" aria-label="Nom" ${bind('trainers.'+i+'.nom','settings')}><button class="btn sm danger" data-act="rm-trainer" data-i="${i}" aria-label="Retirer">${I.trash}</button></div>`).join('');
+  const T=DB.settings.trainers.map((t,i)=>t.archived?'':`<div class="ed-row two gr"><input type="text" id="tr-${i}-grade" value="${esc(t.grade||'')}" placeholder="Grade" aria-label="Grade" ${bind('trainers.'+i+'.grade','settings')}><input type="text" id="tr-${i}-prenom" value="${esc(t.prenom)}" placeholder="Prénom" aria-label="Prénom" ${bind('trainers.'+i+'.prenom','settings')}><input type="text" id="tr-${i}-nom" value="${esc(t.nom)}" placeholder="NOM" aria-label="Nom" ${bind('trainers.'+i+'.nom','settings')}><button class="btn sm danger" data-act="rm-trainer" data-i="${i}" aria-label="Retirer">${I.trash}</button></div>`).join('');
   const nE=DB.evals.length,nS=DB.sessions.length;
   return `<div class="stack">
     <section class="panel"><div class="hd"><h3>Formateurs</h3><button class="btn sm" data-act="add-trainer">${I.plus}Ajouter</button></div><div class="bd stack">
@@ -1268,7 +1403,7 @@ function pen(doc){
 function stamp(){const d=new Date();return `Édité le ${fmtDate(today())} à ${String(d.getHours()).padStart(2,'0')}h${String(d.getMinutes()).padStart(2,'0')} - FORSSUAP 78`}
 
 /* ---- Fiche formative : A4 portrait, 2 apprenants par page ---- */
-function formativePages(e,sess,onlyPid){
+function formativePages(e,sess,onlyPid){if(e.tpl.riofe&&RIOFE_COURSES[e.tpl.cursus])return riofeSheetPages(e,sess,onlyPid);
   let idx=e.learners.map((l,i)=>i);if(onlyPid)idx=idx.filter(i=>e.learners[i].pid===onlyPid);
   const chunks=[];for(let i=0;i<idx.length;i+=2)chunks.push(idx.slice(i,i+2));
   const F=ficheOf(e.tpl);if(F&&FORMS[F.id])return idx.map(li=>({orient:'p',draw:doc=>drawFicheBg(doc,e,sess,li,F)}));
@@ -1340,7 +1475,7 @@ function drawFormative(doc,e,sess,chunk){
 }
 
 /* ---- Fiche de certification : A4 paysage (Annexe 3) ---- */
-function certPages(c,sess){if(c.tpl.id==='ce-certif'&&!c.tpl.edited&&FORMS['ce-certif'])return [{orient:'l',draw:doc=>drawCeCertBg(doc,c,sess)}];const L=certLayout(c);return [{orient:'l',draw:doc=>L?drawCertBg(doc,c,sess,L):drawCert(doc,c,sess)}]}
+function certPages(c,sess){if(c.tpl.riofe)return riofeSommPages(c,sess);if(c.tpl.id==='ce-certif'&&!c.tpl.edited&&FORMS['ce-certif'])return [{orient:'l',draw:doc=>drawCeCertBg(doc,c,sess)}];const L=certLayout(c);return [{orient:'l',draw:doc=>L?drawCertBg(doc,c,sess,L):drawCert(doc,c,sess)}]}
 function drawCert(doc,c,sess){
   const P=pen(doc),t=c.tpl,H=t.header||{},th=t.theme||{},BAND=hex2rgb(th.band||'#4f81bd'),LIGHT=hex2rgb(th.light||'#b8cce4');
   const M=14,W=269,PH=210,G=certGrid(c,sess),p=participant(sess,c.pid)||{};let y=9;
@@ -1872,7 +2007,7 @@ function setPath(o,p,v){const k=p.split('.');const last=k.pop();const t=k.reduce
 function newFormative(s,tpl,pid,init){
   const e={id:uid(),sessionId:s.id,kind:'formative',tpl:clone(tpl),date:today(),theme:'',evaluatorIds:[(s.trainerIds||[])[0]||'',''],situations:{},
     learners:Array.from({length:Math.max(1,tpl.learners||1)},(_,i)=>({pid:i===0&&pid?pid:'',caseNo:'',obs:'',marks:{}})),done:false,counts:true,createdAt:Date.now(),updatedAt:Date.now()};
-  if(init)init(e);DB.evals.push(e);save(true);go('formative',{eid:e.id,lt:0});
+  if(init)init(e);DB.evals.push(e);save(true);S.who='app';go('formative',{eid:e.id,lt:0});
 }
 const A={
   tab:d=>{S.tab=d.v;if(d.v==='scenarios'){S.scNoSess=true;S.scj='all'}go(d.v)},
@@ -1948,6 +2083,7 @@ const A={
   'pdf-dossier':()=>{const s=curSess();runExport('Création du dossier…',()=>({files:[pdfFile(`${s.cursus}_dossier_${pslug(s,S.pid)}`,dossierPages(s,S.pid))],title:'Dossier '+pName(s,S.pid)}))},
   'export-menu':()=>exportMenu(),
   /* auto-évaluation (formation continue) */
+  who:d=>{S.who=d.v;render()},
   self:d=>{const e=curEval(),l=e.learners[+d.i];l.self=l.self||{};if(l.self[d.c]===d.v)delete l.self[d.c];else l.self[d.c]=d.v;touch(e);render()},
   /* QCM */
   'open-suivi':()=>{const s=curSess();const x=ensureSuivi(s,S.pid);if(!x)return;go('suivi',{eid:x.id})},
@@ -1980,11 +2116,15 @@ const A={
   doc:d=>{const s=curSess(),parts=s.participants.filter(p=>!p.archived);
     runExport('Création des documents…',()=>{const base=`${s.cursus}_${slug(s.title||'formation')}`;
       if(d.v==='pv')return {files:[pdfFile(base+'_proces-verbal',pvPages(s))],title:'Procès-verbal'};
+      if(d.v==='riofe-attest')return {files:parts.map(p=>pdfFile(`${s.cursus}_attestation-assiduite_${pslug(s,p.id)}`,riofeAttestPages(s,[p.id]))),title:'Attestations d’assiduité'};
+      if(d.v==='riofe-somm'){const files=parts.map(p=>{const c=ensureCert(s,p.id);return pdfFile(`${s.cursus}_grille-sommative_${pslug(s,p.id)}`,riofeSommPages(c,s))});save();return {files,title:'Grilles sommatives'}}
       const who=parts.filter(p=>resultOfPerson(s,p)===(d.v==='certs'?'apte':'inapte'));
       const mk=p=>d.v==='certs'?(s.type==='FC'?attestationPages(s,p.id):certificatePages(s,p.id)):notifPages(s,p.id);
       const kind=d.v==='certs'?(s.type==='FC'?'attestation-FC':'certificat'):'notification-defavorable';
       return {files:who.map(p=>pdfFile(`${s.cursus}_${kind}_${pslug(s,p.id)}`,mk(p))),title:'Documents '+s.title}})},
   pdoc:d=>{const s=curSess(),pid=S.pid,c=certOf(s.id,pid);
+    if(d.v==='riofe-somm'||d.v==='riofe-attest'){runExport('Création du PDF…',()=>{const n=d.v==='riofe-somm'?'grille-sommative':'attestation-assiduite';
+      const pg=d.v==='riofe-somm'?riofeSommPages(ensureCert(s,pid),s):riofeAttestPages(s,[pid]);if(d.v==='riofe-somm')save();return {files:[pdfFile(`${s.cursus}_${n}_${pslug(s,pid)}`,pg)],title:n}});return}
     runExport('Création du PDF…',()=>{const pg=d.v==='cert'?(s.type==='FC'?attestationPages(s,pid):certificatePages(s,pid)):d.v==='notif'?notifPages(s,pid):qcmPages(c,s);
       const n=d.v==='cert'?(s.type==='FC'?'attestation-FC':'certificat'):d.v==='notif'?'notification-defavorable':'qcm-corrige';return {files:[pdfFile(`${s.cursus}_${n}_${pslug(s,pid)}`,pg)],title:n}})},
   'number-certs':()=>{const s=curSess(),o=DB.settings.org;let n=parseInt(o.nextCert,10)||1,k=0;
@@ -2630,7 +2770,7 @@ if(NATIVE&&window.Capacitor.Plugins.App){window.Capacitor.Plugins.App.addListene
   if(m[S.view])go(m[S.view]);else if(S.view!=='sessions'){S.tab='sessions';go('sessions')}else window.Capacitor.Plugins.App.exitApp();
 })}
 window.__loadForms=loadForms;
-window.__app={DB:()=>DB,S,recGet,recPurge,A,go,ensureSuivi,suiviPages,suiviGrid,suiviVerdict,ensureCert,qcmState,pvPages,certificatePages,notifPages,attestationPages,satPages,qcmPages,buildPdf,formativePages,certPages,techPages,dossierPages,sessionExport,certGrid};
+window.__app={DB:()=>DB,S,ensureDays,formativePages,certPages,verdict,riofeAttestPages,riofeSommPages,recGet,recPurge,A,go,ensureSuivi,suiviPages,suiviGrid,suiviVerdict,ensureCert,qcmState,pvPages,certificatePages,notifPages,attestationPages,satPages,qcmPages,buildPdf,formativePages,certPages,techPages,dossierPages,sessionExport,certGrid};
 render();
 })();
 </script>

@@ -9,3 +9,4 @@ mobile/keystore/
 *.keystore
 # Local secrets written by `elevenlabs onboard`
 /.env.local
+__pycache__/
