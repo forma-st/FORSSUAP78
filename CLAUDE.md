@@ -17,7 +17,7 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
   `cd mobile && npx cap sync android && cd android && ./gradlew assembleDebug --no-daemon -q --max-workers=2`
   puis copier `app/build/outputs/apk/debug/app-debug.apk` vers `docs/FORSSUAP78.apk`.
   Il faut un SDK Android (ANDROID_HOME) et JDK 17 ; dl.google.com est autorisé dans l'environnement.
-  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.1.0 (code 2).
+  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.1.1 (code 3).
 - `tools/brand.py` : toutes les images (logo PDF, icônes web, mipmaps, splash) depuis `brand/logo-sdis78-source.png`.
 - `vendor/` : jsPDF, SDK Anthropic (bundle esbuild), client ElevenLabs (bundle).
 - `relay/` : Cloudflare Worker (relais IA `/v1/messages` + `/eleven/session`), nom `forssuap78-relais`.

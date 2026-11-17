@@ -252,7 +252,7 @@ input[type=color]{width:52px;height:40px;border:1px solid var(--line);border-rad
    Constantes et utilitaires
    ========================================================= */
 const KEY='forssuap78-v1';
-const APP_VERSION='1.1.0';
+const APP_VERSION='1.1.1';
 const LOGO='__LOGO__', MARK='__MARK__';
 const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
@@ -710,10 +710,46 @@ const evaluatorNames=e=>(e.evaluatorIds||[]).filter(Boolean).map(tName).filter(B
    Données d'exemple (supprimables dans Réglages)
    ========================================================= */
 function seedSamples(d){
-  d.settings.trainers.push({id:'t-ex1',nom:'Exemple',prenom:'Formateur',sample:true},{id:'t-ex2',nom:'Démo',prenom:'Formatrice',sample:true});
-  const s={id:'s-ex1',sample:true,cursus:'PS',title:'Prompt Secours · Session exemple',start:'2026-11-16',end:'2026-11-20',lieu:'CFD Yvelines',trainerIds:['t-ex1','t-ex2'],
-    participants:[{id:'p1',nom:'Exemple',prenom:'Camille',cis:'CIS Exemple'},{id:'p2',nom:'Exemple',prenom:'Louis',cis:'CIS Exemple'},{id:'p3',nom:'Démo',prenom:'Inès',cis:'CIS Démo'}],createdAt:Date.now(),updatedAt:Date.now()};
-  d.sessions.push(s)}
+  /* données de démonstration : deux formations remplies, pour essayer l'application tout de suite */
+  d.settings.trainers.push({id:'t-ex1',grade:'Sgt',nom:'Exemple',prenom:'Formateur',sample:true},{id:'t-ex2',grade:'Adj',nom:'Démo',prenom:'Formatrice',sample:true});
+  const T=id=>d.templates.find(t=>t.id===id);
+  const P=(id,grade,nom,prenom,cis,bd)=>({id,grade,nom,prenom,cis,birthDate:bd});
+  const pres=(s,abs)=>{s.presence={};s.participants.forEach(p=>{s.presence[p.id]={};['J1','J2','J3','J4','J5'].forEach(j=>{if(!(abs[p.id]||[]).includes(j))s.presence[p.id][j]=true})})};
+  /* profil : niveau observé pour chaque savoir-agir, selon l'avancement de la formation */
+  const lvl=(prof,k,n)=>prof==='bon'?(n===0&&k%3===1?'ECA':'A'):prof==='moyen'?(k%4===2?'NA':k%2?'ECA':'A'):(k%3===0?'ECA':'A');
+  const mk=(s,tid,date,theme,missions,ref,ev,pid,prof,n,obs,obs2,self)=>{const t=JSON.parse(JSON.stringify(T(tid)));const l={pid,caseNo:'',marks:{},self:{},obs,obs2};
+    t.criteria.filter(c=>!c.sec).forEach((c,k)=>{l.marks[c.id]=lvl(prof,k,n);if(self&&t.riofe==='auto')l.self[c.id]=k%5===3?'A':lvl(prof,k+1,n)});
+    d.evals.push({id:'ex-'+s.id+'-'+ref+'-'+pid+'-'+tid,sessionId:s.id,kind:'formative',tpl:t,date,theme,missions,ref,evaluatorIds:[ev,''],situations:{},learners:[l],done:true,counts:true,createdAt:Date.now(),updatedAt:Date.now()})};
+  /* Prompt Secours */
+  const s1={id:'s-ex1',sample:true,cursus:'PS',title:'Prompt Secours · Session exemple',start:'2026-11-16',end:'2026-11-20',lieu:'CFD Yvelines',trainerIds:['t-ex1','t-ex2'],
+    participants:[P('p1','Sap 2CL','Exemple','Camille','CIS Exemple','2003-04-12'),P('p2','Sap 2CL','Exemple','Louis','CIS Exemple','2004-09-03'),P('p3','Sap 2CL','Démo','Inès','CIS Démo','2002-01-27')],createdAt:Date.now(),updatedAt:Date.now()};
+  pres(s1,{p2:['J3']});d.sessions.push(s1);
+  const PSM=[['2026-11-16','Obstruction des voies aériennes – étouffement au restaurant','Assurer la sécurité, reconnaître l’obstruction grave, réaliser les gestes de désobstruction, alerter.','MSP1','ps-auto'],
+    ['2026-11-17','Hémorragie externe – plaie au bras en atelier','Arrêter l’hémorragie, installer la victime, réaliser le bilan, alerter et surveiller.','MSP2','ps-crit'],
+    ['2026-11-18','Victime inconsciente qui respire – parc public','Apprécier la conscience et la respiration, mettre en PLS, alerter, surveiller.','MSP3','ps-crit'],
+    ['2026-11-19','Arrêt cardiaque adulte – salle de sport, DAE disponible','Reconnaître l’ACR, alerter, RCP et mise en œuvre du DAE, relais des secours.','MSP4','ps-crit']];
+  PSM.forEach(([dt,th,mi,ref,tid],n)=>{
+    mk(s1,tid,dt,th,mi,ref,n%2?'t-ex2':'t-ex1','p1','bon',n,'Bilan structuré, gestes précis et sûrs, alerte complète.','Penser à réévaluer la victime après chaque geste.',true);
+    if(n<3)mk(s1,tid,dt,th,mi,ref,'t-ex1','p2','moyen',n,'Bonne implication, sécurité bien assurée.','Bilan incomplet : reprendre la chronologie XABCDE ; alerte à structurer.',true);
+    if(n<2)mk(s1,tid,dt,th,mi,ref,'t-ex2','p3','partiel',n,'Gestes techniques maîtrisés.','Gagner en assurance lors de la transmission du bilan.',true)});
+  /* Équipier SUAP */
+  const s2={id:'s-ex2',sample:true,cursus:'EQSUAP',title:'Équipier SUAP · Session exemple',start:'2026-11-23',end:'2026-11-27',lieu:'CFD Yvelines',trainerIds:['t-ex1','t-ex2'],
+    participants:[P('q1','Sap 1CL','Exemple','Léa','CIS Exemple','2001-06-15'),P('q2','Sap 2CL','Démo','Hugo','CIS Démo','2003-11-08')],createdAt:Date.now(),updatedAt:Date.now()};
+  pres(s2,{});d.sessions.push(s2);
+  const SM=[['2026-11-23','Chute d’escabeau à domicile, suspicion de traumatisme du rachis','Sécuriser, bilan, immobilisation, relevage et brancardage jusqu’au VSAV.','MSP01','eqsuap-auto'],
+    ['2026-11-24','Malaise chez une personne diabétique à domicile','Réaliser le bilan, recueillir les éléments MHTA, transmettre le bilan au CTA-CODIS / SAMU.','MSP02','eqsuap-crit'],
+    ['2026-11-25','Accident de la circulation, conducteur incarcéré','Sécuriser, bilan, participer à l’extraction avec l’équipe de désincarcération.','MSP03','eqsuap-crit'],
+    ['2026-11-26','Brûlure thermique étendue – cuisine d’un restaurant','Refroidir, bilan, protéger, transmettre et surveiller pendant le transport.','MSP06','eqsuap-crit']];
+  SM.forEach(([dt,th,mi,ref,tid],n)=>{mk(s2,tid,dt,th,mi,ref,n%2?'t-ex2':'t-ex1','q1','bon',n,'Travail en équipe efficace, bilan clair et transmis dans les temps.','Anticiper le conditionnement pour le transport.',true);
+    if(n<2)mk(s2,tid,dt,th,mi,ref,'t-ex1','q2','partiel',n,'Bonne communication avec la victime.','Respect de l’hygiène et de l’asepsie à renforcer.',true)});
+  [['2026-11-24','Garde au CIS – vérification du VSAV et retour d’intervention','MSP-T1'],['2026-11-26','Retour d’intervention – reconditionnement et transmissions','MSP-T2']].forEach(([dt,th,ref],n)=>{
+    mk(s2,'eqsuap-trans',dt,th,'Contrôler et reconditionner le matériel, rendre compte, s’impliquer dans le collectif.',ref,'t-ex2','q1','bon',n,'Implication et rigueur.','Partager davantage ses remarques avec l’équipe.',false)});
+  /* grilles sommatives ; « S’adapter à son environnement » (Prompt Secours) se renseigne directement dans la grille */
+  const adapt={p1:['A','ECA','A','A'],p2:['ECA','NA','ECA'],p3:['ECA']};
+  [s1,s2].forEach(s=>s.participants.forEach(pp=>{const t=JSON.parse(JSON.stringify(T(s.cursus.toLowerCase()+'-somm'))),ov={};
+    t.criteria.filter(k=>k.fam==='adapt').forEach(k=>{ov[k.id]={};(adapt[pp.id]||[]).forEach((v,i)=>ov[k.id][i]=v)});
+    d.evals.push({id:'ex-c-'+pp.id,sessionId:s.id,kind:'certificative',pid:pp.id,tpl:t,overrides:ov,extra:0,valid:{},checks:{},observations:'',createdAt:Date.now(),updatedAt:Date.now()})}));
+}
 function seedSamplesPSE(d){
   const T=d.templates;
   d.settings.trainers.push({id:'t-ex1',nom:'Exemple',prenom:'Formateur',sample:true},{id:'t-ex2',nom:'Démo',prenom:'Formatrice',sample:true});
