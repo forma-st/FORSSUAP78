@@ -252,7 +252,7 @@ input[type=color]{width:52px;height:40px;border:1px solid var(--line);border-rad
    Constantes et utilitaires
    ========================================================= */
 const KEY='forssuap78-v1';
-const APP_VERSION='1.1.1';
+const APP_VERSION='1.2.0';
 const LOGO='__LOGO__', MARK='__MARK__';
 const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
@@ -287,7 +287,7 @@ const I={
 };
 
 /* =========================================================
-   Grilles fournies : formatives, certificatives, technicité (PSE1 / PSE2)
+   Échelles et éléments par défaut des grilles créées par l’utilisateur (les grilles fournies sont les RIOFE, plus bas)
    ========================================================= */
 const FORMATIVE_SCALE=()=>[
   {code:'A',label:'Maîtrise',desc:'Correspond à une maîtrise particulièrement affirmée de la compétence.',tone:'vertf',result:'ok'},
@@ -298,19 +298,13 @@ const CERT_SCALE=()=>[
   {code:'A',label:'Maîtrisé',desc:'Comportement adapté, action efficace, procédures et gestes conformes au référentiel.',tone:'vertf',result:'ok'},
   {code:'B',label:'Acquis',desc:'Quelques erreurs sans mise en cause de la sécurité des intervenants, de la victime ou des tiers.',tone:'vert',result:'ok'},
   {code:'C',label:'En cours d’acquisition',desc:'Procédures ou gestes non conformes ; la sécurité peut être impactée.',tone:'orange',result:'ko'}];
-const SITUATIONS_PSE1=()=>[
-  {id:'ova',label:'4.1 Obstruction des voies aériennes'},{id:'hemo',label:'4.2 Saignement abondant'},{id:'pc',label:'4.3 Perte de connaissance'},
-  {id:'acr',label:'4.4 Arrêt cardiaque'},{id:'detresse',label:'4.5 Détresse respiratoire, circulatoire ou neurologique'},{id:'malaise',label:'4.6 Malaise'},
-  {id:'trauma',label:'4.7 Traumatisme des membres ou de la peau'}];
 const CERT_CHECKS=()=>[
   {id:'A',label:'Avoir réalisé correctement l’ensemble des techniques et des procédures',auto:'tech'},
   {id:'B',label:'Avoir validé l’ensemble des compétences en termes de capacités théorique, pratique et comportementale.',auto:true},
   {id:'C',label:'Avoir suivi l’ensemble de la formation.',auto:'presence'},
   {id:'D',label:'Avoir validé l’évaluation théorique.',auto:'theory'}];
-const FORM_HEADER=r=>({left:'EPN ANPS',center:'Conception des formations',title:'Evaluation formative',ref:'EVAL/ '+r,maj:'25.02.2023'});
+const FORM_HEADER=r=>({left:'SDIS 78',center:'Groupement Formation',title:'Évaluation formative',ref:r?'EVAL/ '+r:'',maj:''});
 const g=(title,items)=>({id:slug(title).toLowerCase(),title,items:items.map((l,i)=>({id:slug(title).toLowerCase().slice(0,14)+'-'+(i+1),label:l}))});
-/* Fiches d'évaluation des techniques pédagogiques (PIC F, PAE FPSE) extraites des référentiels (tools/fiches.py) */
-const FICHES=__FICHES__;
 /* =========================================================
    Référentiels du SDIS 78 (RIOFE) : grilles, contenu et géométrie extraits des PDF d'origine (tools/riofe.py)
    Niveaux : A acquis (vert) · ECA en cours d'acquisition (orange) · NA non acquis (rouge).
@@ -421,100 +415,9 @@ function riofeAttestPages(s,pids){const C=RIOFE_COURSES[s.cursus],days=ensureDay
     box(A.duree,hhmm(hoursOf(s,days.map(d=>d.id))));box(A.assid,hhmm(hoursOf(s,days.filter(d=>pr[d.id]).map(d=>d.id))));
     box(A.fait,frLong(s.end||today()),{b:false})}}))}
 
-/* Scénarios de cas concrets PSE1 / PSE2 (tools/scenarios_pse1.py, scenarios_pse2.py) */
+/* Scénarios de mises en situation professionnelle Prompt Secours / Équipier SUAP (tools/scenarios_sdis78.py) */
 const SCENARIOS=__SCENARIOS__;
-const SC_AB=()=>[{code:'A',label:'Acquis',desc:'Correspond à une maîtrise particulièrement affirmée des compétences qui permet de valider.',tone:'vert',result:'ok'},{code:'B',label:'En cours d’acquisition',desc:'Correspond à des savoirs ou des compétences qui doivent encore être étayés mais qui permet de valider.',tone:'orange',result:'ok'}];
-const SC_ABC=()=>[{code:'A',label:'Maîtrisé',desc:'Connaissances et compétences attendues pleinement maîtrisées.',tone:'vertf',result:'ok'},{code:'B',label:'Acquis',desc:'Connaissances et compétences acquises, mobilisation perfectible.',tone:'vert',result:'ok'},{code:'C',label:'En cours d’acquisition',desc:'Acquis partiels ou instables.',tone:'orange',result:'ko'},{code:'NO',label:'Non observable',desc:'',tone:'gris',result:'none'}];
-function ficheTemplates(cur){const F=FICHES[cur]||[];return F.map(f=>({id:f.id,builtin:true,rev:1,cursus:cur,kind:'formative',fiche:true,learners:1,
-  name:`${cur==='PICF'?'PIC F':'PAE FPSE'} · Fiche n°${f.num} · ${f.title.charAt(0)+f.title.slice(1).toLowerCase()}`,title:f.title,ref:f.ref,
-  header:{left:'EPN ANPS',center:'CONCEPTION DES FORMATIONS',title:'Fiche d’Évaluation n°'+f.num+' '+f.title,ref:f.ref,maj:cur==='PICF'?'18.02.2022':'22.07.2025'},
-  scale:cur==='PICF'?SC_AB():SC_ABC(),
-  criteria:f.rows.map((r,i)=>r.sec?{id:'s'+i,sec:true,label:r.sec,code:'',children:[]}:{id:'r'+i,code:(r.comp||[]).join(' · '),label:r.label,feeds:r.comp||[],ne:!!r.ne,children:[]})}))}
-const PICF_COMPS=[['1','Est capable d’évaluer le niveau de connaissances acquises et celles restant à acquérir'],['2.1','Est capable d’utiliser avec efficacité un support pédagogique'],['2.2','Est capable de s’appuyer sur les acquis des apprenants dans la progression pédagogique'],['2.3','Est capable de démontrer, diriger, expliquer et justifier'],['3','Est capable d’organiser l’apprentissage des apprenants par groupe'],['4','Est capable de placer les apprenants dans une situation proche de la réalité lors d’une simulation et utiliser une évaluation formative'],['5','Est capable de placer l’apprenant dans une situation de travail de groupe'],['6','Est capable de suivre un RIF et adapter si nécessaire les activités'],['7','Est capable d’évaluer l’apprenant'],['8','Est capable de s’auto évaluer dans son rôle de formateur'],['9','Est capable d’établir une communication dans le cadre de la formation'],['10','Est capable d’adapter sa posture, en maîtrisant le cadre juridique et celui de son autorité d’emploi'],['11','Est capable de gérer la mise en place d’une formation : aspects logistique, administratifs…'],['12','Est capable de faciliter l’acquisition des savoirs en positionnant le groupe dans une situation respectant les conditions d’apprentissage chez l’adulte'],['13','Est capable de gérer les comportements et les attitudes au sein du groupe'],['14','Est capable d’utiliser les outils de communication et créer les supports pédagogiques adaptés']];
-const PAE_COMPS=[['1','Dispenser les enseignements pratiques et théoriques de la sensibilisation aux « gestes qui sauvent »','AB'],['2.1','Dispenser les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours Citoyen »','AB'],['2.2','Évaluer les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours Citoyen »','AB'],['3.1','Dispenser les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 1 »','AB'],['3.2','Évaluer les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 1 »','AB'],['4.1','Dispenser les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 2 »','AB'],['4.2','Évaluer les enseignements pratiques et théoriques de l’unité d’enseignement « Premiers Secours en Équipe de niveau 2 »','AB'],['5.1','Maîtriser les techniques des recommandations « Citoyen Sauveteur »','A'],['5.2','Maîtriser les procédures des recommandations « Citoyen Sauveteur »','A'],['6.1','Maîtriser les techniques des recommandations « Premiers Secours en Équipe »','A'],['6.2','Maîtriser les procédures des recommandations « Premiers Secours en Équipe »','A']];
 function builtinTemplates(){return riofeTemplates()}
-function builtinTemplatesPSE(){return [
- {id:'pse1-formative',builtin:true,rev:4,cursus:'PSE1',kind:'formative',name:'PSE1 · Évaluation formative (cas concret)',learners:2,header:FORM_HEADER('PSE1'),
-  scale:FORMATIVE_SCALE(),situations:SITUATIONS_PSE1(),criteria:[
-   {id:'c1',code:'C1',label:'Possède un comportement adapté à la situation',feeds:'1',children:[]},
-   {id:'c2',code:'C2',label:'Assure ou participe à la sécurité de l’intervention',feeds:'2',children:[]},
-   {id:'c3',code:'C3',label:'Réalise un bilan conforme',feeds:'3',subMode:'check',children:[{id:'c3a',label:'1er REGARD'},{id:'c3b',label:'2ème REGARD'},{id:'c3c',label:'3ème REGARD'},{id:'c3d',label:'4ème REGARD'}]},
-   {id:'c8',code:'C3',label:'Surveille la victime',feeds:'3',optional:true,children:[]},
-   {id:'c4',code:'C4',label:'Réalise des gestes de premiers secours efficaces',feeds:'4',children:[]},
-   {id:'c9',code:'C4',label:'Utilise correctement du matériel de premiers secours',feeds:'4',optional:true,children:[]},
-   {id:'c5',code:'C5',label:'Rend compte au chef d’équipe',feeds:'5',children:[]},
-   {id:'c6',code:'C6',label:'Respecte une conduite à tenir appropriée',feeds:'6',children:[]},
-   {id:'c7',code:'C6',label:'Établit une communication au sein de l’équipe',feeds:'6',children:[]}]},
- {id:'pse1-certif',builtin:true,rev:3,cursus:'PSE1',kind:'certificative',name:'PSE1 · Fiche de certification individuelle',
-  header:{title:'FICHE DE CERTIFICATION INDIVIDUELLE « PSE 1 »',ref:'Premier Secours en Equipe de niveau 1 - EPN - Mai 2022'},
-  theme:{band:'#4f81bd',light:'#b8cce4'},passages:{min:3,max:6},scale:CERT_SCALE(),
-  criteria:[
-   {id:'k1',code:'1',label:'Évoluer dans le cadre juridique applicable à son action.',expected:'3B'},
-   {id:'k2',code:'2',label:'Assurer une protection immédiate adaptée et permanente.',expected:'2A'},
-   {id:'k3',code:'3',label:'Réaliser le bilan et assurer sa transmission.',expected:'3B',cond:{type:'situation',ids:['c3c','c3d'],label:'Dont au moins 1 troisième et quatrième regard'}},
-   {id:'k4',code:'4',label:'Réaliser les gestes de premiers secours.',expected:'3B',cond:{type:'situation',id:'acr',label:'Dont au moins 1 prise en charge d’arrêt cardiaque'}},
-   {id:'k5',code:'5',label:'Assister des équipiers secouristes',expected:'1C'},
-   {id:'k6',code:'6',label:'Adapter son comportement à la situation ou à l’état de la victime.',expected:'3B'}],
-  checks:CERT_CHECKS()},
- {id:'pse1-tech',builtin:true,rev:3,cursus:'PSE1',kind:'technicite',name:'PSE1 · Suivi de la technicité',
-  header:{title:'FICHE DE SUIVI DE LA MAITRISE DE LA TECHNICITÉ DE L’APPRENANT PSE 1'},theme:{band:'#4472c4'},
-  groups:[
-   g('ATTITUDE ET COMPORTEMENT',['Évaluation de l’impact psychologique','Stabiliser l’état psycho-physiologique d’une victime','L’écoute active','La respiration contrôlée','La focalisation / défocalisation attentionnelle','Effectuer l’inventaire du matériel de premiers secours']),
-   g('PROTECTION ET SÉCURITÉ',['Dégagements d’urgence']),
-   g('HYGIÈNE ET ASEPSIE',['Équipement en moyens de protection contre les agents infectieux','Friction des mains','Lavage des mains','Mise en place de gants stériles','Nettoyage et désinfection d’un véhicule ou d’un local','Nettoyage et désinfection du matériel','Retrait des gants à usage unique','Utilisation des détergents et désinfectants','Utilisation des emballages à élimination de déchets']),
-   g('BILANS',['Retournement à deux secouristes','Retournement d’urgence à un secouriste','Gestes complémentaires d’examen','Interrogatoire de la victime','Mesure de la glycémie capillaire','Mesure de la pression artérielle','Mesure de la saturation pulsée en oxygène','Mesure de la température','Recherche d’une détresse vitale','Repérage en cas de nombreuses victimes']),
-   g('URGENCES VITALES',['Administration d’oxygène par insufflation','Aspiration de mucosités','Compression manuelle','Compressions thoraciques','Désobstruction par la méthode des claques dans le dos','Désobstruction par la méthode des compressions abdominales','Désobstruction par la méthode des compressions thoraciques','Garrot','Libération des voies aériennes chez une victime assise','Libération des voies aériennes chez une victime non traumatisée','Libération des voies aériennes chez une victime traumatisée','Mise en place d’une canule oro-pharyngée','Pansement compressif','Pansement imbibé d’une substance hémostatique','Utilisation d’un défibrillateur automatisé externe','Ventilation artificielle par une méthode orale','Ventilation artificielle par un insufflateur manuel','Position latérale de sécurité à deux secouristes','Position latérale de sécurité à un secouriste','Administration d’oxygène par inhalation','Utilisation d’une bouteille d’oxygène']),
-   g('MALAISES ET AFFECTIONS SPÉCIFIQUES',['Positions d’attente et de transport','Aide à la prise de médicaments','Manœuvres physiques']),
-   g('TRAUMATISMES',['Immobilisation d’un membre au moyen d’une attelle à dépression','Immobilisation d’un membre au moyen d’une attelle modulable','Immobilisation d’un membre supérieur au moyen d’écharpes','Maintien de la tête en position neutre','Pose d’un collier cervical','Retrait d’un casque de protection','Application de froid','Emballage au moyen d’un pansement stérile','Maintien d’un pansement','Pansement','Utilisation d’un lot membre arraché ou sectionné']),
-   g('RELEVAGE ET BRANCARDAGE',['Préparation d’un dispositif de portage'])]},
- {id:'pse2-formative',builtin:true,rev:3,cursus:'PSE2',kind:'formative',name:'PSE2 · Évaluation formative (cas concret)',learners:3,header:FORM_HEADER('PSE2'),
-  scale:FORMATIVE_SCALE(),criteria:[
-   {id:'d1',code:'C1',label:'Prend en charge une personne',feeds:'1',subMode:'check',children:[{id:'d1a',label:'Présentant une affection spécifique'},{id:'d1b',label:'Victime d’une atteinte circonstancielle'},{id:'d1c',label:'Présentant une souffrance psychique ou comportement inhabituel'}]},
-   {id:'d2',code:'C2',label:'Assure au sein d’une équipe',feeds:'2',subMode:'check',children:[{id:'d2a',label:'L’immobilisation d’une victime traumatisée du squelette et pose correctement le matériel'},{id:'d2b',label:'Le relevage et le brancardage d’une victime'}]},
-   {id:'d9',code:'C2',label:'Utilise correctement du matériel de premiers secours',feeds:'2',optional:true,children:[]},
-   {id:'d3',code:'C3',label:'Coordonne les actions de secours au sein d’une équipe',feeds:'3',children:[]},
-   {id:'d10',code:'C3',label:'Tient sa place au sein d’une équipe',feeds:'3',optional:true,children:[]},
-   {id:'d4',code:'C4',label:'Respecte une conduite à tenir adaptée',feeds:'4',children:[]},
-   {id:'d5',code:'C5',label:'Assure ou participe à la sécurité de l’intervention',feeds:'5',children:[]},
-   {id:'d6',code:'C6',label:'Réalise un bilan complet et assure sa transmission',feeds:'6',children:[]},
-   {id:'d7',code:'C6',label:'Rend compte au chef d’équipe',feeds:'6',children:[]},
-   {id:'d8',code:'C7',label:'Possède un comportement adapté à la situation',feeds:'7',children:[]},
-   {id:'d11',code:'C7',label:'Réagit de façon adaptée devant plusieurs victimes',feeds:'7',optional:true,children:[]}]},
- {id:'pse2-certif',builtin:true,rev:2,cursus:'PSE2',kind:'certificative',name:'PSE2 · Fiche de certification individuelle',
-  header:{title:'FICHE DE CERTIFICATION INDIVIDUELLE « PSE 2 »',ref:''},
-  theme:{band:'#c0504d',light:'#d99594'},passages:{min:3,max:6},scale:CERT_SCALE(),
-  criteria:[
-   {id:'m1',code:'1',label:'Prendre en charge une personne.',expected:'1B'},
-   {id:'m2',code:'2',label:'Assurer au sein d’une équipe l’immobilisation, le relevage et le brancardage.',expected:'3B',cond:{type:'situation',id:'d2b',label:'Dont au moins un relevage'}},
-   {id:'m3',code:'3',label:'Coordonner les actions de secours conduites au sein d’une équipe.',expected:'2B'},
-   {id:'m4',code:'4',label:'Évoluer dans le cadre juridique applicable à son autorité d’emploi.',expected:'3B'},
-   {id:'m5',code:'5',label:'Assurer une protection immédiate, adaptée et permanente.',expected:'3A'},
-   {id:'m6',code:'6',label:'Réaliser un bilan et assurer sa transmission.',expected:'3B',cond:{type:'marks',ids:['d6'],label:'Dont au moins 1 bilan complet'}},
-   {id:'m7',code:'7',label:'Adapter son comportement à la situation et à la victime.',expected:'2B'}],
-  checks:CERT_CHECKS()},
- {id:'pse2-tech',builtin:true,rev:3,cursus:'PSE2',kind:'technicite',name:'PSE2 · Suivi de la technicité',
-  header:{title:'FICHE DE SUIVI DE LA MAITRISE DE LA TECHNICITÉ DE L’APPRENANT PSE 2'},theme:{band:'#c00000'},
-  groups:[
-   g('TRAUMATISMES',['Contention pelvienne','Immobilisation d’un membre inférieur au moyen d’une attelle à traction','Immobilisation générale sur un plan dur (3 possibilités)','Immobilisation générale sur un matelas à dépression','Pose de l’attelle cervico-thoracique','Réalignement de membre']),
-   g('RELEVAGE',['Relevage à l’aide d’un brancard cuillère','Pont néerlandais à 4 secouristes','Pont amélioré','Relevage d’une victime en position latérale de sécurité','Pont néerlandais à 3 secouristes','Pont simple','Transfert d’une victime du lit au brancard à 3 secouristes','Relevage d’une victime en position genoux fléchies','Relevage d’une victime en position demi-assise','Transfert d’une victime sur une chaise de transport','Transfert d’une victime à l’aide d’une alèse portoir']),
-   g('BRANCARDAGE',['Préparer un brancard','Arrimage d’une victime','Aide à la marche','Brancardage d’une victime à 3 secouristes en terrain plat','Brancardage d’une victime à 4 secouristes en terrain plat','Brancardage d’une victime à l’aide d’un chariot brancard (VPSP)','Franchissement d’un obstacle à 3 secouristes','Franchissement d’un obstacle à 4 secouristes','Brancardage d’une victime au travers d’un passage étroit','Brancardage d’une victime dans une pente ou un escalier à 3 secouristes','Brancardage d’une victime dans une pente ou un escalier à 4 secouristes','Installation d’une victime dans un véhicule de premiers secours à personne','Déplacement d’une victime sur une chaise de transport en terrain plat','Déplacement d’une victime sur une chaise de transport dans des escaliers'])]}
-  ,...ficheTemplates('PICF'),
- {id:'picf-suivi',builtin:true,rev:1,cursus:'PICF',kind:'suivi',name:'PIC F · Fiche de suivi de l’apprenant',days:4,rule:'any',scale:[{code:'A',label:'Acquis',tone:'vert',result:'ok'},{code:'B',label:'En cours d’acquisition',tone:'orange',result:'ok'},{code:'NE',label:'Non évalué',tone:'gris',result:'none'}],
-  comps:PICF_COMPS.map(([code,label])=>({code,label,req:'AB'}))},
-  ...ficheTemplates('PAEFPSE'),
- {id:'paefpse-suivi',builtin:true,rev:1,cursus:'PAEFPSE',kind:'suivi',name:'PAE FPSE · Fiche de suivi et avis final',days:6,rule:'final',avis:true,scale:SC_ABC().slice(0,3),
-  comps:PAE_COMPS.map(([code,label,req])=>({code,label,req})),fpsc:['1','2.1','2.2','5.1','5.2'],groups:[{label:'Compétences du formateur (n°1 /2.1/2.2/3.1/3.2/4.1/4.2)',codes:['1','2.1','2.2','3.1','3.2','4.1','4.2']},{label:'Maitrise des procédures et des gestes techniques (Compétences n°5.1/5.2/6.1/6.2)',codes:['5.1','5.2','6.1','6.2']}]},
- {id:'ce-formative',builtin:true,rev:1,cursus:'CE',kind:'formative',name:'CE · Fiche d’évaluation formative (cas concret)',learners:1,
-  header:{left:'EPN A.N.P.S',center:'Association Nationale des Premiers Secours',title:'FICHE D’EVALUATION FORMATIVE',ref:'FE/FI CE',maj:'20.04.2022'},
-  scale:[{code:'A',label:'Très bonne maîtrise',desc:'Correspond à une maîtrise particulièrement affirmée de la compétence.',tone:'vertf',result:'ok'},{code:'B',label:'Maîtrise satisfaisante',desc:'Niveau attendu en fin de cycle. L’objectif est atteint.',tone:'vert',result:'ok'},{code:'C',label:'Maîtrise fragile',desc:'Correspond à des savoirs ou des compétences qui doivent encore être étayés.',tone:'orange',result:'ko'},{code:'NE',label:'Non évalué',desc:'',tone:'gris',result:'none'}],
-  criteria:[{id:'e1',code:'C1',label:'Possède un comportement adapté à la situation',feeds:'1',children:[]},{id:'e2',code:'C2',label:'Coordonne l’action de son équipe par des décisions précises et un fil conducteur clair de l’intervention',feeds:'2',children:[]},
-   {id:'e4',code:'C4',label:'Transmettre et recevoir un bilan par radio',feeds:'4',children:[]},{id:'e7',code:'C7',label:'Gère les différentes étapes d’un DPS par un management adapté',feeds:'7',children:[]},
-   {id:'e8',code:'C8',label:'Dirige et réalise un bilan conforme',feeds:'8',subMode:'check',children:[{id:'e8a',label:'Circonstanciel'},{id:'e8b',label:'Urgence vitale'},{id:'e8c',label:'Complémentaire'},{id:'e8d',label:'Surveillance'}]}]},
- {id:'ce-certif',builtin:true,rev:1,cursus:'CE',kind:'certificative',name:'CE · Fiche de certification individuelle',header:{title:'FICHE DE CERTIFICATION INDIVIDUELLE « Chef d’équipe »',ref:''},
-  theme:{band:'#e46c0a',light:'#f6b98c'},passages:{min:2,max:6},scale:CERT_SCALE(),theory:{max:40,pass:24},
-  criteria:[{id:'q1',code:'1',label:'Évoluer dans le cadre juridique applicable à son action.',expected:'2B'},{id:'q2',code:'2',label:'Coordonner l’action de son équipe de secours',expected:'2B'},{id:'q4',code:'4',label:'Assurer la transmission d’un bilan par radio',expected:'1A'},{id:'q7',code:'7',label:'Assurer le management de son équipe de secours tout au long d’un DPS',expected:'2B'},{id:'q8',code:'8',label:'Diriger et retranscrire les phases d’un bilan',expected:'2B'}],
-  checks:[{id:'A',label:'Avoir suivi l’entièreté du volume de formation',auto:'presence'},{id:'B',label:'Avoir acquis les connaissances via l’évaluation théorique (Compétences 3 / 5 / 6) – Note de 24/40',auto:'theory'},{id:'C',label:'Avoir acquis ou maîtrisé l’ensemble des attitudes et habiletés',auto:true}]}
-]}
 function blankTemplate(kind,cursus){
   const c=cursus||'';
   if(kind==='formative')return {id:uid(),cursus:c,kind,name:'Nouvelle grille formative',learners:2,header:FORM_HEADER(c),scale:FORMATIVE_SCALE(),criteria:[{id:uid(),code:'C1',label:'Premier critère',feeds:'',children:[]}]};
@@ -547,17 +450,17 @@ Cette décision entraîne une incapacité temporaire à exercer vos fonctions en
 Vous pouvez suivre une mise à niveau de vos connaissances avant de vous présenter à une nouvelle évaluation. Si l’évaluation est favorable, vous pourrez dès lors exercer vos fonctions.
 
 Enfin, il vous appartient de transmettre cette décision à l’ensemble de vos autorités d’emploi dont vous assurez des missions qui requièrent des compétences en matière de premiers secours.`});
-const UE={PSE1:{ue:'premiers secours en équipe de niveau 1',qualite:'secouriste',cert:'CERTIFICAT DE COMPÉTENCES DE SECOURISTE – PSE1',certTxt:'certificat de compétences de secouriste'},
-          PSE2:{ue:'premiers secours en équipe de niveau 2',qualite:'équipier secouriste',cert:'CERTIFICAT DE COMPÉTENCES D’ÉQUIPIER SECOURISTE – PSE2',certTxt:'certificat de compétences d’équipier secouriste'}};
+const UE={};
 const ueOf=c=>UE[c]||{ue:c,qualite:'secouriste',cert:'CERTIFICAT DE COMPÉTENCES – '+c,certTxt:'certificat de compétences'};
-/* QCM certificatifs des référentiels ANPS 2025 (corrigés) */
-const QCM=__QCM__;
+/* QCM fournis : aucun pour les RIOFE (un QCM peut être importé par formation dans DB.qcm) */
+const QCM={};
 const qcmFor=c=>(DB.qcm&&DB.qcm[c])||QCM[c]||null;
 const SAT_CRITERIA=['Durée de la session','Satisfaction globale vis-à-vis de la session','Clarté des objectifs exposés','Pertinence des méthodes pédagogiques','Organisation générale de la mise en place de la formation','Niveau d’acquisition des savoirs des apprenants','Intérêts manifestés des contenus','Niveau de la logistique'];
 const SAT_LABELS=['','Inadapté (ou nul)','Insuffisant','Bien','Très bien'];
 function emptyDB(){return {version:2,templates:builtinTemplates(),sessions:[],evals:[],settings:{trainers:[],useLogo:true,extraSkills:false,org:ORG_DEFAULT(),texts:DOC_TEXTS()}}}
 function load(){
   try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(d&&Array.isArray(d.sessions)&&Array.isArray(d.evals)){d.settings=Object.assign({trainers:[],useLogo:true,extraSkills:false},d.settings||{});d.settings.org=Object.assign(ORG_DEFAULT(),d.settings.org||{});d.settings.texts=Object.assign(DOC_TEXTS(),d.settings.texts||{});
+    {const keep=new Set(builtinTemplates().map(b=>b.id));d.templates=d.templates.filter(t=>!t.builtin||t.edited||keep.has(t.id))}
     builtinTemplates().forEach(b=>{const i=d.templates.findIndex(t=>t.id===b.id);
       if(i<0){if(!(d.removedBuiltins||[]).includes(b.id))d.templates.push(b)}
       else if(!d.templates[i].edited&&(d.templates[i].rev||1)<(b.rev||1))d.templates[i]=b});
@@ -668,7 +571,7 @@ function compStatus(c,G,k){
   st.auto=st.count>=req.n&&st.condOk?'oui':'';return st;
 }
 function validOf(c,k,G){const m=c.valid[k.id];if(m)return m;const s=sessById(c.sessionId);if(!s)return '';return compStatus(c,G||certGrid(c,s),k).auto}
-const DUREE={PSE1:5,PSE2:4,PICF:4,PAEFPSE:6,CE:3,PS:5,EQSUAP:5};const HEURES={PAEFPSE:[8,8,8,8,8.5,8.5],PS:[8,8,8,8,8],EQSUAP:[8,8,8,8,8]};
+const DUREE={PS:5,EQSUAP:5};const HEURES={PS:[8,8,8,8,8],EQSUAP:[8,8,8,8,8]};
 function defaultDays(s){const n=s.type==='FC'?1:(DUREE[s.cursus]||1);const out=[];let d=s.start?new Date(s.start+'T12:00:00'):null;
   for(let i=0;i<n;i++){let iso='';if(d){while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);iso=d.toISOString().slice(0,10);if(s.end&&iso>s.end)iso='';d.setDate(d.getDate()+1)}out.push({id:'J'+(i+1),date:iso,h:(HEURES[s.cursus]||[])[i]||7})}return out}
 /* journées de formation : J1, J2… avec date et heures ; migration de l'ancienne présence par date */
@@ -750,33 +653,6 @@ function seedSamples(d){
     t.criteria.filter(k=>k.fam==='adapt').forEach(k=>{ov[k.id]={};(adapt[pp.id]||[]).forEach((v,i)=>ov[k.id][i]=v)});
     d.evals.push({id:'ex-c-'+pp.id,sessionId:s.id,kind:'certificative',pid:pp.id,tpl:t,overrides:ov,extra:0,valid:{},checks:{},observations:'',createdAt:Date.now(),updatedAt:Date.now()})}));
 }
-function seedSamplesPSE(d){
-  const T=d.templates;
-  d.settings.trainers.push({id:'t-ex1',nom:'Exemple',prenom:'Formateur',sample:true},{id:'t-ex2',nom:'Démo',prenom:'Formatrice',sample:true});
-  const s={id:'s-ex1',sample:true,cursus:'PSE1',title:'PSE1 · Session exemple',start:'2026-11-09',end:'2026-11-14',lieu:'Chartres',trainerIds:['t-ex1','t-ex2'],
-    participants:[{id:'p1',nom:'Exemple',prenom:'Camille'},{id:'p2',nom:'Exemple',prenom:'Louis'},{id:'p3',nom:'Démo',prenom:'Inès'},{id:'p4',nom:'Démo',prenom:'Hugo'}],createdAt:Date.now(),updatedAt:Date.now()};
-  Object.assign(s.participants[0],{civ:'Madame',birthDate:'2001-04-12',birthPlace:'Chartres',birthDept:'28'});Object.assign(s,{pvNum:'2026-EX1',pvDate:'2026-11-14'});
-  s.surveys=[{id:'sv1',date:'2026-11-14',scores:[3,4,4,3,3,3,4,2],why:{7:'Salle trop petite pour les cas concrets.'},comment:'Formateurs très disponibles.'},{id:'sv2',date:'2026-11-14',scores:[4,4,3,4,4,3,4,3],why:{},comment:''}];
-  s.presence={p1:{'2026-11-09':true,'2026-11-10':true,'2026-11-11':true,'2026-11-12':true,'2026-11-13':true,'2026-11-14':true},p2:{'2026-11-09':true,'2026-11-10':true}};
-  d.sessions.push(s);
-  const f=T.find(t=>t.id==='pse1-formative');
-  const mk=(date,theme,ev,learners,done)=>({id:uid(),sessionId:s.id,kind:'formative',tpl:clone(f),date,theme,evaluatorIds:ev,learners,situations:{},cases:/Arrêt/.test(theme)?{acr:true}:/Malaise/.test(theme)?{malaise:true}:{trauma:true},done,counts:true,createdAt:Date.now(),updatedAt:Date.now()});
-  d.evals.push(
-    mk('2026-11-11','Malaise sur la voie publique, victime consciente',['t-ex1',''],[
-      {pid:'p1',caseNo:'3',obs:'Bilan incomplet au 2e regard. Bonne gestion de la sécurité.',marks:{c1:'B',c2:'B',c3:'C',c3a:'B',c3b:'C',c3c:'B',c3d:'B',c4:'B',c5:'C',c6:'B',c7:'B'}},
-      {pid:'p2',caseNo:'3',obs:'Très bon leadership, communication à travailler.',marks:{c1:'A',c2:'B',c3:'B',c3a:'A',c3b:'B',c3c:'B',c3d:'B',c4:'B',c5:'B',c6:'B',c7:'C'}}],true),
-    mk('2026-11-12','Arrêt cardiaque dans un hall de gare',['t-ex2','t-ex1'],[
-      {pid:'p1',caseNo:'5',obs:'Compression efficace. Transmission claire et structurée.',marks:{c1:'B',c2:'A',c3:'B',c3a:'A',c3b:'B',c3c:'B',c3d:'B',c4:'B',c5:'B',c6:'B',c7:'B'}},
-      {pid:'p3',caseNo:'5',obs:'Garrot posé tardivement.',marks:{c1:'B',c2:'B',c3:'B',c4:'C',c5:'B',c6:'C',c7:'B'}}],true),
-    mk('2026-11-13','Chute d’un escabeau, suspicion de traumatisme',['t-ex1',''],[
-      {pid:'p1',caseNo:'8',obs:'',marks:{c1:'A',c2:'B',c3:'B',c3a:'B',c3b:'B',c3c:'B',c3d:'B',c4:'A',c5:'B',c6:'B',c7:'B'}},
-      {pid:'p4',caseNo:'8',obs:'',marks:{c1:'B',c2:'B'}}],false));
-  const ct=T.find(t=>t.id==='pse1-certif'),tt=T.find(t=>t.id==='pse1-tech');
-  d.evals.push({id:uid(),sessionId:s.id,kind:'certificative',pid:'p1',tpl:clone(ct),overrides:{},extra:0,valid:{},checks:{},theory:{score:'15,5'},observations:'',createdAt:Date.now(),updatedAt:Date.now()});
-  const done={};tt.groups.flatMap(g=>g.items).forEach((it,i)=>{if(i<58)done[it.id]=i<30?'2026-11-10':'2026-11-12'});
-  d.evals.push({id:uid(),sessionId:s.id,kind:'technicite',pid:'p1',tpl:clone(tt),done,start:s.start,end:s.end,createdAt:Date.now(),updatedAt:Date.now()});
-}
-
 /* =========================================================
    État de l'interface
    ========================================================= */
@@ -803,19 +679,19 @@ function renderTop(){
   const back=to=>`<button class="ibtn" data-act="back" data-v="${to}" aria-label="Retour">${I.back}</button>`;
   const s=curSess();
   if(v==='sessions'){left=markImg();title=`FORSSUAP 78<small>SDIS 78 · formation SSUAP · version ${APP_VERSION}</small>`}
-  else if(v==='tpls'){left=markImg();title='Grilles<small>PSE1, PSE2 et grilles ajoutées</small>'}
+  else if(v==='tpls'){left=markImg();title='Grilles<small>RIOFE Prompt Secours, Équipier SUAP et grilles ajoutées</small>'}
   else if(v==='settings'){left=markImg();title='Réglages<small>Formateurs, sauvegarde, transfert</small>'}
   else if(v==='session'){left=back('sessions');title=`${esc(s.title||s.cursus)}<small>${esc(s.cursus)} · ${s.participants.filter(p=>!p.archived).length} participants</small>`;
     right=`<button class="ibtn" data-act="export-menu" aria-label="Exporter et envoyer">${I.share}<span class="lbl small">Envoyer</span></button><button class="ibtn" data-act="edit-session" aria-label="Modifier la formation">${I.edit}</button>`}
   else if(v==='person'){left=back('session');title=`${esc(pName(s,S.pid))}<small>${esc(s.title||s.cursus)}</small>`;right=pdfBtn('pick-export','Exporter')}
   else if(v==='sessionEdit'){left=`<button class="ibtn" data-act="session-cancel" aria-label="Annuler">${I.x}</button>`;title=`${S.draftNew?'Nouvelle formation':'Modifier la formation'}<small>Participants et formateurs</small>`;right=`<button class="ibtn solid" data-act="session-save">Enregistrer</button>`}
-  else if(v==='formative'){const e=curEval();left=back(S.pid?'person':'session');title=`${e.tpl.riofe?'MSP'+(e.ref?' '+esc(e.ref):''):e.tpl.fiche?esc(e.tpl.ref.replace(/^FE\/(PICF|PAE FPSE)\//,'Fiche n°')):'Cas concret'} · ${esc(fmtDate(e.date))}<small>${esc(e.learners.map(l=>pName(s,l.pid)).join(' · '))}</small>`;right=pdfBtn('pdf-formative')}
+  else if(v==='formative'){const e=curEval();left=back(S.pid?'person':'session');title=`${e.tpl.riofe?'MSP'+(e.ref?' '+esc(e.ref):''):'Cas concret'} · ${esc(fmtDate(e.date))}<small>${esc(e.learners.map(l=>pName(s,l.pid)).join(' · '))}</small>`;right=pdfBtn('pdf-formative')}
   else if(v==='cert'){const c=curEval();left=back('person');title=`Certification · ${esc(pName(s,c.pid))}<small>${esc(c.tpl.name)}</small>`;right=pdfBtn('pdf-cert')}
   else if(v==='tech'){const x=curEval();left=back('person');title=`Technicité · ${esc(pName(s,x.pid))}<small>${esc(x.tpl.name)}</small>`;right=pdfBtn('pdf-tech')}
   else if(v==='suivi'){const x=curEval();left=back('person');title=`Suivi · ${esc(pName(s,x.pid))}<small>${esc(x.tpl.name)}</small>`;right=pdfBtn('pdf-suivi')}
   else if(v==='scenarios'){const cu=scCur(),lk=scS()&&scS().cursus===cu;left=S.scNoSess?markImg():back('session');title=`Scénarios de cas concrets<small>${esc(cu)} · ${scList(cu).length} fiches${S.scNoSess?'':' · '+esc(s.title||s.cursus)}</small>`;right=lk?pdfBtn('pdf-sc-mat','Matériel'):''}
   else if(v==='scenario'){const c=scById(S.scid);left=back(S.scFrom==='formative'?'formative':'scenarios');title=`${c?esc(c.titre):'Scénario'}<small>${c?esc([c.cur,c.jour,c.etape].filter(Boolean).join(' · ')):''}</small>`;right=pdfBtn('pdf-sc','Fiche')}
-  else if(v==='call'){const c=scById(S.call&&S.call.scId);left=`<button class="ibtn" data-act="call-exit" aria-label="Quitter">${I.back}</button>`;title=`Appel au 15${S.call&&S.call.debrief?' · correction':''}<small>${c?esc(c.cur+' n°'+c.n+' · '+c.titre):''}</small>`;right=S.call&&S.call.debrief&&!EMBED?pdfBtn('pdf-call','PDF'):''}
+  else if(v==='call'){const c=scById(S.call&&S.call.scId);left=`<button class="ibtn" data-act="call-exit" aria-label="Quitter">${I.back}</button>`;title=`Transmission du bilan${S.call&&S.call.debrief?' · correction':''}<small>${c?esc(c.cur+' n°'+c.n+' · '+c.titre):''}</small>`;right=S.call&&S.call.debrief&&!EMBED?pdfBtn('pdf-call','PDF'):''}
   else if(v==='scEdit'){left=`<button class="ibtn" data-act="sc-cancel" aria-label="Annuler">${I.x}</button>`;title=`${S.scNew?'Nouveau scénario':'Modifier le scénario'}<small>${esc(S.scdraft.cur)}</small>`;right=`<button class="ibtn solid" data-act="sc-save">Enregistrer</button>`}
   else if(v==='techs'){left=back('session');title=`Fiches de technicité<small>${esc(s.title||s.cursus)}</small>`}
   else if(v==='qcm'){const c=curEval();left=back('cert');const st=qcmState(c,s);title=`QCM ${esc(s.cursus)} · ${esc(pName(s,c.pid))}<small>${st.done}/${st.tot} corrigées · ${String(st.score).replace('.',',')}/20</small>`;right=pdfBtn('pdf-qcm')}
@@ -858,7 +734,7 @@ function viewSessions(){
     ${LOGO.startsWith('data:')?`<div class="brandband"><img src="${LOGO}" alt="SDIS 78"><div class="t">FORSSUAP 78 · évaluations des formations SSUAP<span>équipiers SSUAP SPV/SPP, chefs d’équipe — sans réseau</span></div></div>`:''}
     <input type="search" id="q" placeholder="Rechercher une formation, un participant…" value="${esc(S.q)}" data-bind="q" data-scope="ui" aria-label="Rechercher">
     <div class="chips">${chip('cur','all',S.cur,'Toutes')}${cursusList().map(c=>chip('cur',c,S.cur,esc(c))).join('')}</div>
-    ${L.length?`<div class="cards">${cards}</div>`:`<div class="empty">${DB.sessions.length?'Aucune formation ne correspond.':'Aucune formation. Touchez « Nouvelle formation » pour choisir PSE1 ou PSE2, les formateurs et saisir les participants.'}</div>`}
+    ${L.length?`<div class="cards">${cards}</div>`:`<div class="empty">${DB.sessions.length?'Aucune formation ne correspond.':'Aucune formation. Touchez « Nouvelle formation » pour choisir Prompt Secours ou Équipier SUAP, les formateurs et saisir les participants.'}</div>`}
   </div>`;
 }
 
@@ -982,7 +858,7 @@ function viewSessionEdit(){
     <section class="panel"><div class="hd"><h3>Formation</h3></div><div class="bd stack">
       <div class="fields">
         <label class="f">Type de formation<select id="sd-cursus" ${db('cursus')} ${S.draftNew?'':'disabled'}>${cursusList().map(c=>`<option ${d.cursus===c?'selected':''}>${esc(c)}</option>`).join('')}</select></label>
-        <label class="f">Intitulé<input type="text" id="sd-title" value="${esc(d.title)}" placeholder="Ex. : PSE1 novembre 2026" ${db('title')}></label>
+        <label class="f">Intitulé<input type="text" id="sd-title" value="${esc(d.title)}" placeholder="Ex. : Équipier SUAP novembre 2026" ${db('title')}></label>
         <label class="f">Lieu<input type="text" id="sd-lieu" value="${esc(d.lieu)}" ${db('lieu')}></label>
         <label class="f">Début<input type="date" id="sd-start" value="${esc(d.start)}" ${db('start')}></label>
         <label class="f">Fin<input type="date" id="sd-end" value="${esc(d.end)}" ${db('end')}></label>
@@ -1001,7 +877,7 @@ function viewSessionEdit(){
     </div></section>
     <section class="panel"><div class="hd"><h3>Journées de formation</h3><span class="small muted num">${(d.days||[]).length} jour${(d.days||[]).length>1?'s':''} · ${(d.days||[]).reduce((t,x)=>t+(+x.h||0),0)} h</span></div><div class="bd stack" style="gap:8px">
       ${(d.days||[]).map((x,i)=>`<div class="row" style="flex-wrap:nowrap"><b style="width:34px">${esc(x.id)}</b><input type="date" id="dy-${i}" value="${esc(x.date||'')}" aria-label="Date ${esc(x.id)}" ${db('days.'+i+'.date')}><input type="number" id="dh-${i}" min="0" max="12" step="0.5" style="width:84px" value="${esc(x.h)}" aria-label="Heures ${esc(x.id)}" ${db('days.'+i+'.h')}><span class="small muted">h</span></div>`).join('')}
-      <div class="row"><button class="btn sm" data-act="day-add">${I.plus}Journée</button><button class="btn sm" data-act="day-rm" ${(d.days||[]).length>1?'':'disabled'}>Retirer la dernière</button><button class="btn sm" data-act="day-reset">Durée réglementaire (PSE1 35 h, PSE2 28 h, FC 7 h)</button></div>
+      <div class="row"><button class="btn sm" data-act="day-add">${I.plus}Journée</button><button class="btn sm" data-act="day-rm" ${(d.days||[]).length>1?'':'disabled'}>Retirer la dernière</button><button class="btn sm" data-act="day-reset">Durée du référentiel (5 jours de 8 h)</button></div>
       <p class="small muted" style="margin:0">Les journées peuvent être réparties sur plusieurs semaines : la présence se pointe par journée (J1, J2…).</p>
     </div></section>
     <section class="panel"><div class="hd"><h3>Formateurs de la session</h3><button class="btn sm" data-act="goto-trainers">${I.gear}Gérer la liste</button></div><div class="bd">
@@ -1302,7 +1178,7 @@ function viewTpls(){
    </div></div>`).join('');
   return `<div class="stack">
     <div class="chips">${chip('tplcur','all',S.tplCur,'Toutes')}${cursusList().map(c=>chip('tplcur',c,S.tplCur,esc(c))).join('')}</div>
-    <p class="muted small" style="margin:0">Une formation (PSE1, PSE2…) regroupe une ou plusieurs grilles formatives, une fiche de technicité et une fiche de certification. Pour ajouter une formation, dupliquez ses trois grilles et changez le nom de formation. Les fiches déjà remplies gardent la version de la grille utilisée.</p>
+    <p class="muted small" style="margin:0">Une formation (Prompt Secours, Équipier SUAP…) regroupe ses grilles formatives (autoévaluation accompagnée, fiche critériée) et sa grille sommative et certificative. Pour ajouter une formation, dupliquez ses trois grilles et changez le nom de formation. Les fiches déjà remplies gardent la version de la grille utilisée.</p>
     ${L.length?`<div class="cards">${cards}</div>`:'<div class="empty">Aucune grille.</div>'}</div>`;
 }
 function viewTplEdit(){
@@ -1310,7 +1186,7 @@ function viewTplEdit(){
   const db=p=>bind(p,'tdraft');
   const tools=(list,i)=>`<div class="ed-tools"><button class="btn sm" data-act="mv" data-l="${list}" data-i="${i}" data-v="-1" ${i===0?'disabled':''} aria-label="Monter">${I.up}</button><button class="btn sm" data-act="mv" data-l="${list}" data-i="${i}" data-v="1" aria-label="Descendre">${I.down}</button><button class="btn sm danger" data-act="rm" data-l="${list}" data-i="${i}" aria-label="Supprimer">${I.trash}</button></div>`;
   const ident=`<section class="panel"><div class="hd"><h3>Identité</h3></div><div class="bd fields">
-      <label class="f">Formation<input type="text" id="t-cursus" list="cursus-list" value="${esc(d.cursus||'')}" placeholder="Ex. : PSE1, PSE2, SST…" ${db('cursus')}><datalist id="cursus-list">${cursusList().map(c=>`<option value="${esc(c)}">`).join('')}</datalist></label>
+      <label class="f">Formation<input type="text" id="t-cursus" list="cursus-list" value="${esc(d.cursus||'')}" placeholder="Ex. : PS, EQSUAP…" ${db('cursus')}><datalist id="cursus-list">${cursusList().map(c=>`<option value="${esc(c)}">`).join('')}</datalist></label>
       <label class="f">Nom de la grille<input type="text" id="t-name" value="${esc(d.name)}" ${db('name')}></label>
       ${F?`<label class="f">Apprenants par fiche (défaut)<input type="number" id="t-learners" min="1" max="6" value="${d.learners}" ${db('learners')}></label>`:''}
       ${K==='certificative'?`<label class="f">Passages minimum<input type="number" id="t-pmin" min="1" max="12" value="${d.passages.min}" ${db('passages.min')}></label><label class="f">Passages maximum<input type="number" id="t-pmax" min="1" max="12" value="${d.passages.max}" ${db('passages.max')}></label>`:''}
@@ -1369,7 +1245,7 @@ function viewSettings(){
       <p class="small muted" style="margin:0">Ces formateurs sont proposés dans les listes déroulantes des fiches et de chaque formation.</p>
       ${T||'<div class="empty">Aucun formateur. Touchez « Ajouter ».</div>'}</div></section>
     <section class="panel"><div class="hd"><h3>Fiches PDF</h3></div><div class="bd stack" style="gap:4px">
-      <label class="cb"><input type="checkbox" id="set-logo" ${DB.settings.useLogo!==false?'checked':''} ${bind('useLogo','settings')}>Afficher le logo UDPS 28 sur les fiches formatives</label>
+      <label class="cb"><input type="checkbox" id="set-logo" ${DB.settings.useLogo!==false?'checked':''} ${bind('useLogo','settings')}>Afficher le logo du SDIS 78 sur les fiches formatives</label>
       <label class="cb"><input type="checkbox" id="set-extra" ${DB.settings.extraSkills?'checked':''} ${bind('extraSkills','settings')}>Habiletés complémentaires des référentiels (surveille la victime, utilise le matériel, tient sa place dans l’équipe, plusieurs victimes)</label>
       <p class="small muted" style="margin:0 0 0 30px">Désactivé : fiches strictement au format d’origine. Activé : ces lignes s’ajoutent aux fiches formatives et au PDF, et comptent pour la certification.</p></div></section>
     <section class="panel"><div class="hd"><h3>Organisme (certificats, attestations, notifications)</h3></div><div class="bd fields">
@@ -1397,7 +1273,7 @@ function viewSettings(){
       <div class="row"><button class="btn primary" data-act="import">Importer</button></div>
     </div></section>
     <section class="panel"><div class="hd"><h3>Réinitialiser</h3></div><div class="bd row">
-      <button class="btn" data-act="restore">Restaurer les grilles PSE1 et PSE2 d’origine</button>
+      <button class="btn" data-act="restore">Restaurer les grilles RIOFE d’origine</button>
       <button class="btn" data-act="del-samples">Supprimer les exemples</button>
       <button class="btn danger" data-act="wipe">${I.trash}Tout effacer</button></div></section>
     <p class="small muted" style="margin:0">FORSSUAP 78 · SDIS 78 · version ${APP_VERSION} · données stockées uniquement sur cet appareil.</p>
@@ -1442,10 +1318,7 @@ function stamp(){const d=new Date();return `Édité le ${fmtDate(today())} à ${
 function formativePages(e,sess,onlyPid){if(e.tpl.riofe&&RIOFE_COURSES[e.tpl.cursus])return riofeSheetPages(e,sess,onlyPid);
   let idx=e.learners.map((l,i)=>i);if(onlyPid)idx=idx.filter(i=>e.learners[i].pid===onlyPid);
   const chunks=[];for(let i=0;i<idx.length;i+=2)chunks.push(idx.slice(i,i+2));
-  const F=ficheOf(e.tpl);if(F&&FORMS[F.id])return idx.map(li=>({orient:'p',draw:doc=>drawFicheBg(doc,e,sess,li,F)}));
-  if(e.tpl.id==='ce-formative'&&!e.tpl.edited&&FORMS['ce-formative'])return idx.map(li=>({orient:'p',draw:doc=>drawCeFormativeBg(doc,e,sess,li)}));
-  const L=formLayout(e.tpl);
-  return chunks.map(ch=>({orient:'p',draw:doc=>L?drawFormativeBg(doc,e,sess,ch,L):drawFormative(doc,e,sess,ch)}));
+  return chunks.map(ch=>({orient:'p',draw:doc=>drawFormative(doc,e,sess,ch)}));
 }
 function drawFormative(doc,e,sess,chunk){
   const P=pen(doc),t=e.tpl,H=t.header||{},M=14,W=182,PH=297;let y=12;e.situations=e.situations||{};
@@ -1511,7 +1384,7 @@ function drawFormative(doc,e,sess,chunk){
 }
 
 /* ---- Fiche de certification : A4 paysage (Annexe 3) ---- */
-function certPages(c,sess){if(c.tpl.riofe)return riofeSommPages(c,sess);if(c.tpl.id==='ce-certif'&&!c.tpl.edited&&FORMS['ce-certif'])return [{orient:'l',draw:doc=>drawCeCertBg(doc,c,sess)}];const L=certLayout(c);return [{orient:'l',draw:doc=>L?drawCertBg(doc,c,sess,L):drawCert(doc,c,sess)}]}
+function certPages(c,sess){if(c.tpl.riofe)return riofeSommPages(c,sess);return [{orient:'l',draw:doc=>drawCert(doc,c,sess)}]}
 function drawCert(doc,c,sess){
   const P=pen(doc),t=c.tpl,H=t.header||{},th=t.theme||{},BAND=hex2rgb(th.band||'#4f81bd'),LIGHT=hex2rgb(th.light||'#b8cce4');
   const M=14,W=269,PH=210,G=certGrid(c,sess),p=participant(sess,c.pid)||{};let y=9;
@@ -1549,7 +1422,7 @@ function drawCert(doc,c,sess){
 }
 
 /* ---- Fiche de technicité : A4 paysage, deux colonnes ---- */
-function techPages(x,sess){const T=techLayout(x);return [{orient:'l',draw:doc=>T?drawTechBg(doc,x,sess,T):drawTech(doc,x,sess)}]}
+function techPages(x,sess){return [{orient:'l',draw:doc=>drawTech(doc,x,sess)}]}
 function drawTech(doc,x,sess){
   const P=pen(doc),t=x.tpl,BAND=hex2rgb((t.theme||{}).band||'#4472c4'),M=12,W=273,PH=210,p=participant(sess,x.pid)||{};let y=10;
   const fw=11,colW=(W-4)/2,lw=colW-fw;
@@ -1581,7 +1454,7 @@ function drawTech(doc,x,sess){
 }
 
 /* =========================================================
-   Documents officiels (annexes des référentiels ANPS 2025)
+   Documents de fin de formation (modèles génériques)
    ========================================================= */
 const ORG=()=>DB.settings.org;
 const civ=p=>p&&p.civ?p.civ:'';
@@ -1610,7 +1483,7 @@ function notifPages(s,pid){return [{orient:'p',draw:doc=>{
   signature(doc,P,M+W*0.7,Math.max(y+12,200));
   P.text(`${s.cursus} - ${ORG().code||''} - ${s.title||''}`,M,287,{s:7,c:GREY});}}]}
 
-/* Certificat de compétences (annexe 7 PSE1 / annexe 8 PSE2) */
+/* Certificat de compétences (modèle générique) */
 function certificatePages(s,pid){return [{orient:'l',draw:doc=>{
   const P=pen(doc),M=18,W=261,p=participant(s,pid)||{},u=ueOf(s.cursus),o=ORG();docHeader(doc,P,W,M);
   doc.setDrawColor(0,43,107);doc.setLineWidth(.8);doc.rect(8,8,281,194);doc.setLineWidth(.25);
@@ -1629,7 +1502,7 @@ function certificatePages(s,pid){return [{orient:'l',draw:doc=>{
   signature(doc,P,M+W*0.78,y+16);
   P.text(certNum(s,p),M,196,{s:9,b:true});}}]}
 
-/* Attestation de formation continue (annexe 9 PSE1 / annexe 10 PSE2) */
+/* Attestation de formation continue (modèle générique) */
 function attestationPages(s,pid){return [{orient:'l',draw:doc=>{
   const P=pen(doc),M=18,W=261,p=participant(s,pid)||{},u=ueOf(s.cursus),o=ORG(),fc=s.fc||{};docHeader(doc,P,W,M);
   doc.setDrawColor(0,43,107);doc.setLineWidth(.8);doc.rect(8,8,281,194);doc.setLineWidth(.25);
@@ -1649,7 +1522,7 @@ function attestationPages(s,pid){return [{orient:'l',draw:doc=>{
 
 /* Procès-verbal de l'équipe pédagogique */
 function resultOfPerson(s,p){const c=certOf(s.id,p.id);if(c)return verdict(c);const x=suiviOf(s.id,p.id);if(x)return suiviVerdict(x,s);return ''}
-function pvPages(s){const k=pvBgKey(s);if(k)return pvBgPages(s,k);return [{orient:'p',draw:doc=>{
+function pvPages(s){return [{orient:'p',draw:doc=>{
   const P=pen(doc),M=15,W=180,o=ORG(),u=ueOf(s.cursus),parts=s.participants.filter(p=>!p.archived);docHeader(doc,P,W,M);let y=44;
   P.text('PROCÈS-VERBAL DE L’ÉQUIPE PÉDAGOGIQUE',M+W/2,y,{b:true,s:14,a:'center',c:[0,43,107]});y+=6;
   P.text(`n° ${s.pvNum||'…'} du ${fmtDate(s.pvDate)||'…'}`,M+W/2,y,{s:10,a:'center'});y+=9;
@@ -1725,13 +1598,12 @@ function satPages(s){return [{orient:'p',draw:doc=>{
    données placées dans les cases mesurées sur les modèles (tools/geom.py, tools/grid.py)
    ========================================================= */
 const FORM_FILES=__FORM_FILES__;
-let FORMS={},TECH_LAYOUT=null,formsReady=null;
+let FORMS={},formsReady=null;
 function loadForms(){
   if(formsReady)return formsReady;
-  if(window.__FORMS_EMBED__){FORMS=window.__FORMS_EMBED__;TECH_LAYOUT=window.__TECH_LAYOUT__||null;return formsReady=Promise.resolve()}
+  if(window.__FORMS_EMBED__){FORMS=window.__FORMS_EMBED__;return formsReady=Promise.resolve()}
   const toData=b=>new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=()=>res(null);fr.readAsDataURL(b)});
-  formsReady=Promise.all(FORM_FILES.map(n=>fetch('forms/'+n+'.png').then(r=>r.ok?r.blob():null).then(b=>b?toData(b):null).then(d=>{if(d)FORMS[n]=d}).catch(()=>{})))
-    .then(()=>fetch('forms/layout-tech.json').then(r=>r.ok?r.json():null).then(j=>{TECH_LAYOUT=j}).catch(()=>{}));
+  formsReady=Promise.all(FORM_FILES.map(n=>fetch('forms/'+n+'.png').then(r=>r.ok?r.blob():null).then(b=>b?toData(b):null).then(d=>{if(d)FORMS[n]=d}).catch(()=>{})));
   return formsReady;
 }
 const bgPage=(doc,key,orient)=>{doc.addImage(FORMS[key],'PNG',0,0,orient==='l'?297:210,orient==='l'?210:297,key,'FAST')};
@@ -1748,165 +1620,8 @@ function fitBlock(doc,P,t,x0,y0,x1,y1,o={}){t=PT(t);if(!t)return '';const pad=o.
 const mark=(P,x0,y0,x1,y1)=>P.cross((x0+x1)/2,(y0+y1)/2,Math.min(1.9,(x1-x0)/4,(y1-y0)/4));
 const ring=(P,x0,y0,x1,y1)=>P.circle((x0+x1)/2,(y0+y1)/2,(x1-x0)/2-1,(y1-y0)/2-.6);
 
-/* ---- fiches formatives PSE1 / PSE2 ---- */
-const FL_TOP={theme:[15.6,65.4,200.2,73.5],date:[147.4,86.0,200.2,104.8],
-  L:[{lab:[15.5,86.2,39.4,93.6],name:[39.4,86.2,92.2,93.6],cas:[111.4,86.2,138.1,93.6]},{lab:[15.5,97.2,39.4,104.8],name:[39.4,97.2,92.2,104.8],cas:[111.4,97.2,138.1,104.8]}],
-  cols:[[106.9,118.4,129.9,141.4,152.9],[152.9,164.4,175.9,187.4,198.9]]};
-const FL={
-  'pse1-formative':{bg:'formative-pse1',th:[[107.1,111.1,152.9,118.9],[153.1,111.1,198.9,118.9]],
-    rows:{c1:[124.1,130.0],c2:[130.0,135.9],c3:[135.9,156.7],c4:[156.7,162.6],c5:[162.6,168.5],c6:[168.5,174.4],c7:[174.4,180.4]},
-    boxes:{c3a:[27.55,141.9],c3b:[27.55,146.0],c3c:[27.55,150.05],c3d:[27.55,153.95]},obs:[[16.4,194.6,109.0,219.5],[109.0,194.6,199.0,219.5]]},
-  'pse2-formative':{bg:'formative-pse2',th:[[107.1,107.4,152.9,115.2],[153.1,107.4,198.9,115.2]],
-    rows:{d1:[120.3,143.0],d2:[143.0,161.8],d3:[161.8,167.7],d4:[167.7,173.6],d5:[173.6,179.5],d6:[179.5,185.5],d7:[185.5,191.3],d8:[191.3,197.3]},
-    boxes:{d1a:[27.8,129.1],d1b:[27.8,133.15],d1c:[27.8,137.2],d2a:[27.8,151.7],d2b:[27.8,159.9]},obs:[[16.4,207.7,109.0,234.6],[109.0,207.7,199.0,234.6]]}};
-function formLayout(t){const L=FL[t.id];if(!L||t.edited||!FORMS[L.bg])return null;
-  if(t.criteria.some(c=>shown(c)&&!L.rows[c.id]))return null;return L}
-function drawFormativeBg(doc,e,sess,chunk,L){
-  const P=pen(doc),t=e.tpl,F=FL_TOP;bgPage(doc,L.bg,'p');e.situations=e.situations||{};
-  fit(doc,P,e.theme,...F.theme,{s:10,a:'center'});
-  chunk.forEach((li,j)=>{const l=e.learners[li],S_=F.L[j];
-    if(li!==j){doc.setFillColor(...F_BAND);doc.rect(S_.lab[0]+.3,S_.lab[1]+2.2,S_.lab[2]-S_.lab[0]-.6,S_.lab[3]-S_.lab[1]-4.4,'F');P.text('APPRENANT N°'+(li+1),S_.lab[0]+2.6,(S_.lab[1]+S_.lab[3])/2,{s:5.5,c:WHITE,b:true});
-      const h=L.th[j];doc.setFillColor(...F_BAND);doc.rect(h[0]+.3,h[1]+1.6,h[2]-h[0]-.6,h[3]-h[1]-3.4,'F');P.text('APPRENANT N°'+(li+1),(h[0]+h[2])/2,(h[1]+h[3])/2,{s:5.5,c:WHITE,b:true,a:'center'})}
-    fit(doc,P,pName(sess,l.pid),...S_.name,{s:9,b:true});fit(doc,P,l.caseNo||'',...S_.cas,{s:9.5,b:true,a:'center'});
-    const ro=L.rows;items(t).forEach(x=>{const r=ro[x.id];if(!r)return;const k=t.scale.findIndex(s=>s.code===l.marks[x.id]);if(k<0||k>3)return;const c=F.cols[j];mark(P,c[k],r[0],c[k+1],r[1])})});
-  // cases des situations / regards (communes au cas concret)
-  Object.entries(L.boxes).forEach(([id,[cx,cy]])=>{const on=e.situations[id]||(t.criteria.some(c=>c.subMode!=='check'&&(c.children||[]).some(ch=>ch.id===id))&&chunk.some(li=>e.learners[li].marks[id]));if(on){doc.setLineWidth(.45);doc.line(cx-1.15,cy-1.15,cx+1.15,cy+1.15);doc.line(cx-1.15,cy+1.15,cx+1.15,cy-1.15);doc.setLineWidth(.25)}});
-  const D=F.date;P.text(fmtDate(e.date),D[0]+2.5,D[1]+5,{s:9.5,b:true});
-  P.font(false,8.5);doc.splitTextToSize(PT(evaluatorNames(e)),D[2]-D[0]-5).slice(0,3).forEach((ln,i)=>doc.text(ln,D[0]+2.5,D[1]+10.5+i*3.8));
-  const selfTxt=l=>{const se=l.self||{};const ks=items(t).filter(x=>!x.sub&&se[x.id]);return ks.length?'\nAuto-évaluation : '+ks.map(x=>(x.code||'')+' '+se[x.id]).join(' · '):''};
-  const rest=[];chunk.forEach((li,j)=>{const l=e.learners[li],o=L.obs[j];const r=fitBlock(doc,P,(l.obs||'')+selfTxt(l),...o,{s:8.5});if(r)rest.push([pName(sess,l.pid),r])});
-  if(rest.length){doc.addPage('a4','p');let y=18;P.text('OBSERVATIONS (suite) - cas concret du '+fmtDate(e.date),14,y,{b:true,s:10});y+=8;
-    rest.forEach(([n,r])=>{P.text(n,14,y,{b:true,s:9});y+=5;P.font(false,9);doc.splitTextToSize(r,182).forEach(ln=>{doc.text(ln,14,y);y+=4});y+=4})}
-}
-
-/* ---- fiches de technicité PSE1 / PSE2 ---- */
-const TL={'pse1-tech':{bg:'technicite-pse1',fait:[[137.9,148.6],[272.8,284.3]],nom:[178.5,178.45],dy:178.3,dx:[239.4,246.35,253.25,266.9,273.8,280.75],oui:[246.4,184.7,264.4,191.4]},
-          'pse2-tech':{bg:'technicite-pse2',fait:[[142.9,155.3],[272.8,284.3]],nom:[191.5,142.55],dy:160.8,dx:[237.1,244.05,250.95,264.6,271.5,278.45],oui:[244.5,173.1,262.4,179.8]}};
-function techLayout(x){const L=TL[x.tpl.id];if(!L||x.tpl.edited||!FORMS[L.bg]||!TECH_LAYOUT||!TECH_LAYOUT[L.bg])return null;
-  const rows=TECH_LAYOUT[L.bg].rows;const map={};
-  for(const it of techItems(x)){const n=normTxt(it.label);const r=rows.find(r=>r.t===n)||rows.find(r=>r.t.startsWith(n)||n.startsWith(r.t)&&r.t.length>12);if(!r)return null;map[it.id]=r}
-  return {L,map}}
-function drawTechBg(doc,x,sess,TLx){
-  const P=pen(doc),{L,map}=TLx,p=participant(sess,x.pid)||{};bgPage(doc,L.bg,'l');
-  techItems(x).forEach(it=>{if(!x.done[it.id])return;const r=map[it.id],f=L.fait[r.col];mark(P,f[0],r.y0,f[1],r.y1)});
-  P.text(fullName(p),L.nom[0],L.nom[1],{s:10,b:true});
-  const dd=s=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');return m?[m[3],m[2],m[1].slice(2)]:null};
-  [dd(x.start),dd(x.end)].forEach((v,k)=>{if(v)v.forEach((n,i)=>P.text(n,L.dx[k*3+i],L.dy,{s:8.5,b:true,a:'center'}))});
-  const o=L.oui;if(techStat(x).ok)ring(P,o[0],o[1],o[2],o[3]);
-}
-
-/* ---- fiche de certification PSE1 (Annexe 3) ---- */
-const CL={'pse1-certif':{bg:'certification-pse1',dates:[68.5,38.6],form:[166.5,38.6],nom:[74,44.7],prenom:[163.5,44.7],
-  rows:[[74.9,82.6],[82.6,89.4],[89.4,96.3],[96.3,103.1],[103.1,110.0],[110.0,120.2]],pass:[149.9,161.3,173.0,184.4,196.0,207.6,219.2],yn:[219.2,238.2,256.9],
-  bands:{A:[50.0,55.8],B:[120.2,126.0],C:[128.1,133.9],D:[136.3,142.0]},obs:[35.6,150.9,210.6,180.1],fin:[215.9,165.4,234.8,251.6,171.1]}};
-function certLayout(c){const L=CL[c.tpl.id];if(!L||c.tpl.edited||!FORMS[L.bg]||c.tpl.criteria.length!==L.rows.length||c.tpl.passages.max!==6)return null;if(c.tpl.checks.some(ch=>!L.bands[ch.id]))return null;return L}
-function drawCertBg(doc,c,sess,L){
-  const P=pen(doc),t=c.tpl,G=certGrid(c,sess),p=participant(sess,c.pid)||{};bgPage(doc,L.bg,'l');
-  P.text(fmtDate(sess.start)+(sess.end?' au '+fmtDate(sess.end):''),L.dates[0],L.dates[1],{s:9.5,b:true});
-  fit(doc,P,sessTrainers(sess),L.form[0]-1.5,L.form[1]-3,256.9,L.form[1]+3,{s:9.5,b:true});
-  P.text((p.nom||'').toUpperCase(),L.nom[0],L.nom[1],{s:9.5,b:true});P.text(p.prenom||'',L.prenom[0],L.prenom[1],{s:9.5,b:true});
-  const yn=(v,y0,y1)=>{if(v==='oui')ring(P,L.yn[0],y0,L.yn[1],y1);if(v==='non')ring(P,L.yn[1],y0,L.yn[2],y1)};
-  t.criteria.forEach((k,i)=>{const [y0,y1]=L.rows[i];for(let q=0;q<Math.min(G.P,6);q++){const v=G.cells[k.id][q];if(v)P.text(v,(L.pass[q]+L.pass[q+1])/2,(y0+y1)/2,{s:10,b:true,a:'center',c:resultOf(t,v)==='ko'?[180,20,30]:BLACK})}
-    yn(validOf(c,k,G),y0,y1)});
-  t.checks.forEach(ch=>{const b=L.bands[ch.id];yn(checkVal(c,ch),b[0],b[1])});
-  const r=fitBlock(doc,P,c.observations||'',L.obs[0],L.obs[1]+4.5,L.obs[2],L.obs[3],{s:8.5});
-  const v=verdict(c),f=L.fin;if(v==='apte')ring(P,f[0],f[1],f[2],f[4]);if(v==='inapte')ring(P,f[2],f[1],f[3],f[4]);
-  if(r){doc.addPage('a4','l');P.text('Observations (suite) - '+fullName(p),14,16,{b:true,s:10});P.font(false,9);let y=24;doc.splitTextToSize(r,269).forEach(ln=>{doc.text(ln,14,y);y+=4})}
-}
-
-/* ---- procès-verbal de formation (modèles UDPS : FI / FC, PSE1 / PSE2), 10 lignes par page ---- */
-const PVL={FI:{rows:[73.4,82.3,91.4,100.3,109.3,118.3,127.3,136.3,145.3,154.3,163.3],sig:[176.2,188.4]},
-           FC:{rows:[74.3,83.3,92.2,101.3,110.2,119.3,128.2,137.2,146.2,155.2,164.2],sig:[177.1,189.4]},
-  cols:[15,27.1,39.2,89.7,140.2,190.7,241.2,259,276.9],tr:[[15,80.5],[80.5,145.9],[145.9,211.4]],resp:[211.4,276.9]};
-const PVX={'picf-pv':{rows:[79.4,87.1,94.9,102.6,110.3,117.9,125.5,133.4,141.0,148.8,156.4],cols:[33.2,43.7,54.0,97.2,140.6,183.9,227.1,242.2,257.8],sig:[167.3,177.7],tr:[[33.1,89.5],[89.5,145.4],[145.4,201.5]],resp:[201.5,257.9],udps:[66,54.8],lieu:[66,58.9],date:[66,63.0],num:[241,41.5,258,47.3]},
-  'paefpse-pv':{rows:[70.5,78.6,86.6,94.6,102.6,110.6,118.6,126.6,134.6,142.6,150.6],cols:[20.1,29.7,39.5,87.6,133.3,179.2,225.0,252.5,279.3],sig:[164.3,172.2],tr:[[17.5,83.0],[83.0,148.5],[148.5,213.9]],resp:[213.9,279.5],udps:[40,40.5],lieu:[52,45.3],date:[52,50.0],num:[267.5,25.2,284.5,30.6]},
-  'paefpse-pv-fc':{rows:[62.2,70.2,78.2,86.2,94.2,102.2,110.2,118.2,126.2,134.2,142.2],cols:[20.1,29.7,39.5,87.6,133.3,179.2,225.0,252.5,279.3],sig:[154.7,160.3],tr:[[17.5,83.0],[83.0,148.5],[148.5,213.9]],resp:[213.9,279.5],udps:[40,35.7],lieu:[52,40.5],date:[52,45.2],num:[269,21.8,286,27.2]},
-  'ce-pv':{rows:[70.2,78.5,86.6,94.9,103.3,111.5,119.8,128.1,136.4,144.7,152.9],cols:[15.6,27.8,40.1,91.4,142.8,194.3,245.6,263.7,281.9],sig:[164.9,176.1],tr:[[15.4,81.9],[81.9,148.5],[148.5,215.2],[215.2,281.9]],resp:null,udps:[60,44.0],lieu:[60,48.2],date:[60,52.6],num:[262,31,282,37]}};
-function pvBgKey(s){const c=String(s.cursus).toLowerCase();const k=c==='paefpse'?(s.type==='FC'?'paefpse-pv-fc':'paefpse-pv'):PVX[c+'-pv']?c+'-pv':(s.type==='FC'?'pv-fc-':'pv-')+c;return FORMS[k]?k:null}
-function pvBgPages(s,key){const parts=s.participants.filter(p=>!p.archived);const pages=[];for(let i=0;i<Math.max(1,parts.length);i+=10)pages.push(parts.slice(i,i+10));
-  return pages.map((chunk,pi)=>({orient:'l',draw:doc=>{
-    const X=PVX[key];const P=pen(doc),V=X?{rows:X.rows,sig:X.sig}:PVL[s.type==='FC'?'FC':'FI'],C=X?X.cols:PVL.cols,o=ORG();bgPage(doc,key,'l');
-    const H=X||{udps:[45.5,46.1],lieu:[61,50.6],date:[61,55],num:[258,30.5,277,36]};
-    fit(doc,P,(s.pvNum||'')+(pages.length>1?` (${pi+1}/${pages.length})`:''),...H.num,{s:13,b:true,a:'center',pad:0});
-    P.text(o.udps||'',H.udps[0],H.udps[1],{s:10,b:true});P.text(s.lieu||'',H.lieu[0],H.lieu[1],{s:10,b:true});
-    P.text(s.start===s.end||!s.end?fmtDate(s.start):`du ${fmtDate(s.start)} au ${fmtDate(s.end)}`,H.date[0],H.date[1],{s:10,b:true});
-    chunk.forEach((p,i)=>{const y0=V.rows[i],y1=V.rows[i+1],v=resultOfPerson(s,p);
-      if(p.civ==='Madame')mark(P,C[0],y0,C[1],y1);if(p.civ==='Monsieur')mark(P,C[1],y0,C[2],y1);
-      fit(doc,P,(p.nom||'').toUpperCase(),C[2],y0,C[3],y1,{s:9.5,b:true});fit(doc,P,p.prenom||'',C[3],y0,C[4],y1,{s:9.5});
-      fit(doc,P,fmtDate(p.birthDate),C[4],y0,C[5],y1,{s:9.5,a:'center'});fit(doc,P,[p.birthPlace,p.birthDept?'('+p.birthDept+')':''].filter(Boolean).join(' '),C[5],y0,C[6],y1,{s:9.5,a:'center'});
-      if(v==='apte')mark(P,C[6],y0,C[7],y1);if(v==='inapte')mark(P,C[7],y0,C[8],y1)});
-    const [s0]=V.sig,TR=X?X.tr:PVL.tr,RS=X?X.resp:PVL.resp;(s.trainerIds||[]).map(tName).filter(Boolean).slice(0,TR.length).forEach((n,i)=>fit(doc,P,n,TR[i][0],s0+.4,TR[i][1],s0+4.6,{s:8,b:true}));
-    if(s.respPeda&&RS)fit(doc,P,s.respPeda,RS[0],s0+.4,RS[1],s0+4.6,{s:8,b:true});
-  }}));
-}
-
-/* ---- fiches d'évaluation des techniques pédagogiques (PIC F / PAE FPSE) ---- */
-const ficheOf=t=>{const cur=FICHES[t.cursus];return t.fiche&&!t.edited&&cur?cur.find(f=>f.id===t.id):null};
-function drawFicheBg(doc,e,sess,li,F){
-  const P=pen(doc),t=e.tpl,l=e.learners[li];bgPage(doc,F.id,'p');const fl=F.fields;
-  if(fl.eleve)fit(doc,P,pName(sess,l.pid),...fl.eleve,{s:9.5,b:true,a:'center'});
-  if(fl.formateur)fit(doc,P,evaluatorNames(e),...fl.formateur,{s:9,a:'center'});
-  if(fl.theme)fit(doc,P,e.theme||'',...fl.theme,{s:9.5,a:'center'});
-  if(fl.date)fit(doc,P,fmtDate(e.date),...fl.date,{s:9.5,b:true,a:'center'});
-  if(fl.temps)fit(doc,P,e.temps||'',...fl.temps,{s:9.5,a:'center'});
-  t.criteria.forEach((c,i)=>{const r=F.rows[i];if(!r||c.sec||c.ne)return;const sc=scaleOf(t,l.marks[c.id]);if(!sc||!F.cols[sc.code])return;const [x0,x1]=F.cols[sc.code];mark(P,x0,r.y0,x1,r.y1)});
-  const o=F.obs;const r1=fitBlock(doc,P,e.obsCol||'',o[0],o[1],o[2],o[3],{s:8});
-  const im=F.imp;const selfTxt=(()=>{const se=l.self||{};const ks=items(t).filter(x=>se[x.id]);return ks.length?' Auto-évaluation : '+ks.map(x=>(x.code||'')+' '+se[x.id]).join(' · '):''})();
-  const r2=fitBlock(doc,P,(l.obs||'')+selfTxt,im[0],im[1]+.8,im[2],im[3],{s:8.5});
-  if(r1||r2){doc.addPage('a4','p');let y=18;P.text('Suite - '+(t.ref||'')+' - '+pName(sess,l.pid),14,y,{b:true,s:10});y+=8;P.font(false,9);[['Observations',r1],['Impression générale',r2]].forEach(([h,r])=>{if(!r)return;P.text(h,14,y,{b:true,s:9});y+=5;P.font(false,9);doc.splitTextToSize(r,182).forEach(ln=>{doc.text(ln,14,y);y+=4});y+=4})}
-}
-/* ---- CE : fiche d'évaluation formative et fiche de certification (annexes 2 et 3) ---- */
-const CEF={rows:{e1:[108.7,115.1],e2:[115.1,125.0],e4:[125.0,131.3],e7:[131.3,137.8],e8:[137.8,159.3]},cols:[137.0,152.0,167.1,182.3,197.6],
-  boxes:{e8a:[28.05,144.65],e8b:[28.05,148.85],e8c:[28.05,153.05],e8d:[28.05,157.0]},name:[24.2,60.9,137.0,68.9],date:[137.0,60.9,198.4,68.9],theme:[16.3,79.0,198.4,90.2],obs:[17.1,163.9,197.2,225.6]};
-function drawCeFormativeBg(doc,e,sess,li){
-  const P=pen(doc),t=e.tpl,l=e.learners[li],L=CEF;bgPage(doc,'ce-formative','p');e.situations=e.situations||{};
-  fit(doc,P,pName(sess,l.pid),...L.name,{s:9.5,b:true});fit(doc,P,fmtDate(e.date)+'  -  '+evaluatorNames(e),...L.date,{s:8.5});fit(doc,P,e.theme||'',...L.theme,{s:10,a:'center'});
-  t.criteria.forEach(c=>{const r=L.rows[c.id];if(!r)return;const k=t.scale.findIndex(x=>x.code===l.marks[c.id]);if(k<0||k>3)return;mark(P,L.cols[k],r[0],L.cols[k+1],r[1])});
-  Object.entries(L.boxes).forEach(([id,[cx,cy]])=>{if(e.situations[id]){doc.setLineWidth(.45);doc.line(cx-1.1,cy-1.1,cx+1.1,cy+1.1);doc.line(cx-1.1,cy+1.1,cx+1.1,cy-1.1);doc.setLineWidth(.25)}});
-  fitBlock(doc,P,l.obs||'',L.obs[0],L.obs[1]+7,L.obs[2],L.obs[3],{s:9});
-}
-const CEC={rows:[[87.2,95.0],[95.0,102.0],[102.0,109.1],[109.1,116.1],[116.1,132.7]],pass:[151.6,164.7,178.0,191.3,204.5,217.8,229.4],yn:[229.4,252.5,274.1],
-  bands:{A:[54.4,60.3],B:[64.5,70.4],C:[137.0,142.7]},obs:[29.5,146.8,194.3,165.6],fin:[229.4,154.8,247.8,266.7,165.6]};
-function drawCeCertBg(doc,c,sess){
-  const P=pen(doc),t=c.tpl,G=certGrid(c,sess),p=participant(sess,c.pid)||{},L=CEC;bgPage(doc,'ce-certif','l');
-  P.text((p.nom||'').toUpperCase(),67,46,{s:10,b:true});P.text(p.prenom||'',170,46,{s:10,b:true});
-  const yn=(v,y0,y1)=>{if(v==='oui')ring(P,L.yn[0],y0,L.yn[1],y1);if(v==='non')ring(P,L.yn[1],y0,L.yn[2],y1)};
-  t.criteria.forEach((k,i)=>{const r=L.rows[i];if(!r)return;for(let q=0;q<Math.min(G.P,6);q++){const v=G.cells[k.id][q];if(v)P.text(v,(L.pass[q]+L.pass[q+1])/2,(r[0]+r[1])/2,{s:10,b:true,a:'center',c:resultOf(t,v)==='ko'?[180,20,30]:BLACK})}yn(validOf(c,k,G),r[0],r[1])});
-  t.checks.forEach(ch=>{const b=L.bands[ch.id];if(b)yn(checkVal(c,ch),b[0],b[1])});
-  const n=theoryNote(c);if(n!==null)P.text(`(note : ${String(c.theory.score).replace('.',',')}/${thOf(c).max})`,226,67.5,{s:7.5,a:'right',c:WHITE,b:true});
-  fitBlock(doc,P,c.observations||'',L.obs[0],L.obs[1]+5,L.obs[2],L.obs[3],{s:8.5});
-  const v=verdict(c),f=L.fin;if(v==='apte')ring(P,f[0],f[1],f[2],f[4]);if(v==='inapte')ring(P,f[2],f[1],f[3],f[4]);
-  P.text(fmtDate(sess.start)+(sess.end&&sess.end!==sess.start?' au '+fmtDate(sess.end):''),62,182,{s:9.5,b:true});
-  if(sess.respPeda)P.text(sess.respPeda,250,182,{s:9,b:true});
-}
-/* ---- fiche de suivi (2 pages) et avis final ---- */
-const SUL={'picf-suivi':{p1:'picf-suivi-1',p2:'picf-suivi-2',nom:[[12.7,73.1,107.2,83.7],[107.2,73.1,197.2,83.7]],rows:[107.9,116.3,124.7,133.2,141.7,150.1,158.6,167.0,175.5,183.9,192.4,200.8,209.2,217.7,226.2,234.6,243.0],
-    days:[167.6,175.0,182.3,189.7,197.0],nom2:[[12.7,66.2,106.3,76.7],[106.3,66.2,197.2,76.7]],drows:[92.1,119.6,147.1,174.5,202.1],forts:[55.1,125.2],axes:[125.2,197.0],obs:[12.7,214.3,197.2,254.4],resp:[15,269]},
-  'paefpse-suivi':{p1:'paefpse-suivi-1',p2:'paefpse-suivi-2',nomT:[[47,48],[141,48]],rows:[59.9,69.3,78.9,88.3,97.8,107.4,116.8,126.4,133.1,140.7,149.2,156.4],
-    days:[154.7,162.2,169.8,177.3,184.8,192.3,200.1],nomT2:[[40,52.6],[132,52.6]],drows:[72.2,90.8,111.0,133.6,156.8,178.2,199.5],forts:[35.5,115.5],axes:[115.5,194.9],obs:[13.3,213.7,196.7,234.1],resp:[28,250]}};
-function suiviPages(x,s){const L=SUL[x.tpl.id];if(!L||x.tpl.edited||!FORMS[L.p1])return [];
-  const G=suiviGrid(x,s),p=participant(s,x.pid)||{};
-  const names=(doc,P,pg)=>{if(L.nom){const b=pg===1?L.nom:L.nom2;fit(doc,P,(p.nom||'').toUpperCase(),...b[0],{s:10,b:true,a:'center'});fit(doc,P,p.prenom||'',...b[1],{s:10,b:true,a:'center'})}
-    else{const b=pg===1?L.nomT:L.nomT2;P.text((p.nom||'').toUpperCase(),b[0][0],b[0][1],{s:9.5,b:true});P.text(p.prenom||'',b[1][0],b[1][1],{s:9.5,b:true})}};
-  const pages=[{orient:'p',draw:doc=>{const P=pen(doc);bgPage(doc,L.p1,'p');names(doc,P,1);
-      x.tpl.comps.forEach((k,i)=>{const y0=L.rows[i],y1=L.rows[i+1];if(y1===undefined)return;G.days.forEach((d,j)=>{if(j>=L.days.length-1)return;const v=G.cells[k.code][d];if(v)P.text(v,(L.days[j]+L.days[j+1])/2,(y0+y1)/2,{s:9.5,b:true,a:'center',c:resultOf(x.tpl,v)==='ko'?[180,20,30]:BLACK})})})}},
-    {orient:'p',draw:doc=>{const P=pen(doc);bgPage(doc,L.p2,'p');names(doc,P,2);const notes=x.notes||{};
-      G.days.forEach((d,j)=>{const y0=L.drows[j],y1=L.drows[j+1];if(y1===undefined)return;const n=notes[d]||{};fitBlock(doc,P,n.forts||'',L.forts[0],y0,L.forts[1],y1,{s:8});fitBlock(doc,P,n.axes||'',L.axes[0],y0,L.axes[1],y1,{s:8})});
-      const o=L.obs;fitBlock(doc,P,x.observations||'',o[0],o[1],o[2],o[3],{s:8.5});if(s.respPeda)P.text(s.respPeda,L.resp[0],L.resp[1],{s:9,b:true})}}];
-  if(x.tpl.avis&&FORMS['paefpse-avis'])pages.push({orient:'p',draw:doc=>drawAvisBg(doc,x,s,G)});
-  return pages}
-const AVL={nom:[41,55.1],prenom:[138,55.1],ev:[8.5,70.0,201.5,78.3],rows:[93.2,102.0,110.6,119.3,127.9,136.5,145.2,153.8,158.5,163.3,168.0,173.0],cols:{A:163.35,B:179.0,C:194.0},
-  yn:[[192.6,195.9],[198.1,201.4]],apt:[210.4,213.6],oui:[147.6,153.3],non:[178.0,184.9],lieu:[38,230.8],form:[47.6,250]};
-function drawAvisBg(doc,x,s,G){
-  const P=pen(doc),L=AVL,p=participant(s,x.pid)||{},C=suiviChecks(x,s,G),v=suiviVerdict(x,s);bgPage(doc,'paefpse-avis','p');x.avis=x.avis||{};
-  P.text((p.nom||'').toUpperCase(),L.nom[0],L.nom[1],{s:10,b:true});P.text(p.prenom||'',L.prenom[0],L.prenom[1],{s:10,b:true});
-  fit(doc,P,x.avis.evaluateurs??sessTrainers(s),...L.ev,{s:9.5,a:'center'});
-  x.tpl.comps.forEach((k,i)=>{const y0=L.rows[i],y1=L.rows[i+1];const f=G.fin[k.code];if(!f||y1===undefined||!L.cols[f])return;mark(P,L.cols[f]-6,y0,L.cols[f]+6,y1)});
-  const circ=(val,[y0,y1])=>{if(val==='oui')P.circle((L.oui[0]+L.oui[1])/2,(y0+y1)/2,6,2.6);if(val==='non')P.circle((L.non[0]+L.non[1])/2,(y0+y1)/2,6.5,2.6)};
-  C.groups.forEach((g,i)=>circ(g,L.yn[i]));circ(v==='apte'?'oui':v==='inapte'?'non':'',L.apt);
-  P.text([x.avis.lieu??(s.lieu||''),fmtDate(x.avis.date||s.end||today())].filter(Boolean).join(', le '),L.lieu[0],L.lieu[1],{s:9.5,b:true});
-  fit(doc,P,sessTrainers(s),L.form[0]-20,L.form[1]-3,L.form[0]+60,L.form[1]+3,{s:8.5,a:'center'});
-}
+/* fiches de suivi sur fond d'origine : aucune pour les RIOFE (les grilles sommatives en tiennent lieu) */
+function suiviPages(x,s){return []}
 function buildPdf(pages){
   const J=window.jspdf&&window.jspdf.jsPDF;if(!J)throw new Error('module PDF indisponible');
   const doc=new J({orientation:pages[0].orient==='l'?'landscape':'portrait',unit:'mm',format:'a4',compress:true});
@@ -2187,14 +1902,14 @@ const A={
      <button class="pick" data-act="blank-tpl" data-v="formative"><span class="kind">Formative</span><b>Grille de cas concret</b><span class="small muted">Critères, sous-critères, échelle de niveaux.</span></button>
      <button class="pick" data-act="blank-tpl" data-v="technicite"><span class="kind">Technicité</span><b>Fiche de suivi de la technicité</b><span class="small muted">Rubriques et techniques à cocher « Fait ».</span></button>
      <button class="pick" data-act="blank-tpl" data-v="certificative"><span class="kind">Certification</span><b>Fiche de certification individuelle</b><span class="small muted">Compétences, passages, conditions de validation.</span></button>
-     <p class="small muted" style="margin:0">Le plus simple : dupliquer une grille PSE1 ou PSE2 et changer le nom de formation.</p>`),
+     <p class="small muted" style="margin:0">Le plus simple : dupliquer une grille RIOFE et changer le nom de formation.</p>`),
   'blank-tpl':d=>{closeModal();S.tdraft=blankTemplate(d.v,S.tplCur!=='all'?S.tplCur:'');S.tdraftNew=true;go('tpl')},
   'edit-tpl':d=>{S.tdraft=clone(DB.templates.find(t=>t.id===d.id));S.tdraftNew=false;go('tpl')},
   'dup-tpl':d=>{const t=clone(DB.templates.find(x=>x.id===d.id));t.id=uid();delete t.builtin;t.name+=' (copie)';S.tdraft=t;S.tdraftNew=true;go('tpl')},
   'del-tpl':d=>{const t=DB.templates.find(x=>x.id===d.id);confirmBox(`Supprimer la grille « ${t.name} » ? Les fiches déjà remplies sont conservées.`,'Supprimer',()=>{DB.templates=DB.templates.filter(x=>x.id!==d.id);if(t.builtin)(DB.removedBuiltins=DB.removedBuiltins||[]).push(t.id);save(true);render();toast('Grille supprimée')})},
   'tpl-cancel':()=>{S.tdraft=null;go('tpls')},
   'tpl-save':()=>{const d=S.tdraft;d.cursus=(d.cursus||'').trim().toUpperCase();
-    if(!d.cursus){toast('Indiquez la formation (ex. PSE1)');return}
+    if(!d.cursus){toast('Indiquez la formation (ex. EQSUAP)');return}
     if(!d.name.trim()){toast('Donnez un nom à la grille');return}
     const dupKind=['certificative','technicite'].includes(d.kind)&&DB.templates.find(t=>t.kind===d.kind&&t.cursus===d.cursus&&t.id!==d.id);
     if(dupKind){toast(`Il existe déjà une fiche ${KIND[d.kind].toLowerCase()} ${d.cursus}`);return}
@@ -2233,7 +1948,7 @@ const A={
   'copy-json':()=>copyText(backupJSON()),
   import:()=>{const f=$('#imp-file').files[0];const txt=$('#imp-text').value.trim();
     if(f){const r=new FileReader();r.onload=()=>importData(String(r.result));r.readAsText(f)}else if(txt)importData(txt);else toast('Choisissez un fichier ou collez une sauvegarde')},
-  restore:()=>{DB.removedBuiltins=[];builtinTemplates().forEach(b=>{const i=DB.templates.findIndex(t=>t.id===b.id);if(i>=0)DB.templates[i]=b;else DB.templates.push(b)});save(true);render();toast('Grilles PSE1 et PSE2 restaurées')},
+  restore:()=>{DB.removedBuiltins=[];builtinTemplates().forEach(b=>{const i=DB.templates.findIndex(t=>t.id===b.id);if(i>=0)DB.templates[i]=b;else DB.templates.push(b)});save(true);render();toast('Grilles RIOFE restaurées')},
   'del-samples':()=>{const ids=DB.sessions.filter(s=>s.sample).map(s=>s.id);DB.sessions=DB.sessions.filter(s=>!s.sample);DB.evals=DB.evals.filter(e=>!ids.includes(e.sessionId));
     DB.settings.trainers=DB.settings.trainers.filter(t=>!t.sample);save(true);render();toast(ids.length?'Exemples supprimés':'Aucun exemple à supprimer')},
   wipe:()=>confirmBox('Effacer toutes les formations, fiches, formateurs et grilles de cet appareil ?','Tout effacer',()=>{DB=emptyDB();save(true);render();toast('Données effacées')})
@@ -2268,16 +1983,20 @@ const scList=cur=>scAll().filter(x=>x.cur===cur).sort((a,b)=>(a.jour||'').locale
 const scById=id=>scAll().find(x=>x.id===id);
 const scKind=c=>SCENARIOS.some(x=>x.id===c.id)?(scUser().some(y=>y.id===c.id)?'modifie':'fourni'):'perso';
 const scS=()=>S.scNoSess?null:curSess();
-const scCur=()=>{const s=scS();return S.sccur||(s&&['PSE1','PSE2'].includes(s.cursus)?s.cursus:'PSE1')};
+const SC_CURS=()=>Object.keys(RIOFE_COURSES);
+const scCur=()=>{const s=scS();return S.sccur||(s&&SC_CURS().includes(s.cursus)?s.cursus:SC_CURS()[0])};
 const scPlan=s=>{s.plan=s.plan||[];return s.plan};
 const scPlanned=(s,id)=>scPlan(s).find(p=>p.id===id);
 const scDone=(s,id)=>DB.evals.some(e=>e.sessionId===s.id&&e.scenarioId===id);
 const scObsLabel=(cur,k)=>{const T=formTpls(cur).find(t=>!t.fiche);const c=T&&T.criteria.find(c=>c.id===k);return c?(c.code+' · '+c.label):k};
 const NIV=['','Découverte','Application','Synthèse'];
-const SCTAG={ova:'Obstruction',hemo:'Hémorragie',pc:'Perte de connaissance',acr:'Arrêt cardiaque',detresse:'Détresse',malaise:'Malaise',trauma:'Traumatisme',d1a:'Affection spécifique',d1b:'Atteinte circonstancielle',d1c:'Souffrance psychique',d2a:'Immobilisation',d2b:'Relevage'};
+/* thèmes des scénarios (pastilles), propres à chaque cursus */
+const SC_TAGS={PS:{ova:'Obstruction des voies aériennes',hemo:'Hémorragie',pc:'Victime inconsciente',acr:'Arrêt cardiaque',pedia:'Enfant / nourrisson',trauma:'Traumatisme',malaise:'Malaise',bilan:'Bilans',smv:'Multi-victimes'},
+  EQSUAP:{immo:'Immobilisation',relevage:'Relevage, brancardage',bilan:'Bilan',malaise:'Malaise',detresse:'Détresse vitale',desinc:'Extraction',trauma:'Traumatisme',naissance:'Nouveau-né',pedia:'Pédiatrie',acr:'Arrêt cardiaque',affection:'Affection spécifique',brulure:'Brûlure',violences:'Violences',hygiene:'Hygiène, reconditionnement'}};
+const scTag=(cur,k)=>(SC_TAGS[cur]||{})[k];
 function scMat(list){const g={lieu:[],maq:[],acc:[],sec:[]};
   list.forEach(c=>Object.keys(g).forEach(k=>(c.mat[k]||[]).forEach(x=>{let r=g[k].find(y=>y.t===x);if(!r)g[k].push(r={t:x,n:[]});r.n.push(c.n)})));return g}
-const MATLAB={lieu:'Lieu et décor',maq:'Maquillage et simulation de plaies',acc:'Accessoires et matériel de jeu',sec:'Matériel des secouristes'};
+const MATLAB={lieu:'Lieu et décor',maq:'Maquillage et simulation de plaies',acc:'Accessoires et matériel de jeu',sec:'Matériel des sapeurs-pompiers'};
 function viewScPanel(s){const P=scPlan(s).map(p=>({p,c:scById(p.id)})).filter(x=>x.c).sort((a,b)=>a.c.n-b.c.n);
   return `<section class="panel"><div class="hd"><h3>Scénarios de cas concrets</h3><span class="small muted num">${P.length} prévu${P.length>1?'s':''} · ${scList(s.cursus).length} disponibles</span></div>
    <div class="bd stack" style="gap:8px"><div class="row"><button class="btn primary grow" data-act="open-scs">Choisir et préparer les scénarios</button>${P.length&&!EMBED?`<button class="btn" data-act="pdf-sc-mat">${I.pdf}Matériel</button>`:''}</div></div>
@@ -2289,11 +2008,11 @@ function viewScenarios(){const cur=scCur(),s0=scS(),s=s0&&s0.cursus===cur?s0:nul
     return `<div class="panel"><button class="line" style="align-items:flex-start" data-act="open-sc" data-id="${c.id}"><span class="av">${c.n}</span><span class="grow"><b>${esc(c.titre)}</b>
       <span class="small muted" style="display:block">${esc(c.theme)}</span>
       <span class="small muted" style="display:block">${esc(c.jour)} · ${esc(c.etape)} · ${esc(NIV[c.niveau]||'')} · ${esc(c.duree.split('+')[0].trim())}</span>
-      <span class="chips" style="margin-top:6px">${[...c.cases,...c.checks.filter(k=>/^d/.test(k))].map(k=>SCTAG[k]?`<span class="pill neutral">${SCTAG[k]}</span>`:'').join('')}${scKind(c)==='perso'?'<span class="pill ex">Personnel</span>':scKind(c)==='modifie'?'<span class="pill ex">Modifié</span>':''}${dn?'<span class="pill ok">Réalisé</span>':pl?'<span class="pill wait">Prévu</span>':''}</span></span>${I.chev}</button>
+      <span class="chips" style="margin-top:6px">${(c.cases||[]).map(k=>scTag(c.cur,k)?`<span class="pill neutral">${scTag(c.cur,k)}</span>`:'').join('')}${scKind(c)==='perso'?'<span class="pill ex">Personnel</span>':scKind(c)==='modifie'?'<span class="pill ex">Modifié</span>':''}${dn?'<span class="pill ok">Réalisé</span>':pl?'<span class="pill wait">Prévu</span>':''}</span></span>${I.chev}</button>
       ${s?`<div class="bd" style="padding-top:0;display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm ${pl?'primary':''}" data-act="sc-plan" data-id="${c.id}">${pl?'✓ Au planning':'Ajouter au planning'}</button>${EMBED?'':`<button class="btn sm" data-act="new-sc-fiche" data-id="${c.id}">Évaluer ce cas</button>`}</div>`:''}</div>`};
   const nb=c=>scList(c).length;
-  return `<div class="stack"><div class="chips">${['PSE1','PSE2'].map(c=>`<button class="chip ${cur===c?'on':''}" data-act="sccur" data-v="${c}">${c} · ${nb(c)} scénarios</button>`).join('')}</div>
-    ${s0&&!s?`<div class="panel"><div class="bd small">Scénarios ${esc(cur)} en consultation. Pour les mettre au planning ou les évaluer, ouvrez une formation ${esc(cur)}.</div></div>`:''}
+  return `<div class="stack"><div class="chips">${SC_CURS().map(c=>`<button class="chip ${cur===c?'on':''}" data-act="sccur" data-v="${c}">${esc(RIOFE_COURSES[c].name)} · ${nb(c)} scénarios</button>`).join('')}</div>
+    ${s0&&!s?`<div class="panel"><div class="bd small">Scénarios ${esc(RIOFE_COURSES[cur].name)} en consultation. Pour les mettre au planning ou les évaluer, ouvrez une formation ${esc(RIOFE_COURSES[cur].name)}.</div></div>`:''}
     <p class="muted small" style="margin:0">Scénarios classés selon la progression de la formation (${esc(jours.join(', '))}). Ajoutez ceux que vous voulez jouer : l’application prépare la liste de matériel et les fiches de briefing à imprimer.</p>
     <div class="row"><button class="btn red" data-act="sc-new">${I.plus}Créer un scénario</button>${scUser().length&&!EMBED?`<button class="btn" data-act="sc-share">${I.share}Partager mes scénarios (${scUser().length})</button>`:''}</div>
     <div class="chips">${[['all','Tous'],...jours.map(j=>[j,j]),...(s?[['plan','Au planning ('+scPlan(s).length+')']]:[])].map(([k,l])=>`<button class="chip ${f===k?'on':''}" data-act="scj" data-v="${k}">${esc(l)}</button>`).join('')}</div>
@@ -2309,13 +2028,13 @@ function viewScenario(){const c=scById(S.scid);if(!c)return viewScenarios();cons
    <div class="panel"><div class="bd stack" style="gap:8px"><div class="row">${badge(c.cur)}<span class="pill neutral">${esc(c.jour)}</span><span class="pill neutral">${esc(NIV[c.niveau]||'')}</span><span class="small muted grow">${esc(c.duree)}</span></div>
      <div style="font-weight:700;color:var(--brand)">${esc(c.theme)}</div><div class="small muted">Étape de la formation : ${esc(c.etape)}</div>
      <div class="small"><b>Lieu :</b> ${esc(c.lieu)}<br><b>Équipe :</b> ${esc(c.equipe)}</div>
-     <div class="row">${s?`<button class="btn sm ${pl?'primary':''}" data-act="sc-plan" data-id="${c.id}">${pl?'✓ Au planning':'Ajouter au planning'}</button>`:''}${EMBED?'':`${s?`<button class="btn sm red" data-act="new-sc-fiche" data-id="${c.id}">Évaluer ce cas</button>`:''}<button class="btn sm" data-act="pdf-sc-brief">${I.pdf}Briefings</button>`}<button class="btn sm primary" data-act="call-start">${I.phone}Appeler le 15</button></div>
+     <div class="row">${s?`<button class="btn sm ${pl?'primary':''}" data-act="sc-plan" data-id="${c.id}">${pl?'✓ Au planning':'Ajouter au planning'}</button>`:''}${EMBED?'':`${s?`<button class="btn sm red" data-act="new-sc-fiche" data-id="${c.id}">Évaluer ce cas</button>`:''}<button class="btn sm" data-act="pdf-sc-brief">${I.pdf}Briefings</button>`}<button class="btn sm primary" data-act="call-start">${I.phone}Transmettre le bilan</button></div>
      ${viewCallList(c)}
      <div class="row"><button class="btn sm" data-act="sc-edit">${I.edit}Modifier</button><button class="btn sm" data-act="sc-dup">${I.copy}Dupliquer</button>${scKind(c)==='perso'?`<button class="btn sm danger" data-act="sc-del">${I.trash}Supprimer</button>`:scKind(c)==='modifie'?`<button class="btn sm danger" data-act="sc-del">Rétablir l’original</button>`:''}</div></div></div>
    ${(c.objectifs||[]).length?sec('Objectifs',ul(c.objectifs),true):''}
-   ${sec('Message d’alerte et contexte',`<div><b class="small">Message d’alerte (aux secouristes)</b><div>${esc(c.message)}</div></div><div><b class="small">Contexte (animateur)</b><div>${esc(c.contexte)}</div></div>`,true)}
+   ${sec('Message de départ et contexte',`<div><b class="small">Message de départ (aux sapeurs-pompiers)</b><div>${esc(c.message)}</div></div><div><b class="small">Contexte (animateur)</b><div>${esc(c.contexte)}</div></div>`,true)}
    ${sec('Briefings : victime, tiers',c.roles.map(role).join(''),true)}
-   ${sec('Briefing des secouristes',`<div>${esc(c.secouristes)}</div>`,false)}
+   ${sec('Briefing des sapeurs-pompiers',`<div>${esc(c.secouristes)}</div>`,false)}
    ${sec('Évolution de la situation',`<div style="display:grid;gap:6px">${c.evolution.map(([a,b])=>`<div class="line" style="min-height:0;padding:8px 0;align-items:flex-start"><span style="flex:1"><b class="small">Si</b> ${esc(a)}</span><span style="flex:1"><b class="small">Alors</b> ${esc(b)}</span></div>`).join('')}</div>`,false)}
    ${sec('Gestes et attitudes attendus',ul(c.attendus),true)}
    ${sec('Ce qui sera observé (fiche d’évaluation)',`<div style="display:grid;gap:6px">${Object.entries(c.observe).map(([k,v])=>`<div><span class="code">${esc(scObsLabel(c.cur,k).split(' · ')[0])}</span><b class="small">${esc(scObsLabel(c.cur,k).split(' · ').slice(1).join(' · '))}</b><div>${esc(v)}</div></div>`).join('')}</div>`,true)}
@@ -2323,7 +2042,7 @@ function viewScenario(){const c=scById(S.scid);if(!c)return viewScenarios();cons
    ${sec('Sécurité',`<div>${esc(c.securite)}</div>`,true)}
    ${sec('Questions pour le débriefing',ul(c.debrief),false)}
   </div>`}
-function viewScLink(e){const c=scById(e.scenarioId);return `<section class="panel"><div class="hd"><h3>Scénario : ${esc(c.titre)}</h3><span class="row"><button class="btn sm primary" data-act="call-start" data-id="${c.id}" data-from="formative">${I.phone}Appeler le 15</button><button class="btn sm" data-act="open-sc" data-id="${c.id}" data-from="formative">Voir</button></span></div>
+function viewScLink(e){const c=scById(e.scenarioId);return `<section class="panel"><div class="hd"><h3>Scénario : ${esc(c.titre)}</h3><span class="row"><button class="btn sm primary" data-act="call-start" data-id="${c.id}" data-from="formative">${I.phone}Transmettre le bilan</button><button class="btn sm" data-act="open-sc" data-id="${c.id}" data-from="formative">Voir</button></span></div>
   <div class="bd small"><b>Observer :</b><ul style="margin:4px 0 0;padding-left:20px;display:grid;gap:3px">${Object.entries(c.observe).map(([k,v])=>`<li><b>${esc(scObsLabel(c.cur,k).split(' · ')[0])}</b> ${esc(v)}</li>`).join('')}</ul></div></section>`}
 /* PDF : fiche animateur, briefings à remettre, liste de matériel */
 function scWriter(doc,P,title){const M=14,W=182;let y=0;
@@ -2341,11 +2060,11 @@ function scBriefPages(c){return [{orient:'p',draw:doc=>{const P=pen(doc);let fir
   const page=(who,body)=>{if(!first){doc.addPage('a4','p');w.top()}first=false;scHead(w,c);w.h(who);body()};
   c.roles.forEach(r=>page(`${r.t.toUpperCase()} : ${r.nom}`,()=>{w.h('Votre rôle');w.p(r.brief,{s:10.5,gap:3});if(r.jeu){w.h('Votre jeu');w.p(r.jeu,{s:10.5,gap:3})}
     if((r.param||[]).length){w.h('Constantes à donner si on vous les demande');r.param.forEach(x=>w.li(x,{s:10}))}if(r.maq){w.h('Maquillage');w.p(r.maq,{s:10})}}));
-  page('SECOURISTES (à lire aux apprenants)',()=>{w.h('Message d’alerte');w.p(c.message,{s:11,gap:3});w.h('Votre mission');w.p(c.secouristes,{s:10.5,gap:3});w.h('Matériel à votre disposition');(c.mat.sec||[]).forEach(x=>w.li(x,{s:10}))});}}]}
+  page('SAPEURS-POMPIERS (à lire aux stagiaires)',()=>{w.h('Message de départ');w.p(c.message,{s:11,gap:3});w.h('Votre mission');w.p(c.secouristes,{s:10.5,gap:3});w.h('Matériel à votre disposition');(c.mat.sec||[]).forEach(x=>w.li(x,{s:10}))});}}]}
 function scFichePages(c){return [{orient:'p',draw:doc=>{const P=pen(doc);const w=scWriter(doc,P,`${c.cur} · Fiche scénario n°${c.n}`);scHead(w,c);
-  w.h('Objectifs');c.objectifs.forEach(x=>w.li(x));w.h('Message d’alerte et contexte');w.lab('Message : ',c.message);w.lab('Contexte : ',c.contexte);
+  w.h('Objectifs');c.objectifs.forEach(x=>w.li(x));w.h('Message de départ et contexte');w.lab('Message : ',c.message);w.lab('Contexte : ',c.contexte);
   w.h('Rôles et briefings');c.roles.forEach(r=>{w.p(`${r.t} : ${r.nom}`,{b:true,gap:.4});w.p(r.brief,{x:3,s:8.5,gap:.6});if(r.jeu)w.p('Jeu : '+r.jeu,{x:3,s:8.5,gap:.6});(r.param||[]).forEach(x=>w.li('Paramètres : '+x,{s:8.5}));if(r.maq)w.p('Maquillage : '+r.maq,{x:3,s:8.5});w.y+=1});
-  w.h('Briefing des secouristes');w.p(c.secouristes);
+  w.h('Briefing des sapeurs-pompiers');w.p(c.secouristes);
   w.h('Évolution de la situation');c.evolution.forEach(([a,b])=>w.li(`Si ${a} : ${b}`));
   w.h('Gestes et attitudes attendus');c.attendus.forEach(x=>w.li(x));
   w.h('Ce qui sera observé');Object.entries(c.observe).forEach(([k,v])=>w.li(`${scObsLabel(c.cur,k).split(' · ')[0]} - ${v}`));
@@ -2364,14 +2083,14 @@ Object.assign(A,{
   'sc-got':(d,ev,el)=>{const s=scS();if(!s)return;let p=scPlanned(s,d.id);if(!p){scPlan(s).push(p={id:d.id,got:{}})}p.got=p.got||{};if(el.checked)p.got[d.k]=true;else delete p.got[d.k];s.updatedAt=Date.now();save();},
   'new-sc-fiche':d=>{const s=scS(),c=scById(d.id);if(!s||s.cursus!==c.cur){toast('Ouvrez une formation '+c.cur+' pour évaluer ce cas');return}const T=formTpls(s.cursus).find(t=>!t.fiche);if(!T){toast('Aucune grille formative');return}
     if(!scPlanned(s,c.id))scPlan(s).push({id:c.id,got:{}});
-    newFormative(s,T,S.pid,e=>{e.theme=c.titre+' - '+c.theme;e.scenarioId=c.id;e.cases={};c.cases.forEach(k=>e.cases[k]=true);c.checks.forEach(k=>e.situations[k]=true)})},
+    newFormative(s,T,S.pid,e=>{e.theme=c.titre+' - '+c.theme;e.scenarioId=c.id;if(T.riofe){e.theme=c.theme;e.missions=(c.objectifs||[]).join(' ; ');const m=String(c.etape||'').match(/MSP\s*\d+/);e.ref=(m?m[0]+' · ':'')+'scénario n°'+c.n}e.cases={};c.cases.forEach(k=>e.cases[k]=true);c.checks.forEach(k=>e.situations[k]=true)})},
   'pdf-sc':()=>{const c=scById(S.scid);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_scenario_${String(c.n).padStart(2,'0')}_${slug(c.titre)}`,scFichePages(c))],title:'Scénario'}))},
   'pdf-sc-brief':()=>{const c=scById(S.scid);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_briefings_${String(c.n).padStart(2,'0')}_${slug(c.titre)}`,scBriefPages(c))],title:'Briefings'}))},
   'pdf-sc-mat':()=>{const s=curSess();if(!scPlan(s).length){toast('Ajoutez d’abord des scénarios au planning');return}runExport('Création du PDF…',()=>({files:[pdfFile(`${s.cursus}_${slug(s.title||'formation')}_materiel-scenarios`,scMatPages(s))],title:'Matériel'}))}
 });
 
 /* ---- éditeur de scénarios ---- */
-const SC_BLANK=cur=>({id:'u'+uid(),cur,n:'',titre:'',theme:'',jour:'J1',etape:'',niveau:1,duree:'10 min + 10 min de débriefing',lieu:'',equipe:cur==='PSE2'?'Équipe de 3 secouristes PSE2':'Binôme de secouristes PSE1',
+const SC_BLANK=cur=>({id:'u'+uid(),cur,n:'',titre:'',theme:'',jour:'J1',etape:'',niveau:1,duree:'10 min + 15 min de débriefing',lieu:'',equipe:cur==='EQSUAP'?'Équipage VSAV : chef d’agrès, deux équipiers':'Équipier prompt secours seul, VSAV engagé',
   cases:[],checks:[],objectifs:[],message:'',contexte:'',roles:[{t:'Victime',nom:'',brief:'',jeu:'',param:[],maq:''}],secouristes:'',evolution:[['','']],attendus:[],observe:{},
   mat:{lieu:[],maq:[],acc:[],sec:[]},securite:'',debrief:[]});
 const scClean=d=>{const L=a=>(a||[]).map(x=>String(x).trim()).filter(Boolean);
@@ -2380,7 +2099,7 @@ const scClean=d=>{const L=a=>(a||[]).map(x=>String(x).trim()).filter(Boolean);
   Object.keys(d.observe).forEach(k=>{if(!String(d.observe[k]).trim())delete d.observe[k]});d.niveau=+d.niveau||1;
   const crit=new Set((formTpls(d.cur).find(t=>!t.fiche)||{criteria:[]}).criteria.map(c=>c.id));Object.keys(d.observe).forEach(k=>{if(!crit.has(k))delete d.observe[k]});
   const ok=new Set(scSits(d.cur).map(x=>x.id));d.cases=d.cases.filter(k=>ok.has(k));d.checks=d.checks.filter(k=>ok.has(k));return d};
-const scSits=cur=>{const T=formTpls(cur).find(t=>!t.fiche);if(!T)return [];
+const scSits=cur=>{if(SC_TAGS[cur])return Object.entries(SC_TAGS[cur]).map(([id,label])=>({id,label,f:'cases'}));const T=formTpls(cur).find(t=>!t.fiche);if(!T)return [];
   return [...(T.situations||[]).map(x=>({id:x.id,label:x.label,f:'cases'})),...T.criteria.filter(c=>c.subMode==='check').flatMap(c=>c.children.map(ch=>({id:ch.id,label:(c.code||'')+' · '+ch.label,f:'checks'})))]};
 function viewScEdit(){const d=S.scdraft;if(!d)return viewScenarios();const B=p=>`data-bind="${p}" data-scope="scdraft"`;
   const inp=(l,p,v,ph='')=>`<label class="f">${l}<input type="text" value="${esc(v||'')}" placeholder="${esc(ph)}" ${B(p)}></label>`;
@@ -2390,26 +2109,26 @@ function viewScEdit(){const d=S.scdraft;if(!d)return viewScenarios();const B=p=>
   const T=formTpls(d.cur).find(t=>!t.fiche);const crit=T?T.criteria:[];
   return `<div class="stack">
    ${panel('Identification',`<div class="fields">
-     <label class="f">Formation<select ${B('cur')}>${['PSE1','PSE2'].map(c=>`<option ${d.cur===c?'selected':''}>${c}</option>`).join('')}</select></label>
+     <label class="f">Formation<select ${B('cur')}>${SC_CURS().map(c=>`<option value="${c}" ${d.cur===c?'selected':''}>${esc(RIOFE_COURSES[c].name)}</option>`).join('')}</select></label>
      ${inp('N°','n',d.n,'ex. 18')}
      <label class="f">Jour de formation<select ${B('jour')}>${['J1','J2','J3','J4','J5','J6'].map(j=>`<option ${d.jour===j?'selected':''}>${j}</option>`).join('')}</select></label>
      <label class="f">Niveau<select ${B('niveau')}>${[1,2,3].map(n=>`<option value="${n}" ${+d.niveau===n?'selected':''}>${NIV[n]}</option>`).join('')}</select></label></div>
      ${inp('Titre du scénario','titre',d.titre,'ex. Malaise au gymnase')}${inp('Thème (repris sur la fiche d’évaluation)','theme',d.theme,'ex. Malaise hypoglycémique')}
-     ${inp('Étape de la progression','etape',d.etape,'ex. Malaises et affections spécifiques')}
+     ${inp('Étape de la progression','etape',d.etape,'ex. MSP05 · Affections spécifiques')}
      <div class="fields">${inp('Durée','duree',d.duree)}${inp('Lieu et décor','lieu',d.lieu)}</div>${inp('Équipe','equipe',d.equipe)}`)}
-   ${panel('Situations travaillées',`<p class="small muted" style="margin:0">Cochées d’office sur la fiche d’évaluation créée depuis ce scénario.</p><div style="display:grid;gap:2px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">${scSits(d.cur).map(x=>`<label class="cb" style="font-weight:500"><input type="checkbox" data-act="sc-sit" data-f="${x.f}" data-k="${x.id}" ${(d[x.f]||[]).includes(x.id)?'checked':''}>${esc(x.label)}</label>`).join('')}</div>`)}
-   ${panel('Objectifs et situation de départ',`${tl('Objectifs pédagogiques','objectifs',d.objectifs)}${ta('Message d’alerte (lu aux secouristes)','message',d.message)}${ta('Contexte (pour l’animateur)','contexte',d.contexte)}`)}
+   ${panel('Thèmes travaillés',`<p class="small muted" style="margin:0">Affichés en pastilles dans la liste des scénarios.</p><div style="display:grid;gap:2px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">${scSits(d.cur).map(x=>`<label class="cb" style="font-weight:500"><input type="checkbox" data-act="sc-sit" data-f="${x.f}" data-k="${x.id}" ${(d[x.f]||[]).includes(x.id)?'checked':''}>${esc(x.label)}</label>`).join('')}</div>`)}
+   ${panel('Objectifs et situation de départ',`${tl('Objectifs pédagogiques','objectifs',d.objectifs)}${ta('Message de départ (lu aux sapeurs-pompiers)','message',d.message)}${ta('Contexte (pour l’animateur)','contexte',d.contexte)}`)}
    <section class="panel"><div class="hd"><h3>Rôles : victimes et tiers</h3><button class="btn sm" data-act="sc-role-add">${I.plus}Ajouter un rôle</button></div><div class="bd stack">
      ${d.roles.map((r,i)=>`<div class="panel" style="border-left:4px solid var(--brand)"><div class="bd stack">
        <div class="row"><label class="f" style="width:140px">Rôle<select ${B('roles.'+i+'.t')}>${['Victime','Tiers','Témoin','Autre'].map(x=>`<option ${r.t===x?'selected':''}>${x}</option>`).join('')}</select></label><span class="grow">${inp('Nom, âge','roles.'+i+'.nom',r.nom)}</span><button class="btn danger" data-act="sc-role-rm" data-i="${i}" aria-label="Retirer le rôle">${I.trash}</button></div>
-       ${ta('Briefing','roles.'+i+'.brief',r.brief,'Ce que la personne sait, ressent, dit')}${ta('Jeu et évolution','roles.'+i+'.jeu',r.jeu,'Comment réagir selon les actions des secouristes',2)}
+       ${ta('Briefing','roles.'+i+'.brief',r.brief,'Ce que la personne sait, ressent, dit')}${ta('Jeu et évolution','roles.'+i+'.jeu',r.jeu,'Comment réagir selon les actions des sapeurs-pompiers',2)}
        ${tl('Paramètres à donner','roles.'+i+'.param',r.param,'ex. FR 24/min · FC 110/min · SpO2 94 %')}${inp('Maquillage','roles.'+i+'.maq',r.maq)}</div></div>`).join('')}</div></section>
-   ${panel('Secouristes et évolution',`${ta('Briefing des secouristes','secouristes',d.secouristes)}
+   ${panel('Sapeurs-pompiers et évolution',`${ta('Briefing des sapeurs-pompiers','secouristes',d.secouristes)}
      <div class="stack" style="gap:6px"><div class="row"><b class="small grow">Évolution : si… alors…</b><button class="btn sm" data-act="sc-evo-add">${I.plus}Ajouter</button></div>
      ${d.evolution.map((x,i)=>`<div class="row" style="align-items:flex-end"><span class="grow">${inp('Si','evolution.'+i+'.0',x[0])}</span><span class="grow">${inp('Alors','evolution.'+i+'.1',x[1])}</span><button class="btn danger" data-act="sc-evo-rm" data-i="${i}" aria-label="Retirer">${I.trash}</button></div>`).join('')}</div>`)}
    ${panel('Attendus et observation',`${tl('Gestes et attitudes attendus','attendus',d.attendus)}
      <p class="small muted" style="margin:0">Ce qui sera observé, critère par critère (laisser vide si non observé) :</p>
-     ${crit.map(c=>ta(`<span><span class="code">${esc(c.code)}</span>${esc(c.label)}</span>`,'observe.'+c.id,d.observe[c.id],'',2)).join('')}`)}
+     ${crit.filter(c=>!c.sec).map(c=>ta(`<span><span class="code">${esc(c.code)}</span>${esc(c.label)}</span>`,'observe.'+c.id,d.observe[c.id],'',2)).join('')}`)}
    ${panel('Matériel à préparer',Object.keys(MATLAB).map(k=>tl(MATLAB[k],'mat.'+k,d.mat[k])).join(''))}
    ${panel('Sécurité et débriefing',`${ta('Sécurité de l’exercice','securite',d.securite)}${tl('Questions de débriefing','debrief',d.debrief)}`)}
    <div class="row"><button class="btn primary grow" data-act="sc-save">Enregistrer le scénario</button><button class="btn" data-act="sc-cancel">Annuler</button></div>
@@ -2432,16 +2151,15 @@ Object.assign(A,{
 });
 
 /* =========================================================
-   Régulation SAMU simulée par l'IA (Claude) : appel au 15 depuis un scénario, puis correction du bilan.
+   Régulation simulée par l'IA (Claude) : transmission du bilan au CTA-CODIS 78 puis au médecin régulateur du SAMU 78 (CRRA 15),
+   depuis un scénario, puis correction du bilan.
    Accès : clé API sur l'appareil, ou serveur relais (relay/) qui garde la clé. Rien n'est envoyé hors appel.
    Aucun nom de participant n'est transmis : seulement le scénario et ce qui est dit pendant l'appel.
    ========================================================= */
 const AI_MODEL='claude-opus-5-5';        // correction du bilan : le plus fiable
 const AI_CALL_MODEL='claude-sonnet-5-5';  // conversation : réponse la plus rapide, sans réflexion préalable
-const AI_GREETING='SAMU, centre 15, j’écoute.';
-const CALL_LEVELS={debutant:'Débutant : secouriste en formation (régulateur qui guide)',standard:'Standard : secouriste (médecin régulateur réaliste)',certif:'Avancé : chef d’équipe / chef d’agrès (médecin régulateur exigeant)'};
-/* agent vocal ElevenLabs de FORSSUAP 78 (public, limité à l'adresse de l'application et à l'application Android) ; vide tant qu'il n'est pas créé */
-const EL_AGENT_DEFAULT='';
+/* agent vocal ElevenLabs de FORSSUAP 78 « SDIS 78 Régulation 15 » (voix Claire ; public, à limiter à l'adresse de l'application et à l'application Android) */
+const EL_AGENT_DEFAULT='agent_4401m7ptk799fpxvzbprhgfr232b';
 function aiCfg(){const a=DB.settings.ai=Object.assign({mode:'key',key:'',relay:'',code:'',voice:true,engine:'eleven',elMode:'public',elAgent:''},DB.settings.ai||{});
   /* une seule fois : brancher l'agent de FORSSUAP 78 sur les appareils qui n'ont pas de relais configuré */
   if(!a.elDefaulted){a.elDefaulted=true;if(!a.relay.trim())a.elMode='public';if(!a.elAgent)a.elAgent=EL_AGENT_DEFAULT}
@@ -2464,46 +2182,45 @@ async function aiAsk({system,messages,effort='low',max_tokens=4000,format}){
   if(r.stop_reason==='refusal')throw new Error('L’IA n’a pas pu répondre à cette demande');
   return r.content.filter(b=>b.type==='text').map(b=>b.text).join('').trim()}
 
-function scPromptData(c){
-  const L=[`Formation : ${c.cur}`,`Titre : ${c.titre}`,`Thème : ${c.theme}`,`Lieu : ${c.lieu}`,`Équipe : ${c.equipe}`,`Message d’alerte reçu par l’équipe : ${c.message}`,`Ce qui s’est passé : ${c.contexte}`];
+const AI_GREETING='CTA-CODIS des Yvelines, j’écoute.';
+const CALL_LEVELS={debutant:'Débutant : équipier en formation (opérateur et régulateur qui guident)',standard:'Standard : équipier (régulation réaliste)',certif:'Avancé : chef d’agrès VSAV (régulation exigeante)'};
+/* qui transmet le bilan : l'équipier prompt secours, seul, ou le chef d'agrès du VSAV */
+const CALL_ROLE={PS:'un sapeur-pompier volontaire engagé seul en prompt secours (Prompt Secours, module transverse de l’équipier SPV) : il est seul auprès de la victime avec son sac de prompt secours, un VSAV est engagé et il rend compte au CTA-CODIS en attendant son arrivée',
+  EQSUAP:'un équipier du VSAV en formation Équipier SUAP, qui transmet le bilan pour son équipage (chef d’agrès et équipiers) ; le VSAV est sur les lieux avec tout son matériel'};
+const scPromptData=c=>{
+  const L=[`Formation : ${(RIOFE_COURSES[c.cur]||{}).name||c.cur}`,`Titre : ${c.titre}`,`Thème : ${c.theme}`,`Lieu : ${c.lieu}`,`Équipe : ${c.equipe}`,`Message de départ reçu : ${c.message}`,`Ce qui s’est passé : ${c.contexte}`];
   (c.roles||[]).forEach(r=>{L.push(`${r.t} - ${r.nom} : ${r.brief}${r.jeu?' Évolution jouée : '+r.jeu:''}${(r.param||[]).length?' Paramètres : '+r.param.join(' ; '):''}`)});
   if((c.evolution||[]).length)L.push('Évolution selon les actions : '+c.evolution.map(([a,b])=>`si ${a}, alors ${b}`).join(' ; '));
-  if((c.attendus||[]).length)L.push('Gestes attendus des secouristes : '+c.attendus.join(' ; '));
-  return L.join('\n')}
-function callSystem(c,level){
-  const lv={debutant:`Niveau débutant. L’appelant est un secouriste en formation, débutant. Tu restes un vrai régulateur mais bienveillant et pédagogue dans ta façon de questionner : tu le guides pas à pas dans l’ordre XABCDE (« Y a-t-il une hémorragie ? », « Il respire comment ? »), tu reformules brièvement pour l’aider à structurer, tu ne relèves que les oublis importants et tu ne le déstabilises pas.`,
-    standard:`Niveau standard. L’appelant est un secouriste, encore en formation. Tu te comportes comme un médecin régulateur réel : courtois, efficace, précis. Tu le laisses donner son bilan, puis tu relances sur ce qui manque ou reste flou en suivant l’ordre XABCDE, tu fais préciser les chiffres et tu demandes les mesures qui manquent, sans le brusquer.`,
-    certif:`Niveau avancé. L’appelant est le chef d’équipe ou le chef d’agrès de l’équipe de secours : il dirige les équipiers et c’est lui qui fait le lien avec la régulation. Tu es exigeant, comme avec un chef d’agrès expérimenté. Tu dis « Je vous écoute » et tu attends un bilan complet et hiérarchisé sans aide : présentation, adresse, bilan circonstanciel (mécanisme, nombre de victimes, risques, moyens déjà sur place), bilan d’urgence vitale XABCDE, bilan complémentaire, gestes réalisés, puis ses demandes (moyens, renforts, évacuation). Tu ne guides pas ; tu poses des questions ouvertes (« Autre chose ? », « Vos besoins ? »), tu relèves les incohérences, tu exiges des chiffres précis. Tu lui demandes des décisions de chef : moyens supplémentaires nécessaires, répartition de ses équipiers s’il y a plusieurs victimes, préparation de l’évacuation, point de rendez-vous des secours, délai de son prochain bilan. À la fin, tu lui demandes de te répéter tes consignes (collationnement).`}[level]||'';
-  return `Tu joues la régulation médicale du SAMU (le « 15 ») dans un exercice de formation aux premiers secours en équipe (PSE1 / PSE2), organisé par une association agréée de sécurité civile. L’appelant est un apprenant secouriste qui s’entraîne à transmettre un bilan et à travailler avec la régulation. Les secouristes appliquent le bilan XABCDE : X pour hémorragie eXsanguinante, A pour voies aériennes (Airway), B pour respiration (Breathing), C pour circulation, D pour neurologique (Disability), E pour exposition et environnement. Tout est fictif, mais tu dois être aussi crédible qu’une vraie régulation française.
+  if((c.attendus||[]).length)L.push('Gestes et attitudes attendus : '+c.attendus.join(' ; '));
+  return L.join('\n')};
+function callSystem(c,level){const who=CALL_ROLE[c.cur]||CALL_ROLE.EQSUAP;
+  const lv={debutant:`Niveau débutant. L’appelant débute. L’opérateur et le médecin restent réalistes mais bienveillants et pédagogues dans leur façon de questionner : ils le guident pas à pas (bilan circonstanciel, puis urgence vitale dans l’ordre XABCDE, puis complémentaire), reformulent brièvement pour l’aider à structurer, ne relèvent que les oublis importants et ne le déstabilisent pas.`,
+    standard:`Niveau standard. L’appelant est en formation. Tu te comportes comme une vraie salle opérationnelle et une vraie régulation : courtoises, efficaces, précises. Tu le laisses donner son bilan, puis tu relances sur ce qui manque ou reste flou, tu fais préciser les chiffres et demander les mesures qui manquent, sans le brusquer.`,
+    certif:`Niveau avancé. L’appelant joue le chef d’agrès du VSAV : c’est lui qui dirige l’équipage et fait le lien avec le CTA-CODIS et la régulation. Tu es exigeant, comme avec un chef d’agrès expérimenté. Le médecin dit « Je vous écoute » et attend un bilan complet et hiérarchisé sans aide : indicatif, adresse, bilan circonstanciel (mécanisme, nombre de victimes, risques, moyens sur place), bilan d’urgence vitale XABCDE, bilan complémentaire, gestes réalisés, puis ses demandes (renfort médical, moyens, orientation). Pas de guidage : questions ouvertes (« Autre chose ? », « Vos besoins ? »), incohérences relevées, chiffres exigés. Tu lui demandes des décisions de chef : moyens supplémentaires, répartition de l’équipage s’il y a plusieurs victimes, préparation du transport, délai du prochain bilan. À la fin, tu lui demandes de répéter les consignes (collationnement).`}[level]||'';
+  return `Tu joues la chaîne de traitement de l’alerte et de régulation du département des Yvelines (78) dans un exercice de formation des sapeurs-pompiers du SDIS 78. L’appelant est ${who}. Il s’entraîne à transmettre un bilan et à travailler avec la régulation médicale. Les sapeurs-pompiers réalisent le bilan circonstanciel, le bilan d’urgence vitale dans l’ordre XABCDE (X hémorragie eXsanguinante, A voies aériennes, B respiration, C circulation, D neurologique, E exposition), puis le bilan complémentaire et la surveillance. Tout est fictif, mais tu dois être aussi crédible qu’une vraie salle opérationnelle et une vraie régulation françaises.
 
 LA CONVERSATION
-C’est un appel téléphonique en direct : tout ce que tu écris est lu à voix haute aussitôt. Parle comme au téléphone : une à deux phrases courtes, sans liste, sans titre, sans mise en forme, sans émoji. Pose une question à la fois, ou deux questions liées (« Quelle est sa fréquence respiratoire et sa saturation ? »). Ne répète pas ce que l’appelant vient de dire, n’annonce pas ce que tu vas faire : avance. Ce que dit l’appelant arrive par reconnaissance vocale : il peut y avoir des erreurs de transcription ; interprète au mieux et ne fais répéter que ce qui est essentiel et incompréhensible (adresse, chiffre, nom de médicament). Si son message semble coupé au milieu d’une phrase, dis seulement « Oui ? » ou « Je vous écoute. ».
+C’est un appel téléphonique en direct : tout ce que tu écris est lu à voix haute aussitôt. Parle comme au téléphone : une à deux phrases courtes, sans liste, sans titre, sans mise en forme, sans émoji. Pose une question à la fois, ou deux questions liées. Ne répète pas ce que l’appelant vient de dire, n’annonce pas ce que tu vas faire : avance. Ce que dit l’appelant arrive par reconnaissance vocale : interprète au mieux et ne fais répéter que l’essentiel incompréhensible (adresse, chiffre, médicament). Si son message semble coupé, dis seulement « Oui ? » ou « Je vous écoute. ».
 
 TU AS DEUX RÔLES SUCCESSIFS
-1. L’assistant de régulation médicale (ARM). Tu as décroché en disant « ${AI_GREETING} ». En quelques échanges rapides, tu obtiens : qui appelle et en quelle qualité (équipe de secouristes, organisme), un numéro de rappel, l’adresse exacte (commune, rue, numéro, étage, code, accès, point de rendez-vous pour les secours), le motif en une phrase et le nombre de victimes. Puis tu dis : « Je vous passe le médecin régulateur, ne quittez pas. »
-2. Le médecin régulateur. Tu te présentes en une phrase (« Docteur Martin, médecin régulateur, je vous écoute. ») et tu mènes un véritable interrogatoire médical, thème par thème, en t’adaptant à chaque réponse :
-- circonstances et mécanisme : ce qui s’est passé, heure de début, cinétique ou hauteur de chute, témoin, perte de connaissance initiale ;
-- urgence vitale dans l’ordre XABCDE :
-  X, hémorragie externe grave et ce qui a été fait (compression, pansement, garrot et son heure) ;
-  A, voies aériennes : libres, obstruées, encombrées, position de la victime ;
-  B, respiration : fréquence, amplitude, régularité, bruits, saturation, cyanose, sueurs, signes de lutte ;
-  C, circulation : pouls (fréquence, régularité, pouls radial perçu), tension, coloration, temps de recoloration cutanée, marbrures ;
-  D, neurologique : conscience, orientation, perte de connaissance initiale, pupilles, motricité et sensibilité des membres, glycémie ;
-  E, exposition : lésions de la tête aux pieds, température, environnement, protection contre le froid ;
-- plaintes : douleur (siège, type, intensité sur 10, irradiation, depuis quand), autres signes ;
-- antécédents, traitements (en particulier anticoagulants, insuline, traitements du cœur), allergies, grossesse si c’est une femme en âge de l’être, dernier repas, prise d’alcool ou de toxiques si pertinent ;
-- gestes réalisés et leur effet : position, oxygène et débit, pansement ou garrot (avec l’heure), immobilisations, RCP et nombre de chocs ;
-- évolution depuis l’arrivée de l’équipe.
-Tu creuses ce qui compte pour ce cas : si une réponse est vague (« il respire mal »), tu fais préciser (« Combien de mouvements par minute ? Il parle normalement ? »). Si un chiffre manque, tu le demandes ; si une mesure n’a pas été faite, tu demandes de la faire (« Faites-moi une glycémie et rappelez-moi le chiffre », « Reprenez la tension »). Si deux informations se contredisent, tu le dis et tu fais vérifier. Si un signe de gravité apparaît, tu le traites en priorité et tu donnes aussitôt la consigne utile.
+1. L’opérateur du CTA-CODIS 78. Tu as décroché en disant « ${AI_GREETING} ». En quelques échanges rapides, tu obtiens : l’indicatif de l’engin ou du sapeur-pompier (par exemple « VSAV Versailles 1 » ou « prompt secours de Maule ») et son centre, l’adresse exacte et la confirmation que les moyens sont sur les lieux, le motif en une phrase et le nombre de victimes. Si c’est un prompt secours, tu confirmes que le VSAV est engagé et tu donnes un délai d’arrivée réaliste. Puis tu dis : « Je vous mets en relation avec le médecin régulateur du SAMU 78, ne quittez pas. »
+2. Le médecin régulateur du CRRA 15 (SAMU 78). Tu te présentes en une phrase (« Docteur Martin, médecin régulateur, je vous écoute. ») et tu mènes un véritable interrogatoire médical, en t’adaptant à chaque réponse :
+- circonstances et mécanisme : ce qui s’est passé, heure de début, cinétique ou hauteur de chute, témoins, perte de connaissance initiale ;
+- urgence vitale dans l’ordre XABCDE : hémorragie et ce qui a été fait (compression, pansement compressif, garrot et son heure) ; voies aériennes ; respiration (fréquence, amplitude, bruits, saturation, cyanose, sueurs, signes de lutte) ; circulation (pouls, régularité, pouls radial, tension, coloration, temps de recoloration, marbrures) ; neurologique (conscience, orientation, pupilles, motricité, sensibilité, glycémie) ; exposition (lésions, température, environnement) ;
+- plaintes : douleur (siège, type, intensité sur 10, irradiation, depuis quand) ;
+- antécédents, traitements (anticoagulants, insuline, traitements du cœur), allergies, grossesse si pertinent, dernier repas ;
+- gestes réalisés et leur effet : position, oxygène et débit, pansement ou garrot, immobilisations, RCP et nombre de chocs ;
+- évolution depuis l’arrivée.
+Si une réponse est vague, tu fais préciser. Si un chiffre manque, tu le demandes ; si une mesure n’a pas été faite, tu demandes de la faire et de te rappeler. Si deux informations se contredisent, tu le dis. Si un signe de gravité apparaît, tu le traites en priorité.
 
 TA DÉCISION
-Quand tu as ce qu’il te faut, tu annonces une décision réaliste et cohérente avec ce cas : moyen engagé (équipe médicale du SMUR, ambulance, transport par l’équipe, ou maintien sur place avec conseils), délai approximatif, orientation si utile, puis des consignes précises et réalisables par des secouristes PSE, conformes aux recommandations françaises de premiers secours : position, oxygène et débit, surveillance (quoi et toutes les combien de minutes), ce qu’il ne faut pas faire (rien à boire par exemple), éléments à préparer (ordonnances, traitements, papiers), et quand rappeler (bilan de surveillance ou aggravation). Tu ne prescris rien en dehors de ce que des secouristes peuvent faire. Si l’appelant annonce une aggravation, tu réagis immédiatement et brièvement.
+Quand tu as ce qu’il te faut, tu annonces une décision réaliste et cohérente : envoi du SMUR, transport par le VSAV vers un service précis (urgences de l’hôpital le plus adapté des Yvelines, par exemple centre hospitalier de Versailles André-Mignot, de Poissy-Saint-Germain, de Mantes-la-Jolie, de Rambouillet), ou laissé sur place avec conseils. Pour un prompt secours seul, tu lui donnes les consignes d’attente du VSAV. Tu donnes des consignes précises et réalisables par des sapeurs-pompiers non médecins, conformes aux référentiels nationaux du secours d’urgence aux personnes : position, oxygène et débit, surveillance (quoi et à quel rythme), ce qu’il ne faut pas faire, éléments à emporter (ordonnances, traitements, papiers), et quand rappeler (bilan de surveillance ou aggravation). Tu ne prescris rien d’autre.
 
 CE QUE TU SAIS ET NE SAIS PAS
-Tu ne connais de la situation que ce que l’appelant te dit. Le scénario ci-dessous est confidentiel : ne le révèle jamais, ne suggère pas les réponses, n’invente aucune information sur la victime. Il te sert uniquement à savoir ce qu’un bon bilan doit contenir, à poser les bonnes questions et à prendre une décision cohérente. Si l’appelant donne des valeurs différentes de celles du scénario, ce sont les siennes qui comptent (le formateur peut avoir fait évoluer le cas).
+Tu ne connais de la situation que ce que l’appelant te dit. Le scénario ci-dessous est confidentiel : ne le révèle jamais, ne suggère pas les réponses, n’invente aucune information sur la victime. Il te sert à savoir ce qu’un bon bilan doit contenir et à prendre une décision cohérente. Si l’appelant donne des valeurs différentes, ce sont les siennes qui comptent.
 
 PENDANT L’APPEL
-Aucune note, aucun conseil pédagogique, aucun commentaire sur la qualité du bilan : la correction est faite après l’appel. Si l’appelant sort de l’exercice, rappelle en une phrase que tu es le 15 dans l’exercice. S’il rappelle pour un bilan de surveillance, c’est l’assistant qui décroche puis te le repasse ; tu demandes ce qui a changé et tu ajustes ta décision. S’il met fin à l’appel, conclus en une phrase.
+Aucune note, aucun conseil pédagogique, aucun commentaire sur la qualité du bilan : la correction est faite après l’appel. Si l’appelant sort de l’exercice, rappelle en une phrase que tu es le CTA-CODIS ou la régulation dans l’exercice. S’il rappelle pour un bilan de surveillance, l’opérateur décroche puis le remet en relation avec le médecin ; tu demandes ce qui a changé et tu ajustes ta décision. S’il met fin à l’appel, conclus en une phrase.
 
 ${lv}
 
@@ -2511,23 +2228,25 @@ Scénario confidentiel :
 ${scPromptData(c)}`}
 const DEBRIEF_FORMAT={type:'json_schema',schema:{type:'object',additionalProperties:false,
   required:['note','appreciation','suggestion_fiche','justification','criteres','points_forts','a_ameliorer','bilan_modele'],
-  properties:{note:{type:'integer',description:'Note sur 10'},appreciation:{type:'string'},suggestion_fiche:{type:'string',enum:['A','B','C']},justification:{type:'string'},
+  properties:{note:{type:'integer',description:'Note sur 10'},appreciation:{type:'string'},suggestion_fiche:{type:'string',enum:['A','ECA','NA']},justification:{type:'string'},
     criteres:{type:'array',items:{type:'object',additionalProperties:false,required:['critere','niveau','commentaire'],properties:{critere:{type:'string'},niveau:{type:'string',enum:['acquis','partiel','absent','sans objet']},commentaire:{type:'string'}}}},
     points_forts:{type:'array',items:{type:'string'}},a_ameliorer:{type:'array',items:{type:'string'}},bilan_modele:{type:'string'}}}};
-const DEBRIEF_CRIT=['Présentation de l’appelant (qui appelle, en quelle qualité, numéro de rappel)','Localisation précise et accès','Motif et circonstances','Nombre de victimes, âge et sexe','Bilan d’urgence vitale dans l’ordre XABCDE (hémorragie, voies aériennes, respiration, circulation, neurologique, exposition)','Paramètres chiffrés','Bilan complémentaire (plaintes, examen, antécédents, traitements, allergies)','Gestes réalisés et leur effet','Demande et besoins exprimés (pour un chef d’agrès : moyens, renforts, évacuation, organisation de l’équipe)','Clarté, ordre et concision du message','Réponses aux questions du médecin régulateur et collationnement des consignes reçues'];
-function debriefSystem(c,level){const lvl={debutant:'Niveau de l’exercice : débutant. L’apprenant est un secouriste en formation, débutant : sois encourageant, valorise ce qui est acquis et concentre-toi sur deux ou trois priorités ; un bilan incomplet mais sûr et dans le bon ordre mérite une note correcte.',
-    standard:'Niveau de l’exercice : standard. L’apprenant est un secouriste encore en formation : attends un bilan complet dans l’ordre XABCDE, avec des chiffres, en restant bienveillant.',
-    certif:'Niveau de l’exercice : avancé. L’apprenant joue le chef d’équipe ou chef d’agrès : attends un bilan complet et hiérarchisé, une demande de moyens adaptée, des décisions de chef (organisation de l’équipe, évacuation) et le collationnement des consignes ; sois aussi exigeant qu’avec un chef d’agrès.'}[level]||'';
-  return `Tu es formateur de formateurs en premiers secours (PSE1 / PSE2) en France. Tu corriges la transmission d’un bilan au 15 réalisée par un apprenant secouriste pendant un exercice, à partir de la transcription de l’appel et du scénario joué. Les secouristes appliquent le bilan XABCDE (hémorragie eXsanguinante, voies aériennes, respiration, circulation, neurologique, exposition) : vérifie que l’ordre est respecté.
+const DEBRIEF_CRIT=['Présentation au CTA-CODIS (indicatif de l’engin ou du prompt secours, centre)','Localisation précise et confirmation de la présence sur les lieux','Motif et bilan circonstanciel (mécanisme, risques, nombre de victimes)','Âge et sexe de la ou des victimes','Bilan d’urgence vitale dans l’ordre XABCDE (hémorragie, voies aériennes, respiration, circulation, neurologique, exposition)','Paramètres chiffrés','Bilan complémentaire (plaintes, examen, antécédents, traitements, allergies)','Gestes réalisés et leur effet','Demandes exprimées (renfort médical, moyens, orientation) et, pour un chef d’agrès, organisation de l’équipage','Clarté, ordre et concision du message','Réponses au médecin régulateur et collationnement des consignes reçues'];
+/* savoir-agir du RIOFE sur lequel porte la proposition de niveau */
+const CALL_SA={PS:'C24 « Alerter, informer »',EQSUAP:'C4 « Collaborer avec les personnels médicaux, paramédicaux » et C5 « Réaliser les bilans en vigueur »'};
+function debriefSystem(c,level){const lvl={debutant:'Niveau de l’exercice : débutant. Sois encourageant, valorise ce qui est acquis et concentre-toi sur deux ou trois priorités ; un bilan incomplet mais sûr et dans le bon ordre mérite une note correcte.',
+    standard:'Niveau de l’exercice : standard. Attends un bilan complet dans l’ordre (circonstanciel, XABCDE, complémentaire), avec des chiffres, en restant bienveillant.',
+    certif:'Niveau de l’exercice : avancé. L’apprenant joue le chef d’agrès du VSAV : attends un bilan complet et hiérarchisé, des demandes adaptées, des décisions de chef (organisation de l’équipage, transport) et le collationnement des consignes.'}[level]||'';
+  return `Tu es formateur de formateurs en secours d’urgence aux personnes au SDIS 78 (Groupement Formation). Tu corriges la transmission d’un bilan au CTA-CODIS et au médecin régulateur du SAMU réalisée par ${CALL_ROLE[c.cur]||CALL_ROLE.EQSUAP}, pendant une mise en situation professionnelle, à partir de la transcription de l’appel et du scénario joué. Vérifie l’ordre : bilan circonstanciel, bilan d’urgence vitale XABCDE, bilan complémentaire.
 
 ${lvl}
 
 Évalue chacun de ces critères, dans cet ordre, avec le niveau acquis, partiel, absent ou sans objet, et un commentaire court qui cite si possible les mots de l’apprenant :
 ${DEBRIEF_CRIT.map((x,i)=>`${i+1}. ${x}`).join('\n')}
 
-Donne une note sur 10, une appréciation globale de deux ou trois phrases, les points forts et les points à améliorer (concrets, trois au plus chacun), et un exemple de bilan oral bien construit pour ce scénario (six à dix phrases, prêt à être dit au téléphone).
+Donne une note sur 10, une appréciation globale de deux ou trois phrases, les points forts et les points à améliorer (concrets, trois au plus chacun), et un exemple de bilan oral bien construit pour ce scénario (six à dix phrases, prêt à être dit au téléphone, commençant par l’indicatif).
 
-Propose aussi un niveau pour la fiche d’évaluation, critère « rend compte » / « assure la transmission du bilan » : A maîtrise particulièrement affirmée, B niveau attendu atteint, C maîtrise fragile ; justifie-le en une phrase. Cette proposition aide le formateur, qui reste seul à décider.
+Propose aussi un niveau pour la grille RIOFE, savoir-agir ${CALL_SA[c.cur]||CALL_SA.EQSUAP} : A (acquis, réalisé complètement), ECA (en cours d’acquisition, réalisé partiellement) ou NA (non acquis, non réalisé ou dangereux) ; justifie-le en une phrase. Cette proposition aide le formateur, qui reste seul à décider.
 
 Sois bienveillant, précis et juste : un bilan imparfait mais sûr n’est pas un échec. La transcription vient d’une reconnaissance vocale : ignore les fautes de transcription évidentes. Tout en français.
 
@@ -2633,8 +2352,8 @@ async function elStart(K){const c=scById(K.scId),s=await elSession();if(!ELC())t
   throw new Error('Connexion vocale impossible'+(last?' : '+(last.message||last):''))}
 /* ---- écrans ---- */
 function viewAiSettings(){const a=aiCfg();
-  return `<section class="panel"><div class="hd"><h3>Régulation SAMU simulée (IA)</h3><span class="pill ${(a.engine==='eleven'?elReady():true)&&aiReady()?'ok':'neutral'}">${(a.engine==='eleven'?elReady():true)&&aiReady()?'Prête':'À configurer'}</span></div><div class="bd stack">
-    <p class="small muted" style="margin:0">Depuis un scénario, « Appeler le 15 » met l’apprenant en ligne avec un régulateur simulé par l’IA Claude, puis corrige son bilan. Il faut du réseau pendant l’appel. Seuls le scénario et ce qui est dit pendant l’appel sont envoyés, jamais les noms des participants.</p>
+  return `<section class="panel"><div class="hd"><h3>Régulation simulée (CTA-CODIS / SAMU) (IA)</h3><span class="pill ${(a.engine==='eleven'?elReady():true)&&aiReady()?'ok':'neutral'}">${(a.engine==='eleven'?elReady():true)&&aiReady()?'Prête':'À configurer'}</span></div><div class="bd stack">
+    <p class="small muted" style="margin:0">Depuis un scénario, « Transmettre le bilan » met l’apprenant en ligne avec le CTA-CODIS puis le médecin régulateur du SAMU, simulés par l’IA Claude, puis corrige son bilan. Il faut du réseau pendant l’appel. Seuls le scénario et ce qui est dit pendant l’appel sont envoyés, jamais les noms des participants.</p>
     <label class="f">Voix de l’appel<select id="ai-engine" ${bind('ai.engine','settings')}><option value="eleven" ${a.engine==='eleven'?'selected':''}>ElevenLabs : voix naturelle, conversation fluide (recommandé)</option><option value="phone" ${a.engine==='phone'?'selected':''}>Voix et reconnaissance du téléphone (sans compte)</option></select></label>
     ${a.engine==='eleven'?`<label class="f">Accès à ElevenLabs<select id="ai-elmode" ${bind('ai.elMode','settings')}><option value="relay" ${a.elMode==='relay'?'selected':''}>Par le serveur relais (recommandé : la clé reste sur le serveur)</option><option value="public" ${a.elMode==='public'?'selected':''}>Agent public (essai rapide, sans serveur)</option></select></label>
       ${a.elMode==='public'?`<label class="f">Identifiant de l’agent ElevenLabs<input type="text" id="ai-elagent" value="${esc(a.elAgent)}" placeholder="agent_…" ${bind('ai.elAgent','settings')}></label><p class="small muted" style="margin:0">Un agent public peut être utilisé par quiconque connaît son identifiant : limitez-le à votre adresse dans ElevenLabs (Security › Allowlist) et fixez un plafond de dépense. Pour un usage régulier, passez par le serveur relais.</p>`:''}`:''}
@@ -2657,17 +2376,17 @@ function viewCall(){const K=S.call;if(!K)return viewScenarios();const c=scById(K
   if(K.closed)return viewCallClosed(K,c);
   if(!K.started)return `<div class="stack">
     <section class="panel"><div class="hd"><h3>Avant l’appel</h3></div><div class="bd stack">
-      <p style="margin:0">L’apprenant appelle le 15 et parle comme au téléphone : rien à toucher, rien à lire pendant l’appel. Le régulateur répond à voix haute quand l’apprenant marque une vraie pause. À la fin, « Raccrocher » : l’IA corrige la transmission.</p>
+      <p style="margin:0">L’apprenant appelle le CTA-CODIS et parle comme au téléphone : rien à toucher, rien à lire pendant l’appel. Le régulateur répond à voix haute quand l’apprenant marque une vraie pause. À la fin, « Raccrocher » : l’IA corrige la transmission.</p>
       ${parts.length?`<label class="f">Apprenant qui appelle (reste sur cet appareil)<select id="call-who" ${bind('who','call')}><option value="">—</option>${parts.map(p=>`<option value="${esc(fullName(p))}" ${K.who===fullName(p)?'selected':''}>${esc(fullName(p))}</option>`).join('')}</select></label>`:''}
       ${voiceIn()?`<label class="f">Mode de l’appel<select id="call-mode" ${bind('mode','call')}><option value="voice" ${K.mode==='voice'?'selected':''}>À la voix, comme au téléphone</option><option value="text" ${K.mode==='text'?'selected':''}>Par écrit (salle bruyante, pas de micro)</option></select></label>`:''}
       ${useEleven()&&K.mode==='voice'?'':`<label class="f">Pause avant que le régulateur réponde<select id="call-pause" ${bind('ai.pause','settings')}>${Object.entries(PAUSES).map(([k,[,l]])=>`<option value="${k}" ${(aiCfg().pause||'normal')===k?'selected':''}>${l}</option>`).join('')}</select></label>`}
       <label class="f">Niveau du régulateur<select id="call-level" ${bind('level','call')}>${Object.entries(CALL_LEVELS).map(([k,l])=>`<option value="${k}" ${K.level===k?'selected':''}>${l}</option>`).join('')}</select></label>
       ${voiceIn()?'<p class="small muted" style="margin:0">Conseil : téléphone ou tablette sur haut-parleur, dans un endroit calme ; parlez normalement : les hésitations courtes ne coupent pas la parole ; si l’apprenant est souvent coupé, choisissez une pause plus longue.</p>':'<p class="small" style="color:var(--t-orange);margin:0">Pas de reconnaissance vocale sur ce navigateur : l’appel se fera par écrit (Chrome ou l’application Android permettent la voix).</p>'}
       ${aiCfg().record!==false&&recCan()?'<p class="small" style="margin:0">● L’appel à la voix est <b>enregistré</b> pour être réécouté au débriefing : le son reste sur cet appareil et s’efface automatiquement au bout de 30 minutes. Prévenez l’apprenant.</p>':''}
-      ${callReady(K)?'':`<div class="small" style="color:var(--t-orange)">${K.mode==='voice'&&useEleven()?'La voix ElevenLabs n’est pas configurée':'L’IA n’est pas configurée'} : renseignez l’accès dans Réglages › Régulation SAMU simulée.</div>`}
+      ${callReady(K)?'':`<div class="small" style="color:var(--t-orange)">${K.mode==='voice'&&useEleven()?'La voix ElevenLabs n’est pas configurée':'L’IA n’est pas configurée'} : renseignez l’accès dans Réglages › Régulation simulée (CTA-CODIS / SAMU).</div>`}
       ${callReady(K)&&!aiReady()?'<div class="small muted">La correction du bilan demande aussi l’accès à Claude (Réglages) : sans lui, vous aurez la transcription et l’enregistrement, mais pas la note.</div>':''}
-      <button class="btn red" data-act="call-go" ${callReady(K)?'':'disabled'}>${I.phone}Composer le 15</button></div></section></div>`;
-  const st={connecting:'Connexion au 15…',ended:'Appel terminé',talking:'Vous parlez…',listening:'À vous, parlez…',thinking:'Le régulateur réfléchit…',speaking:'Le régulateur parle…',muted:'Micro coupé',text:'Appel par écrit'}[K.phase]||'En ligne';
+      <button class="btn red" data-act="call-go" ${callReady(K)?'':'disabled'}>${I.phone}Appeler le CTA-CODIS</button></div></section></div>`;
+  const st={connecting:'Connexion au CTA-CODIS…',ended:'Appel terminé',talking:'Vous parlez…',listening:'À vous, parlez…',thinking:'Le régulateur réfléchit…',speaking:'Le régulateur parle…',muted:'Micro coupé',text:'Appel par écrit'}[K.phase]||'En ligne';
   const sec=Math.floor((Date.now()-K.t0)/1000);
   const bubbles=callLines(K).filter(m=>!m.hidden).map(m=>`<div class="bub ${m.r==='u'?'me':''}"><span class="small muted">${m.r==='u'?'Secouriste':'Régulateur'}</span>${esc(m.t.replace(/^\[[^\]]*\]\s*/,''))}</div>`).join('');
   return `<div class="stack">
@@ -2685,7 +2404,7 @@ function viewCall(){const K=S.call;if(!K)return viewScenarios();const c=scById(K
     ${K.mode==='text'?`<div class="row" style="align-items:stretch"><input type="text" id="call-in" class="grow" style="min-height:48px" placeholder="Votre message au régulateur" value="${esc(K.draft||'')}" ${K.busy?'disabled':''}><button class="btn primary" data-act="call-send" ${K.busy?'disabled':''}>Envoyer</button></div>`:''}
     ${K.mode==='text'?`<div class="calllog" id="calllog">${bubbles}</div>`:`<p class="small muted" style="margin:0;text-align:center">La transcription complète de l’appel s’affichera avec la correction.</p>`}</div>`}
 function viewCallClosed(K,c){return `<div class="stack">
-    <div class="panel"><div class="bd small">Appel terminé. ${aiReady()?'La correction n’a pas pu être faite : réessayez.':'Pour obtenir la note et la correction du bilan, renseignez l’accès à Claude dans Réglages › Régulation SAMU simulée.'}</div></div>
+    <div class="panel"><div class="bd small">Appel terminé. ${aiReady()?'La correction n’a pas pu être faite : réessayez.':'Pour obtenir la note et la correction du bilan, renseignez l’accès à Claude dans Réglages › Régulation simulée (CTA-CODIS / SAMU).'}</div></div>
     ${aiReady()?'<button class="btn primary" data-act="call-redebrief">Corriger le bilan</button>':''}
     <section class="panel"><div class="hd"><h3>Réécouter l’appel</h3></div><div class="bd" id="call-audio"><span class="small muted">Chargement…</span></div></section>
     <section class="panel"><div class="hd"><h3>Transcription de l’appel</h3></div><div class="bd calllog">${callLines(K).filter(m=>!m.hidden).map(m=>`<div class="bub ${m.r==='u'?'me':''}"><span class="small muted">${m.r==='u'?'Secouriste':'Régulateur'}</span>${esc(m.t.replace(/^\[[^\]]*\]\s*/,''))}</div>`).join('')}</div></section>
@@ -2694,7 +2413,7 @@ function viewDebrief(K,c){const D=K.debrief;const col={acquis:'ok',partiel:'wait
   const ul=a=>`<ul style="margin:0;padding-left:20px;display:grid;gap:4px">${(a||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
   return `<div class="stack">
     <div class="tiles"><div class="tile"><span class="eyebrow">Note de la transmission</span><span class="big">${D.note}/10</span><span class="small muted">${esc(D.appreciation)}</span></div>
-      <div class="tile"><span class="eyebrow">Proposition pour la fiche d’évaluation</span><span class="big">${esc(D.suggestion_fiche)}</span><span class="small muted">${esc(D.justification)} Le formateur décide.</span></div></div>
+      <div class="tile"><span class="eyebrow">Proposition pour la grille RIOFE</span><span class="big">${esc(D.suggestion_fiche)}</span><span class="small muted">${esc(D.justification)} Le formateur décide.</span></div></div>
     <section class="panel"><div class="hd"><h3>Critères</h3></div><div class="lines">${(D.criteres||[]).map(x=>`<div class="line" style="min-height:0;align-items:flex-start"><span class="grow small"><b>${esc(x.critere)}</b><span style="display:block">${esc(x.commentaire)}</span></span><span class="pill ${col[x.niveau]||'neutral'}">${esc(x.niveau)}</span></div>`).join('')}</div></section>
     <div class="tiles"><section class="panel"><div class="hd"><h3>Points forts</h3></div><div class="bd">${ul(D.points_forts)}</div></section>
       <section class="panel"><div class="hd"><h3>À améliorer</h3></div><div class="bd">${ul(D.a_ameliorer)}</div></section></div>
@@ -2759,7 +2478,7 @@ Object.assign(A,{
   'call-mute':()=>{const K=S.call;K.muted=!K.muted;K.err='';if(K.engine==='eleven'){if(K.el)K.el.setMicMuted(K.muted);render();return}if(K.muted){stopListen();setPhase(K,'muted')}else{setPhase(K,'listening');callLoop(K)}},
   'call-interrupt':()=>{const K=S.call;K.cut=true;if(K.stream){try{K.stream.abort()}catch(e){}}hush();K.muted=false;if(!K.looping)callLoop(K);else setPhase(K,'listening')},
   'call-kb':()=>{const K=S.call;if(K.mode==='voice'){K.mode='text';stopListen();setPhase(K,'text')}else{K.mode='voice';K.muted=false;setPhase(K,'listening');callLoop(K)}},
-  'call-recall':()=>{const K=S.call;if(K.engine==='eleven'){if(K.el){K.msgs.push({r:'u',t:'(L’équipe rappelle pour le bilan de surveillance.)'});K.el.sendUserMessage('[Quelques minutes plus tard, l’équipe rappelle le 15 pour transmettre le bilan de surveillance.] Allô, c’est l’équipe de secouristes, je vous rappelle pour le bilan de surveillance.')}return}stopListen();callTurn('[Quelques minutes plus tard, l’équipe rappelle le 15 pour transmettre le bilan de surveillance.] Allô le 15, c’est l’équipe de secouristes, je vous rappelle pour le bilan de surveillance.').then(()=>{if(K.mode==='voice'&&!K.muted)callLoop(K)})},
+  'call-recall':()=>{const K=S.call;if(K.engine==='eleven'){if(K.el){K.msgs.push({r:'u',t:'(Rappel pour le bilan de surveillance.)'});K.el.sendUserMessage('[Quelques minutes plus tard, les sapeurs-pompiers rappellent le CTA-CODIS pour transmettre le bilan de surveillance.] Allô, je vous rappelle pour le bilan de surveillance.')}return}stopListen();callTurn('[Quelques minutes plus tard, les sapeurs-pompiers rappellent le CTA-CODIS pour transmettre le bilan de surveillance.] Allô, je vous rappelle pour le bilan de surveillance.').then(()=>{if(K.mode==='voice'&&!K.muted)callLoop(K)})},
   'call-end':async()=>{const K=S.call,c=scById(K.scId);const rs=recStop(K);endCallMedia(K);await rs;callSave(K);
     if(!aiReady()){K.closed=true;render();window.scrollTo(0,0);return}busy(true,'Correction du bilan…');
     try{const txt=await aiAsk({system:debriefSystem(c,K.level),messages:[{role:'user',content:'Transcription de l’appel :\n'+callTranscript(callLines(K))}],effort:'medium',max_tokens:16000,format:DEBRIEF_FORMAT});
@@ -2769,9 +2488,9 @@ Object.assign(A,{
   'call-again':()=>{const K=S.call;startCall(scById(K.scId),{eid:K.eid,who:K.who,level:K.level})},
   'call-exit':()=>{const K=S.call;endCallMedia(K);S.call=null;if(K&&K.eid&&S.scFrom==='formative'){go('formative',{eid:K.eid})}else go('scenario',{scid:K?K.scId:S.scid})},
   'call-open':d=>{const x=(DB.calls||[]).find(y=>y.id===d.id);if(!x)return;S.call=Object.assign({started:true,t0:0},clone(x));go('call')},
-  'pdf-call':()=>{const K=S.call,c=scById(K.scId);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_appel-15_${String(c.n).padStart(2,'0')}_${slug(K.who||'apprenant')}_${K.date}`,callPages(K,c))],title:'Appel au 15'}))}
+  'pdf-call':()=>{const K=S.call,c=scById(K.scId);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_transmission-bilan_${String(c.n).padStart(2,'0')}_${slug(K.who||'apprenant')}_${K.date}`,callPages(K,c))],title:'Transmission du bilan'}))}
 });
-function callPages(K,c){const D=K.debrief;return [{orient:'p',draw:doc=>{const P=pen(doc);const w=scWriter(doc,P,`${c.cur} · Transmission du bilan au 15`);
+function callPages(K,c){const D=K.debrief;return [{orient:'p',draw:doc=>{const P=pen(doc);const w=scWriter(doc,P,`${c.cur} · Transmission du bilan (CTA-CODIS / SAMU)`);
   w.p(c.titre,{b:true,s:15,c:[0,43,107],gap:1});w.p(`${c.cur} · scénario n°${c.n} · ${fmtDate(K.date)}${K.who?' · '+K.who:''} · niveau ${CALL_LEVELS[K.level]||''}`,{s:8.5,c:GREY});w.y+=2;
   w.lab('Note : ',`${D.note}/10 - ${D.appreciation}`);w.lab('Proposition pour la fiche d’évaluation : ',`${D.suggestion_fiche} - ${D.justification} (le formateur décide)`);
   w.h('Critères');(D.criteres||[]).forEach(x=>w.li(`${x.critere} : ${x.niveau.toUpperCase()} - ${x.commentaire}`,{s:8.5}));

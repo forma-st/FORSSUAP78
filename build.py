@@ -12,8 +12,7 @@ b64 = lambda p: base64.b64encode(open(p, 'rb').read()).decode()
 LOGO = 'data:image/jpeg;base64,' + b64('brand/logo-480.jpg')
 MARK = 'data:image/png;base64,' + b64('brand/symbole-96.png')
 import json
-QCM = json.dumps({'PSE1': json.load(open('data/qcm-pse1.json', encoding='utf-8')), 'PSE2': json.load(open('data/qcm-pse2.json', encoding='utf-8'))}, ensure_ascii=False)
-src = src.replace('__LOGO__', LOGO).replace('__MARK__', MARK).replace('const QCM=__QCM__;', 'const QCM=' + QCM + ';').replace('const FORM_FILES=__FORM_FILES__;', 'const FORM_FILES=' + json.dumps(sorted(f[:-4] for f in os.listdir('docs/app/forms') if f.endswith('.png'))) + ';').replace('const SCENARIOS=__SCENARIOS__;', 'const SCENARIOS=' + open('data/scenarios.json', encoding='utf-8').read() + ';').replace('const RIOFE=__RIOFE__;', 'const RIOFE=' + open('data/riofe.json', encoding='utf-8').read() + ';').replace('const FICHES=__FICHES__;', 'const FICHES=' + json.dumps(json.load(open('data/fiches-pedagogiques.json', encoding='utf-8')), ensure_ascii=False, separators=(',', ':')) + ';')
+src = src.replace('__LOGO__', LOGO).replace('__MARK__', MARK).replace('const FORM_FILES=__FORM_FILES__;', 'const FORM_FILES=' + json.dumps(sorted(f[:-4] for f in os.listdir('docs/app/forms') if f.endswith('.png'))) + ';').replace('const SCENARIOS=__SCENARIOS__;', 'const SCENARIOS=' + open('data/scenarios.json', encoding='utf-8').read() + ';').replace('const RIOFE=__RIOFE__;', 'const RIOFE=' + open('data/riofe.json', encoding='utf-8').read() + ';')
 
 WEIGHTS = (400, 500, 600, 700, 800)
 FONT_FILES = [f'montserrat-latin-{w}-normal.woff2' for w in WEIGHTS]
@@ -37,7 +36,7 @@ el = open('vendor/elevenlabs-client.min.js', encoding='utf-8').read()  # client 
 
 # 1) Fichier unique
 FORMS = {os.path.splitext(f)[0]: 'data:image/png;base64,' + b64('docs/app/forms/' + f) for f in sorted(os.listdir('docs/app/forms')) if f.endswith('.png')}
-embed = '<script>window.__FORMS_EMBED__=' + json.dumps(FORMS) + ';window.__TECH_LAYOUT__=' + open('docs/app/forms/layout-tech.json', encoding='utf-8').read() + ';</script>'
+embed = '<script>window.__FORMS_EMBED__=' + json.dumps(FORMS) + ';</script>'
 single = src.replace('<!--FONTS-->', '<style>' + font_css(lambda f: 'data:font/woff2;base64,' + b64('docs/app/fonts/' + f)) + '</style>') \
             .replace('<!--JSPDF-->', embed + '<script>' + jspdf + '</script><script>' + sdk + '</script><script>' + el + '</script>')
 open('fichier-unique.html', 'w', encoding='utf-8').write(page(single))

@@ -17,11 +17,11 @@ const agent = await client.conversationalAi.agents.create({
   name: "FORSSUAP 78 - Régulation",
   conversationConfig: {
     agent: {
-      firstMessage: "SAMU, centre 15, j’écoute.",
+      firstMessage: "CTA-CODIS des Yvelines, j’écoute.",
       language: "fr",
       prompt: {
         // Le rôle détaillé et le scénario sont envoyés par FORSSUAP 78 au début de chaque appel.
-        prompt: "Tu joues la régulation médicale du SAMU (le 15) dans un exercice de formation aux premiers secours. Tu parles français, au téléphone, en phrases courtes.",
+        prompt: "Tu joues l’opérateur du CTA-CODIS 78 puis le médecin régulateur du SAMU 78 dans un exercice de formation des sapeurs-pompiers. Tu parles français, au téléphone, en phrases courtes.",
         llm: "claude-sonnet-5-5",
       },
     },

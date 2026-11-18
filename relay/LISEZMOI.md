@@ -32,11 +32,14 @@ npx wrangler deploy
 
 La dernière commande affiche l'adresse du relais (par exemple `https://forssuap78-relais.<compte>.workers.dev`).
 
-4. Dans FORSSUAP 78 : Réglages › Régulation SAMU simulée › « Serveur relais de l'organisme », coller l'adresse et le code d'accès, puis « Tester la connexion ».
+4. Dans FORSSUAP 78 : Réglages › Régulation simulée (CTA-CODIS / SAMU) › « Serveur relais de l'organisme », coller l'adresse et le code d'accès, puis « Tester la connexion ».
 
 Pour changer le code (formateur parti, code diffusé) : relancer `npx wrangler secret put ACCESS_CODE` ; l'ancien code ne fonctionne plus aussitôt.
 
-## Appel au 15 avec ElevenLabs (voix naturelle)
+## Transmission du bilan (CTA-CODIS puis SAMU) avec ElevenLabs (voix naturelle)
+
+Agent en service : « SDIS 78 Régulation 15 » (voix Claire), identifiant `agent_4401m7ptk799fpxvzbprhgfr232b`, branché par défaut dans l’application (`EL_AGENT_DEFAULT`, accès « Agent public »).
+L’application envoie à chaque appel le rôle, le scénario, le niveau et la première phrase (« CTA-CODIS des Yvelines, j’écoute. ») : dans le tableau de bord ElevenLabs, l’agent doit autoriser ces réglages par appel (Security › Overrides : System prompt, First message, Language).
 Le relais ouvre aussi les appels vocaux ElevenLabs : la clé ElevenLabs reste sur le relais, la tablette ne reçoit qu'un laissez-passer à usage unique.
 
 1. Sur elevenlabs.io : Profil › API Keys › créer une clé (droits « ElevenAgents » au minimum).
@@ -60,8 +63,8 @@ npx wrangler secret put ELEVENLABS_AGENT_ID
 npx wrangler deploy
 ```
 
-4. Dans le tableau de bord ElevenLabs (Agents › FORSSUAP 78 - Régulation 15 › Voice), choisir une **voix française**.
-5. Dans FORSSUAP 78 : Réglages › Régulation SAMU simulée › Voix de l'appel : « ElevenLabs », Accès : « Par le serveur relais ».
+4. Dans le tableau de bord ElevenLabs (Agents › SDIS 78 Régulation 15 › Voice), choisir une **voix française**.
+5. Dans FORSSUAP 78 : Réglages › Régulation simulée (CTA-CODIS / SAMU) › Voix de l'appel : « ElevenLabs », Accès : « Par le serveur relais ».
 
 Essai rapide sans relais : `npm run creer-agent -- --public` crée un agent public ; collez son identifiant dans FORSSUAP 78 (« Agent public »). Limitez-le alors à votre adresse (Security › Allowlist) et fixez un plafond de dépense, car quiconque connaît l'identifiant peut l'utiliser.
 
