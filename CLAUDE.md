@@ -10,17 +10,27 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
 ## Architecture
 - `src/app.html` : application complète en un seul fichier (JS vanilla). État `S`, actions `A` (`data-act`),
   liaisons `data-bind` / `data-scope`. Données dans localStorage (clé `forssuap78-v1`), audio dans IndexedDB `forssuap78-audio`.
-- `build.py` injecte les données (`__LOGO__`, `__MARK__`, `__QCM__`, `__FICHES__`, `__FORM_FILES__`, `__SCENARIOS__`, `__RIOFE__`)
+- `build.py` injecte les données (`__LOGO__`, `__MARK__`, `__QCM__`, `__FICHES__`, `__FORM_FILES__`, `__SCENARIOS__`, `__RIOFE__`, `__FORMATION__`)
   et produit `fichier-unique.html` + `docs/app/` (PWA, service worker). Toujours relancer `python3 build.py` après modification.
 - `docs/` = GitHub Pages (https://forma-st.github.io/FORSSUAP78/), `docs/FORSSUAP78.apk`, `docs/qr.png`.
 - Android : Capacitor 6 dans `mobile/` (appId `fr.sdis78.forssuap`). Build :
   `cd mobile && npx cap sync android && cd android && ./gradlew assembleDebug --no-daemon -q --max-workers=2`
   puis copier `app/build/outputs/apk/debug/app-debug.apk` vers `docs/FORSSUAP78.apk`.
   Il faut un SDK Android (ANDROID_HOME) et JDK 17 ; dl.google.com est autorisé dans l'environnement.
-  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.1.1 (code 3).
+  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.2.0 (code 4).
 - `tools/brand.py` : toutes les images (logo PDF, icônes web, mipmaps, splash) depuis `brand/logo-sdis78-source.png`.
 - `vendor/` : jsPDF, SDK Anthropic (bundle esbuild), client ElevenLabs (bundle).
 - `relay/` : Cloudflare Worker (relais IA `/v1/messages` + `/eleven/session`), nom `forssuap78-relais`.
+
+## Deux espaces (écran d'accueil `home`)
+- **Espace administratif** (`S.space='admin'`, onglets Formations / Grilles / Réglages) : formations, participants, présence,
+  fiches MSP, grilles sommatives, attestations.
+- **Espace formation** (`S.space='form'`, onglets Planning / Séquences / Scénarios MSP) : vues `planning`, `modules`, `module`, `present`
+  (diaporama plein écran : flèches, balayage, notes formateur) et `scenarios`. Le planning se cale sur les journées d'une formation choisie
+  (`S.fsid`) ; « Évaluer » sur une MSP ouvre la fiche MSP pré-remplie (thème, missions, réf.) dans cette formation.
+- Données : `tools/formation.py` → `data/formation.json` (plannings PS d'après le programme de la valise, SUAP d'après le chronogramme RIOFE p. 16 ;
+  modules séquences/APP avec fiche + diapositives ; seule la séquence 1 est reprise d'un document fourni, les autres sont marquées « à valider »).
+  `tools/scenarios_sdis78.py` → `data/scenarios.json` (16 scénarios MSP, `observe` indexé par les savoir-agir RIOFE, `tpl` auto/crit).
 
 ## Référentiels RIOFE
 - Sources : `modeles/riofe/` (RIOFE_EQ_SPV_SUAP.pdf, RIOFE_EQ_SPV_MODULE_TRANSVERSE.pdf, RIOFE_CHEF_EQUIPE_SPP.pdf), valise pédagogique `modeles/valise/`.
@@ -39,7 +49,7 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
 ## Règles de sécurité (impératives)
 - ElevenLabs : ne jamais ouvrir/afficher un fichier .env ; ne jamais demander ni accepter une clé dans le chat ; jamais de clé dans le code
   (le SDK lit `ELEVENLABS_API_KEY`). Les clés passent par les secrets réseau de l'environnement (formulaire sécurisé).
-  L'environnement FORSSUAP 78 n'a **pas encore** de secret ElevenLabs ni d'agent dédié (`EL_AGENT_DEFAULT=''`).
+  L'environnement sdis78 n'a **pas encore** de secret ElevenLabs ni d'agent dédié (`EL_AGENT_DEFAULT=''`).
 - Jamais de noms de participants dans les requêtes IA. `.env.local` et le keystore ne sont jamais commités.
 
 ## Tests
@@ -48,10 +58,7 @@ Serveur local : `cd docs/app && python3 -m http.server 8779`, puis Playwright (C
 Vérifier les PDF en les rendant en PNG (`pdftoppm`) et en contrôlant visuellement le placement.
 
 ## Tâches restantes
-1. **Scénarios MSP SSUAP** (remplacer les 60 scénarios PSE hérités de `data/scenarios.json`) d'après le programme Prompt Secours
-   (OAVA, hémorragie, inconscient, ACR adulte, RCP nouveau-né/nourrisson/enfant, traumatisé dos/nuque, bilans/malaise, SMV, synthèse)
-   et le chronogramme SUAP (MSP01–07 : immobilisation/relevage/brancardage, bilan MMP, extraction ACT, nouveau-né,
-   affections spécifiques, brûlures, adaptée). Les pastilles de scénarios doivent dépendre du cursus.
+1. Faire relire et compléter par l'équipe pédagogique les modules et scénarios (fiches séquences fournies au fur et à mesure).
 2. **Régulation adaptée SDIS** : simulation d'appel CTA-CODIS / CRRA 15, chef d'agrès VSAV ; agent ElevenLabs dédié FORSSUAP
    (nécessite le secret ElevenLabs sur cet environnement, via le formulaire sécurisé) puis renseigner `EL_AGENT_DEFAULT`.
 3. **Feuille d'émargement** à compléter à l'export — modèle à fournir par l'utilisateur.
