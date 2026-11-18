@@ -52,10 +52,10 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
 - Agent ElevenLabs « SDIS 78 Régulation 15 » (voix Claire) : `EL_AGENT_DEFAULT='agent_4401m7ptk799fpxvzbprhgfr232b'` (mode « Agent public »).
   Il doit autoriser les surcharges par appel (prompt, first message, language) et être limité à forma-st.github.io et localhost.
 - Secret réseau ElevenLabs enregistré sur l’environnement « sdis78 » (hôte api.elevenlabs.io, en-tête xi-api-key), droits ElevenAgents
-  en écriture (lecture / modification de l’agent, jetons et URL signées : OK) ; pas de `voices_read`. Le proxy de la session bloque les
+  en écriture et voix en lecture (lecture / modification de l’agent, jetons, URL signées, liste des voix : OK). Le proxy de la session bloque les
   WebSocket (404) : l’appel vocal ne se teste que dans un vrai navigateur. Agent vérifié le 18/11/2026 : surcharges prompt / first message /
   language autorisées, allowlist forma-st.github.io + localhost, auth désactivée, 600 s max, 3 appels simultanés, 40 / jour,
-  voix `IbbR6Av0dWuQJS0b8JVT` (voix par défaut du script creer-agent, à confirmer).
+  voix **Claire - Customer service** `HuLbOdhRlvQQN8oPP0AJ` (française, féminine), modèle eleven_flash_v2_5. L’application ne surcharge pas la voix.
 
 ## Règles de sécurité (impératives)
 - ElevenLabs : ne jamais ouvrir/afficher un fichier .env ; ne jamais demander ni accepter une clé dans le chat ; jamais de clé dans le code

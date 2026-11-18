@@ -25,8 +25,8 @@ const agent = await client.conversationalAi.agents.create({
         llm: "claude-sonnet-5-5",
       },
     },
-    // Voix par défaut : « Hugo - Warm and Grounded » (français standard), à ajouter d'abord à « My Voices » ; ELEVENLABS_VOICE_ID pour une autre voix.
-    tts: { modelId: "eleven_flash_v2_5", voiceId: process.env.ELEVENLABS_VOICE_ID || "IbbR6Av0dWuQJS0b8JVT" },
+    // Voix par défaut : « Claire - Customer service » (française), à ajouter d'abord à « My Voices » ; ELEVENLABS_VOICE_ID pour une autre voix.
+    tts: { modelId: "eleven_flash_v2_5", voiceId: process.env.ELEVENLABS_VOICE_ID || "HuLbOdhRlvQQN8oPP0AJ" },
     // « patient » : l'agent laisse le temps d'hésiter avant de répondre ; relance après 8 s de silence.
     turn: { turnEagerness: "patient", turnTimeout: 8 },
     // Garde-fou de coût : un appel d'exercice ne dépasse pas 10 minutes.
@@ -48,4 +48,4 @@ console.log("\nAgent créé. Identifiant :", agent.agentId);
 console.log(isPublic
   ? "Mode public : collez cet identifiant dans FORSSUAP 78 (Réglages > Régulation SAMU simulée > Voix de l'appel)."
   : "Enregistrez-le sur le relais :  npx wrangler secret put ELEVENLABS_AGENT_ID");
-console.log("Voix : Hugo (français). Pour en changer : tableau de bord ElevenLabs > Agents > FORSSUAP 78 - Régulation > Voice.\n");
+console.log("Voix : Claire (français). Pour en changer : tableau de bord ElevenLabs > Agents > FORSSUAP 78 - Régulation > Voice.\n");
