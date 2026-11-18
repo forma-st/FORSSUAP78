@@ -1,2468 +1,2551 @@
 [
- {
-  "id": "ps-01",
-  "cur": "PS",
-  "n": 1,
-  "titre": "Étouffement au restaurant",
-  "theme": "Obstruction grave des voies aériennes chez l’adulte",
-  "jour": "J1",
-  "etape": "Séquence 1 : le système ventilatoire · MSP OAVA",
-  "niveau": 1,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Salle de restaurant : tables, chaises, clients",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "ova"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître une obstruction grave des voies aériennes",
-   "Réaliser les claques dans le dos puis les compressions abdominales",
-   "Alerter et surveiller après la désobstruction"
-  ],
-  "message": "« Prompt secours, pour une personne qui s’étouffe au restaurant Le Relais, 12 rue de la Paroisse à Versailles. »",
-  "contexte": "M. Duval (58 ans) mangeait une entrecôte. Il se lève brusquement, porte les mains à son cou, ne peut ni parler ni tousser.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Duval, 58 ans",
-    "brief": "Un morceau de viande vous bloque la gorge. Vous ne pouvez ni parler, ni tousser, ni respirer.",
-    "jeu": "Mains au cou, regard affolé. Le morceau sort à la 3e compression abdominale bien réalisée. Ensuite vous toussez, vous êtes gêné et inquiet.",
-    "param": [
-     "Avant : aucun son, agitation",
-     "Après : conscient, FR 22/min, FC 110/min, SpO2 95 %, PA 150/90"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Épouse",
-    "brief": "Vous êtes affolée, vous criez « il s’étouffe ! » et tapez dans le dos de votre mari sans efficacité.",
-    "jeu": "Vous vous écartez si on vous le demande calmement.",
-    "param": [],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Serveur",
-    "brief": "Vous avez appelé les secours. Vous pouvez aider (dégager la salle, guider le VSAV).",
-    "jeu": "Vous attendez qu’on vous donne une mission.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Désobstruction réalisée dans la minute",
-    "Le morceau est expulsé, la victime respire, tousse, reste anxieuse."
-   ],
-   [
-    "Gestes inefficaces au-delà de 2 minutes",
-    "La victime perd connaissance : allonger au sol, débuter la RCP, prévenir le SAMU (15)."
-   ],
-   [
-    "Pas de surveillance après la désobstruction",
-    "La victime se plaint d’une douleur abdominale : le formateur interroge sur les compressions."
-   ]
-  ],
-  "attendus": [
-   "Se présenter, faire écarter l’entourage",
-   "Reconnaître l’obstruction grave : ne peut ni parler, ni tousser, ni respirer",
-   "Donner 1 à 5 claques dans le dos puis 1 à 5 compressions abdominales, alterner",
-   "Installer en position assise, rassurer, réaliser le bilan",
-   "Rendre compte au SAMU (15) : compressions abdominales réalisées, victime à faire examiner"
-  ],
-  "observe": {
-   "c23": "Fait écarter l’entourage, installe la victime en sécurité",
-   "c26": "Reconnaît l’obstruction grave et enchaîne claques et compressions sans délai",
-   "c24": "Rend compte au SAMU (15) : motif, gestes réalisés, état actuel",
-   "c31": "Surveille la respiration et la conscience après la désobstruction"
-  },
-  "mat": {
-   "lieu": [
-    "Tables, chaises, couverts"
-   ],
-   "maq": [],
-   "acc": [
-    "Assiette avec morceau de pain",
-    "Gilet de désobstruction si disponible"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI"
-   ]
-  },
-  "securite": "Les compressions abdominales ne sont jamais réalisées sur le figurant : gilet de désobstruction ou mime.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-02",
-  "cur": "PS",
-  "n": 2,
-  "titre": "Le bébé qui s’étouffe",
-  "theme": "Obstruction grave des voies aériennes chez le nourrisson",
-  "jour": "J1",
-  "etape": "Séquence 1 : le système ventilatoire · MSP OAVA",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Appartement, salon avec tapis de jeu",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "ova",
-   "pedia"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître une obstruction grave chez le nourrisson",
-   "Réaliser les claques dans le dos et les compressions thoraciques adaptées",
-   "Gérer un parent paniqué"
-  ],
-  "message": "« Prompt secours, pour un nourrisson qui s’étouffe, 4 allée des Tilleuls, 3e étage, à Plaisir. »",
-  "contexte": "Léo (8 mois) jouait sur le tapis. Sa mère l’a trouvé violacé, sans bruit, avec une petite pièce de jeu manquante.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Léo, 8 mois (mannequin nourrisson)",
-    "brief": "Mannequin nourrisson.",
-    "jeu": "Le formateur annonce l’expulsion de l’objet après une série correcte de claques et compressions thoraciques.",
-    "param": [
-     "Avant : pas de cri, pas de toux, lèvres bleues",
-     "Après : pleure, FR 40/min, FC 150/min, coloration qui revient"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Mère",
-    "brief": "Vous tenez le bébé contre vous en hurlant. Vous refusez d’abord de le donner.",
-    "jeu": "Vous le confiez si le sapeur-pompier vous parle avec fermeté et douceur.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Gestes correctement enchaînés",
-    "L’objet est expulsé, le bébé pleure : rassurer la mère, surveiller, bilan."
-   ],
-   [
-    "Nourrisson secoué ou compressions abdominales",
-    "Le formateur arrête et rappelle le geste dangereux."
-   ],
-   [
-    "Gestes inefficaces",
-    "Le nourrisson perd connaissance : RCP nourrisson, alerte immédiate."
-   ]
-  ],
-  "attendus": [
-   "Prendre le nourrisson, tête plus basse que le thorax, sur l’avant-bras",
-   "1 à 5 claques dans le dos, puis 1 à 5 compressions thoraciques avec deux doigts",
-   "Vérifier la bouche, retirer l’objet visible",
-   "Bilan, surveillance, rendre compte au SAMU (15)"
-  ],
-  "observe": {
-   "c23": "Obtient le nourrisson de la mère et la rassure",
-   "c26": "Gestes adaptés au nourrisson, sans compression abdominale",
-   "c24": "Message clair au SAMU (15)",
-   "c31": "Surveillance de la respiration et de la coloration"
-  },
-  "mat": {
-   "lieu": [
-    "Tapis de jeu, jouets"
-   ],
-   "maq": [],
-   "acc": [
-    "Mannequin nourrisson de désobstruction",
-    "Petite pièce de jeu"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI"
-   ]
-  },
-  "securite": "Utiliser exclusivement un mannequin.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-03",
-  "cur": "PS",
-  "n": 3,
-  "titre": "Coupure à l’atelier",
-  "theme": "Hémorragie externe du membre supérieur",
-  "jour": "J1",
-  "etape": "Séquence 2 : le système circulatoire · MSP hémorragie",
-  "niveau": 1,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Atelier municipal : établi, outils, sol encombré",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "hemo"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Arrêter une hémorragie par compression directe puis pansement compressif",
-   "Se protéger du sang",
-   "Installer la victime et rendre compte"
-  ],
-  "message": "« Prompt secours, homme blessé à l’atelier municipal, avenue de Saint-Cloud à Versailles, il saigne beaucoup du bras. »",
-  "contexte": "M. Leroy (45 ans) s’est entaillé l’avant-bras avec une tôle. Le sang coule en continu entre ses doigts. Il est debout et pâle.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Leroy, 45 ans",
-    "brief": "Vous vous êtes coupé avec une tôle. Vous voulez « juste un pansement » pour finir votre travail.",
-    "jeu": "Faiblesse au bout de 2 minutes si personne ne vous fait asseoir ou allonger.",
-    "param": [
-     "Conscient, anxieux",
-     "FR 20/min · FC 108/min · SpO2 98 % · PA 115/70",
-     "Peau pâle, sueurs"
-    ],
-    "maq": "Plaie de 6 cm face antérieure de l’avant-bras, faux sang coulant sur la main et le sol"
-   },
-   {
-    "t": "Tiers",
-    "nom": "Collègue",
-    "brief": "Vous proposez de serrer avec une ceinture.",
-    "jeu": "Vous aidez si on vous donne une mission.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Compression efficace dans la minute",
-    "Le saignement s’arrête, FC 96/min."
-   ],
-   [
-    "Victime laissée debout",
-    "Malaise : la victime s’assoit seule, FC 120/min."
-   ],
-   [
-    "Pansement compressif inefficace",
-    "Le sang traverse le pansement : reprendre la compression, envisager le garrot."
-   ]
-  ],
-  "attendus": [
-   "Mettre des gants",
-   "Compression directe immédiate, puis pansement compressif",
-   "Allonger la victime, la couvrir",
-   "Bilan, oxygène si besoin selon protocole, rendre compte au SAMU (15)"
-  ],
-  "observe": {
-   "c22": "Port des gants, gestion des souillures",
-   "c26": "Arrête l’hémorragie sans délai",
-   "c25": "Bilan après arrêt du saignement : FC, coloration, conscience",
-   "c24": "Rend compte avec l’heure du pansement compressif",
-   "c31": "Vérifie l’efficacité du pansement et l’état de la victime"
-  },
-  "mat": {
-   "lieu": [
-    "Établi, outils, tôle sans arête"
-   ],
-   "maq": [
-    "Faux sang (pompe ou poche)",
-    "Cire ou plaie en silicone"
-   ],
-   "acc": [
-    "Ceinture"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI",
-    "Pansements compressifs, garrot"
-   ]
-  },
-  "securite": "Aucune tôle coupante réelle. Sol protégé contre le faux sang.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-04",
-  "cur": "PS",
-  "n": 4,
-  "titre": "Accident de tronçonneuse",
-  "theme": "Hémorragie de la cuisse nécessitant un garrot",
-  "jour": "J2",
-  "etape": "Séquence 2 : le système circulatoire · MSP hémorragie",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Jardin pavillonnaire, bois coupé",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "hemo"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître l’échec de la compression et poser un garrot",
-   "Noter l’heure de pose",
-   "Prévenir la détresse circulatoire"
-  ],
-  "message": "« Prompt secours, homme blessé à la jambe par une tronçonneuse, 18 chemin des Vignes à Maule. »",
-  "contexte": "M. Petit (62 ans) élaguait seul. La tronçonneuse a ripé sur sa cuisse. Une flaque de sang s’étend sous lui.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Petit, 62 ans",
-    "brief": "Vous êtes allongé dans l’herbe, vous avez très mal et vous avez froid.",
-    "jeu": "Vous devenez somnolent si l’hémorragie n’est pas arrêtée en 2 minutes.",
-    "param": [
-     "Conscient puis somnolent",
-     "FR 26/min · FC 125/min · pouls radial faible · PA 90/60",
-     "Pâleur, sueurs, frissons"
-    ],
-    "maq": "Plaie profonde face antérieure de cuisse, faux sang abondant, pantalon déchiré"
-   },
-   {
-    "t": "Tiers",
-    "nom": "Voisine",
-    "brief": "Vous avez appelé le 18. Vous avez coupé la tronçonneuse.",
-    "jeu": "Vous pouvez comprimer si on vous montre comment.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Garrot posé rapidement",
-    "Hémorragie arrêtée, FC 115/min, la victime reste consciente."
-   ],
-   [
-    "Compression seule prolongée",
-    "Le saignement continue : la victime devient somnolente."
-   ],
-   [
-    "Heure du garrot non notée",
-    "Le médecin régulateur la demande."
-   ]
-  ],
-  "attendus": [
-   "Vérifier que la tronçonneuse est arrêtée",
-   "Compression immédiate puis garrot au-dessus de la plaie si inefficace ou impossible",
-   "Noter l’heure de pose",
-   "Allonger, couvrir, oxygène selon protocole",
-   "Rendre compte en urgence au SAMU (15) (demande de renfort médical)"
-  ],
-  "observe": {
-   "c23": "Vérifie l’arrêt de la machine",
-   "c26": "Décision rapide du garrot",
-   "c25": "Recherche les signes de détresse circulatoire",
-   "c24": "Message d’urgence : garrot et heure de pose",
-   "c31": "Surveille conscience, respiration et pouls"
-  },
-  "mat": {
-   "lieu": [
-    "Bûches, branchages"
-   ],
-   "maq": [
-    "Faux sang abondant",
-    "Plaie de cuisse en silicone"
-   ],
-   "acc": [
-    "Tronçonneuse sans chaîne ou factice"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI",
-    "Garrot tourniquet, marqueur"
-   ]
-  },
-  "securite": "Tronçonneuse sans chaîne, réservoir vide. Garrot jamais serré sur le figurant (garrot sur manchon ou mannequin).",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-05",
-  "cur": "PS",
-  "n": 5,
-  "titre": "Malaise dans la salle d’attente",
-  "theme": "Bilans : malaise chez une personne diabétique",
-  "jour": "J2",
-  "etape": "Séquence 4 : les bilans · MSP bilans / malaise",
-  "niveau": 1,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Salle d’attente d’une mairie",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "malaise",
-   "bilan"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Réaliser les bilans (circonstanciel, urgence vitale, complémentaire)",
-   "Rechercher les antécédents et traitements",
-   "Rendre compte de façon structurée"
-  ],
-  "message": "« Prompt secours, femme qui fait un malaise à la mairie de Trappes, place de la République. »",
-  "contexte": "Mme Morel (54 ans), diabétique sous insuline, n’a pas déjeuné. Elle est assise, en sueur, confuse.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Mme Morel, 54 ans",
-    "brief": "Vous êtes diabétique, vous avez fait votre insuline ce matin mais n’avez pas mangé à midi.",
-    "jeu": "Vous répondez lentement, vous êtes un peu agressive. Vous vous améliorez 10 min après un sucre si vous pouvez avaler.",
-    "param": [
-     "Consciente, confuse",
-     "FR 18/min · FC 100/min · SpO2 98 % · PA 130/80",
-     "Glycémie 0,48 g/l",
-     "Sueurs abondantes"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Agent d’accueil",
-    "brief": "Vous connaissez un peu Mme Morel. Vous savez qu’elle « a du diabète ».",
-    "jeu": "Vous donnez son sac (carnet de diabète, insuline).",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Glycémie mesurée et sucre donné",
-    "Amélioration progressive, la victime redevient cohérente."
-   ],
-   [
-    "Pas de recherche d’antécédents",
-    "La victime devient somnolente."
-   ],
-   [
-    "Sucre donné à une victime somnolente",
-    "Le formateur arrête : risque de fausse route."
-   ]
-  ],
-  "attendus": [
-   "Bilan circonstanciel puis d’urgence vitale",
-   "Interroger sur la maladie, les traitements, le dernier repas",
-   "Mesurer la glycémie",
-   "Donner du sucre si la victime est consciente et peut avaler",
-   "Rendre compte au SAMU (15) et surveiller"
-  ],
-  "observe": {
-   "c25": "Bilans complets et ordonnés, glycémie mesurée",
-   "c28": "Prise en charge adaptée du malaise hypoglycémique",
-   "c24": "Message structuré au SAMU (15)",
-   "c31": "Surveillance de la conscience et réévaluation"
-  },
-  "mat": {
-   "lieu": [
-    "Chaises de salle d’attente"
-   ],
-   "maq": [
-    "Brumisateur (sueurs)"
-   ],
-   "acc": [
-    "Sac à main avec carnet de diabète et stylo à insuline factice",
-    "Sucres"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI"
-   ]
-  },
-  "securite": "Pas de sucre réellement avalé par le figurant s’il est diabétique.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-06",
-  "cur": "PS",
-  "n": 6,
-  "titre": "Inconscient dans le parc",
-  "theme": "Victime inconsciente qui respire",
-  "jour": "J2",
-  "etape": "Séquence 3 : le système nerveux · MSP victime inconsciente",
-  "niveau": 1,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Parc public, banc, allée",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "pc"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Apprécier la conscience et la respiration",
-   "Mettre en position latérale de sécurité",
-   "Alerter et surveiller"
-  ],
-  "message": "« Prompt secours, homme allongé au sol qui ne répond pas, parc Balbi à Versailles, entrée rue du Maréchal Joffre. »",
-  "contexte": "Un promeneur a trouvé M. Garnier (70 ans) allongé sur le dos au pied d’un banc. Il ne répond pas mais respire.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Garnier, 70 ans",
-    "brief": "Vous êtes inconscient. Vous ne réagissez pas.",
-    "jeu": "Respiration bruyante tant que la tête n’est pas basculée. Calme une fois en PLS.",
-    "param": [
-     "Inconscient, ne répond pas",
-     "FR 14/min bruyante · FC 88/min · SpO2 93 %",
-     "Glycémie 1,10 g/l",
-     "Pupilles égales et réactives"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Témoin",
-    "nom": "Promeneur",
-    "brief": "Vous avez trouvé la victime et appelé les secours.",
-    "jeu": "Vous ne savez rien de plus.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "PLS rapide",
-    "La respiration devient calme, SpO2 95 % sous oxygène."
-   ],
-   [
-    "Victime laissée sur le dos",
-    "Bruits de gargouillement : risque d’inhalation."
-   ],
-   [
-    "Surveillance absente",
-    "Au bout de 6 min la victime ne respire plus : RCP."
-   ]
-  ],
-  "attendus": [
-   "Apprécier la conscience, libérer les voies aériennes, apprécier la respiration 10 s",
-   "PLS",
-   "Alerter le SAMU (15)",
-   "Bilan complémentaire, protection contre le froid, surveillance"
-  ],
-  "observe": {
-   "c23": "Sécurise la zone",
-   "c26": "Libération des voies aériennes et PLS",
-   "c24": "Alerte précoce",
-   "c31": "Surveillance régulière de la respiration"
-  },
-  "mat": {
-   "lieu": [
-    "Banc, couverture au sol"
-   ],
-   "maq": [],
-   "acc": [],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI"
-   ]
-  },
-  "securite": "Sol protégé (tapis), retournement en douceur.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-07",
-  "cur": "PS",
-  "n": 7,
-  "titre": "Arrêt cardiaque à la salle de sport",
-  "theme": "Arrêt cardiaque de l’adulte, DAE disponible",
-  "jour": "J3",
-  "etape": "MSP ACR adulte",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Salle de sport, tapis, haltères",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "acr"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître l’arrêt cardiaque",
-   "Débuter la RCP sans délai et mettre en œuvre le DAE",
-   "Organiser les témoins et relayer le VSAV"
-  ],
-  "message": "« Prompt secours, homme effondré dans la salle de sport Gymforme, 25 rue Georges Clemenceau à Rambouillet. »",
-  "contexte": "M. Lambert (49 ans) s’est effondré sur le tapis de course. Un coach a appelé les secours.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Lambert, 49 ans (mannequin adulte)",
-    "brief": "Mannequin RCP.",
-    "jeu": "Rythme choquable au 1er et 2e choc, puis reprise d’une respiration au bout de 6 min de RCP de qualité.",
-    "param": [
-     "Ne répond pas, ne respire pas",
-     "Après reprise : FR 10/min, pouls carotidien perçu"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Coach",
-    "brief": "Vous êtes paniqué, vous avez vu l’homme tomber.",
-    "jeu": "Vous savez où est le DAE de la salle. Vous savez masser si on vous le demande.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "RCP et DAE en moins de 3 min",
-    "Choc délivré, reprise d’activité à la 6e minute."
-   ],
-   [
-    "Pauses longues",
-    "Le formateur annonce l’absence de reprise."
-   ],
-   [
-    "Relais par le coach non organisé",
-    "Fatigue : compressions moins efficaces."
-   ]
-  ],
-  "attendus": [
-   "Constater l’absence de conscience et de respiration",
-   "Alerter le SAMU (15)",
-   "Compressions thoraciques 30/2 puis DAE dès disponible",
-   "Organiser le relais avec le coach",
-   "Après reprise : PLS, oxygène, surveillance"
-  ],
-  "observe": {
-   "c26": "RCP de qualité et DAE posé sans délai",
-   "c24": "Alerte immédiate",
-   "c32": "Organise le relais et le passage de consignes au VSAV",
-   "c31": "Surveillance après reprise"
-  },
-  "mat": {
-   "lieu": [
-    "Tapis de sol"
-   ],
-   "maq": [],
-   "acc": [
-    "Mannequin RCP adulte",
-    "DAE de formation",
-    "Boîtier DAE mural"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI"
-   ]
-  },
-  "securite": "RCP sur mannequin uniquement.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-08",
-  "cur": "PS",
-  "n": 8,
-  "titre": "Le nourrisson qui ne respire plus",
-  "theme": "RCP du nourrisson et de l’enfant",
-  "jour": "J3",
-  "etape": "APP / MSP RCP nouveau-né, nourrisson, enfant",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Chambre d’enfant",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "acr",
-   "pedia"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître l’arrêt respiratoire et cardiaque du nourrisson",
-   "Réaliser 5 insufflations initiales puis la RCP 15/2",
-   "Soutenir les parents"
-  ],
-  "message": "« Prompt secours, nourrisson qui ne respire plus, 7 rue Pasteur à Mantes-la-Jolie, 1er étage. »",
-  "contexte": "Inès (5 mois) a été trouvée inerte dans son lit par son père.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Inès, 5 mois (mannequin nourrisson)",
-    "brief": "Mannequin nourrisson.",
-    "jeu": "Pas de reprise avant l’arrivée du VSAV (12 min).",
-    "param": [
-     "Inconsciente, ne respire pas, pas de signe de vie"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Père",
-    "brief": "Vous êtes sidéré, vous répétez « elle dormait ».",
-    "jeu": "Vous restez si on vous donne une mission (ouvrir la porte au VSAV).",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "5 insufflations puis 15/2",
-    "RCP poursuivie jusqu’à l’arrivée du VSAV."
-   ],
-   [
-    "RCP adulte sur nourrisson",
-    "Le formateur arrête et rappelle la technique."
-   ]
-  ],
-  "attendus": [
-   "Apprécier la conscience et la respiration",
-   "5 insufflations initiales",
-   "Compressions avec deux doigts ou deux pouces, 15/2",
-   "DAE avec électrodes pédiatriques si disponible",
-   "Alerter, passer le relais"
-  ],
-  "observe": {
-   "c26": "RCP adaptée au nourrisson",
-   "c24": "Alerte immédiate avec l’âge de la victime",
-   "c22": "Gère l’émotion du parent sans perdre l’efficacité"
-  },
-  "mat": {
-   "lieu": [
-    "Lit à barreaux, table à langer"
-   ],
-   "maq": [],
-   "acc": [
-    "Mannequin RCP nourrisson"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI",
-    "Électrodes pédiatriques de formation"
-   ]
-  },
-  "securite": "Désinfecter le mannequin entre chaque passage.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-09",
-  "cur": "PS",
-  "n": 9,
-  "titre": "Chute dans l’escalier",
-  "theme": "Victime traumatisée : suspicion d’atteinte du dos et de la nuque",
-  "jour": "J4",
-  "etape": "MSP victime traumatisée (dos, nuque)",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Cage d’escalier d’un immeuble",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "trauma"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Suspecter une atteinte du rachis",
-   "Maintenir la tête et ne pas mobiliser",
-   "Réaliser le bilan et rendre compte"
-  ],
-  "message": "« Prompt secours, femme tombée dans l’escalier, résidence Les Peupliers, bâtiment B, à Poissy. »",
-  "contexte": "Mme Roux (67 ans) a raté une marche et a dévalé une dizaine de marches. Elle est allongée sur le palier.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Mme Roux, 67 ans",
-    "brief": "Vous avez très mal à la nuque et au bas du dos. Vous voulez vous relever.",
-    "jeu": "Fourmillements dans les mains si on vous bouge la tête.",
-    "param": [
-     "Consciente, orientée",
-     "FR 20/min · FC 92/min · SpO2 97 % · PA 145/85",
-     "Douleur cervicale 7/10",
-     "Sous anticoagulant"
-    ],
-    "maq": "Hématome du front"
-   },
-   {
-    "t": "Tiers",
-    "nom": "Voisin",
-    "brief": "Vous voulez l’aider à se relever et l’asseoir sur une marche.",
-    "jeu": "Vous obéissez si on vous explique.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Maintien tête immédiat",
-    "La victime reste stable."
-   ],
-   [
-    "Victime mobilisée",
-    "Fourmillements dans les mains : le formateur rappelle le danger."
-   ],
-   [
-    "Anticoagulant non recherché",
-    "Le médecin régulateur le demande."
-   ]
-  ],
-  "attendus": [
-   "Interdire tout mouvement, maintien de la tête",
-   "Bilan : mécanisme, douleurs, motricité, sensibilité",
-   "Antécédents et traitements (anticoagulants)",
-   "Couvrir, rendre compte, surveiller"
-  ],
-  "observe": {
-   "c23": "Empêche la mobilisation par le voisin",
-   "c30": "Maintien de la tête en position neutre",
-   "c25": "Bilan traumatique complet",
-   "c24": "Rend compte du mécanisme et des signes neurologiques",
-   "c31": "Surveille motricité et sensibilité"
-  },
-  "mat": {
-   "lieu": [
-    "Escalier ou marches de formation"
-   ],
-   "maq": [
-    "Hématome frontal (fard)"
-   ],
-   "acc": [
-    "Sac de courses renversé"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI"
-   ]
-  },
-  "securite": "Aucune chute simulée. Figurant installé au sol avant l’arrivée du stagiaire.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-10",
-  "cur": "PS",
-  "n": 10,
-  "titre": "Collision de deux scooters",
-  "theme": "Situation multi-victimes (SMV)",
-  "jour": "J4",
-  "etape": "MSP SMV",
-  "niveau": 3,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Carrefour, deux scooters au sol",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "smv",
-   "trauma"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Assurer la sécurité de la zone",
-   "Trier rapidement les victimes et traiter la détresse prioritaire",
-   "Faire un message de renseignement précis"
-  ],
-  "message": "« Prompt secours, accident entre deux scooters, carrefour de la rue Royale et de la rue d’Anjou à Versailles. »",
-  "contexte": "Deux scooters se sont percutés. Un conducteur est inconscient au sol, l’autre crie et saigne de la jambe. Un passant est choqué.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Conducteur 1, 25 ans",
-    "brief": "Vous êtes inconscient, casque sur la tête.",
-    "jeu": "Respiration bruyante si les voies aériennes ne sont pas libérées.",
-    "param": [
-     "Inconscient, FR 12/min bruyante",
-     "FC 60/min",
-     "Pupille droite dilatée"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Victime",
-    "nom": "Conducteur 2, 19 ans",
-    "brief": "Votre jambe saigne beaucoup, vous criez.",
-    "jeu": "Vous comprimez vous-même si on vous le montre.",
-    "param": [
-     "Conscient, FR 24/min, FC 115/min"
-    ],
-    "maq": "Plaie de jambe, faux sang"
-   },
-   {
-    "t": "Témoin",
-    "nom": "Passant",
-    "brief": "Vous avez tout vu, vous êtes choqué, vous tremblez.",
-    "jeu": "Vous aidez si on vous guide.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Balisage et tri rapides",
-    "Le conducteur 2 comprime, le conducteur 1 est pris en charge."
-   ],
-   [
-    "Fixation sur la victime qui crie",
-    "Le conducteur 1 aggrave sa respiration."
-   ],
-   [
-    "Message sans nombre de victimes",
-    "Le SAMU demande le nombre et l’état des victimes."
-   ]
-  ],
-  "attendus": [
-   "Se protéger et baliser",
-   "Identifier toutes les victimes, la détresse prioritaire",
-   "Faire comprimer le blessé conscient",
-   "Maintien tête et libération des voies aériennes du blessé inconscient",
-   "Message au SAMU (15) : nombre de victimes, état, moyens nécessaires"
-  ],
-  "observe": {
-   "c23": "Balisage et sécurité",
-   "c26": "Priorise la détresse vitale",
-   "c24": "Message de renseignement : nombre et état des victimes",
-   "c32": "Accueille et oriente les renforts"
-  },
-  "mat": {
-   "lieu": [
-    "Cônes de balisage",
-    "Deux scooters ou silhouettes"
-   ],
-   "maq": [
-    "Faux sang",
-    "Éraflures"
-   ],
-   "acc": [
-    "Deux casques"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI",
-    "Triangle et gilet haute visibilité"
-   ]
-  },
-  "securite": "Exercice hors circulation. Retrait du casque uniquement sur mannequin ou de façon simulée.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "ps-11",
-  "cur": "PS",
-  "n": 11,
-  "titre": "Douleur thoracique au marché",
-  "theme": "Synthèse : malaise cardiaque évoluant vers l’arrêt",
-  "jour": "J5",
-  "etape": "MSP synthèse",
-  "niveau": 3,
-  "duree": "15 min + 15 min de débriefing",
-  "lieu": "Marché couvert",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
-  "cases": [
-   "malaise",
-   "acr",
-   "bilan"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Mobiliser l’ensemble des compétences : bilans, alerte, gestes, surveillance",
-   "Reconnaître l’aggravation et adapter sa conduite",
-   "Passer le relais au VSAV"
-  ],
-  "message": "« Prompt secours, homme qui a mal à la poitrine au marché de Saint-Germain-en-Laye. »",
-  "contexte": "M. Fabre (63 ans) est assis sur une caisse, il se tient la poitrine. Il est fumeur, hypertendu.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Fabre, 63 ans",
-    "brief": "Vous avez une douleur qui serre dans la poitrine depuis 20 minutes, elle irradie dans le bras gauche.",
-    "jeu": "Au bout de 8 minutes, vous vous effondrez (passage sur mannequin). Vous refusez d’abord de vous allonger.",
-    "param": [
-     "Conscient, angoissé",
-     "FR 22/min · FC 104/min irrégulier · SpO2 95 % · PA 160/95",
-     "Douleur 8/10, sueurs"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Épouse",
-    "brief": "Vous savez qu’il prend un traitement pour la tension et qu’il a déjà eu « un problème au cœur ».",
-    "jeu": "Vous apportez les ordonnances si on vous le demande.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
-  "evolution": [
-   [
-    "Repos strict, bilan et alerte rapides",
-    "Effondrement à la 8e minute : RCP et DAE immédiats."
-   ],
-   [
-    "Victime laissée debout",
-    "Effondrement plus précoce."
-   ],
-   [
-    "Aggravation non annoncée au SAMU",
-    "Le SAMU rappelle pour un point de situation."
-   ]
-  ],
-  "attendus": [
-   "Mise au repos, bilans, recherche des antécédents",
-   "Rendre compte rapidement (douleur thoracique)",
-   "Préparer le DAE à proximité",
-   "Reconnaître l’arrêt et débuter la RCP sans délai",
-   "Point de situation et relais au VSAV"
-  ],
-  "observe": {
-   "c25": "Bilan complet de la douleur thoracique",
-   "c28": "Prise en charge adaptée du malaise",
-   "c26": "Réaction immédiate à l’arrêt cardiaque",
-   "c24": "Message initial puis point de situation",
-   "c32": "Transmission au chef d’agrès du VSAV"
-  },
-  "mat": {
-   "lieu": [
-    "Étal, caisses"
-   ],
-   "maq": [
-    "Brumisateur (sueurs)"
-   ],
-   "acc": [
-    "Mannequin RCP adulte",
-    "Ordonnances"
-   ],
-   "sec": [
-    "Sac de prompt secours complet",
-    "DAE de formation",
-    "Bouteille d’oxygène de formation et masque haute concentration",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
-    "Gants, gel hydroalcoolique, sacs DASRI"
-   ]
-  },
-  "securite": "Substitution figurant / mannequin annoncée par le formateur.",
-  "debrief": [
-   "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
-   "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
-   "Si c’était à refaire, que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-01",
-  "cur": "EQSUAP",
-  "n": 1,
-  "titre": "Chute d’escabeau à domicile",
-  "theme": "Suspicion de traumatisme du rachis : immobilisation, relevage, brancardage",
-  "jour": "J1",
-  "etape": "MSP01 · Immobilisation, relevage, brancardage",
-  "niveau": 1,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Pavillon : salon, couloir étroit, trois marches",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "immo",
-   "relevage"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Immobiliser le rachis en équipe (collier, matelas immobilisateur)",
-   "Relever en pont ou à la cuillère selon la place",
-   "Brancarder en sécurité jusqu’au VSAV"
-  ],
-  "message": "« VSAV Versailles 1, départ pour chute de hauteur, 8 rue des Lilas à Viroflay, homme de 72 ans. »",
-  "contexte": "M. Bernard (72 ans) est tombé d’un escabeau en changeant une ampoule (environ 1,50 m). Il est sur le dos au milieu du salon.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Bernard, 72 ans",
-    "brief": "Vous avez mal dans le dos, en bas de la nuque. Vous voulez vous lever.",
-    "jeu": "Vous coopérez si on vous explique chaque manœuvre.",
-    "param": [
-     "Conscient, orienté",
-     "FR 18/min · FC 84/min · SpO2 96 % · PA 150/90",
-     "Douleur cervicale 6/10, pas de trouble moteur",
-     "Sous antiagrégant plaquettaire"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Épouse",
-    "brief": "Vous êtes inquiète, vous voulez accompagner votre mari.",
-    "jeu": "Vous préparez ses papiers et ses médicaments si on vous le demande.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Maintien tête dès l’arrivée",
-    "Immobilisation sans douleur supplémentaire."
-   ],
-   [
-    "Relevage non coordonné",
-    "Le figurant signale une douleur aiguë : le formateur arrête."
-   ],
-   [
-    "Brancardage dans les marches sans annonce",
-    "Déséquilibre du brancard."
-   ]
-  ],
-  "attendus": [
-   "Répartition des rôles par le chef d’agrès, maintien tête immédiat",
-   "Bilan et transmission",
-   "Collier cervical, matelas immobilisateur à dépression",
-   "Relevage en pont ou cuillère, commandement clair",
-   "Brancardage tête en avant dans les marches montantes, surveillance"
-  ],
-  "observe": {
-   "c3": "Chaque équipier tient son poste selon les ordres du chef d’agrès",
-   "c5": "Bilan traumatique complet",
-   "c10": "Immobilisation du rachis conforme",
-   "c11": "Relevage coordonné",
-   "c13": "Surveillance pendant le brancardage"
-  },
-  "mat": {
-   "lieu": [
-    "Escabeau, ampoule",
-    "Meubles pour réduire la place"
-   ],
-   "maq": [],
-   "acc": [
-    "Boîte de médicaments, carte vitale"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "Collier cervical, matelas immobilisateur à dépression, brancard"
-   ]
-  },
-  "securite": "Relevage uniquement après contrôle des gestes par le formateur. Charge réelle : respecter les postures.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-02",
-  "cur": "EQSUAP",
-  "n": 2,
-  "titre": "Motard au sol",
-  "theme": "Traumatisme de membre et retrait du casque",
-  "jour": "J1",
-  "etape": "MSP01 · Immobilisation, relevage, brancardage",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Bord de route départementale",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "immo",
-   "relevage",
-   "trauma"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Retirer un casque intégral à deux",
-   "Immobiliser une fracture de jambe",
-   "Relever au plan dur et brancarder"
-  ],
-  "message": "« VSAV Rambouillet 1, départ pour accident deux-roues seul, RD 906 à hauteur du lieu-dit La Villeneuve. »",
-  "contexte": "Un motard (30 ans) a chuté seul dans un virage. Il est sur le côté, casque intégral, jambe droite déformée.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Caron, 30 ans",
-    "brief": "Vous avez très mal à la jambe droite. Vous voulez enlever votre casque.",
-    "jeu": "Vous êtes nauséeux, vous criez à chaque mouvement de la jambe.",
-    "param": [
-     "Conscient, orienté",
-     "FR 22/min · FC 110/min · SpO2 97 % · PA 130/80",
-     "Douleur jambe 9/10, pas de perte de connaissance"
-    ],
-    "maq": "Déformation de jambe (attelle factice sous pantalon)"
-   },
-   {
-    "t": "Témoin",
-    "nom": "Automobiliste témoin",
-    "brief": "Vous avez vu la chute, vous avez posé votre triangle.",
-    "jeu": "Vous restez à disposition.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Retrait du casque coordonné",
-    "Pas d’aggravation."
-   ],
-   [
-    "Attelle posée sans maintien de part et d’autre",
-    "Douleur majorée."
-   ]
-  ],
-  "attendus": [
-   "Balisage et protection",
-   "Maintien de la tête, retrait du casque à deux",
-   "Bilan, immobilisation de la jambe par attelle à dépression",
-   "Relevage, matelas immobilisateur, brancardage"
-  ],
-  "observe": {
-   "c2": "Protection de la zone",
-   "c10": "Retrait du casque et immobilisation conformes",
-   "c11": "Relevage en équipe",
-   "c5": "Bilan transmis"
-  },
-  "mat": {
-   "lieu": [
-    "Cônes",
-    "Moto ou silhouette"
-   ],
-   "maq": [
-    "Éraflures, combinaison déchirée"
-   ],
-   "acc": [
-    "Casque intégral"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "Attelles à dépression, matelas immobilisateur, plan dur"
-   ]
-  },
-  "securite": "Exercice hors circulation.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-03",
-  "cur": "EQSUAP",
-  "n": 3,
-  "titre": "Malaise de la personne diabétique",
-  "theme": "Bilan et malaise hypoglycémique",
-  "jour": "J1",
-  "etape": "MSP02 · Bilan et malaise",
-  "niveau": 1,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Appartement, cuisine",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "bilan",
-   "malaise"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Réaliser le bilan complet",
-   "Recueillir les antécédents et traitements",
-   "Transmettre le bilan pompier au SAMU (15)"
-  ],
-  "message": "« VSAV Plaisir 1, départ pour malaise, 15 avenue de Saint-Germain à Plaisir, 2e étage. »",
-  "contexte": "M. Rey (66 ans), diabétique sous insuline, a fait son injection mais a sauté le repas. Il est assis, en sueur, agité.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Rey, 66 ans",
-    "brief": "Vous êtes confus, vous dites que tout va bien.",
-    "jeu": "Vous vous améliorez après resucrage.",
-    "param": [
-     "Conscient, désorienté",
-     "FR 18/min · FC 98/min · SpO2 97 % · PA 135/80",
-     "Glycémie 0,45 g/l",
-     "Sueurs"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Fille",
-    "brief": "Vous avez appelé, vous connaissez les traitements de votre père.",
-    "jeu": "Vous donnez l’ordonnance si on vous la demande.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Glycémie et resucrage",
-    "Amélioration à 10 min, glycémie 1,05 g/l."
-   ],
-   [
-    "Bilan sans glycémie",
-    "La victime devient somnolente."
-   ]
-  ],
-  "attendus": [
-   "Bilan circonstanciel, urgence vitale, complémentaire",
-   "Glycémie capillaire, resucrage per os si conscient",
-   "Transmettre le bilan, appliquer la décision",
-   "Surveiller, contrôler la glycémie"
-  ],
-  "observe": {
-   "c1": "Mesures conservatoires et hygiène",
-   "c5": "Bilan complet et chiffré",
-   "c9": "Prise en charge du malaise adaptée",
-   "c4": "Échanges clairs avec la régulation"
-  },
-  "mat": {
-   "lieu": [
-    "Table de cuisine"
-   ],
-   "maq": [
-    "Brumisateur"
-   ],
-   "acc": [
-    "Lecteur de glycémie factice, ordonnance, stylo à insuline factice",
-    "Sucres"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone"
-   ]
-  },
-  "securite": "Le figurant n’avale pas de sucre s’il est diabétique.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-04",
-  "cur": "EQSUAP",
-  "n": 4,
-  "titre": "Détresse respiratoire chez une personne âgée",
-  "theme": "Bilan et détresse vitale respiratoire",
-  "jour": "J2",
-  "etape": "MSP02 · Bilan et malaise",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Chambre d’un EHPAD",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "bilan",
-   "detresse"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître une détresse respiratoire",
-   "Installer la victime et administrer l’oxygène selon le protocole",
-   "Collaborer avec le personnel soignant présent"
-  ],
-  "message": "« VSAV Versailles 2, départ pour difficultés respiratoires, EHPAD Les Glycines, 3 rue Hoche à Versailles, chambre 112. »",
-  "contexte": "Mme Lefèvre (88 ans), insuffisante cardiaque, est essoufflée depuis la nuit. L’infirmière l’a assise au bord du lit.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Mme Lefèvre, 88 ans",
-    "brief": "Vous avez du mal à respirer, vous ne pouvez dire que quelques mots.",
-    "jeu": "Vous êtes mieux assise, jambes pendantes.",
-    "param": [
-     "Consciente, phrases courtes",
-     "FR 32/min · FC 112/min · SpO2 86 % · PA 170/100",
-     "Crépitants, œdèmes des chevilles"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Infirmière",
-    "brief": "Vous donnez le dossier de liaison d’urgence, les traitements, l’historique.",
-    "jeu": "Vous demandez ce que les sapeurs-pompiers comptent faire.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Position assise et oxygène",
-    "SpO2 92 %, FR 26/min."
-   ],
-   [
-    "Victime allongée",
-    "Aggravation : SpO2 80 %, sueurs."
-   ]
-  ],
-  "attendus": [
-   "Bilan d’urgence vitale, reconnaître la détresse respiratoire",
-   "Position demi-assise, oxygène selon protocole",
-   "Recueillir le dossier de liaison d’urgence",
-   "Transmettre le bilan, surveiller"
-  ],
-  "observe": {
-   "c7": "Reconnaît et prend en charge la détresse vitale",
-   "c4": "Collabore avec l’infirmière de l’établissement",
-   "c5": "Bilan et transmission",
-   "c13": "Surveillance pendant le transport"
-  },
-  "mat": {
-   "lieu": [
-    "Lit médicalisé"
-   ],
-   "maq": [
-    "Cyanose des lèvres (fard bleu)"
-   ],
-   "acc": [
-    "Dossier de liaison d’urgence"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone"
-   ]
-  },
-  "securite": "Pas d’oxygène réel sur le figurant.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-05",
-  "cur": "EQSUAP",
-  "n": 5,
-  "titre": "Conducteur incarcéré",
-  "theme": "Accident de la circulation : extraction d’une victime",
-  "jour": "J2",
-  "etape": "MSP03 · Extraction (accident de circulation)",
-  "niveau": 2,
-  "duree": "20 min + 15 min de débriefing",
-  "lieu": "Plateau technique : véhicule léger accidenté",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires, équipe de secours routier (FPT / VSR)",
-  "cases": [
-   "desinc",
-   "immo"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Assurer la sécurité de la victime pendant la désincarcération",
-   "Prendre en charge la victime dans le véhicule",
-   "Participer à l’extraction en coordination avec le secours routier"
-  ],
-  "message": "« VSAV Mantes 1, départ pour accident de la circulation, un véhicule contre un arbre, une victime incarcérée, RD 983 à Arnouville-lès-Mantes. »",
-  "contexte": "Une voiture a percuté un arbre. Le conducteur (40 ans) est coincé au niveau des jambes par le tableau de bord.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Henry, 40 ans",
-    "brief": "Vous êtes coincé, vous avez mal aux jambes et au thorax.",
-    "jeu": "Vous paniquez au bruit des outils si personne ne vous parle.",
-    "param": [
-     "Conscient, angoissé",
-     "FR 24/min · FC 112/min · SpO2 95 % · PA 120/75",
-     "Douleur thoracique à l’inspiration",
-     "Douleur des deux jambes"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Autre",
-    "nom": "Chef d’agrès du secours routier",
-    "brief": "Vous coordonnez la désincarcération avec le chef d’agrès VSAV.",
-    "jeu": "Vous annoncez chaque phase (calage, découpe, retrait).",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Équipier dans le véhicule qui parle à la victime",
-    "Victime calme."
-   ],
-   [
-    "Pas de protection lors des découpes",
-    "Le formateur arrête : risque de projection."
-   ],
-   [
-    "Extraction non coordonnée",
-    "Torsion du rachis."
-   ]
-  ],
-  "attendus": [
-   "Un équipier dans l’habitacle : maintien tête, protection (couverture, bâche)",
-   "Bilan et transmission",
-   "Collier, coordination avec le secours routier",
-   "Extraction dans l’axe sur plan dur",
-   "Surveillance"
-  ],
-  "observe": {
-   "c2": "Sécurité de la victime et des intervenants pendant la désincarcération",
-   "c12": "Participe à l’extraction en coordination",
-   "c3": "Tient son poste dans l’équipe",
-   "c7": "Recherche et prend en charge une détresse"
-  },
-  "mat": {
-   "lieu": [
-    "Véhicule de désincarcération"
-   ],
-   "maq": [
-    "Éclats de verre factices, coupures légères"
-   ],
-   "acc": [
-    "Bâche de protection"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "Plan dur, collier cervical, couverture"
-   ]
-  },
-  "securite": "Exercice sous responsabilité d’un formateur secours routier. EPI complets.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-06",
-  "cur": "EQSUAP",
-  "n": 6,
-  "titre": "Piéton renversé",
-  "theme": "Traumatisé grave : détresse circulatoire",
-  "jour": "J2",
-  "etape": "MSP03 · Extraction (accident de circulation)",
-  "niveau": 3,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Rue en agglomération",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "trauma",
-   "detresse"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître une détresse circulatoire chez un traumatisé",
-   "Prioriser les gestes et demander un renfort médical",
-   "Préparer un transport rapide"
-  ],
-  "message": "« VSAV Poissy 1, départ pour piéton renversé, boulevard Robespierre à Poissy. »",
-  "contexte": "Une piétonne (35 ans) a été percutée par une camionnette à 50 km/h. Elle est au sol, pâle, se plaint du ventre et du bassin.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Mme Blanc, 35 ans",
-    "brief": "Vous avez mal au ventre et au bassin, vous avez soif.",
-    "jeu": "Vous devenez somnolente à la 10e minute.",
-    "param": [
-     "Consciente puis somnolente",
-     "FR 28/min · FC 130/min · pouls radial filant · PA 85/50",
-     "Pâleur, marbrures",
-     "Douleur abdominale"
-    ],
-    "maq": "Abrasions de la hanche"
-   },
-   {
-    "t": "Témoin",
-    "nom": "Conducteur",
-    "brief": "Vous êtes choqué, vous répétez que vous ne l’avez pas vue.",
-    "jeu": "",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Demande précoce du SMUR",
-    "SMUR annoncé dans 10 min."
-   ],
-   [
-    "Bilan long sans priorisation",
-    "Aggravation rapide."
-   ]
-  ],
-  "attendus": [
-   "Mécanisme à haute cinétique : maintien tête",
-   "Détresse circulatoire : allonger, couvrir, oxygène",
-   "Message d’urgence et demande de renfort médical",
-   "Immobilisation, ceinture pelvienne selon protocole"
-  ],
-  "observe": {
-   "c7": "Reconnaît la détresse circulatoire",
-   "c5": "Bilan priorisé et transmis en urgence",
-   "c4": "Collabore avec le SMUR",
-   "c10": "Immobilisation adaptée"
-  },
-  "mat": {
-   "lieu": [
-    "Cônes"
-   ],
-   "maq": [
-    "Fard pâle, marbrures",
-    "Abrasions"
-   ],
-   "acc": [],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "Ceinture pelvienne, matelas immobilisateur"
-   ]
-  },
-  "securite": "Exercice hors circulation.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-07",
-  "cur": "EQSUAP",
-  "n": 7,
-  "titre": "Accouchement inopiné",
-  "theme": "Accouchement inopiné et prise en charge du nouveau-né",
-  "jour": "J3",
-  "etape": "MSP04 · Nouveau-né",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Appartement, chambre",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "naissance",
-   "pedia"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître un accouchement imminent",
-   "Aider à la naissance et prendre en charge le nouveau-né",
-   "Prévenir l’hypothermie"
-  ],
-  "message": "« VSAV Trappes 1, départ pour femme enceinte en travail, 21 rue Jean Jaurès à Trappes, 4e étage. »",
-  "contexte": "Mme N’Diaye (28 ans), 3e grossesse, à terme. Contractions toutes les 2 minutes, envie de pousser.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Mme N’Diaye, 28 ans",
-    "brief": "Vous avez envie de pousser. Votre dernier accouchement a été très rapide.",
-    "jeu": "La naissance survient à la 6e minute (mannequin).",
-    "param": [
-     "Consciente, douloureuse",
-     "FR 22/min · FC 100/min · PA 125/80",
-     "Poche des eaux rompue",
-     "Contractions toutes les 2 min"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Victime",
-    "nom": "Nouveau-né (mannequin)",
-    "brief": "Mannequin nouveau-né.",
-    "jeu": "Crie après séchage et stimulation.",
-    "param": [
-     "À la naissance : peu tonique",
-     "Après séchage : crie, FC > 100/min"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Conjoint",
-    "brief": "Vous êtes très stressé.",
-    "jeu": "Vous aidez à préparer serviettes et chauffage.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Préparation anticipée",
-    "Naissance sereine."
-   ],
-   [
-    "Nouveau-né non séché",
-    "Hypothermie : le formateur annonce un nouveau-né froid et peu tonique."
-   ]
-  ],
-  "attendus": [
-   "Bilan obstétrical, chauffer la pièce, lot accouchement",
-   "Transmettre le bilan à la régulation",
-   "Accompagner la naissance",
-   "Sécher, stimuler, couvrir, peau à peau",
-   "Surveillance de la mère et du nouveau-né"
-  ],
-  "observe": {
-   "c14": "Hygiène et asepsie de l’accouchement",
-   "c8": "Prise en charge de l’accouchement inopiné",
-   "c4": "Suit les consignes de la régulation",
-   "c13": "Surveillance mère et enfant"
-  },
-  "mat": {
-   "lieu": [
-    "Lit, chauffage d’appoint"
-   ],
-   "maq": [],
-   "acc": [
-    "Mannequin d’accouchement",
-    "Mannequin nouveau-né",
-    "Serviettes"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "Lot accouchement, couverture de survie"
-   ]
-  },
-  "securite": "Respect de la pudeur du figurant.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-08",
-  "cur": "EQSUAP",
-  "n": 8,
-  "titre": "Le nouveau-né qui ne crie pas",
-  "theme": "Réanimation du nouveau-né",
-  "jour": "J3",
-  "etape": "MSP04 · Nouveau-né",
-  "niveau": 3,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Salle de bain d’un appartement",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "naissance",
-   "acr",
-   "pedia"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Évaluer le nouveau-né à la naissance",
-   "Débuter la ventilation puis la RCP du nouveau-né",
-   "Demander un renfort médical"
-  ],
-  "message": "« VSAV Versailles 1, départ pour accouchement, 2 place Hoche à Versailles. »",
-  "contexte": "À l’arrivée, l’enfant vient de naître dans la baignoire. Il est bleu, mou, ne crie pas.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Nouveau-né (mannequin)",
-    "brief": "Mannequin nouveau-né.",
-    "jeu": "Reprise d’une respiration après 1 min de ventilation efficace.",
-    "param": [
-     "Ne respire pas, FC 50/min",
-     "Après ventilation : FC 120/min, crie"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Mère",
-    "brief": "Vous êtes épuisée et terrifiée.",
-    "jeu": "Vous demandez sans cesse si le bébé va bien.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Ventilation efficace dans la minute",
-    "Le nouveau-né reprend une respiration."
-   ],
-   [
-    "Compressions sans ventilation préalable",
-    "Le formateur rappelle la conduite à tenir."
-   ]
-  ],
-  "attendus": [
-   "Sécher, stimuler, couvrir",
-   "5 insufflations puis ventilation",
-   "RCP 3/1 si FC < 60/min",
-   "Alerte et renfort médical, prise en charge de la mère"
-  ],
-  "observe": {
-   "c7": "Réanimation adaptée au nouveau-né",
-   "c4": "Demande et accueil du renfort médical",
-   "c3": "Répartition des rôles (mère / enfant)"
-  },
-  "mat": {
-   "lieu": [
-    "Baignoire"
-   ],
-   "maq": [],
-   "acc": [
-    "Mannequin nouveau-né de réanimation",
-    "Serviettes"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "BAVU nouveau-né"
-   ]
-  },
-  "securite": "Désinfecter le mannequin entre chaque passage.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-09",
-  "cur": "EQSUAP",
-  "n": 9,
-  "titre": "Crise convulsive au collège",
-  "theme": "Affection spécifique : crise convulsive",
-  "jour": "J3",
-  "etape": "MSP05 · Affections spécifiques",
-  "niveau": 1,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Cour de collège",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "affection"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Protéger une victime pendant une crise convulsive",
-   "Réaliser le bilan après la crise",
-   "Collaborer avec l’infirmière scolaire"
-  ],
-  "message": "« VSAV Saint-Germain 1, départ pour adolescent qui convulse, collège Debussy, rue de Poissy à Saint-Germain-en-Laye. »",
-  "contexte": "Hugo (14 ans), épileptique connu, convulse dans la cour depuis 3 minutes.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Hugo, 14 ans",
-    "brief": "Vous êtes en crise puis très endormi après.",
-    "jeu": "La crise cesse 1 minute après votre arrivée, puis phase de sommeil bruyant.",
-    "param": [
-     "Après la crise : obnubilé, FR 20/min, FC 110/min, SpO2 94 %",
-     "Glycémie 0,95 g/l",
-     "Morsure de langue"
-    ],
-    "maq": ""
-   },
-   {
-    "t": "Tiers",
-    "nom": "Infirmière scolaire",
-    "brief": "Vous avez le projet d’accueil individualisé (PAI) de Hugo.",
-    "jeu": "Vous avez appelé les parents.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Protection sans contention",
-    "Pas de blessure."
-   ],
-   [
-    "Tentative d’ouvrir la bouche",
-    "Le formateur rappelle le danger."
-   ]
-  ],
-  "attendus": [
-   "Écarter les objets dangereux, ne pas contenir",
-   "Après la crise : PLS, oxygène, bilan, glycémie",
-   "Recueillir le PAI et les traitements",
-   "Transmission et surveillance"
-  ],
-  "observe": {
-   "c2": "Sécurise l’environnement pendant la crise",
-   "c8": "Prise en charge de la crise convulsive",
-   "c4": "Collabore avec l’infirmière scolaire",
-   "c6": "Respect de la confidentialité devant les élèves"
-  },
-  "mat": {
-   "lieu": [
-    "Cour, cartables"
-   ],
-   "maq": [
-    "Faux sang (morsure de langue)"
-   ],
-   "acc": [
-    "PAI"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone"
-   ]
-  },
-  "securite": "Le figurant simule la crise sur un tapis.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-10",
-  "cur": "EQSUAP",
-  "n": 10,
-  "titre": "Réaction allergique au restaurant",
-  "theme": "Affection spécifique : anaphylaxie",
-  "jour": "J4",
-  "etape": "MSP05 · Affections spécifiques",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Restaurant",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "affection",
-   "detresse"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Reconnaître une réaction anaphylactique",
-   "Aider à l’utilisation du stylo d’adrénaline",
-   "Transmettre en urgence"
-  ],
-  "message": "« VSAV Versailles 2, départ pour réaction allergique, restaurant Le Saint-Louis, rue de la Paroisse à Versailles. »",
-  "contexte": "Mme Colin (32 ans), allergique à l’arachide, a mangé un dessert. Elle a des plaques sur le corps, du mal à respirer.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Mme Colin, 32 ans",
-    "brief": "Vous avez la gorge qui serre, vous avez un stylo d’adrénaline dans votre sac.",
-    "jeu": "Amélioration 5 min après l’adrénaline.",
-    "param": [
-     "Consciente, angoissée",
-     "FR 30/min · FC 125/min · SpO2 91 % · PA 85/50",
-     "Urticaire géante, œdème des lèvres"
-    ],
-    "maq": "Plaques rouges (fard)"
-   },
-   {
-    "t": "Tiers",
-    "nom": "Ami",
-    "brief": "Vous savez qu’elle a un stylo d’adrénaline.",
-    "jeu": "Vous le donnez si on vous le demande.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Adrénaline rapidement utilisée",
-    "Amélioration."
-   ],
-   [
-    "Délai",
-    "Aggravation : PA 70/40, somnolence."
-   ]
-  ],
-  "attendus": [
-   "Reconnaître l’anaphylaxie",
-   "Aider à l’auto-injection, position adaptée, oxygène",
-   "Message d’urgence, demande de renfort médical",
-   "Surveillance"
-  ],
-  "observe": {
-   "c8": "Reconnaît l’anaphylaxie et aide à l’injection",
-   "c5": "Bilan transmis en urgence",
-   "c13": "Surveillance de l’évolution"
-  },
-  "mat": {
-   "lieu": [
-    "Table de restaurant"
-   ],
-   "maq": [
-    "Fard rouge"
-   ],
-   "acc": [
-    "Stylo d’adrénaline factice"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone"
-   ]
-  },
-  "securite": "Stylo factice uniquement.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-11",
-  "cur": "EQSUAP",
-  "n": 11,
-  "titre": "Incendie de cuisine",
-  "theme": "Brûlure thermique étendue",
-  "jour": "J4",
-  "etape": "MSP06 · Brûlures",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Cuisine d’un restaurant",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "brulure"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Refroidir une brûlure dans les délais",
-   "Évaluer la surface et la gravité",
-   "Protéger contre l’hypothermie"
-  ],
-  "message": "« VSAV Plaisir 1, départ pour brûlé, restaurant La Grange, rue de la Gare à Plaisir. »",
-  "contexte": "Un cuisinier (24 ans) a reçu de l’huile bouillante sur l’avant-bras et le thorax il y a 5 minutes.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Simon, 24 ans",
-    "brief": "Vous avez très mal, vous voulez retirer votre tablier.",
-    "jeu": "Vous frissonnez au bout de 15 min de refroidissement.",
-    "param": [
-     "Conscient",
-     "FR 22/min · FC 105/min · SpO2 98 % · PA 135/80",
-     "Douleur 9/10",
-     "Brûlure environ 9 % de la surface corporelle"
-    ],
-    "maq": "Brûlure du 2e degré (fard rouge, cloques en gélatine)"
-   },
-   {
-    "t": "Tiers",
-    "nom": "Chef de cuisine",
-    "brief": "Vous avez coupé le gaz. Vous proposez du beurre.",
-    "jeu": "",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Refroidissement rapide et adapté",
-    "Douleur diminuée."
-   ],
-   [
-    "Refroidissement trop long, victime non couverte",
-    "Hypothermie : frissons."
-   ]
-  ],
-  "attendus": [
-   "Sécuriser (gaz coupé)",
-   "Refroidir à l’eau tempérée",
-   "Retirer vêtements non adhérents, bijoux",
-   "Évaluer la surface, emballage stérile, couverture",
-   "Transmission"
-  ],
-  "observe": {
-   "c2": "Sécurise la cuisine",
-   "c8": "Prise en charge de la brûlure conforme",
-   "c14": "Asepsie de l’emballage",
-   "c5": "Bilan : surface, localisation, degré"
-  },
-  "mat": {
-   "lieu": [
-    "Cuisine, plaque"
-   ],
-   "maq": [
-    "Fard rouge, cloques en gélatine"
-   ],
-   "acc": [
-    "Tablier, casserole"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "Lot brûlés, couverture"
-   ]
-  },
-  "securite": "Aucune source de chaleur réelle.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-12",
-  "cur": "EQSUAP",
-  "n": 12,
-  "titre": "Électrisation sur chantier",
-  "theme": "Brûlure électrique",
-  "jour": "J4",
-  "etape": "MSP06 · Brûlures",
-  "niveau": 3,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Chantier",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "brulure",
-   "trauma"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Faire couper le courant avant d’approcher",
-   "Rechercher les lésions d’entrée et de sortie",
-   "Surveiller le risque cardiaque"
-  ],
-  "message": "« VSAV Mantes 1, départ pour ouvrier électrisé, chantier ZAC Mantes Innovaparc. »",
-  "contexte": "Un électricien (45 ans) a touché un câble sous tension. Il est tombé de 1 m. Le câble est toujours au sol.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "M. Lucas, 45 ans",
-    "brief": "Vous avez des douleurs à la main droite et au pied gauche.",
-    "jeu": "Palpitations au cours de la prise en charge.",
-    "param": [
-     "Conscient",
-     "FR 20/min · FC 120/min irrégulier · PA 140/85",
-     "Brûlures main droite, pied gauche"
-    ],
-    "maq": "Petites brûlures noircies"
-   },
-   {
-    "t": "Tiers",
-    "nom": "Chef de chantier",
-    "brief": "Vous savez où est le disjoncteur.",
-    "jeu": "Vous le coupez si on vous le demande.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Courant coupé avant approche",
-    "Prise en charge sécurisée."
-   ],
-   [
-    "Approche avant coupure",
-    "Le formateur arrête : sur-accident."
-   ]
-  ],
-  "attendus": [
-   "Faire couper le courant",
-   "Bilan, lésions d’entrée et de sortie",
-   "Pouls irrégulier : oxygène, surveillance rapprochée",
-   "Transmission avec le mécanisme"
-  ],
-  "observe": {
-   "c2": "Fait couper le courant",
-   "c8": "Prise en charge de l’électrisation",
-   "c5": "Bilan : mécanisme, lésions, troubles du rythme"
-  },
-  "mat": {
-   "lieu": [
-    "Câble factice, armoire électrique factice"
-   ],
-   "maq": [
-    "Fard noir"
-   ],
-   "acc": [
-    "Escabeau"
-   ],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone"
-   ]
-  },
-  "securite": "Aucun matériel électrique sous tension.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-13",
-  "cur": "EQSUAP",
-  "n": 13,
-  "titre": "Chute d’une femme âgée et suspicion de violences",
-  "theme": "MSP adaptée : traumatisme et violences intrafamiliales",
-  "jour": "J5",
-  "etape": "MSP07 · MSP adaptée",
-  "niveau": 3,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Appartement",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "violences",
-   "trauma"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Repérer des signes de violences",
-   "Adapter son attitude",
-   "Rendre compte au chef d’agrès et signaler selon la procédure"
-  ],
-  "message": "« VSAV Trappes 1, départ pour chute, 9 square Gagarine à Trappes. »",
-  "contexte": "Mme Robert (79 ans) serait tombée. Son fils parle à sa place. Elle a des hématomes d’âges différents sur les bras.",
-  "roles": [
-   {
-    "t": "Victime",
-    "nom": "Mme Robert, 79 ans",
-    "brief": "Vous êtes craintive, vous répondez en regardant votre fils.",
-    "jeu": "Vous parlez davantage si on vous isole avec bienveillance.",
-    "param": [
-     "Consciente",
-     "FR 18/min · FC 90/min · PA 150/90",
-     "Douleur du poignet droit"
-    ],
-    "maq": "Hématomes jaunes et violets aux bras"
-   },
-   {
-    "t": "Tiers",
-    "nom": "Fils",
-    "brief": "Vous êtes nerveux, vous refusez que votre mère soit transportée.",
-    "jeu": "Vous vous énervez si on insiste.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Signes repérés et transmis discrètement",
-    "Le chef d’agrès signale."
-   ],
-   [
-    "Accusation devant le fils",
-    "Tension, refus de transport."
-   ]
-  ],
-  "attendus": [
-   "Bilan complet",
-   "Isoler la victime avec tact",
-   "Rendre compte au chef d’agrès, transmission adaptée",
-   "Ne pas accuser, ne pas enquêter"
-  ],
-  "observe": {
-   "c6": "Repère les signes et adapte sa conduite",
-   "c5": "Bilan complet",
-   "c10": "Immobilisation du poignet",
-   "c3": "Rend compte au chef d’agrès"
-  },
-  "mat": {
-   "lieu": [
-    "Salon"
-   ],
-   "maq": [
-    "Hématomes de différentes couleurs"
-   ],
-   "acc": [],
-   "sec": [
-    "Sac d’urgence VSAV",
-    "Bouteille d’oxygène et masques",
-    "DSA de formation",
-    "Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
-    "Gants, surblouses, gel hydroalcoolique, sacs DASRI",
-    "Fiche bilan SUAP et radio / téléphone",
-    "Attelles"
-   ]
-  },
-  "securite": "Thème sensible : prévenir les stagiaires au briefing général.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- },
- {
-  "id": "suap-14",
-  "cur": "EQSUAP",
-  "n": 14,
-  "titre": "Retour d’intervention",
-  "theme": "MSP adaptée : hygiène, reconditionnement et transmission",
-  "jour": "J5",
-  "etape": "MSP07 · MSP adaptée",
-  "niveau": 2,
-  "duree": "10 min + 15 min de débriefing",
-  "lieu": "Remise du CIS, VSAV",
-  "equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
-  "cases": [
-   "hygiene"
-  ],
-  "checks": [],
-  "objectifs": [
-   "Nettoyer et désinfecter le VSAV après une intervention",
-   "Reconditionner et contrôler le matériel",
-   "Signaler un matériel défectueux"
-  ],
-  "message": "« Retour du VSAV après le transport d’une victime porteuse d’une infection respiratoire. »",
-  "contexte": "Le VSAV rentre au CIS. Le brancard est souillé, la bouteille d’oxygène est presque vide, le DSA signale un défaut d’électrodes.",
-  "roles": [
-   {
-    "t": "Autre",
-    "nom": "Chef de garde",
-    "brief": "Vous attendez le compte rendu du reconditionnement.",
-    "jeu": "Vous demandez si le VSAV est disponible.",
-    "param": [],
-    "maq": ""
-   }
-  ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
-  "evolution": [
-   [
-    "Protocole respecté",
-    "VSAV disponible."
-   ],
-   [
-    "Défaut DSA non signalé",
-    "Le formateur annonce un DSA indisponible à la prochaine intervention."
-   ]
-  ],
-  "attendus": [
-   "Équipements de protection",
-   "Nettoyage et désinfection selon protocole",
-   "Remplacement de l’oxygène et des consommables",
-   "Contrôle du DSA, signalement",
-   "Compte rendu au chef de garde"
-  ],
-  "observe": {
-   "c14": "Désinfection selon le protocole",
-   "c15": "Contrôle et reconditionnement complets",
-   "c3": "Rend compte au chef de garde"
-  },
-  "mat": {
-   "lieu": [
-    "VSAV"
-   ],
-   "maq": [],
-   "acc": [
-    "Souillures factices",
-    "Électrodes périmées"
-   ],
-   "sec": [
-    "Produits de désinfection",
-    "Bouteille d’oxygène pleine",
-    "Consommables"
-   ]
-  },
-  "securite": "Gants et lunettes pour les produits de désinfection.",
-  "debrief": [
-   "Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
-   "Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
-   "Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
-   "Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
-  ]
- }
+{
+"id": "ps-oava",
+"n": 1,
+"ref": "MSP OAVA",
+"tpl": "auto",
+"cur": "PS",
+"jour": "J1",
+"etape": "Détresse ventilatoire",
+"niveau": 1,
+"titre": "Étouffement au restaurant",
+"theme": "Obstruction grave des voies aériennes chez un adulte",
+"missions": "Reconnaître l’obstruction grave, réaliser les gestes de désobstruction, faire alerter, surveiller.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Salle de restaurant : tables, chaises, assiettes",
+"equipe": "Équipier prompt-secours seul, témoins joués par les stagiaires",
+"cases": [
+"ova"
+],
+"checks": [],
+"objectifs": [
+"Distinguer obstruction partielle et obstruction grave",
+"Réaliser claques dans le dos puis compressions abdominales",
+"Faire alerter et surveiller après la désobstruction"
+],
+"message": "« Vous déjeunez au restaurant ; à la table voisine, un homme se lève brusquement en portant les mains à sa gorge. »",
+"contexte": "M. Durand (52 ans) a avalé un morceau de viande. Il ne peut plus parler ni tousser ; il est rouge puis bleuit.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Durand, 52 ans",
+"brief": "Vous vous étouffez avec un morceau de viande. Vous ne pouvez ni parler ni tousser.",
+"jeu": "Portez les mains à la gorge, restez debout et penché en avant. Le corps étranger sort à la 3e compression abdominale si les gestes sont corrects.",
+"param": [
+"Ne parle pas, ne tousse pas",
+"Agitation, cyanose des lèvres",
+"Après désobstruction : FR 22/min, SpO2 94 %, FC 110/min"
+],
+"maq": "Fond de teint bleuté sur les lèvres"
+},
+{
+"t": "Tiers",
+"nom": "Épouse de la victime",
+"brief": "Vous êtes affolée et tapez dans le dos de votre mari sans efficacité.",
+"jeu": "Laissez la place si on vous le demande clairement ; vous pouvez être envoyée alerter.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"Gestes corrects et rapides",
+"Désobstruction à la 3e compression abdominale ; la victime respire et tousse."
+],
+[
+"Gestes inefficaces ou tardifs",
+"Perte de connaissance au bout de 1 min 30 : arrêt cardiaque, RCP à débuter."
+]
+],
+"attendus": [
+"Reconnaître l’obstruction grave (ne parle pas, ne tousse pas)",
+"Jusqu’à 5 claques dans le dos",
+"Jusqu’à 5 compressions abdominales en alternance",
+"Faire alerter les secours",
+"Installer et surveiller la victime après la désobstruction"
+],
+"observe": {
+"c23": "Écarte les chaises, fait de la place",
+"c24": "Désigne un témoin pour alerter, message complet",
+"c25": "Reconnaît l’obstruction grave",
+"c26": "Claques dans le dos puis compressions abdominales efficaces",
+"c31": "Surveille la respiration après désobstruction"
+},
+"mat": {
+"lieu": [
+"Table et 2 chaises",
+"Assiettes, couverts"
+],
+"maq": [
+"Fond de teint bleuté"
+],
+"acc": [
+"Mannequin de désobstruction pour la pratique"
+],
+"sec": [
+"Sac de premiers secours"
+]
+},
+"securite": "Les compressions abdominales et les claques se simulent sur le figurant, se pratiquent réellement sur mannequin uniquement.",
+"debrief": [
+"Quels signes vous ont fait dire que l’obstruction était grave ?",
+"Que faire si la victime perd connaissance ?"
+]
+},
+{
+"id": "ps-hemo",
+"n": 2,
+"ref": "MSP hémorragie",
+"tpl": "auto",
+"cur": "PS",
+"jour": "J1",
+"etape": "Détresse circulatoire",
+"niveau": 1,
+"titre": "Coupure à l’atelier",
+"theme": "Hémorragie externe de l’avant-bras",
+"missions": "Arrêter l’hémorragie, installer la victime, alerter, surveiller.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Atelier : établi, outils sans lame, sol encombré",
+"equipe": "Équipier prompt-secours seul, collègue de la victime",
+"cases": [
+"hemo"
+],
+"checks": [],
+"objectifs": [
+"Se protéger et arrêter immédiatement le saignement",
+"Allonger la victime et relayer la compression",
+"Alerter et surveiller"
+],
+"message": "« Un agent technique s’est coupé à l’atelier, son collègue vous appelle. »",
+"contexte": "M. Leroy (45 ans) s’est entaillé l’avant-bras avec une tôle. Le sang coule en continu. Il est debout et pâle.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Leroy, 45 ans",
+"brief": "Vous vous êtes coupé, vous tenez votre bras. Vous voulez juste un pansement.",
+"jeu": "Debout au départ ; vous vous sentez faible au bout de 2 minutes si on ne vous allonge pas.",
+"param": [
+"Conscient, anxieux",
+"FC 104/min, FR 18/min",
+"Pâleur, sueurs"
+],
+"maq": "Plaie de 6 cm à l’avant-bras, faux sang"
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"Compression efficace dans la minute",
+"Le saignement s’arrête, la victime se calme."
+],
+[
+"Pas de compression",
+"Malaise : la victime s’assoit seule, FC 120/min."
+]
+],
+"attendus": [
+"Mettre des gants",
+"Comprimer immédiatement la plaie",
+"Allonger la victime",
+"Relayer par un pansement compressif",
+"Alerter, couvrir, surveiller"
+],
+"observe": {
+"c22": "Gants, éloigne les outils",
+"c24": "Alerte complète et structurée",
+"c26": "Compression immédiate puis pansement compressif",
+"c25": "Recherche les autres signes de gravité",
+"c31": "Surveille le saignement et l’état de la victime"
+},
+"mat": {
+"lieu": [
+"Établi, quelques outils sans lame",
+"Bâche au sol"
+],
+"maq": [
+"Plaie en silicone",
+"Faux sang",
+"Fond de teint clair"
+],
+"acc": [
+"Chiffon"
+],
+"sec": [
+"Gants, pansement compressif, garrot"
+]
+},
+"securite": "Aucun outil tranchant réel. Protéger le sol du faux sang.",
+"debrief": [
+"Pourquoi comprimer avant d’ouvrir le sac ?",
+"Quand poser un garrot ?"
+]
+},
+{
+"id": "ps-malaise",
+"n": 3,
+"ref": "MSP bilans",
+"tpl": "auto",
+"cur": "PS",
+"jour": "J2",
+"etape": "Bilans, malaise",
+"niveau": 2,
+"titre": "Malaise au bureau",
+"theme": "Malaise chez une personne diabétique",
+"missions": "Réaliser le bilan complet, installer la victime, transmettre le bilan, surveiller.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Bureau : chaise, bureau, sac à main",
+"equipe": "Équipier prompt-secours, collègue de bureau",
+"cases": [
+"malaise"
+],
+"checks": [],
+"objectifs": [
+"Réaliser un bilan structuré",
+"Recueillir les antécédents et traitements",
+"Transmettre un bilan clair, appliquer les consignes"
+],
+"message": "« Une collègue se sent mal à son bureau. »",
+"contexte": "Mme Petit (38 ans), diabétique, a sauté le déjeuner. Elle est pâle, en sueur, tremblante et un peu confuse.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Petit, 38 ans",
+"brief": "Vous êtes diabétique sous insuline, vous n’avez pas mangé ce midi.",
+"jeu": "Réponses lentes, un peu confuses. Vous vous améliorez si on vous donne du sucre.",
+"param": [
+"Consciente, ralentie",
+"FC 96/min, FR 16/min, SpO2 98 %",
+"Sueurs, tremblements",
+"Glycémie si mesurée : 0,45 g/L"
+],
+"maq": "Glycérine en vaporisateur pour les sueurs"
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"Bilan complet et sucre donné",
+"Amélioration en 10 minutes."
+],
+[
+"Rien n’est fait",
+"Aggravation : la victime ne répond plus."
+]
+],
+"attendus": [
+"Installer en position d’attente adaptée",
+"Bilan d’urgence vitale puis complémentaire",
+"Rechercher antécédents, traitements, dernier repas",
+"Transmettre le bilan",
+"Appliquer les consignes (resucrage si autorisé), surveiller"
+],
+"observe": {
+"c25": "Bilan structuré et complet",
+"c24": "Transmission claire",
+"c28": "Prise en charge adaptée du malaise",
+"c31": "Surveillance et réévaluation"
+},
+"mat": {
+"lieu": [
+"Bureau, chaise"
+],
+"maq": [
+"Glycérine (sueurs)"
+],
+"acc": [
+"Sac à main avec carnet de diabétique et stylo à insuline factice"
+],
+"sec": [
+"Sac de premiers secours, sucre"
+]
+},
+"securite": "Aucun produit réel à injecter.",
+"debrief": [
+"Quels éléments du bilan vous ont orientés ?",
+"Comment avez-vous structuré la transmission ?"
+]
+},
+{
+"id": "ps-inconscient",
+"n": 4,
+"ref": "MSP inconscient",
+"tpl": "crit",
+"cur": "PS",
+"jour": "J2",
+"etape": "Victime inconsciente",
+"niveau": 2,
+"titre": "Personne au sol dans un parc",
+"theme": "Victime inconsciente qui respire",
+"missions": "Apprécier la conscience et la respiration, libérer les voies aériennes, PLS, alerter, surveiller.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Extérieur : allée de parc, banc",
+"equipe": "Équipier prompt-secours seul, témoin",
+"cases": [
+"pc"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître la perte de connaissance",
+"Libérer les voies aériennes et apprécier la respiration",
+"Mettre en PLS, alerter, surveiller"
+],
+"message": "« Un promeneur vous fait signe : une femme est allongée près d’un banc. »",
+"contexte": "Mme Martin (60 ans) est allongée sur le dos, ne répond pas. Elle respire bruyamment.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Martin, 60 ans",
+"brief": "Vous êtes inconsciente.",
+"jeu": "Restez inerte, respiration bruyante qui devient normale après libération des voies aériennes.",
+"param": [
+"Ne répond pas",
+"Respire : FR 14/min"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Promeneur",
+"brief": "Vous avez trouvé la dame.",
+"jeu": "Vous pouvez alerter si on vous le demande précisément.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"PLS rapide",
+"Respiration régulière, la victime reste stable."
+],
+[
+"Victime laissée sur le dos",
+"Respiration de plus en plus bruyante, vomissements."
+]
+],
+"attendus": [
+"Vérifier l’absence de danger",
+"Apprécier la conscience",
+"Libérer les voies aériennes et apprécier la respiration",
+"PLS",
+"Alerter",
+"Surveiller la respiration"
+],
+"observe": {
+"c23": "Vérifie l’absence de danger",
+"c25": "Conscience puis respiration",
+"c26": "LVA et PLS correctes",
+"c24": "Alerte",
+"c31": "Surveillance continue"
+},
+"mat": {
+"lieu": [
+"Banc"
+],
+"maq": [],
+"acc": [
+"Couverture"
+],
+"sec": [
+"Sac de premiers secours"
+]
+},
+"securite": "Tapis de sol pour le figurant.",
+"debrief": [
+"Comment avez-vous apprécié la respiration ?",
+"Qu’auriez-vous fait si elle cessait de respirer ?"
+]
+},
+{
+"id": "ps-acr",
+"n": 5,
+"ref": "MSP ACR adulte",
+"tpl": "crit",
+"cur": "PS",
+"jour": "J3",
+"etape": "Arrêt cardiaque",
+"niveau": 2,
+"titre": "Arrêt cardiaque en salle de sport",
+"theme": "Arrêt cardiaque chez l’adulte, DAE disponible",
+"missions": "Reconnaître l’arrêt cardiaque, alerter, RCP, mise en œuvre du DAE, relais des secours.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Salle de sport : tapis, haltères",
+"equipe": "Équipier prompt-secours et un témoin",
+"cases": [
+"acr"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître l’arrêt cardiaque",
+"Alerter et faire apporter le DAE",
+"RCP de qualité et DAE sans interruption inutile"
+],
+"message": "« Un homme vient de s’effondrer près d’un tapis de course. »",
+"contexte": "M. Bernard (58 ans) s’est effondré pendant son entraînement. Il ne répond pas et ne respire pas.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mannequin RCP (M. Bernard, 58 ans)",
+"brief": "Arrêt cardiaque.",
+"jeu": "Remplacer le figurant par le mannequin dès le début de la RCP.",
+"param": [
+"Inconscient",
+"Ne respire pas"
+],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"RCP et DAE dans les 3 minutes",
+"Le DAE délivre un choc ; poursuivre la RCP jusqu’au relais."
+],
+[
+"RCP retardée",
+"Le DAE n’indique pas de choc, poursuivre la RCP."
+]
+],
+"attendus": [
+"Reconnaître l’ACR",
+"Alerter, demander le DAE",
+"Compressions 100 à 120/min, 5 à 6 cm",
+"Mettre en œuvre le DAE",
+"Poursuivre jusqu’au relais"
+],
+"observe": {
+"c26": "RCP de qualité, DAE",
+"c24": "Alerte précoce",
+"c32": "Relais avec les secours",
+"c23": "Sécurité lors du choc"
+},
+"mat": {
+"lieu": [
+"Tapis de sol"
+],
+"maq": [],
+"acc": [
+"Mannequin RCP",
+"DAE de formation"
+],
+"sec": [
+"Sac de premiers secours"
+]
+},
+"securite": "DAE de formation uniquement.",
+"debrief": [
+"Combien de temps entre l’effondrement et le premier choc ?",
+"Comment limiter les interruptions des compressions ?"
+]
+},
+{
+"id": "ps-trauma",
+"n": 6,
+"ref": "MSP traumatisme",
+"tpl": "crit",
+"cur": "PS",
+"jour": "J3",
+"etape": "Victime traumatisée",
+"niveau": 2,
+"titre": "Chute d’échelle dans un jardin",
+"theme": "Suspicion de traumatisme du rachis",
+"missions": "Assurer la sécurité, maintenir la tête, réaliser le bilan, alerter, surveiller.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Jardin : échelle couchée au sol",
+"equipe": "Équipier prompt-secours, conjoint de la victime",
+"cases": [
+"trauma"
+],
+"checks": [],
+"objectifs": [
+"Suspecter un traumatisme du rachis",
+"Maintenir la tête en position neutre",
+"Bilan et alerte"
+],
+"message": "« Un homme est tombé de son échelle en taillant sa haie. »",
+"contexte": "M. Roux (67 ans) est tombé d’environ 2 m. Il est allongé sur le dos et se plaint du cou.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Roux, 67 ans",
+"brief": "Vous avez mal au cou, des fourmillements dans les mains.",
+"jeu": "Vous voulez vous relever : n’obéissez que si on vous l’interdit clairement.",
+"param": [
+"Conscient",
+"FC 88/min, FR 18/min",
+"Douleur cervicale, fourmillements des mains"
+],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"Maintien de tête rapide",
+"État stable."
+],
+[
+"Victime mobilisée",
+"Aggravation des fourmillements, perte de force dans les bras."
+]
+],
+"attendus": [
+"Interdire de bouger",
+"Maintien de tête",
+"Bilan",
+"Alerter",
+"Couvrir, surveiller"
+],
+"observe": {
+"c30": "Maintien de tête en position neutre",
+"c25": "Bilan orienté traumatisme",
+"c24": "Alerte",
+"c31": "Surveillance"
+},
+"mat": {
+"lieu": [
+"Échelle",
+"Taille-haie factice"
+],
+"maq": [],
+"acc": [],
+"sec": [
+"Sac de premiers secours, couverture"
+]
+},
+"securite": "Échelle couchée au sol, aucune hauteur.",
+"debrief": [
+"Quels éléments vous ont fait suspecter une atteinte du rachis ?"
+]
+},
+{
+"id": "ps-smv",
+"n": 7,
+"ref": "MSP SMV",
+"tpl": "crit",
+"cur": "PS",
+"jour": "J4",
+"etape": "Situation multi-victimes",
+"niveau": 3,
+"titre": "Accident entre deux cyclistes",
+"theme": "Situation à plusieurs victimes",
+"missions": "Bilan circonstanciel, priorisation des victimes, alerte, gestes de secours, intégration à l’arrivée des secours.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Piste cyclable",
+"equipe": "Deux équipiers prompt-secours",
+"cases": [
+"hemo",
+"trauma",
+"pc"
+],
+"checks": [],
+"objectifs": [
+"Faire un bilan circonstanciel et demander des renforts",
+"Prioriser les victimes",
+"S’intégrer à l’arrivée des secours"
+],
+"message": "« Deux cyclistes viennent de se percuter. »",
+"contexte": "Un cycliste saigne abondamment de la jambe, un second est inconscient, un troisième marche et crie.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Cycliste 1",
+"brief": "Plaie de jambe qui saigne abondamment.",
+"jeu": "Pâleur progressive.",
+"param": [
+"FC 120/min"
+],
+"maq": "Faux sang"
+},
+{
+"t": "Victime",
+"nom": "Cycliste 2",
+"brief": "Inconscient, respire.",
+"jeu": "Restez inerte.",
+"param": [
+"FR 16/min"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Cycliste 3",
+"brief": "Égratignures, très agité.",
+"jeu": "Vous accaparez l’équipier.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"Priorisation correcte",
+"Les deux victimes graves sont prises en charge."
+],
+[
+"Équipier accaparé par le cycliste 3",
+"La victime qui saigne s’aggrave."
+]
+],
+"attendus": [
+"Bilan circonstanciel",
+"Demander des renforts",
+"Hémorragie : compression",
+"Inconscient : PLS",
+"Rendre compte à l’arrivée des secours"
+],
+"observe": {
+"c23": "Sécurise la zone",
+"c24": "Alerte avec nombre de victimes",
+"c26": "Traite les détresses vitales en priorité",
+"c32": "S’intègre à l’arrivée des secours"
+},
+"mat": {
+"lieu": [
+"Vélos"
+],
+"maq": [
+"Faux sang",
+"Égratignures"
+],
+"acc": [],
+"sec": [
+"2 sacs de premiers secours"
+]
+},
+"securite": "Vélos couchés au sol.",
+"debrief": [
+"Comment avez-vous choisi la première victime ?"
+]
+},
+{
+"id": "ps-synthese",
+"n": 8,
+"ref": "MSP synthèse",
+"tpl": "crit",
+"cur": "PS",
+"jour": "J4",
+"etape": "Synthèse",
+"niveau": 3,
+"titre": "Malaise et chute dans un escalier",
+"theme": "Synthèse : bilan, malaise et traumatisme",
+"missions": "Prendre en charge une victime présentant plusieurs atteintes, transmettre le bilan, s’intégrer dans la chaîne des secours.",
+"duree": "20 min + 15 min de débriefing",
+"lieu": "Escalier d’immeuble",
+"equipe": "Équipier prompt-secours",
+"cases": [
+"malaise",
+"trauma"
+],
+"checks": [],
+"objectifs": [
+"Mener un bilan complet",
+"Prioriser les actions",
+"Transmettre et s’intégrer à l’arrivée des secours"
+],
+"message": "« Une voisine a entendu quelqu’un tomber dans l’escalier. »",
+"contexte": "Mme Lefèvre (74 ans) a fait un malaise et chuté de quelques marches. Douleur au poignet, désorientée.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Lefèvre, 74 ans",
+"brief": "Vous avez eu un étourdissement, vous avez mal au poignet.",
+"jeu": "Un peu désorientée, vous répétez les mêmes questions.",
+"param": [
+"FC 52/min irrégulier",
+"PA 95/60",
+"Déformation du poignet"
+],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes équipier prompt-secours, seul ou en binôme, avec votre sac de premiers secours.",
+"evolution": [
+[
+"Bilan complet",
+"L’équipier détecte le pouls lent et irrégulier et le transmet."
+],
+[
+"Bilan centré sur le poignet",
+"Nouveau malaise."
+]
+],
+"attendus": [
+"Bilan d’urgence vitale puis complémentaire",
+"Immobiliser le poignet",
+"Transmettre les anomalies du pouls",
+"Surveiller"
+],
+"observe": {
+"c25": "Bilan complet",
+"c28": "Malaise pris en compte",
+"c30": "Immobilisation du poignet",
+"c32": "S’intègre à la chaîne des secours"
+},
+"mat": {
+"lieu": [
+"Escalier ou marches"
+],
+"maq": [
+"Déformation du poignet"
+],
+"acc": [],
+"sec": [
+"Sac de premiers secours, attelle"
+]
+},
+"securite": "Figurante allongée sur un tapis en bas des marches.",
+"debrief": [
+"Quelle était l’information la plus importante à transmettre ?"
+]
+},
+{
+"id": "su-msp01",
+"n": 1,
+"ref": "MSP01",
+"tpl": "auto",
+"cur": "EQSUAP",
+"jour": "J1",
+"etape": "Immobilisation, relevage, brancardage",
+"niveau": 1,
+"titre": "Chute d’escabeau à domicile",
+"theme": "Suspicion de traumatisme du rachis, relevage et brancardage",
+"missions": "Sécuriser, réaliser le bilan, immobiliser, relever et brancarder la victime jusqu’au VSAV.",
+"duree": "45 min + 15 min de débriefing",
+"lieu": "Domicile : salon encombré, couloir étroit",
+"equipe": "Équipage VSAV de 3 ou 4",
+"cases": [
+"trauma"
+],
+"checks": [],
+"objectifs": [
+"Immobiliser le rachis",
+"Choisir et réaliser la technique de relevage",
+"Brancarder en sécurité jusqu’au VSAV"
+],
+"message": "Départ VSAV : « Chute d’une personne âgée à domicile, douleur dorsale. »",
+"contexte": "Mme Garnier (78 ans) est tombée de son escabeau en changeant une ampoule. Elle est au sol sur le dos.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Garnier, 78 ans",
+"brief": "Douleur dans le bas du dos.",
+"jeu": "Vous avez peur d’être déplacée, demandez ce qu’on vous fait.",
+"param": [
+"Consciente",
+"FC 92/min, PA 145/85",
+"Douleur lombaire, sensibilité conservée"
+],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Immobilisation correcte",
+"Douleur stable."
+],
+[
+"Relevage brutal",
+"Douleur intense, angoisse."
+]
+],
+"attendus": [
+"Maintien de tête",
+"Bilan",
+"Choix du matériel (cuillère, MID)",
+"Relevage commandé",
+"Brancardage adapté au couloir"
+],
+"observe": {
+"c10": "Immobilisation adaptée",
+"c11": "Relevage commandé et synchronisé",
+"c3": "Se positionne au sein de l’équipe",
+"c5": "Bilan",
+"c13": "Surveillance pendant le brancardage"
+},
+"mat": {
+"lieu": [
+"Escabeau",
+"Meubles pour encombrer"
+],
+"maq": [],
+"acc": [],
+"sec": [
+"Brancard cuillère, MID, brancard"
+]
+},
+"securite": "Charge réelle : rappel des gestes et postures.",
+"debrief": [
+"Pourquoi ce choix de technique de relevage ?"
+]
+},
+{
+"id": "su-msp02",
+"n": 2,
+"ref": "MSP02",
+"tpl": "auto",
+"cur": "EQSUAP",
+"jour": "J2",
+"etape": "Bilan – MMP",
+"niveau": 2,
+"titre": "Malaise d’un homme diabétique",
+"theme": "Bilan complet et transmission au médecin régulateur",
+"missions": "Réaliser le bilan, recueillir les éléments, transmettre le bilan pompier au SAMU (15), appliquer les consignes.",
+"duree": "30 min + 15 min de débriefing",
+"lieu": "Domicile : cuisine",
+"equipe": "Équipage VSAV",
+"cases": [
+"malaise"
+],
+"checks": [],
+"objectifs": [
+"Bilan structuré",
+"Transmission claire au médecin régulateur",
+"Application des consignes et surveillance"
+],
+"message": "Départ VSAV : « Homme de 62 ans, malaise à domicile. »",
+"contexte": "M. Moreau (62 ans), diabétique, est assis dans sa cuisine, en sueur et confus.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Moreau, 62 ans",
+"brief": "Diabétique, vous avez fait votre insuline sans manger.",
+"jeu": "Confus, agressif si on insiste.",
+"param": [
+"Glycémie 0,40 g/L",
+"FC 100/min",
+"Sueurs"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Épouse",
+"brief": "Vous donnez le traitement et les antécédents si on vous les demande.",
+"jeu": "",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Bilan complet et resucrage",
+"Amélioration."
+],
+[
+"Bilan incomplet",
+"Perte de connaissance."
+]
+],
+"attendus": [
+"Bilan circonstanciel, d’urgence vitale, complémentaire",
+"Glycémie",
+"Transmission au médecin régulateur",
+"Application des consignes"
+],
+"observe": {
+"c5": "Bilan complet",
+"c4": "Transmission au médecin régulateur",
+"c9": "Prise en charge du malaise",
+"c13": "Surveillance",
+"c14": "Hygiène lors de la glycémie"
+},
+"mat": {
+"lieu": [
+"Table, chaise"
+],
+"maq": [],
+"acc": [
+"Lecteur de glycémie de formation"
+],
+"sec": [
+"Sac VSAV"
+]
+},
+"securite": "",
+"debrief": [
+"Votre transmission était-elle complète ?"
+]
+},
+{
+"id": "su-msp03",
+"n": 3,
+"ref": "MSP03",
+"tpl": "crit",
+"cur": "EQSUAP",
+"jour": "J2",
+"etape": "Extraction de victime ACT",
+"niveau": 2,
+"titre": "Accident de la circulation, conducteur incarcéré",
+"theme": "Extraction d’une victime d’un véhicule",
+"missions": "Sécuriser, accéder à la victime, bilan, participer à l’extraction avec l’équipe de désincarcération.",
+"duree": "45 min + 15 min de débriefing",
+"lieu": "Véhicule de formation",
+"equipe": "Équipage VSAV et équipe de désincarcération",
+"cases": [
+"trauma"
+],
+"checks": [],
+"objectifs": [
+"Sécuriser",
+"Maintien de tête et bilan dans le véhicule",
+"Extraction coordonnée"
+],
+"message": "Départ VSAV et FPT : « Accident véhicule léger contre arbre, une personne incarcérée. »",
+"contexte": "Le conducteur (35 ans) est conscient, coincé par le tableau de bord, douleur à la jambe.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Conducteur, 35 ans",
+"brief": "Douleur à la jambe droite, peur.",
+"jeu": "Vous voulez sortir seul.",
+"param": [
+"FC 110/min",
+"PA 120/80",
+"Déformation de la jambe"
+],
+"maq": "Déformation de jambe"
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Coordination efficace",
+"Extraction dans l’axe."
+],
+[
+"Défaut de coordination",
+"Mobilisation de la tête, douleur cervicale."
+]
+],
+"attendus": [
+"Sécurisation",
+"Maintien de tête",
+"Bilan",
+"Extraction synchronisée"
+],
+"observe": {
+"c2": "Sécurité des intervenants",
+"c12": "Participation à l’extraction",
+"c10": "Immobilisation",
+"c3": "Position dans l’équipe"
+},
+"mat": {
+"lieu": [
+"Véhicule de formation"
+],
+"maq": [],
+"acc": [],
+"sec": [
+"Plan dur, collier, MID"
+]
+},
+"securite": "Zone de désincarcération balisée, EPI obligatoires.",
+"debrief": [
+"Comment s’est faite la coordination ?"
+]
+},
+{
+"id": "su-msp04",
+"n": 4,
+"ref": "MSP04",
+"tpl": "crit",
+"cur": "EQSUAP",
+"jour": "J3",
+"etape": "Nouveau-né à la naissance",
+"niveau": 2,
+"titre": "Accouchement inopiné à domicile",
+"theme": "Accouchement et prise en charge du nouveau-né",
+"missions": "Évaluer l’imminence, préparer le kit, accompagner la naissance, prendre en charge le nouveau-né et la mère.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Domicile : chambre",
+"equipe": "Équipage VSAV",
+"cases": [
+"detresse"
+],
+"checks": [],
+"objectifs": [
+"Évaluer l’imminence de l’accouchement",
+"Prendre en charge le nouveau-né",
+"Surveiller la mère"
+],
+"message": "Départ VSAV : « Femme enceinte, contractions rapprochées. »",
+"contexte": "Mme Robert (29 ans), 3e grossesse, à terme, a envie de pousser.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Robert, 29 ans",
+"brief": "Vous avez très envie de pousser.",
+"jeu": "Naissance au bout de quelques minutes.",
+"param": [
+"Contractions toutes les 2 minutes"
+],
+"maq": ""
+},
+{
+"t": "Victime",
+"nom": "Nouveau-né (mannequin)",
+"brief": "",
+"jeu": "Respire après séchage et stimulation.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Prise en charge correcte",
+"Nouveau-né rose et tonique."
+],
+[
+"Nouveau-né non séché",
+"Hypothermie, respiration faible."
+]
+],
+"attendus": [
+"Bilan de la parturiente",
+"Transmission au médecin régulateur",
+"Préparation du kit",
+"Sécher, réchauffer, stimuler",
+"Surveiller mère et enfant"
+],
+"observe": {
+"c8": "Prise en charge adaptée",
+"c4": "Transmission",
+"c13": "Surveillance",
+"c14": "Hygiène"
+},
+"mat": {
+"lieu": [
+"Lit"
+],
+"maq": [],
+"acc": [
+"Mannequin d’accouchement",
+"Mannequin nouveau-né"
+],
+"sec": [
+"Kit accouchement"
+]
+},
+"securite": "",
+"debrief": [
+"Quels signes annonçaient un accouchement imminent ?"
+]
+},
+{
+"id": "su-msp05",
+"n": 5,
+"ref": "MSP05",
+"tpl": "crit",
+"cur": "EQSUAP",
+"jour": "J3",
+"etape": "Affections spécifiques",
+"niveau": 2,
+"titre": "Troubles de la parole chez une personne âgée",
+"theme": "Suspicion d’accident vasculaire cérébral",
+"missions": "Reconnaître les signes d’AVC, noter l’heure de début, transmettre rapidement, surveiller.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Domicile : salon",
+"equipe": "Équipage VSAV",
+"cases": [
+"malaise"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître un AVC",
+"Noter l’heure de début des signes",
+"Transmission rapide"
+],
+"message": "Départ VSAV : « Homme de 70 ans, ne parle plus correctement. »",
+"contexte": "M. Laurent (70 ans) a la bouche déviée et ne bouge plus le bras droit depuis 30 minutes.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Laurent, 70 ans",
+"brief": "Vous parlez difficilement.",
+"jeu": "Bras droit sans force.",
+"param": [
+"PA 180/100",
+"Glycémie 1,10 g/L"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Fille de la victime",
+"brief": "Vous savez que les signes ont commencé à 14 h 10.",
+"jeu": "",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Transmission rapide",
+"Orientation vers une unité neurovasculaire."
+],
+[
+"Heure non recherchée",
+"Orientation retardée."
+]
+],
+"attendus": [
+"Bilan",
+"Rechercher l’heure de début",
+"Glycémie",
+"Transmission",
+"Surveillance"
+],
+"observe": {
+"c9": "Reconnaît l’AVC",
+"c5": "Bilan",
+"c4": "Transmission",
+"c13": "Surveillance"
+},
+"mat": {
+"lieu": [
+"Fauteuil"
+],
+"maq": [],
+"acc": [],
+"sec": [
+"Sac VSAV"
+]
+},
+"securite": "",
+"debrief": [
+"Pourquoi l’heure de début est-elle essentielle ?"
+]
+},
+{
+"id": "su-msp06",
+"n": 6,
+"ref": "MSP06",
+"tpl": "crit",
+"cur": "EQSUAP",
+"jour": "J4",
+"etape": "Brûlures",
+"niveau": 2,
+"titre": "Brûlure dans la cuisine d’un restaurant",
+"theme": "Brûlure thermique étendue",
+"missions": "Refroidir, réaliser le bilan, protéger, transmettre et surveiller pendant le transport.",
+"duree": "15 min + 10 min de débriefing",
+"lieu": "Cuisine de restaurant",
+"equipe": "Équipage VSAV",
+"cases": [
+"detresse"
+],
+"checks": [],
+"objectifs": [
+"Refroidir sans provoquer d’hypothermie",
+"Évaluer la gravité",
+"Transmettre et surveiller"
+],
+"message": "Départ VSAV : « Cuisinier brûlé par de l’huile. »",
+"contexte": "M. Henry (40 ans) a reçu de l’huile chaude sur l’avant-bras et le thorax.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Henry, 40 ans",
+"brief": "Douleur intense.",
+"jeu": "Vous voulez retirer votre tablier collé.",
+"param": [
+"FC 115/min",
+"Brûlures avant-bras et thorax"
+],
+"maq": "Maquillage de brûlures"
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Refroidissement précoce",
+"Douleur diminuée."
+],
+[
+"Refroidissement prolongé à l’eau froide",
+"Frissons."
+]
+],
+"attendus": [
+"Refroidir",
+"Évaluer surface et profondeur",
+"Protéger",
+"Transmettre",
+"Surveiller"
+],
+"observe": {
+"c8": "Prise en charge de la brûlure",
+"c5": "Bilan",
+"c14": "Hygiène",
+"c13": "Surveillance"
+},
+"mat": {
+"lieu": [
+"Plan de travail"
+],
+"maq": [
+"Brûlures maquillées"
+],
+"acc": [],
+"sec": [
+"Pansements pour brûlés, couverture"
+]
+},
+"securite": "",
+"debrief": [
+"Comment avez-vous évalué la gravité ?"
+]
+},
+{
+"id": "su-msp07",
+"n": 7,
+"ref": "MSP07",
+"tpl": "crit",
+"cur": "EQSUAP",
+"jour": "J4",
+"etape": "MSP adaptée aux besoins",
+"niveau": 3,
+"titre": "Violences intrafamiliales",
+"theme": "Détecter une situation de violences et adapter sa conduite",
+"missions": "Prendre en charge la victime, détecter les signes de violences, adapter sa conduite, rendre compte au chef d’agrès.",
+"duree": "30 min + 20 min de débriefing",
+"lieu": "Domicile",
+"equipe": "Équipage VSAV",
+"cases": [
+"trauma"
+],
+"checks": [],
+"objectifs": [
+"Détecter des signes de violences",
+"Adapter sa conduite et assurer la sécurité",
+"Rendre compte"
+],
+"message": "Départ VSAV : « Femme tombée dans l’escalier. »",
+"contexte": "Mme Simon (34 ans) présente des ecchymoses d’âges différents ; son conjoint répond à sa place.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Simon, 34 ans",
+"brief": "Vous dites être tombée.",
+"jeu": "Regards inquiets vers votre conjoint.",
+"param": [
+"Ecchymoses d’âges différents"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Conjoint",
+"brief": "Vous répondez à la place de votre compagne.",
+"jeu": "Vous devenez agressif si on vous demande de sortir.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Situation repérée",
+"Le chef d’agrès est informé."
+],
+[
+"Signes ignorés",
+"La victime reste au domicile."
+]
+],
+"attendus": [
+"Bilan",
+"Repérer les incohérences",
+"Assurer la sécurité de l’équipe",
+"Rendre compte au chef d’agrès"
+],
+"observe": {
+"c6": "Détecte la situation, adapte sa conduite",
+"c2": "Sécurité",
+"c5": "Bilan",
+"c3": "Rend compte"
+},
+"mat": {
+"lieu": [],
+"maq": [
+"Ecchymoses"
+],
+"acc": [],
+"sec": [
+"Sac VSAV"
+]
+},
+"securite": "Débriefing attentif : sujet sensible.",
+"debrief": [
+"Quels signes vous ont alertés ?"
+]
+},
+{
+"id": "su-msp07b",
+"n": 8,
+"ref": "MSP07",
+"tpl": "crit",
+"cur": "EQSUAP",
+"jour": "J5",
+"etape": "MSP adaptée aux besoins",
+"niveau": 3,
+"titre": "Douleur thoracique au travail",
+"theme": "Synthèse : détresse circulatoire évolutive",
+"missions": "Bilan, transmission au médecin régulateur, collaboration avec l’équipe médicale, surveillance pendant le transport.",
+"duree": "30 min + 20 min de débriefing",
+"lieu": "Bureau",
+"equipe": "Équipage VSAV, équipe SMUR jouée par un formateur",
+"cases": [
+"malaise",
+"acr"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître une douleur thoracique grave",
+"Collaborer avec l’équipe médicale",
+"Réagir à l’arrêt cardiaque"
+],
+"message": "Départ VSAV : « Homme de 55 ans, douleur dans la poitrine. »",
+"contexte": "M. Fontaine (55 ans) a une douleur thoracique serrant depuis 20 minutes, en sueur.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Fontaine, 55 ans",
+"brief": "Douleur qui serre la poitrine et irradie dans le bras.",
+"jeu": "Arrêt cardiaque au bout de 10 minutes (passer au mannequin).",
+"param": [
+"FC 105/min",
+"PA 100/60",
+"Sueurs"
+],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage d’un VSAV (chef d’agrès joué par un formateur ou un stagiaire) avec l’ensemble du matériel du véhicule.",
+"evolution": [
+[
+"Transmission rapide et DAE posé",
+"Choc délivré, reprise d’activité cardiaque."
+],
+[
+"DAE non préparé",
+"Retard au premier choc."
+]
+],
+"attendus": [
+"Bilan",
+"Transmission",
+"Anticiper : DAE prêt",
+"RCP",
+"Collaboration avec le SMUR"
+],
+"observe": {
+"c7": "Prise en charge de la détresse vitale",
+"c4": "Collaboration avec l’équipe médicale",
+"c5": "Bilan",
+"c13": "Surveillance"
+},
+"mat": {
+"lieu": [],
+"maq": [],
+"acc": [
+"Mannequin RCP",
+"DAE de formation"
+],
+"sec": [
+"Sac VSAV, oxygène"
+]
+},
+"securite": "DAE de formation uniquement.",
+"debrief": [
+"Qu’avez-vous anticipé ?"
+]
+},
+{
+"id": "ps-c1",
+"cur": "PS",
+"n": 9,
+"titre": "Le bébé qui s’étouffe",
+"theme": "Obstruction grave des voies aériennes chez le nourrisson",
+"jour": "J1",
+"etape": "Séquence 1 : le système ventilatoire · MSP OAVA",
+"niveau": 2,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Appartement, salon avec tapis de jeu",
+"equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
+"cases": [
+"ova",
+"pedia"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître une obstruction grave chez le nourrisson",
+"Réaliser les claques dans le dos et les compressions thoraciques adaptées",
+"Gérer un parent paniqué"
+],
+"message": "« Prompt secours, pour un nourrisson qui s’étouffe, 4 allée des Tilleuls, 3e étage, à Plaisir. »",
+"contexte": "Léo (8 mois) jouait sur le tapis. Sa mère l’a trouvé violacé, sans bruit, avec une petite pièce de jeu manquante.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Léo, 8 mois (mannequin nourrisson)",
+"brief": "Mannequin nourrisson.",
+"jeu": "Le formateur annonce l’expulsion de l’objet après une série correcte de claques et compressions thoraciques.",
+"param": [
+"Avant : pas de cri, pas de toux, lèvres bleues",
+"Après : pleure, FR 40/min, FC 150/min, coloration qui revient"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Mère",
+"brief": "Vous tenez le bébé contre vous en hurlant. Vous refusez d’abord de le donner.",
+"jeu": "Vous le confiez si le sapeur-pompier vous parle avec fermeté et douceur.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
+"evolution": [
+[
+"Gestes correctement enchaînés",
+"L’objet est expulsé, le bébé pleure : rassurer la mère, surveiller, bilan."
+],
+[
+"Nourrisson secoué ou compressions abdominales",
+"Le formateur arrête et rappelle le geste dangereux."
+],
+[
+"Gestes inefficaces",
+"Le nourrisson perd connaissance : RCP nourrisson, alerte immédiate."
+]
+],
+"attendus": [
+"Prendre le nourrisson, tête plus basse que le thorax, sur l’avant-bras",
+"1 à 5 claques dans le dos, puis 1 à 5 compressions thoraciques avec deux doigts",
+"Vérifier la bouche, retirer l’objet visible",
+"Bilan, surveillance, rendre compte au SAMU (15)"
+],
+"observe": {
+"c23": "Obtient le nourrisson de la mère et la rassure",
+"c26": "Gestes adaptés au nourrisson, sans compression abdominale",
+"c24": "Message clair au SAMU (15)",
+"c31": "Surveillance de la respiration et de la coloration"
+},
+"mat": {
+"lieu": [
+"Tapis de jeu, jouets"
+],
+"maq": [],
+"acc": [
+"Mannequin nourrisson de désobstruction",
+"Petite pièce de jeu"
+],
+"sec": [
+"Sac de prompt secours complet",
+"DAE de formation",
+"Bouteille d’oxygène de formation et masque haute concentration",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
+"Gants, gel hydroalcoolique, sacs DASRI"
+]
+},
+"securite": "Utiliser exclusivement un mannequin.",
+"debrief": [
+"Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
+"Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
+"Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
+"Si c’était à refaire, que changeriez-vous ?"
+],
+"ref": "MSP OAVA",
+"tpl": "crit",
+"missions": "Reconnaître une obstruction grave chez le nourrisson ; Réaliser les claques dans le dos et les compressions thoraciques adaptées ; Gérer un parent paniqué"
+},
+{
+"id": "ps-c2",
+"cur": "PS",
+"n": 10,
+"titre": "Accident de tronçonneuse",
+"theme": "Hémorragie de la cuisse nécessitant un garrot",
+"jour": "J2",
+"etape": "Séquence 2 : le système circulatoire · MSP hémorragie",
+"niveau": 2,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Jardin pavillonnaire, bois coupé",
+"equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
+"cases": [
+"hemo"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître l’échec de la compression et poser un garrot",
+"Noter l’heure de pose",
+"Prévenir la détresse circulatoire"
+],
+"message": "« Prompt secours, homme blessé à la jambe par une tronçonneuse, 18 chemin des Vignes à Maule. »",
+"contexte": "M. Petit (62 ans) élaguait seul. La tronçonneuse a ripé sur sa cuisse. Une flaque de sang s’étend sous lui.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Petit, 62 ans",
+"brief": "Vous êtes allongé dans l’herbe, vous avez très mal et vous avez froid.",
+"jeu": "Vous devenez somnolent si l’hémorragie n’est pas arrêtée en 2 minutes.",
+"param": [
+"Conscient puis somnolent",
+"FR 26/min · FC 125/min · pouls radial faible · PA 90/60",
+"Pâleur, sueurs, frissons"
+],
+"maq": "Plaie profonde face antérieure de cuisse, faux sang abondant, pantalon déchiré"
+},
+{
+"t": "Tiers",
+"nom": "Voisine",
+"brief": "Vous avez appelé le 18. Vous avez coupé la tronçonneuse.",
+"jeu": "Vous pouvez comprimer si on vous montre comment.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
+"evolution": [
+[
+"Garrot posé rapidement",
+"Hémorragie arrêtée, FC 115/min, la victime reste consciente."
+],
+[
+"Compression seule prolongée",
+"Le saignement continue : la victime devient somnolente."
+],
+[
+"Heure du garrot non notée",
+"Le médecin régulateur la demande."
+]
+],
+"attendus": [
+"Vérifier que la tronçonneuse est arrêtée",
+"Compression immédiate puis garrot au-dessus de la plaie si inefficace ou impossible",
+"Noter l’heure de pose",
+"Allonger, couvrir, oxygène selon protocole",
+"Rendre compte en urgence au SAMU (15) (demande de renfort médical)"
+],
+"observe": {
+"c23": "Vérifie l’arrêt de la machine",
+"c26": "Décision rapide du garrot",
+"c25": "Recherche les signes de détresse circulatoire",
+"c24": "Message d’urgence : garrot et heure de pose",
+"c31": "Surveille conscience, respiration et pouls"
+},
+"mat": {
+"lieu": [
+"Bûches, branchages"
+],
+"maq": [
+"Faux sang abondant",
+"Plaie de cuisse en silicone"
+],
+"acc": [
+"Tronçonneuse sans chaîne ou factice"
+],
+"sec": [
+"Sac de prompt secours complet",
+"DAE de formation",
+"Bouteille d’oxygène de formation et masque haute concentration",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
+"Gants, gel hydroalcoolique, sacs DASRI",
+"Garrot tourniquet, marqueur"
+]
+},
+"securite": "Tronçonneuse sans chaîne, réservoir vide. Garrot jamais serré sur le figurant (garrot sur manchon ou mannequin).",
+"debrief": [
+"Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
+"Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
+"Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
+"Si c’était à refaire, que changeriez-vous ?"
+],
+"ref": "MSP hémorragie",
+"tpl": "crit",
+"missions": "Reconnaître l’échec de la compression et poser un garrot ; Noter l’heure de pose ; Prévenir la détresse circulatoire"
+},
+{
+"id": "ps-c3",
+"cur": "PS",
+"n": 11,
+"titre": "Le nourrisson qui ne respire plus",
+"theme": "RCP du nourrisson et de l’enfant",
+"jour": "J3",
+"etape": "APP / MSP RCP nouveau-né, nourrisson, enfant",
+"niveau": 2,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Chambre d’enfant",
+"equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
+"cases": [
+"acr",
+"pedia"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître l’arrêt respiratoire et cardiaque du nourrisson",
+"Réaliser 5 insufflations initiales puis la RCP 15/2",
+"Soutenir les parents"
+],
+"message": "« Prompt secours, nourrisson qui ne respire plus, 7 rue Pasteur à Mantes-la-Jolie, 1er étage. »",
+"contexte": "Inès (5 mois) a été trouvée inerte dans son lit par son père.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Inès, 5 mois (mannequin nourrisson)",
+"brief": "Mannequin nourrisson.",
+"jeu": "Pas de reprise avant l’arrivée du VSAV (12 min).",
+"param": [
+"Inconsciente, ne respire pas, pas de signe de vie"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Père",
+"brief": "Vous êtes sidéré, vous répétez « elle dormait ».",
+"jeu": "Vous restez si on vous donne une mission (ouvrir la porte au VSAV).",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
+"evolution": [
+[
+"5 insufflations puis 15/2",
+"RCP poursuivie jusqu’à l’arrivée du VSAV."
+],
+[
+"RCP adulte sur nourrisson",
+"Le formateur arrête et rappelle la technique."
+]
+],
+"attendus": [
+"Apprécier la conscience et la respiration",
+"5 insufflations initiales",
+"Compressions avec deux doigts ou deux pouces, 15/2",
+"DAE avec électrodes pédiatriques si disponible",
+"Alerter, passer le relais"
+],
+"observe": {
+"c26": "RCP adaptée au nourrisson",
+"c24": "Alerte immédiate avec l’âge de la victime",
+"c22": "Gère l’émotion du parent sans perdre l’efficacité"
+},
+"mat": {
+"lieu": [
+"Lit à barreaux, table à langer"
+],
+"maq": [],
+"acc": [
+"Mannequin RCP nourrisson"
+],
+"sec": [
+"Sac de prompt secours complet",
+"DAE de formation",
+"Bouteille d’oxygène de formation et masque haute concentration",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
+"Gants, gel hydroalcoolique, sacs DASRI",
+"Électrodes pédiatriques de formation"
+]
+},
+"securite": "Désinfecter le mannequin entre chaque passage.",
+"debrief": [
+"Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
+"Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
+"Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
+"Si c’était à refaire, que changeriez-vous ?"
+],
+"ref": "MSP RCP nourrisson",
+"tpl": "crit",
+"missions": "Reconnaître l’arrêt respiratoire et cardiaque du nourrisson ; Réaliser 5 insufflations initiales puis la RCP 15/2 ; Soutenir les parents"
+},
+{
+"id": "ps-c4",
+"cur": "PS",
+"n": 12,
+"titre": "Douleur thoracique au marché",
+"theme": "Synthèse : malaise cardiaque évoluant vers l’arrêt",
+"jour": "J5",
+"etape": "MSP synthèse",
+"niveau": 3,
+"duree": "15 min + 15 min de débriefing",
+"lieu": "Marché couvert",
+"equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
+"cases": [
+"malaise",
+"acr",
+"bilan"
+],
+"checks": [],
+"objectifs": [
+"Mobiliser l’ensemble des compétences : bilans, alerte, gestes, surveillance",
+"Reconnaître l’aggravation et adapter sa conduite",
+"Passer le relais au VSAV"
+],
+"message": "« Prompt secours, homme qui a mal à la poitrine au marché de Saint-Germain-en-Laye. »",
+"contexte": "M. Fabre (63 ans) est assis sur une caisse, il se tient la poitrine. Il est fumeur, hypertendu.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Fabre, 63 ans",
+"brief": "Vous avez une douleur qui serre dans la poitrine depuis 20 minutes, elle irradie dans le bras gauche.",
+"jeu": "Au bout de 8 minutes, vous vous effondrez (passage sur mannequin). Vous refusez d’abord de vous allonger.",
+"param": [
+"Conscient, angoissé",
+"FR 22/min · FC 104/min irrégulier · SpO2 95 % · PA 160/95",
+"Douleur 8/10, sueurs"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Épouse",
+"brief": "Vous savez qu’il prend un traitement pour la tension et qu’il a déjà eu « un problème au cœur ».",
+"jeu": "Vous apportez les ordonnances si on vous le demande.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
+"evolution": [
+[
+"Repos strict, bilan et alerte rapides",
+"Effondrement à la 8e minute : RCP et DAE immédiats."
+],
+[
+"Victime laissée debout",
+"Effondrement plus précoce."
+],
+[
+"Aggravation non annoncée au SAMU",
+"Le SAMU rappelle pour un point de situation."
+]
+],
+"attendus": [
+"Mise au repos, bilans, recherche des antécédents",
+"Rendre compte rapidement (douleur thoracique)",
+"Préparer le DAE à proximité",
+"Reconnaître l’arrêt et débuter la RCP sans délai",
+"Point de situation et relais au VSAV"
+],
+"observe": {
+"c25": "Bilan complet de la douleur thoracique",
+"c28": "Prise en charge adaptée du malaise",
+"c26": "Réaction immédiate à l’arrêt cardiaque",
+"c24": "Message initial puis point de situation",
+"c32": "Transmission au chef d’agrès du VSAV"
+},
+"mat": {
+"lieu": [
+"Étal, caisses"
+],
+"maq": [
+"Brumisateur (sueurs)"
+],
+"acc": [
+"Mannequin RCP adulte",
+"Ordonnances"
+],
+"sec": [
+"Sac de prompt secours complet",
+"DAE de formation",
+"Bouteille d’oxygène de formation et masque haute concentration",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)",
+"Gants, gel hydroalcoolique, sacs DASRI"
+]
+},
+"securite": "Substitution figurant / mannequin annoncée par le formateur.",
+"debrief": [
+"Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
+"Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
+"Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
+"Si c’était à refaire, que changeriez-vous ?"
+],
+"ref": "MSP synthèse",
+"tpl": "crit",
+"missions": "Mobiliser l’ensemble des compétences : bilans, alerte, gestes, surveillance ; Reconnaître l’aggravation et adapter sa conduite ; Passer le relais au VSAV"
+},
+{
+"id": "su-c1",
+"cur": "EQSUAP",
+"n": 9,
+"titre": "Motard au sol",
+"theme": "Traumatisme de membre et retrait du casque",
+"jour": "J1",
+"etape": "MSP01 · Immobilisation, relevage, brancardage",
+"niveau": 2,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Bord de route départementale",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"immo",
+"relevage",
+"trauma"
+],
+"checks": [],
+"objectifs": [
+"Retirer un casque intégral à deux",
+"Immobiliser une fracture de jambe",
+"Relever au plan dur et brancarder"
+],
+"message": "« VSAV Rambouillet 1, départ pour accident deux-roues seul, RD 906 à hauteur du lieu-dit La Villeneuve. »",
+"contexte": "Un motard (30 ans) a chuté seul dans un virage. Il est sur le côté, casque intégral, jambe droite déformée.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Caron, 30 ans",
+"brief": "Vous avez très mal à la jambe droite. Vous voulez enlever votre casque.",
+"jeu": "Vous êtes nauséeux, vous criez à chaque mouvement de la jambe.",
+"param": [
+"Conscient, orienté",
+"FR 22/min · FC 110/min · SpO2 97 % · PA 130/80",
+"Douleur jambe 9/10, pas de perte de connaissance"
+],
+"maq": "Déformation de jambe (attelle factice sous pantalon)"
+},
+{
+"t": "Témoin",
+"nom": "Automobiliste témoin",
+"brief": "Vous avez vu la chute, vous avez posé votre triangle.",
+"jeu": "Vous restez à disposition.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Retrait du casque coordonné",
+"Pas d’aggravation."
+],
+[
+"Attelle posée sans maintien de part et d’autre",
+"Douleur majorée."
+]
+],
+"attendus": [
+"Balisage et protection",
+"Maintien de la tête, retrait du casque à deux",
+"Bilan, immobilisation de la jambe par attelle à dépression",
+"Relevage, matelas immobilisateur, brancardage"
+],
+"observe": {
+"c2": "Protection de la zone",
+"c10": "Retrait du casque et immobilisation conformes",
+"c11": "Relevage en équipe",
+"c5": "Bilan transmis"
+},
+"mat": {
+"lieu": [
+"Cônes",
+"Moto ou silhouette"
+],
+"maq": [
+"Éraflures, combinaison déchirée"
+],
+"acc": [
+"Casque intégral"
+],
+"sec": [
+"Sac d’urgence VSAV",
+"Bouteille d’oxygène et masques",
+"DSA de formation",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
+"Gants, surblouses, gel hydroalcoolique, sacs DASRI",
+"Fiche bilan SUAP et radio / téléphone",
+"Attelles à dépression, matelas immobilisateur, plan dur"
+]
+},
+"securite": "Exercice hors circulation.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP01",
+"tpl": "crit",
+"missions": "Retirer un casque intégral à deux ; Immobiliser une fracture de jambe ; Relever au plan dur et brancarder"
+},
+{
+"id": "su-c2",
+"cur": "EQSUAP",
+"n": 10,
+"titre": "Détresse respiratoire chez une personne âgée",
+"theme": "Bilan et détresse vitale respiratoire",
+"jour": "J2",
+"etape": "MSP02 · Bilan et malaise",
+"niveau": 2,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Chambre d’un EHPAD",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"bilan",
+"detresse"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître une détresse respiratoire",
+"Installer la victime et administrer l’oxygène selon le protocole",
+"Collaborer avec le personnel soignant présent"
+],
+"message": "« VSAV Versailles 2, départ pour difficultés respiratoires, EHPAD Les Glycines, 3 rue Hoche à Versailles, chambre 112. »",
+"contexte": "Mme Lefèvre (88 ans), insuffisante cardiaque, est essoufflée depuis la nuit. L’infirmière l’a assise au bord du lit.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Lefèvre, 88 ans",
+"brief": "Vous avez du mal à respirer, vous ne pouvez dire que quelques mots.",
+"jeu": "Vous êtes mieux assise, jambes pendantes.",
+"param": [
+"Consciente, phrases courtes",
+"FR 32/min · FC 112/min · SpO2 86 % · PA 170/100",
+"Crépitants, œdèmes des chevilles"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Infirmière",
+"brief": "Vous donnez le dossier de liaison d’urgence, les traitements, l’historique.",
+"jeu": "Vous demandez ce que les sapeurs-pompiers comptent faire.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Position assise et oxygène",
+"SpO2 92 %, FR 26/min."
+],
+[
+"Victime allongée",
+"Aggravation : SpO2 80 %, sueurs."
+]
+],
+"attendus": [
+"Bilan d’urgence vitale, reconnaître la détresse respiratoire",
+"Position demi-assise, oxygène selon protocole",
+"Recueillir le dossier de liaison d’urgence",
+"Transmettre le bilan, surveiller"
+],
+"observe": {
+"c7": "Reconnaît et prend en charge la détresse vitale",
+"c4": "Collabore avec l’infirmière de l’établissement",
+"c5": "Bilan et transmission",
+"c13": "Surveillance pendant le transport"
+},
+"mat": {
+"lieu": [
+"Lit médicalisé"
+],
+"maq": [
+"Cyanose des lèvres (fard bleu)"
+],
+"acc": [
+"Dossier de liaison d’urgence"
+],
+"sec": [
+"Sac d’urgence VSAV",
+"Bouteille d’oxygène et masques",
+"DSA de formation",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
+"Gants, surblouses, gel hydroalcoolique, sacs DASRI",
+"Fiche bilan SUAP et radio / téléphone"
+]
+},
+"securite": "Pas d’oxygène réel sur le figurant.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP02",
+"tpl": "crit",
+"missions": "Reconnaître une détresse respiratoire ; Installer la victime et administrer l’oxygène selon le protocole ; Collaborer avec le personnel soignant présent"
+},
+{
+"id": "su-c3",
+"cur": "EQSUAP",
+"n": 11,
+"titre": "Piéton renversé",
+"theme": "Traumatisé grave : détresse circulatoire",
+"jour": "J2",
+"etape": "MSP03 · Extraction (accident de circulation)",
+"niveau": 3,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Rue en agglomération",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"trauma",
+"detresse"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître une détresse circulatoire chez un traumatisé",
+"Prioriser les gestes et demander un renfort médical",
+"Préparer un transport rapide"
+],
+"message": "« VSAV Poissy 1, départ pour piéton renversé, boulevard Robespierre à Poissy. »",
+"contexte": "Une piétonne (35 ans) a été percutée par une camionnette à 50 km/h. Elle est au sol, pâle, se plaint du ventre et du bassin.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Blanc, 35 ans",
+"brief": "Vous avez mal au ventre et au bassin, vous avez soif.",
+"jeu": "Vous devenez somnolente à la 10e minute.",
+"param": [
+"Consciente puis somnolente",
+"FR 28/min · FC 130/min · pouls radial filant · PA 85/50",
+"Pâleur, marbrures",
+"Douleur abdominale"
+],
+"maq": "Abrasions de la hanche"
+},
+{
+"t": "Témoin",
+"nom": "Conducteur",
+"brief": "Vous êtes choqué, vous répétez que vous ne l’avez pas vue.",
+"jeu": "",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Demande précoce du SMUR",
+"SMUR annoncé dans 10 min."
+],
+[
+"Bilan long sans priorisation",
+"Aggravation rapide."
+]
+],
+"attendus": [
+"Mécanisme à haute cinétique : maintien tête",
+"Détresse circulatoire : allonger, couvrir, oxygène",
+"Message d’urgence et demande de renfort médical",
+"Immobilisation, ceinture pelvienne selon protocole"
+],
+"observe": {
+"c7": "Reconnaît la détresse circulatoire",
+"c5": "Bilan priorisé et transmis en urgence",
+"c4": "Collabore avec le SMUR",
+"c10": "Immobilisation adaptée"
+},
+"mat": {
+"lieu": [
+"Cônes"
+],
+"maq": [
+"Fard pâle, marbrures",
+"Abrasions"
+],
+"acc": [],
+"sec": [
+"Sac d’urgence VSAV",
+"Bouteille d’oxygène et masques",
+"DSA de formation",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
+"Gants, surblouses, gel hydroalcoolique, sacs DASRI",
+"Fiche bilan SUAP et radio / téléphone",
+"Ceinture pelvienne, matelas immobilisateur"
+]
+},
+"securite": "Exercice hors circulation.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP03",
+"tpl": "crit",
+"missions": "Reconnaître une détresse circulatoire chez un traumatisé ; Prioriser les gestes et demander un renfort médical ; Préparer un transport rapide"
+},
+{
+"id": "su-c4",
+"cur": "EQSUAP",
+"n": 12,
+"titre": "Le nouveau-né qui ne crie pas",
+"theme": "Réanimation du nouveau-né",
+"jour": "J3",
+"etape": "MSP04 · Nouveau-né",
+"niveau": 3,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Salle de bain d’un appartement",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"naissance",
+"acr",
+"pedia"
+],
+"checks": [],
+"objectifs": [
+"Évaluer le nouveau-né à la naissance",
+"Débuter la ventilation puis la RCP du nouveau-né",
+"Demander un renfort médical"
+],
+"message": "« VSAV Versailles 1, départ pour accouchement, 2 place Hoche à Versailles. »",
+"contexte": "À l’arrivée, l’enfant vient de naître dans la baignoire. Il est bleu, mou, ne crie pas.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Nouveau-né (mannequin)",
+"brief": "Mannequin nouveau-né.",
+"jeu": "Reprise d’une respiration après 1 min de ventilation efficace.",
+"param": [
+"Ne respire pas, FC 50/min",
+"Après ventilation : FC 120/min, crie"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Mère",
+"brief": "Vous êtes épuisée et terrifiée.",
+"jeu": "Vous demandez sans cesse si le bébé va bien.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Ventilation efficace dans la minute",
+"Le nouveau-né reprend une respiration."
+],
+[
+"Compressions sans ventilation préalable",
+"Le formateur rappelle la conduite à tenir."
+]
+],
+"attendus": [
+"Sécher, stimuler, couvrir",
+"5 insufflations puis ventilation",
+"RCP 3/1 si FC < 60/min",
+"Alerte et renfort médical, prise en charge de la mère"
+],
+"observe": {
+"c7": "Réanimation adaptée au nouveau-né",
+"c4": "Demande et accueil du renfort médical",
+"c3": "Répartition des rôles (mère / enfant)"
+},
+"mat": {
+"lieu": [
+"Baignoire"
+],
+"maq": [],
+"acc": [
+"Mannequin nouveau-né de réanimation",
+"Serviettes"
+],
+"sec": [
+"Sac d’urgence VSAV",
+"Bouteille d’oxygène et masques",
+"DSA de formation",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
+"Gants, surblouses, gel hydroalcoolique, sacs DASRI",
+"Fiche bilan SUAP et radio / téléphone",
+"BAVU nouveau-né"
+]
+},
+"securite": "Désinfecter le mannequin entre chaque passage.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP04",
+"tpl": "crit",
+"missions": "Évaluer le nouveau-né à la naissance ; Débuter la ventilation puis la RCP du nouveau-né ; Demander un renfort médical"
+},
+{
+"id": "su-c5",
+"cur": "EQSUAP",
+"n": 13,
+"titre": "Crise convulsive au collège",
+"theme": "Affection spécifique : crise convulsive",
+"jour": "J3",
+"etape": "MSP05 · Affections spécifiques",
+"niveau": 1,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Cour de collège",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"affection"
+],
+"checks": [],
+"objectifs": [
+"Protéger une victime pendant une crise convulsive",
+"Réaliser le bilan après la crise",
+"Collaborer avec l’infirmière scolaire"
+],
+"message": "« VSAV Saint-Germain 1, départ pour adolescent qui convulse, collège Debussy, rue de Poissy à Saint-Germain-en-Laye. »",
+"contexte": "Hugo (14 ans), épileptique connu, convulse dans la cour depuis 3 minutes.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Hugo, 14 ans",
+"brief": "Vous êtes en crise puis très endormi après.",
+"jeu": "La crise cesse 1 minute après votre arrivée, puis phase de sommeil bruyant.",
+"param": [
+"Après la crise : obnubilé, FR 20/min, FC 110/min, SpO2 94 %",
+"Glycémie 0,95 g/l",
+"Morsure de langue"
+],
+"maq": ""
+},
+{
+"t": "Tiers",
+"nom": "Infirmière scolaire",
+"brief": "Vous avez le projet d’accueil individualisé (PAI) de Hugo.",
+"jeu": "Vous avez appelé les parents.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Protection sans contention",
+"Pas de blessure."
+],
+[
+"Tentative d’ouvrir la bouche",
+"Le formateur rappelle le danger."
+]
+],
+"attendus": [
+"Écarter les objets dangereux, ne pas contenir",
+"Après la crise : PLS, oxygène, bilan, glycémie",
+"Recueillir le PAI et les traitements",
+"Transmission et surveillance"
+],
+"observe": {
+"c2": "Sécurise l’environnement pendant la crise",
+"c8": "Prise en charge de la crise convulsive",
+"c4": "Collabore avec l’infirmière scolaire",
+"c6": "Respect de la confidentialité devant les élèves"
+},
+"mat": {
+"lieu": [
+"Cour, cartables"
+],
+"maq": [
+"Faux sang (morsure de langue)"
+],
+"acc": [
+"PAI"
+],
+"sec": [
+"Sac d’urgence VSAV",
+"Bouteille d’oxygène et masques",
+"DSA de formation",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
+"Gants, surblouses, gel hydroalcoolique, sacs DASRI",
+"Fiche bilan SUAP et radio / téléphone"
+]
+},
+"securite": "Le figurant simule la crise sur un tapis.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP05",
+"tpl": "crit",
+"missions": "Protéger une victime pendant une crise convulsive ; Réaliser le bilan après la crise ; Collaborer avec l’infirmière scolaire"
+},
+{
+"id": "su-c6",
+"cur": "EQSUAP",
+"n": 14,
+"titre": "Réaction allergique au restaurant",
+"theme": "Affection spécifique : anaphylaxie",
+"jour": "J4",
+"etape": "MSP05 · Affections spécifiques",
+"niveau": 2,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Restaurant",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"affection",
+"detresse"
+],
+"checks": [],
+"objectifs": [
+"Reconnaître une réaction anaphylactique",
+"Aider à l’utilisation du stylo d’adrénaline",
+"Transmettre en urgence"
+],
+"message": "« VSAV Versailles 2, départ pour réaction allergique, restaurant Le Saint-Louis, rue de la Paroisse à Versailles. »",
+"contexte": "Mme Colin (32 ans), allergique à l’arachide, a mangé un dessert. Elle a des plaques sur le corps, du mal à respirer.",
+"roles": [
+{
+"t": "Victime",
+"nom": "Mme Colin, 32 ans",
+"brief": "Vous avez la gorge qui serre, vous avez un stylo d’adrénaline dans votre sac.",
+"jeu": "Amélioration 5 min après l’adrénaline.",
+"param": [
+"Consciente, angoissée",
+"FR 30/min · FC 125/min · SpO2 91 % · PA 85/50",
+"Urticaire géante, œdème des lèvres"
+],
+"maq": "Plaques rouges (fard)"
+},
+{
+"t": "Tiers",
+"nom": "Ami",
+"brief": "Vous savez qu’elle a un stylo d’adrénaline.",
+"jeu": "Vous le donnez si on vous le demande.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Adrénaline rapidement utilisée",
+"Amélioration."
+],
+[
+"Délai",
+"Aggravation : PA 70/40, somnolence."
+]
+],
+"attendus": [
+"Reconnaître l’anaphylaxie",
+"Aider à l’auto-injection, position adaptée, oxygène",
+"Message d’urgence, demande de renfort médical",
+"Surveillance"
+],
+"observe": {
+"c8": "Reconnaît l’anaphylaxie et aide à l’injection",
+"c5": "Bilan transmis en urgence",
+"c13": "Surveillance de l’évolution"
+},
+"mat": {
+"lieu": [
+"Table de restaurant"
+],
+"maq": [
+"Fard rouge"
+],
+"acc": [
+"Stylo d’adrénaline factice"
+],
+"sec": [
+"Sac d’urgence VSAV",
+"Bouteille d’oxygène et masques",
+"DSA de formation",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
+"Gants, surblouses, gel hydroalcoolique, sacs DASRI",
+"Fiche bilan SUAP et radio / téléphone"
+]
+},
+"securite": "Stylo factice uniquement.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP05",
+"tpl": "crit",
+"missions": "Reconnaître une réaction anaphylactique ; Aider à l’utilisation du stylo d’adrénaline ; Transmettre en urgence"
+},
+{
+"id": "su-c7",
+"cur": "EQSUAP",
+"n": 15,
+"titre": "Électrisation sur chantier",
+"theme": "Brûlure électrique",
+"jour": "J4",
+"etape": "MSP06 · Brûlures",
+"niveau": 3,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Chantier",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"brulure",
+"trauma"
+],
+"checks": [],
+"objectifs": [
+"Faire couper le courant avant d’approcher",
+"Rechercher les lésions d’entrée et de sortie",
+"Surveiller le risque cardiaque"
+],
+"message": "« VSAV Mantes 1, départ pour ouvrier électrisé, chantier ZAC Mantes Innovaparc. »",
+"contexte": "Un électricien (45 ans) a touché un câble sous tension. Il est tombé de 1 m. Le câble est toujours au sol.",
+"roles": [
+{
+"t": "Victime",
+"nom": "M. Lucas, 45 ans",
+"brief": "Vous avez des douleurs à la main droite et au pied gauche.",
+"jeu": "Palpitations au cours de la prise en charge.",
+"param": [
+"Conscient",
+"FR 20/min · FC 120/min irrégulier · PA 140/85",
+"Brûlures main droite, pied gauche"
+],
+"maq": "Petites brûlures noircies"
+},
+{
+"t": "Tiers",
+"nom": "Chef de chantier",
+"brief": "Vous savez où est le disjoncteur.",
+"jeu": "Vous le coupez si on vous le demande.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Courant coupé avant approche",
+"Prise en charge sécurisée."
+],
+[
+"Approche avant coupure",
+"Le formateur arrête : sur-accident."
+]
+],
+"attendus": [
+"Faire couper le courant",
+"Bilan, lésions d’entrée et de sortie",
+"Pouls irrégulier : oxygène, surveillance rapprochée",
+"Transmission avec le mécanisme"
+],
+"observe": {
+"c2": "Fait couper le courant",
+"c8": "Prise en charge de l’électrisation",
+"c5": "Bilan : mécanisme, lésions, troubles du rythme"
+},
+"mat": {
+"lieu": [
+"Câble factice, armoire électrique factice"
+],
+"maq": [
+"Fard noir"
+],
+"acc": [
+"Escabeau"
+],
+"sec": [
+"Sac d’urgence VSAV",
+"Bouteille d’oxygène et masques",
+"DSA de formation",
+"Oxymètre, tensiomètre, thermomètre, lecteur de glycémie",
+"Gants, surblouses, gel hydroalcoolique, sacs DASRI",
+"Fiche bilan SUAP et radio / téléphone"
+]
+},
+"securite": "Aucun matériel électrique sous tension.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP06",
+"tpl": "crit",
+"missions": "Faire couper le courant avant d’approcher ; Rechercher les lésions d’entrée et de sortie ; Surveiller le risque cardiaque"
+},
+{
+"id": "su-c8",
+"cur": "EQSUAP",
+"n": 16,
+"titre": "Retour d’intervention",
+"theme": "MSP adaptée : hygiène, reconditionnement et transmission",
+"jour": "J5",
+"etape": "MSP07 · MSP adaptée",
+"niveau": 2,
+"duree": "10 min + 15 min de débriefing",
+"lieu": "Remise du CIS, VSAV",
+"equipe": "Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires",
+"cases": [
+"hygiene"
+],
+"checks": [],
+"objectifs": [
+"Nettoyer et désinfecter le VSAV après une intervention",
+"Reconditionner et contrôler le matériel",
+"Signaler un matériel défectueux"
+],
+"message": "« Retour du VSAV après le transport d’une victime porteuse d’une infection respiratoire. »",
+"contexte": "Le VSAV rentre au CIS. Le brancard est souillé, la bouteille d’oxygène est presque vide, le DSA signale un défaut d’électrodes.",
+"roles": [
+{
+"t": "Autre",
+"nom": "Chef de garde",
+"brief": "Vous attendez le compte rendu du reconditionnement.",
+"jeu": "Vous demandez si le VSAV est disponible.",
+"param": [],
+"maq": ""
+}
+],
+"secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
+"evolution": [
+[
+"Protocole respecté",
+"VSAV disponible."
+],
+[
+"Défaut DSA non signalé",
+"Le formateur annonce un DSA indisponible à la prochaine intervention."
+]
+],
+"attendus": [
+"Équipements de protection",
+"Nettoyage et désinfection selon protocole",
+"Remplacement de l’oxygène et des consommables",
+"Contrôle du DSA, signalement",
+"Compte rendu au chef de garde"
+],
+"observe": {
+"c14": "Désinfection selon le protocole",
+"c15": "Contrôle et reconditionnement complets",
+"c3": "Rend compte au chef de garde"
+},
+"mat": {
+"lieu": [
+"VSAV"
+],
+"maq": [],
+"acc": [
+"Souillures factices",
+"Électrodes périmées"
+],
+"sec": [
+"Produits de désinfection",
+"Bouteille d’oxygène pleine",
+"Consommables"
+]
+},
+"securite": "Gants et lunettes pour les produits de désinfection.",
+"debrief": [
+"Comment l’équipage s’est-il réparti les missions dès l’arrivée ?",
+"Le bilan transmis était-il complet, chiffré et hiérarchisé ?",
+"Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?",
+"Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?"
+],
+"ref": "MSP07",
+"tpl": "crit",
+"missions": "Nettoyer et désinfecter le VSAV après une intervention ; Reconditionner et contrôler le matériel ; Signaler un matériel défectueux"
+}
 ]

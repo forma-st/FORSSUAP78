@@ -10,17 +10,34 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
 ## Architecture
 - `src/app.html` : application complète en un seul fichier (JS vanilla). État `S`, actions `A` (`data-act`),
   liaisons `data-bind` / `data-scope`. Données dans localStorage (clé `forssuap78-v1`), audio dans IndexedDB `forssuap78-audio`.
-- `build.py` injecte les données (`__LOGO__`, `__MARK__`, `__FORM_FILES__`, `__SCENARIOS__`, `__RIOFE__`)
+- `build.py` injecte les données (`__LOGO__`, `__MARK__`, `__FORM_FILES__`, `__SCENARIOS__`, `__RIOFE__`, `__FORMATION__`)
   et produit `fichier-unique.html` + `docs/app/` (PWA, service worker). Toujours relancer `python3 build.py` après modification.
 - `docs/` = GitHub Pages (https://forma-st.github.io/FORSSUAP78/), `docs/FORSSUAP78.apk`, `docs/qr.png`.
 - Android : Capacitor 6 dans `mobile/` (appId `fr.sdis78.forssuap`). Build :
   `cd mobile && npx cap sync android && cd android && ./gradlew assembleDebug --no-daemon -q --max-workers=2`
   puis copier `app/build/outputs/apk/debug/app-debug.apk` vers `docs/FORSSUAP78.apk`.
   Il faut un SDK Android (ANDROID_HOME) et JDK 17 ; dl.google.com est autorisé dans l'environnement.
-  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.2.1 (code 5).
+  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.3.0 (code 6).
 - `tools/brand.py` : toutes les images (logo PDF, icônes web, mipmaps, splash) depuis `brand/logo-sdis78-source.png`.
 - `vendor/` : jsPDF, SDK Anthropic (bundle esbuild), client ElevenLabs (bundle).
 - `relay/` : Cloudflare Worker (relais IA `/v1/messages` + `/eleven/session`), nom `forssuap78-relais`.
+
+## Charte graphique (v1.3.0)
+- Fond blanc, **pas de mode sombre**. Couleurs des documents RIOFE : marine `#1f3864` (barre du haut, en-têtes), bleu `#2e74b5`
+  (accent, badge cursus), bleu pâle `#dbe5f1` (en-têtes de panneaux), liseré jaune `#ffff00` ; niveaux NA `#ff5050`, ECA `#ffc000`,
+  A `#92d050` (variables `--f-*`, texte foncé sur ces fonds). PDF générés : marine `[31,56,100]`.
+- Plus aucune référence UDPS / ANPS / PSE : certificats de compétences, attestations FC, notifications défavorables, textes et
+  réglages associés supprimés (v1.3.0). Restent : attestation d'assiduité et grilles sommatives RIOFE, procès-verbal générique.
+
+## Deux espaces (écran d'accueil `home`)
+- **Espace administratif** (`S.space='admin'`, onglets Formations / Grilles / Réglages) : formations, participants, présence,
+  fiches MSP, grilles sommatives, attestations.
+- **Espace formation** (`S.space='form'`, onglets Planning / Séquences / Scénarios MSP) : vues `planning`, `modules`, `module`, `present`
+  (diaporama plein écran : flèches, balayage, notes formateur) et `scenarios`. Le planning se cale sur les journées d'une formation choisie
+  (`S.fsid`) ; « Évaluer » sur une MSP ouvre la fiche MSP pré-remplie (thème, missions, réf.) dans cette formation.
+- Données : `tools/formation.py` → `data/formation.json` (plannings PS d'après le programme de la valise, SUAP d'après le chronogramme RIOFE p. 16 ;
+  modules séquences/APP avec fiche + diapositives ; seule la séquence 1 est reprise d'un document fourni, les autres sont marquées « à valider »).
+  `tools/scenarios_sdis78.py` → `data/scenarios.json` (scénarios MSP reliés au planning, `observe` indexé par les savoir-agir RIOFE, `tpl` auto/crit).
 
 ## Référentiels RIOFE
 - Sources : `modeles/riofe/` (RIOFE_EQ_SPV_SUAP.pdf, RIOFE_EQ_SPV_MODULE_TRANSVERSE.pdf, RIOFE_CHEF_EQUIPE_SPP.pdf), valise pédagogique `modeles/valise/`.
@@ -39,9 +56,10 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
 - Exigence forte : les exports PDF **respectent rigoureusement les documents d'origine** (fond = page d'origine + surimpression mesurée).
 
 ## Scénarios MSP
-- `tools/scenarios_sdis78.py` → `data/scenarios.json` : 11 scénarios Prompt Secours (`ps-01`…) et 14 Équipier SUAP (`suap-01`…, MSP01–07).
+- `tools/scenarios_sdis78.py` (16 scénarios reliés au planning : `ps-oava`…, `su-msp01`…) + `tools/scenarios_complements.py`
+  (scénarios complémentaires `ps-c…` / `su-c…`, sujets absents du planning) → `data/scenarios.json`.
 - `observe` = savoirs-agir RIOFE (`c22`…`c32` PS, `c1`…`c15` SUAP) ; `cases` = thèmes en pastilles, propres au cursus (`SC_TAGS`).
-- « Évaluer ce cas » crée une fiche MSP (autoévaluation accompagnée) pré-remplie : thème, missions (objectifs), réf. MSP.
+- « Évaluer cette MSP » crée la fiche MSP (`tpl` auto/crit) pré-remplie : thème, missions, réf. MSP.
 
 ## Régulation simulée (SAMU 78 – CRRA 15 : bilan pompier)
 - **Pas de CTA-CODIS** (décision utilisateur). Accueil : « Le SAMU, j’écoute. » (`AI_GREETING`, identique au first message de l’agent).
@@ -68,8 +86,9 @@ Serveur local : `cd docs/app && python3 -m http.server 8779`, puis Playwright (C
 Vérifier les PDF en les rendant en PNG (`pdftoppm`) et en contrôlant visuellement le placement.
 
 ## Tâches restantes
-1. Faire valider les scénarios MSP par l’équipe pédagogique (contenu, adresses, jours) ; tester un appel vocal réel avec l’agent Claire.
-2. **Feuille d'émargement** à compléter à l'export — modèle à fournir par l'utilisateur.
-3. Diplôme Équipier SUAP (modèle GEEF à fusion) : non implémenté, à voir avec l'utilisateur.
-4. Code générique encore présent mais sans usage RIOFE (technicité, fiches de suivi, QCM, certificat / attestation FC génériques) : à garder
+1. Faire relire et compléter par l'équipe pédagogique les modules et scénarios (fiches séquences fournies au fur et à mesure).
+2. Tester un appel vocal réel avec l’agent Claire (échec « agent not available », code 3000, au 18/11/2026 : voir la section Régulation).
+3. **Feuille d'émargement** à compléter à l'export — modèle à fournir par l'utilisateur.
+4. Diplôme Équipier SUAP (modèle GEEF à fusion) : non implémenté, à voir avec l'utilisateur.
+5. Code générique encore présent mais sans usage RIOFE (technicité, fiches de suivi, QCM, certificat / attestation FC génériques) : à garder
    tant que des grilles personnalisées peuvent s’en servir.

@@ -12,7 +12,7 @@ b64 = lambda p: base64.b64encode(open(p, 'rb').read()).decode()
 LOGO = 'data:image/jpeg;base64,' + b64('brand/logo-480.jpg')
 MARK = 'data:image/png;base64,' + b64('brand/symbole-96.png')
 import json
-src = src.replace('__LOGO__', LOGO).replace('__MARK__', MARK).replace('const FORM_FILES=__FORM_FILES__;', 'const FORM_FILES=' + json.dumps(sorted(f[:-4] for f in os.listdir('docs/app/forms') if f.endswith('.png'))) + ';').replace('const SCENARIOS=__SCENARIOS__;', 'const SCENARIOS=' + open('data/scenarios.json', encoding='utf-8').read() + ';').replace('const RIOFE=__RIOFE__;', 'const RIOFE=' + open('data/riofe.json', encoding='utf-8').read() + ';')
+src = src.replace('__LOGO__', LOGO).replace('__MARK__', MARK).replace('const FORM_FILES=__FORM_FILES__;', 'const FORM_FILES=' + json.dumps(sorted(f[:-4] for f in os.listdir('docs/app/forms') if f.endswith('.png'))) + ';').replace('const SCENARIOS=__SCENARIOS__;', 'const SCENARIOS=' + open('data/scenarios.json', encoding='utf-8').read() + ';').replace('const RIOFE=__RIOFE__;', 'const RIOFE=' + open('data/riofe.json', encoding='utf-8').read() + ';').replace('const FORMATION=__FORMATION__;', 'const FORMATION=' + open('data/formation.json', encoding='utf-8').read() + ';')
 
 WEIGHTS = (400, 500, 600, 700, 800)
 FONT_FILES = [f'montserrat-latin-{w}-normal.woff2' for w in WEIGHTS]

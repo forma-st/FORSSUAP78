@@ -1,30 +1,20 @@
 <title>FORSSUAP 78</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="theme-color" content="#002b6b">
+<meta name="theme-color" content="#1f3864">
 <!--FONTS-->
 <style>
-/* Layout : application une colonne aux couleurs du SDIS 78 (marine + rouge), barre du haut collante + navigation basse ; grilles en tableau sur tablette, en cartes sur téléphone. */
+/* Layout : application une colonne aux couleurs des documents RIOFE du SDIS 78 (fond blanc, bleu marine des en-têtes,
+   bleu du bandeau « Équipier SUAP », bleu pâle des intitulés de blocs, liseré jaune du pied de page ; niveaux vert / orange / rouge). */
 :root{
-  --bg:#f4f7fa; --surface:#ffffff; --surface-2:#f5f7fa; --ink:#1f2937; --muted:#5b6b80; --line:#d7e1ea;
-  --brand:#002b6b; --brand-ink:#ffffff; --brand-soft:#e3eaf5; --brand-deep:#001d39;
-  --accent:#e30613; --accent-ink:#ffffff; --alert:#c10435;
-  --t-vertf:#17643a; --t-vert:#2f8a47; --t-orange:#c97a12; --t-rouge:#c10435; --t-bleu:#064d94; --t-gris:#7b8594;
+  --bg:#ffffff; --surface:#ffffff; --surface-2:#f2f2f2; --ink:#1a1a1a; --muted:#595959; --line:#d0d7e2;
+  --brand:#1f3864; --brand-ink:#ffffff; --brand-soft:#dbe5f1; --brand-deep:#16284a; --brand-mid:#2e74b5; --band:#ffff00;
+  --accent:#2e74b5; --accent-ink:#ffffff; --alert:#c00000;
+  --t-vertf:#3b6e12; --t-vert:#4e8a1f; --t-orange:#b07800; --t-rouge:#c00000; --t-bleu:#2e74b5; --t-gris:#7f7f7f;
+  --f-vert:#92d050; --f-orange:#ffc000; --f-rouge:#ff5050;
   --f-display:"Montserrat",Arial,system-ui,sans-serif;
   --f-body:"Montserrat",Arial,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --r:10px; --shadow:0 1px 2px rgba(0,43,107,.06),0 2px 10px rgba(0,43,107,.06);
+  --r:8px; --shadow:none; color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0b1422; --surface:#13203a; --surface-2:#182844; --ink:#e7edf5; --muted:#9db0c8; --line:#263f5c;
-  --brand:#7fa8e6; --brand-ink:#001d39; --brand-soft:#1b3157; --brand-deep:#001d39;
-  --accent:#ff4b55; --accent-ink:#ffffff; --alert:#ff6b7a;
-  --t-vertf:#2f9a5c; --t-vert:#4fb468; --t-orange:#e09a35; --t-rouge:#ff5a66; --t-bleu:#5b93e0; --t-gris:#8792a3;
-  --shadow:none; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0b1422; --surface:#13203a; --surface-2:#182844; --ink:#e7edf5; --muted:#9db0c8; --line:#263f5c;
-  --brand:#7fa8e6; --brand-ink:#001d39; --brand-soft:#1b3157; --brand-deep:#001d39;
-  --accent:#ff4b55; --accent-ink:#ffffff; --alert:#ff6b7a;
-  --t-vertf:#2f9a5c; --t-vert:#4fb468; --t-orange:#e09a35; --t-rouge:#ff5a66; --t-bleu:#5b93e0; --t-gris:#8792a3;
-  --shadow:none; color-scheme:dark}
 
 *{box-sizing:border-box}
 html,body{background:var(--bg)}
@@ -32,10 +22,10 @@ body{color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.4
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#002b6b}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#1f3864}
 
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:#002b6b;color:#fff;border-bottom:3px solid #e30613}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:#1f3864;color:#fff;border-bottom:4px solid var(--band)}
 .top .wrap{display:flex;align-items:center;gap:8px;min-height:56px;padding-block:6px}
 .top h1{font-family:var(--f-display);font-weight:700;font-size:1.08rem;letter-spacing:.005em;margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top h1 small{font-weight:500;font-size:.74rem;opacity:.85;display:block;overflow:hidden;text-overflow:ellipsis}
@@ -44,12 +34,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ibtn{border:0;background:transparent;color:inherit;min-width:44px;height:44px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 10px;font-weight:600;flex:none}
 .ibtn:hover{background:rgba(255,255,255,.12)}
 .ibtn svg{width:22px;height:22px}
-.ibtn.solid{background:#e30613;color:#fff}
+.ibtn.solid{background:#2e74b5;color:#fff}
 @media (max-width:440px){.ibtn .lbl{display:none}}
 
 main{padding-block:16px 130px}
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
-.nav .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.nav .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.home{max-width:560px;margin:0 auto;padding-top:8px}.home-hd{text-align:center;margin:8px 0 24px}.home-hd img{width:96px;height:auto}.home-hd h1{margin:8px 0 4px;font-size:1.6rem;color:var(--brand)}
+.space-tile{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:1px solid var(--line);border-left:6px solid var(--c);background:var(--surface);border-radius:14px;padding:18px 14px;min-height:104px;cursor:pointer;color:var(--text)}
+.space-tile .ic{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;background:var(--c);color:#fff;flex:none}.space-tile .ic svg{width:28px;height:28px}
+.space-tile>svg{width:22px;height:22px;flex:none;color:var(--muted)}
+.space-tile b{display:block;font-size:1.12rem;margin-bottom:4px}.space-tile .small{color:var(--muted);display:block}
+.slot{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:8px;align-items:center;border-left:4px solid var(--c);background:var(--surface);border-radius:8px;padding:6px 8px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.slot .t{font-size:.82rem;font-weight:700;line-height:1.3}.slot .b{display:flex;flex-direction:column;gap:2px;text-align:left;background:none;border:0;padding:4px 0;color:var(--text);min-width:0}.slot button.b{cursor:pointer}
+.mtable{display:grid;gap:0;padding:0}.mrow{display:grid;grid-template-columns:150px minmax(0,1fr);border-top:1px solid var(--line)}.mrow:first-child{border-top:0}.mrow .k{font-weight:700;padding:10px;background:var(--bg)}.mrow .v{padding:10px}
+@media (max-width:520px){.mrow{grid-template-columns:1fr}.mrow .k{padding-bottom:4px}}
+body.presenting .top,body.presenting .nav{display:none}body.presenting #main{max-width:none;padding:0}
+.present{position:fixed;inset:0;z-index:20;background:#1f3864;color:#fff;display:flex;flex-direction:column}
+.present .ph{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;opacity:.85}.present .ph .ibtn{color:#fff}
+.present .pb{flex:1;overflow:auto;padding:4vh 6vw;display:flex;flex-direction:column;justify-content:center;max-width:1100px;margin:0 auto;width:100%}
+.present h2{font-size:clamp(1.5rem,4.2vw,3rem);margin:0 0 3vh;color:#ffff00}.present ul{margin:0;padding-left:1.2em;display:grid;gap:1.6vh;font-size:clamp(1.05rem,2.6vw,1.9rem);line-height:1.35}
+.present .pn{margin-top:4vh;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.12);font-size:clamp(.9rem,1.8vw,1.2rem)}
+.present .pf{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}.present .pf .num{min-width:60px;text-align:center}
 .nav button{border:0;background:none;padding:8px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.74rem;font-weight:600;color:var(--muted);min-height:58px;position:relative}
 .nav button svg{width:24px;height:24px}
 .nav button.on{color:var(--brand)}
@@ -66,11 +72,11 @@ h3{font-family:var(--f-display);font-weight:700;font-size:1rem;margin:0;color:va
 
 .brandband{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;box-shadow:var(--shadow)}
 .brandband img{height:58px;width:auto;flex:none}
-.brandband .t{font-weight:700;color:#002b6b;font-size:.95rem;line-height:1.25}
-.brandband .t span{display:block;font-weight:500;color:#5b6b80;font-size:.8rem}
+.brandband .t{font-weight:700;color:#1f3864;font-size:.95rem;line-height:1.25}
+.brandband .t span{display:block;font-weight:500;color:#595959;font-size:.8rem}
 
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
-.panel>.hd{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.panel>.hd{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap;background:var(--brand-soft);border-radius:var(--r) var(--r) 0 0}
 .panel>.hd>h3{flex:1 0 auto}
 .panel>.bd{padding:14px}
 .fields{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
@@ -150,15 +156,15 @@ button.line:hover{background:var(--surface-2)}
 .mk.off{display:none}
 .seg{display:flex;gap:6px;flex-wrap:wrap}
 .lv{min-width:52px;height:46px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);font-weight:800;font-size:1rem;color:var(--tone);padding:0 10px}
-.lv.on{background:var(--tone);border-color:var(--tone);color:#fff}
+.lv.on{background:var(--fill,var(--tone));border-color:var(--tone);color:#111}
 .lv.selfmk{outline:3px dashed var(--tone);outline-offset:2px;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--tone) 32%,transparent) 0 5px,transparent 5px 10px)}
-.lv.selfmk.on{background:var(--tone)}
+.lv.selfmk.on{background:var(--fill,var(--tone))}
 .crit.bloc{background:var(--brand);color:#fff}.crit.bloc .cl{color:#fff;font-weight:800;font-size:.85rem;letter-spacing:.02em}
 details.desc{margin-top:4px;font-weight:500;font-size:.8rem}details.desc summary{cursor:pointer;color:var(--muted)}details.desc div{margin-top:3px;padding-left:6px;border-left:3px solid var(--tone)}
-.t-vertf{--tone:var(--t-vertf)} .t-vert{--tone:var(--t-vert)} .t-orange{--tone:var(--t-orange)} .t-rouge{--tone:var(--t-rouge)} .t-bleu{--tone:var(--t-bleu)} .t-gris{--tone:var(--t-gris)}
+.t-vertf{--tone:var(--t-vertf)} .t-vert{--tone:var(--t-vert);--fill:var(--f-vert)} .t-orange{--tone:var(--t-orange);--fill:var(--f-orange)} .t-rouge{--tone:var(--t-rouge);--fill:var(--f-rouge)} .t-bleu{--tone:var(--t-bleu)} .t-gris{--tone:var(--t-gris)}
 .legend{display:grid;gap:8px}
 .legend div{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
-.legend b.lvb{min-width:42px;text-align:center;border-radius:6px;background:var(--tone);color:#fff;font-size:.9rem;padding:2px 6px}
+.legend b.lvb{min-width:42px;text-align:center;border-radius:6px;background:var(--fill,var(--tone));color:#111;font-size:.9rem;padding:2px 6px}
 @media (min-width:760px){
   .lt{display:none}
   .gh{display:grid;grid-template-columns:minmax(0,1fr) repeat(var(--n),var(--colw));gap:12px;padding:10px 14px;font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
@@ -179,7 +185,7 @@ details.desc{margin-top:4px;font-weight:500;font-size:.8rem}details.desc summary
 .pass{display:flex;gap:6px;flex-wrap:wrap}
 .pc{position:relative;width:62px;height:56px;border-radius:8px;border:1.5px dashed var(--line);background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;color:var(--muted);font-size:.68rem;font-weight:600}
 .pc b{font-size:1rem;color:var(--ink);min-height:1.2em;font-weight:800}
-.pc.set{border-style:solid;border-color:var(--tone);background:var(--tone);color:#fff}
+.pc.set{border-style:solid;border-color:var(--tone);background:var(--fill,var(--tone));color:#111}
 .pc.set b{color:#fff}
 .pc.man::after{content:"";position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px var(--ink)}
 .hint{flex:1 1 200px}
@@ -231,7 +237,7 @@ input[type=color]{width:52px;height:40px;border:1px solid var(--line);border-rad
 .pick{text-align:left;border:1px solid var(--line);background:var(--surface-2);border-radius:10px;padding:12px 14px;display:grid;gap:3px;color:var(--ink);width:100%}
 .pick:hover{border-color:var(--brand)}
 .pick b{color:var(--brand)}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom,0px));z-index:30;background:#001d39;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;max-width:calc(100% - 32px);font-size:.9rem}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom,0px));z-index:30;background:#16284a;color:#fff;padding:10px 16px;border-radius:8px;font-weight:600;max-width:calc(100% - 32px);font-size:.9rem}
 .busy{position:fixed;inset:0;z-index:40;background:rgba(0,29,57,.4);display:flex;align-items:center;justify-content:center}
 .busy div{background:var(--surface);padding:16px 20px;border-radius:12px;font-weight:600}
 
@@ -252,7 +258,7 @@ input[type=color]{width:52px;height:40px;border:1px solid var(--line);border-rad
    Constantes et utilitaires
    ========================================================= */
 const KEY='forssuap78-v1';
-const APP_VERSION='1.2.1';
+const APP_VERSION='1.3.0';
 const LOGO='__LOGO__', MARK='__MARK__';
 const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
@@ -265,7 +271,7 @@ const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth
 const fmtDate=s=>{if(!s)return '';const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);return m?`${m[3]}/${m[2]}/${m[1]}`:s};
 const $=s=>document.querySelector(s);
 const slug=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^\w-]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'').slice(0,60)||'x';
-const hex2rgb=h=>{const m=/^#?([0-9a-f]{6})$/i.exec(h||'');if(!m)return [0,43,107];return [0,2,4].map(i=>parseInt(m[1].slice(i,i+2),16))};
+const hex2rgb=h=>{const m=/^#?([0-9a-f]{6})$/i.exec(h||'');if(!m)return [31,56,100];return [0,2,4].map(i=>parseInt(m[1].slice(i,i+2),16))};
 const I={
   back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
   chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
@@ -283,6 +289,9 @@ const I={
   scen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg>',
   phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
   mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>',
+  cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
   x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
 };
 
@@ -421,8 +430,8 @@ function builtinTemplates(){return riofeTemplates()}
 function blankTemplate(kind,cursus){
   const c=cursus||'';
   if(kind==='formative')return {id:uid(),cursus:c,kind,name:'Nouvelle grille formative',learners:2,header:FORM_HEADER(c),scale:FORMATIVE_SCALE(),criteria:[{id:uid(),code:'C1',label:'Premier critère',feeds:'',children:[]}]};
-  if(kind==='technicite')return {id:uid(),cursus:c,kind,name:'Suivi de la technicité',header:{title:'FICHE DE SUIVI DE LA MAITRISE DE LA TECHNICITÉ DE L’APPRENANT '+c},theme:{band:'#002b6b'},groups:[{id:uid(),title:'TECHNIQUES',items:[{id:uid(),label:'Première technique'}]}]};
-  return {id:uid(),cursus:c,kind,name:'Nouvelle fiche certificative',header:{title:'FICHE DE CERTIFICATION INDIVIDUELLE « '+c+' »',ref:''},theme:{band:'#002b6b',light:'#c9d6ea'},passages:{min:3,max:6},
+  if(kind==='technicite')return {id:uid(),cursus:c,kind,name:'Suivi de la technicité',header:{title:'FICHE DE SUIVI DE LA MAITRISE DE LA TECHNICITÉ DE L’APPRENANT '+c},theme:{band:'#1f3864'},groups:[{id:uid(),title:'TECHNIQUES',items:[{id:uid(),label:'Première technique'}]}]};
+  return {id:uid(),cursus:c,kind,name:'Nouvelle fiche certificative',header:{title:'FICHE DE CERTIFICATION INDIVIDUELLE « '+c+' »',ref:''},theme:{band:'#1f3864',light:'#c9d6ea'},passages:{min:3,max:6},
     scale:CERT_SCALE(),criteria:[{id:uid(),code:'1',label:'Première compétence',expected:''}],checks:CERT_CHECKS()};
 }
 
@@ -430,36 +439,15 @@ function blankTemplate(kind,cursus){
    Stockage local (fonctionne sans réseau)
    ========================================================= */
 let DB;
-const ORG_DEFAULT=()=>({udps:'',name:'SDIS 78 - Groupement Formation',code:'SDIS78',ville:'',repQualite:'',repPrenom:'',repNom:'',habilitation:'',nextCert:1});
-const DOC_TEXTS=()=>({
-  notifFI:`Vous avez suivi une session de formation initiale relative à l’unité d’enseignement « {UE} » ({CURSUS}) organisée du {DEBUT} au {FIN}{LIEU}.
-
-L’équipe pédagogique désignée pour cette session a procédé à votre évaluation conformément aux dispositions réglementaires en vigueur.
-
-Celle-ci n’a pas permis de donner un avis favorable à la délivrance du certificat de compétences de {QUALITE} – {CURSUS}.
-
-Vous pouvez vous représenter à une nouvelle formation initiale dans l’organisme de formation de votre choix. Un suivi et un accompagnement sur une nouvelle session peuvent vous être proposés afin de vous amener à la réussite.`,
-  notifFC:`Vous avez suivi une session de formation continue relative à l’unité d’enseignement « {UE} » ({CURSUS}) organisée du {DEBUT} au {FIN}{LIEU}.
-
-L’équipe pédagogique désignée pour cette session a procédé à votre évaluation conformément aux dispositions réglementaires en vigueur.
-
-Celle-ci n’a pas permis de donner un avis favorable pour permettre la reconduction de vos fonctions à compter de ce jour jusqu’à une nouvelle évaluation favorable lors d’une formation continue.
-
-Cette décision entraîne une incapacité temporaire à exercer vos fonctions en qualité de {QUALITE}, dans les organismes habilités, associations agréées ou dans toute autre activité professionnelle lorsque cette/ces compétence(s) est (sont) exigée(s).
-
-Vous pouvez suivre une mise à niveau de vos connaissances avant de vous présenter à une nouvelle évaluation. Si l’évaluation est favorable, vous pourrez dès lors exercer vos fonctions.
-
-Enfin, il vous appartient de transmettre cette décision à l’ensemble de vos autorités d’emploi dont vous assurez des missions qui requièrent des compétences en matière de premiers secours.`});
-const UE={};
-const ueOf=c=>UE[c]||{ue:c,qualite:'secouriste',cert:'CERTIFICAT DE COMPÉTENCES – '+c,certTxt:'certificat de compétences'};
+const ORG_DEFAULT=()=>({name:'SDIS 78 - Groupement Formation',ville:''});
 /* QCM fournis : aucun pour les RIOFE (un QCM peut être importé par formation dans DB.qcm) */
 const QCM={};
 const qcmFor=c=>(DB.qcm&&DB.qcm[c])||QCM[c]||null;
 const SAT_CRITERIA=['Durée de la session','Satisfaction globale vis-à-vis de la session','Clarté des objectifs exposés','Pertinence des méthodes pédagogiques','Organisation générale de la mise en place de la formation','Niveau d’acquisition des savoirs des apprenants','Intérêts manifestés des contenus','Niveau de la logistique'];
 const SAT_LABELS=['','Inadapté (ou nul)','Insuffisant','Bien','Très bien'];
-function emptyDB(){return {version:2,templates:builtinTemplates(),sessions:[],evals:[],settings:{trainers:[],useLogo:true,extraSkills:false,org:ORG_DEFAULT(),texts:DOC_TEXTS()}}}
+function emptyDB(){return {version:2,templates:builtinTemplates(),sessions:[],evals:[],settings:{trainers:[],useLogo:true,extraSkills:false,org:ORG_DEFAULT()}}}
 function load(){
-  try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(d&&Array.isArray(d.sessions)&&Array.isArray(d.evals)){d.settings=Object.assign({trainers:[],useLogo:true,extraSkills:false},d.settings||{});d.settings.org=Object.assign(ORG_DEFAULT(),d.settings.org||{});d.settings.texts=Object.assign(DOC_TEXTS(),d.settings.texts||{});
+  try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(d&&Array.isArray(d.sessions)&&Array.isArray(d.evals)){d.settings=Object.assign({trainers:[],useLogo:true,extraSkills:false},d.settings||{});d.settings.org=Object.assign(ORG_DEFAULT(),d.settings.org||{});
     {const keep=new Set(builtinTemplates().map(b=>b.id));d.templates=d.templates.filter(t=>!t.builtin||t.edited||keep.has(t.id))}
     builtinTemplates().forEach(b=>{const i=d.templates.findIndex(t=>t.id===b.id);
       if(i<0){if(!(d.removedBuiltins||[]).includes(b.id))d.templates.push(b)}
@@ -657,7 +645,7 @@ function seedSamples(d){
    État de l'interface
    ========================================================= */
 DB=load();
-const S={open:{pres:true},expMode:(()=>{try{return localStorage.getItem('forssuap78-expmode')||'save'}catch(e){return 'save'}})(),view:'sessions',tab:'sessions',sid:null,pid:null,eid:null,lt:0,q:'',cur:'all',draft:null,draftNew:false,tdraft:null,tdraftNew:false,tplCur:'all'};
+const S={open:{pres:true},expMode:(()=>{try{return localStorage.getItem('forssuap78-expmode')||'save'}catch(e){return 'save'}})(),view:'home',tab:'sessions',space:null,sid:null,pid:null,eid:null,lt:0,q:'',cur:'all',draft:null,draftNew:false,tdraft:null,tdraftNew:false,tplCur:'all'};
 const curSess=()=>sessById(S.sid);
 const curEval=()=>evalById(S.eid);
 function go(view,opts={}){Object.assign(S,opts);S.view=view;render();window.scrollTo(0,0)}
@@ -668,7 +656,8 @@ function go(view,opts={}){Object.assign(S,opts);S.view=view;render();window.scro
 function render(){
   renderTop();renderNav();
   const v=S.view,m=$('#main');
-  const views={sessions:viewSessions,session:viewSession,person:viewPerson,sessionEdit:viewSessionEdit,formative:viewFormative,cert:viewCert,tech:viewTech,techs:viewTechs,suivi:viewSuivi,scenarios:viewScenarios,scenario:viewScenario,scEdit:viewScEdit,call:viewCall,qcm:viewQcm,survey:viewSurvey,satis:viewSatis,tpls:viewTpls,tpl:viewTplEdit,settings:viewSettings};
+  const views={home:viewHome,planning:viewPlanning,modules:viewModules,module:viewModule,present:viewPresent,sessions:viewSessions,session:viewSession,person:viewPerson,sessionEdit:viewSessionEdit,formative:viewFormative,cert:viewCert,tech:viewTech,techs:viewTechs,suivi:viewSuivi,scenarios:viewScenarios,scenario:viewScenario,scEdit:viewScEdit,call:viewCall,qcm:viewQcm,survey:viewSurvey,satis:viewSatis,tpls:viewTpls,tpl:viewTplEdit,settings:viewSettings};
+  document.body.classList.toggle('presenting',v==='present');document.body.classList.toggle('at-home',v==='home');
   m.innerHTML=(views[v]||viewSessions)();
   if(v==='call'&&S.call&&(S.call.debrief||S.call.closed))loadCallAudio();
   $('#fabslot').innerHTML=v==='sessions'?`<button class="fab" data-act="new-session">${I.plus}Nouvelle formation</button>`:v==='tpls'?`<button class="fab" data-act="new-tpl">${I.plus}Nouvelle grille</button>`:'';
@@ -678,19 +667,25 @@ function renderTop(){
   const v=S.view;let left='',title='',right='';
   const back=to=>`<button class="ibtn" data-act="back" data-v="${to}" aria-label="Retour">${I.back}</button>`;
   const s=curSess();
-  if(v==='sessions'){left=markImg();title=`FORSSUAP 78<small>SDIS 78 · formation SSUAP · version ${APP_VERSION}</small>`}
-  else if(v==='tpls'){left=markImg();title='Grilles<small>RIOFE Prompt Secours, Équipier SUAP et grilles ajoutées</small>'}
-  else if(v==='settings'){left=markImg();title='Réglages<small>Formateurs, sauvegarde, transfert</small>'}
+  const homeB=`<button class="ibtn" data-act="home" aria-label="Accueil">${I.home||I.back}</button>`;
+  if(v==='home'){left=markImg();title=`FORSSUAP 78<small>SDIS 78 · Groupement Formation</small>`}
+  else if(v==='planning'){left=homeB;title=`Planning<small>Espace formation · ${esc(cName(fCur()))}</small>`}
+  else if(v==='modules'){left=homeB;title=`Séquences et ateliers<small>Espace formation · ${esc(cName(fCur()))}</small>`}
+  else if(v==='module'){const m=modById(S.mid);left=back(S.modFrom==='planning'?'planning':'modules');title=`${m?esc(m.code+' · '+m.titre):'Module'}<small>${m?esc(cName(m.cur)+' · jour '+m.jour+' · '+m.duree):''}</small>`}
+  else if(v==='present'){title=''}
+  else if(v==='sessions'){left=homeB;title=`Espace administratif<small>FORSSUAP 78 · formations, évaluations, documents</small>`}
+  else if(v==='tpls'){left=homeB;title='Grilles<small>RIOFE Prompt Secours, Équipier SUAP et grilles ajoutées</small>'}
+  else if(v==='settings'){left=homeB;title='Réglages<small>Formateurs, sauvegarde, transfert</small>'}
   else if(v==='session'){left=back('sessions');title=`${esc(s.title||s.cursus)}<small>${esc(s.cursus)} · ${s.participants.filter(p=>!p.archived).length} participants</small>`;
     right=`<button class="ibtn" data-act="export-menu" aria-label="Exporter et envoyer">${I.share}<span class="lbl small">Envoyer</span></button><button class="ibtn" data-act="edit-session" aria-label="Modifier la formation">${I.edit}</button>`}
   else if(v==='person'){left=back('session');title=`${esc(pName(s,S.pid))}<small>${esc(s.title||s.cursus)}</small>`;right=pdfBtn('pick-export','Exporter')}
   else if(v==='sessionEdit'){left=`<button class="ibtn" data-act="session-cancel" aria-label="Annuler">${I.x}</button>`;title=`${S.draftNew?'Nouvelle formation':'Modifier la formation'}<small>Participants et formateurs</small>`;right=`<button class="ibtn solid" data-act="session-save">Enregistrer</button>`}
-  else if(v==='formative'){const e=curEval();left=back(S.pid?'person':'session');title=`${e.tpl.riofe?'MSP'+(e.ref?' '+esc(e.ref):''):'Cas concret'} · ${esc(fmtDate(e.date))}<small>${esc(e.learners.map(l=>pName(s,l.pid)).join(' · '))}</small>`;right=pdfBtn('pdf-formative')}
+  else if(v==='formative'){const e=curEval();left=back(S.pid?'person':'session');title=`${e.tpl.riofe?(e.ref?(/^MSP/i.test(e.ref)?esc(e.ref):'MSP '+esc(e.ref)):'MSP'):'Cas concret'} · ${esc(fmtDate(e.date))}<small>${esc(e.learners.map(l=>pName(s,l.pid)).join(' · '))}</small>`;right=pdfBtn('pdf-formative')}
   else if(v==='cert'){const c=curEval();left=back('person');title=`Certification · ${esc(pName(s,c.pid))}<small>${esc(c.tpl.name)}</small>`;right=pdfBtn('pdf-cert')}
   else if(v==='tech'){const x=curEval();left=back('person');title=`Technicité · ${esc(pName(s,x.pid))}<small>${esc(x.tpl.name)}</small>`;right=pdfBtn('pdf-tech')}
   else if(v==='suivi'){const x=curEval();left=back('person');title=`Suivi · ${esc(pName(s,x.pid))}<small>${esc(x.tpl.name)}</small>`;right=pdfBtn('pdf-suivi')}
-  else if(v==='scenarios'){const cu=scCur(),lk=scS()&&scS().cursus===cu;left=S.scNoSess?markImg():back('session');title=`Scénarios de cas concrets<small>${esc(cu)} · ${scList(cu).length} fiches${S.scNoSess?'':' · '+esc(s.title||s.cursus)}</small>`;right=lk?pdfBtn('pdf-sc-mat','Matériel'):''}
-  else if(v==='scenario'){const c=scById(S.scid);left=back(S.scFrom==='formative'?'formative':'scenarios');title=`${c?esc(c.titre):'Scénario'}<small>${c?esc([c.cur,c.jour,c.etape].filter(Boolean).join(' · ')):''}</small>`;right=pdfBtn('pdf-sc','Fiche')}
+  else if(v==='scenarios'){const cu=scCur(),lk=scS()&&scS().cursus===cu;left=S.scNoSess?homeB:back('session');title=`Scénarios de MSP<small>${esc(cName(cu))} · ${scList(cu).length} scénarios${S.scNoSess?'':' · '+esc(s.title||s.cursus)}</small>`;right=lk?pdfBtn('pdf-sc-mat','Matériel'):''}
+  else if(v==='scenario'){const c=scById(S.scid);left=back(S.scFrom==='formative'?'formative':S.scFrom==='planning'?'planning':S.scFrom==='module'?'module':'scenarios');title=`${c?esc(c.titre):'Scénario'}<small>${c?esc([c.cur,c.jour,c.etape].filter(Boolean).join(' · ')):''}</small>`;right=pdfBtn('pdf-sc','Fiche')}
   else if(v==='call'){const c=scById(S.call&&S.call.scId);left=`<button class="ibtn" data-act="call-exit" aria-label="Quitter">${I.back}</button>`;title=`Transmission du bilan${S.call&&S.call.debrief?' · correction':''}<small>${c?esc(c.cur+' n°'+c.n+' · '+c.titre):''}</small>`;right=S.call&&S.call.debrief&&!EMBED?pdfBtn('pdf-call','PDF'):''}
   else if(v==='scEdit'){left=`<button class="ibtn" data-act="sc-cancel" aria-label="Annuler">${I.x}</button>`;title=`${S.scNew?'Nouveau scénario':'Modifier le scénario'}<small>${esc(S.scdraft.cur)}</small>`;right=`<button class="ibtn solid" data-act="sc-save">Enregistrer</button>`}
   else if(v==='techs'){left=back('session');title=`Fiches de technicité<small>${esc(s.title||s.cursus)}</small>`}
@@ -702,9 +697,11 @@ function renderTop(){
 }
 const pdfBtn=(act,l='PDF')=>EMBED?'':`<button class="ibtn" data-act="${act}" aria-label="Exporter en PDF">${I.pdf}<span class="lbl small">${l}</span></button>`;
 function renderNav(){
-  $('#nav').hidden=!(['sessions','tpls','settings'].includes(S.view)||(S.view==='scenarios'&&S.scNoSess));
+  $('#nav').hidden=!(['sessions','tpls','settings','planning','modules'].includes(S.view)||(S.view==='scenarios'&&S.scNoSess));
   const b=(k,l,ic)=>`<button class="${S.tab===k?'on':''}" data-act="tab" data-v="${k}">${ic}${l}</button>`;
-  $('#nav').innerHTML=`<div class="in">${b('sessions','Formations',I.formation)}${b('scenarios','Scénarios',I.scen)}${b('tpls','Grilles',I.grid)}${b('settings','Réglages',I.gear)}</div>`;
+  $('#nav').innerHTML=S.space==='form'||['planning','modules'].includes(S.view)||(S.view==='scenarios'&&S.scNoSess)
+    ?`<div class="in">${b('planning','Planning',I.cal||I.formation)}${b('modules','Séquences',I.grid)}${b('scenarios','Scénarios MSP',I.scen)}</div>`
+    :`<div class="in">${b('sessions','Formations',I.formation)}${b('tpls','Grilles',I.grid)}${b('settings','Réglages',I.gear)}</div>`;
 }
 const bind=(path,scope='eval')=>`data-bind="${path}" data-scope="${scope}"`;
 const chip=(act,k,cur,l)=>`<button class="chip ${cur===k?'on':''}" data-act="${act}" data-v="${esc(k)}">${l}</button>`;
@@ -784,12 +781,10 @@ function viewSession(){
         ${EMBED?'':`<div class="row"><button class="btn sm" data-act="doc" data-v="riofe-attest" ${parts.length?'':'disabled'}>${I.pdf}Attestations d’assiduité (${parts.length})</button>
           ${C.diplome?`<button class="btn sm" data-act="doc" data-v="riofe-dipl" ${ok?'':'disabled'}>${I.pdf}Diplômes (${ok})</button>`:''}
           <button class="btn sm" data-act="doc" data-v="riofe-somm" ${parts.length?'':'disabled'}>${I.pdf}Grilles sommatives (${parts.length})</button></div>`}`})():(()=>{const R=parts.map(p=>resultOfPerson(s,p));const ap=R.filter(v=>v==='apte').length,ko=R.filter(v=>v==='inapte').length;
-        return `<div class="small"><b class="num">${ap}</b> ${s.type==='FC'?'favorable(s)':'apte(s)'} · <b class="num">${ko}</b> ${s.type==='FC'?'défavorable(s)':'inapte(s)'} · <b class="num">${parts.length-ap-ko}</b> en attente${s.pvNum?'':' · <span style="color:var(--t-orange)">n° de PV à saisir (« Modifier la formation »)</span>'}</div>
+        return `<div class="small"><b class="num">${ap}</b> validé(s) · <b class="num">${ko}</b> non validé(s) · <b class="num">${parts.length-ap-ko}</b> en attente${s.pvNum?'':' · <span style="color:var(--t-orange)">n° de PV à saisir (« Modifier la formation »)</span>'}</div>
         ${EMBED?'':`<div class="row">
           <button class="btn sm" data-act="doc" data-v="pv">${I.pdf}Procès-verbal</button>
-          <button class="btn sm" data-act="doc" data-v="certs" ${ap?'':'disabled'}>${I.pdf}${s.type==='FC'?'Attestations FC':'Certificats'} (${ap})</button>
-          <button class="btn sm" data-act="doc" data-v="notifs" ${ko?'':'disabled'}>${I.pdf}Notifications défavorables (${ko})</button>
-          <button class="btn sm" data-act="number-certs" ${ap?'':'disabled'}>Numéroter les ${s.type==='FC'?'attestations':'certificats'}</button></div>`}`})()}
+</div>`}`})()}
       <div class="row"><span class="small grow">Questionnaire de satisfaction : <b class="num">${(s.surveys||[]).length}</b> réponse${(s.surveys||[]).length>1?'s':''}</span><button class="btn sm red" data-act="survey-start">Faire remplir</button><button class="btn sm" data-act="go" data-v="satis">Synthèse</button></div>
     </div></section>
     <section class="panel"><div class="hd"><h3>${isRiofe(s.cursus)?'Mises en situation professionnelle (fiches MSP)':'Cas concrets (fiches formatives)'}</h3><span class="small muted num">${F.length}</span></div>
@@ -828,19 +823,16 @@ function viewPerson(){
       <span class="grow small">${dv==='oui'?'<b style="color:var(--t-vert)">Validée (OUI)</b>':dv==='non'?'<b style="color:var(--t-rouge)">Non validée (NON)</b>':n!==null&&n>=10&&n<12?'<b style="color:var(--t-orange)">Entretien de rattrapage à faire</b>':'<span class="muted">OUI / NON modifiable sur la fiche de certification</span>'}</span>
       ${qcmFor(s.cursus)?`<button class="btn sm" data-act="person-qcm">Corriger le QCM</button>`:''}</div></section>`})():''}
     ${days.length?`<section class="panel"><div class="hd"><h3>C · Présence</h3><span class="small muted num">${days.filter(d=>pr[d]).length}/${days.length} jours · ${hoursOf(s,days.filter(d=>pr[d]))}/${hoursOf(s,days)} h</span></div><div class="bd chips">${days.map(d=>`<button class="chip ${pr[d]?'on':''}" data-act="presence" data-pid="${p.id}" data-d="${d}" aria-pressed="${!!pr[d]}">${pr[d]?'✓ ':''}${esc(dayLabel(s,d))}</button>`).join('')}</div></section>`:''}
-    <details class="panel" ${p.birthDate?'':'open'}><summary class="hd" style="cursor:pointer;list-style:none"><h3>${isRiofe(s.cursus)?'Identité (fiches, attestation)':'État civil (certificat, notification)'}</h3><span class="small muted">${p.birthDate?esc(neLe(p)):'à compléter'}</span></summary><div class="bd fields">
+    <details class="panel" ${p.birthDate?'':'open'}><summary class="hd" style="cursor:pointer;list-style:none"><h3>${isRiofe(s.cursus)?'Identité (fiches, attestation)':'Identité'}</h3><span class="small muted">${p.birthDate?esc(neLe(p)):'à compléter'}</span></summary><div class="bd fields">
       ${isRiofe(s.cursus)?`<label class="f">Grade<input type="text" id="pc-grade" value="${esc(p.grade||'')}" ${bind('grade','part')}></label><label class="f">CIS<input type="text" id="pc-cis" value="${esc(p.cis||'')}" ${bind('cis','part')}></label>`:''}
       <label class="f">Civilité<select id="pc-civ" ${bind('civ','part')}><option value="">—</option><option ${p.civ==='Madame'?'selected':''}>Madame</option><option ${p.civ==='Monsieur'?'selected':''}>Monsieur</option></select></label>
       <label class="f">Date de naissance<input type="date" id="pc-bd" value="${esc(p.birthDate||'')}" ${bind('birthDate','part')}></label>
       <label class="f">Lieu de naissance<input type="text" id="pc-bp" value="${esc(p.birthPlace||'')}" ${bind('birthPlace','part')}></label>
-      <label class="f">Département<input type="text" id="pc-dep" value="${esc(p.birthDept||'')}" placeholder="ex. 28" ${bind('birthDept','part')}></label>
-      <label class="f">N° de ${s.type==='FC'?'l’attestation':'certificat'}<input type="text" id="pc-num" value="${esc(p.certNo||'')}" placeholder="attribué au PV" ${bind('certNo','part')}></label></div></details>
+      <label class="f">Département<input type="text" id="pc-dep" value="${esc(p.birthDept||'')}" placeholder="ex. 78" ${bind('birthDept','part')}></label></div></details>
     ${EMBED||!c||!c.id?'':`<section class="panel"><div class="hd"><h3>Documents</h3></div><div class="bd row">
       ${isRiofe(s.cursus)?`<button class="btn sm" data-act="pdoc" data-v="riofe-somm">${I.pdf}Grille sommative</button><button class="btn sm" data-act="pdoc" data-v="riofe-attest">${I.pdf}Attestation d’assiduité</button>`:`
-      ${v==='apte'?`<button class="btn sm primary" data-act="pdoc" data-v="cert">${I.pdf}${s.type==='FC'?'Attestation de formation continue':'Certificat de compétences'}</button>`:''}
-      ${v==='inapte'?`<button class="btn sm danger" data-act="pdoc" data-v="notif">${I.pdf}Notification défavorable</button>`:''}
       ${qcmFor(s.cursus)&&qcmState(c,s).done?`<button class="btn sm" data-act="pdoc" data-v="qcm">${I.pdf}Questionnaire corrigé</button>`:''}
-      ${v?'':'<span class="small muted">Le certificat ou la notification apparaît quand la validation finale est connue.</span>'}`}</div></section>`}
+`}</div></section>`}
     <section class="panel"><div class="hd"><h3>Cas concrets</h3><span class="small muted num">${F.length}</span></div><div class="lines">
       ${F.map(e=>{const l=e.learners.find(l=>l.pid===p.id);return `<button class="line" data-act="open-formative" data-id="${e.id}"><span class="grow"><b>${esc(fmtDate(e.date))}</b> · ${esc(e.theme||'Thème non renseigné')}<span class="small muted" style="display:block">Cas n°${esc(l.caseNo||'—')}${evaluatorNames(e)?' · '+esc(evaluatorNames(e)):''}</span></span>${e.counts===false?'<span class="pill neutral">Hors certif.</span>':''}${I.chev}</button>`}).join('')||'<div class="empty" style="margin:14px">Aucun cas concret pour ce participant.</div>'}
     </div></section>
@@ -1199,7 +1191,7 @@ function viewTplEdit(){
       <label class="f">Mise à jour<input type="text" id="h-maj" value="${esc(d.header.maj||'')}" placeholder="JJ.MM.AAAA" ${db('header.maj')}></label>`
       :`<label class="f">Titre de la fiche<input type="text" id="h-title" value="${esc(d.header.title||'')}" ${db('header.title')}></label>
       ${K==='certificative'?`<label class="f">Pied de page<input type="text" id="h-ref" value="${esc(d.header.ref||'')}" ${db('header.ref')}></label>`:''}
-      <label class="f">Couleur des bandeaux<input type="color" id="th-band" value="${esc(d.theme.band||'#002b6b')}" ${db('theme.band')}></label>
+      <label class="f">Couleur des bandeaux<input type="color" id="th-band" value="${esc(d.theme.band||'#1f3864')}" ${db('theme.band')}></label>
       ${K==='certificative'?`<label class="f">Couleur des en-têtes<input type="color" id="th-light" value="${esc(d.theme.light||'#c9d6ea')}" ${db('theme.light')}></label>`:''}`}
     </div></section>`;
   if(K==='technicite'){
@@ -1248,14 +1240,9 @@ function viewSettings(){
       <label class="cb"><input type="checkbox" id="set-logo" ${DB.settings.useLogo!==false?'checked':''} ${bind('useLogo','settings')}>Afficher le logo du SDIS 78 sur les fiches formatives</label>
       <label class="cb"><input type="checkbox" id="set-extra" ${DB.settings.extraSkills?'checked':''} ${bind('extraSkills','settings')}>Habiletés complémentaires des référentiels (surveille la victime, utilise le matériel, tient sa place dans l’équipe, plusieurs victimes)</label>
       <p class="small muted" style="margin:0 0 0 30px">Désactivé : fiches strictement au format d’origine. Activé : ces lignes s’ajoutent aux fiches formatives et au PDF, et comptent pour la certification.</p></div></section>
-    <section class="panel"><div class="hd"><h3>Organisme (certificats, attestations, notifications)</h3></div><div class="bd fields">
-      ${[['udps','U.D.P.S. n° (procès-verbal)'],['name','Nom de l’organisme habilité'],['code','Code organisme (n° de certificat)'],['ville','Ville (« <Ville>, le <date> »)'],['repQualite','Qualité du signataire'],['repPrenom','Prénom du signataire'],['repNom','Nom du signataire'],['habilitation','Date de l’arrêté d’habilitation'],['nextCert','Prochain n° de certificat']]
+    <section class="panel"><div class="hd"><h3>Organisme</h3></div><div class="bd fields">
+      ${[['name','Nom de l’organisme (en-tête des documents)'],['ville','Ville']]
         .map(([k,l])=>`<label class="f">${l}<input type="text" id="org-${k}" value="${esc(DB.settings.org[k]??'')}" ${bind('org.'+k,'settings')}></label>`).join('')}</div></section>
-    <details class="panel"><summary class="hd" style="cursor:pointer;list-style:none"><h3>Textes des notifications défavorables</h3><span class="small muted">modifiables</span></summary><div class="bd stack">
-      <p class="small muted" style="margin:0">Champs remplacés automatiquement : {UE} {CURSUS} {QUALITE} {DEBUT} {FIN} {LIEU}. Le texte « formation initiale » est une correction du modèle des référentiels, qui reprend par erreur le texte de la formation continue.</p>
-      <label class="f">Formation initiale<textarea id="txt-fi" style="min-height:180px" ${bind('texts.notifFI','settings')}>${esc(DB.settings.texts.notifFI)}</textarea></label>
-      <label class="f">Formation continue (annexe du référentiel)<textarea id="txt-fc" style="min-height:220px" ${bind('texts.notifFC','settings')}>${esc(DB.settings.texts.notifFC)}</textarea></label>
-      <div><button class="btn sm" data-act="texts-reset">Rétablir les textes d’origine</button></div></div></details>
     ${viewAiSettings()}
     <section class="panel"><div class="hd"><h3>Sauvegarde et transfert</h3></div><div class="bd stack">
       <p class="small muted" style="margin:0">${nS} formation${nS>1?'s':''} et ${nE} fiche${nE>1?'s':''} enregistrées sur cet appareil, sans réseau. Envoyez une sauvegarde pour l’archiver ou pour passer les données sur une autre tablette (mail, Bluetooth, Quick Share, clé USB…), puis importez-la sur l’autre appareil.</p>
@@ -1458,86 +1445,30 @@ function drawTech(doc,x,sess){
    ========================================================= */
 const ORG=()=>DB.settings.org;
 const civ=p=>p&&p.civ?p.civ:'';
-const nomComplet=p=>[civ(p),p&&p.prenom,((p&&p.nom)||'').toUpperCase()].filter(Boolean).join(' ');
-const neLe=p=>{if(!p||!p.birthDate)return '';const f=p.civ==='Madame'?'née':p.civ==='Monsieur'?'né':'né(e)';return `${f} le ${fmtDate(p.birthDate)}${p.birthPlace?' à '+p.birthPlace:''}${p.birthDept?' ('+p.birthDept+')':''}`};
 const docDate=s=>fmtDate(s.docDate||s.end||today());
 const yearOf=s=>(s.end||s.start||today()).slice(0,4);
-const certNum=(s,p)=>`${s.cursus}${s.type==='FC'?'':''} - ${ORG().code||'ORGA'} - n° ${yearOf(s)}/${p.certNo||'____'}`;
-function fillText(t,s,p){const u=ueOf(s.cursus);return t.replace(/\{UE\}/g,u.ue).replace(/\{CURSUS\}/g,s.cursus).replace(/\{QUALITE\}/g,u.qualite)
-  .replace(/\{DEBUT\}/g,fmtDate(s.start)||'…').replace(/\{FIN\}/g,fmtDate(s.end||s.start)||'…').replace(/\{LIEU\}/g,s.lieu?' à '+s.lieu:'').replace(/\{NOM\}/g,nomComplet(p))}
 function docHeader(doc,P,W,M){
   if(LOGO.startsWith('data:')){try{doc.addImage(LOGO,'JPEG',M,10,44,44*297/480)}catch(e){}}
-  P.text(ORG().name||'',M+W,14,{s:9,b:true,a:'right',c:[0,43,107]});
+  P.text(ORG().name||'',M+W,14,{s:9,b:true,a:'right',c:[31,56,100]});
 }
-function paragraphs(doc,P,txt,x,y,w,size,lh){P.font(false,size);txt.split(/\n\s*\n/).forEach(par=>{doc.splitTextToSize(PT(par.replace(/\s*\n\s*/g,' ')),w).forEach(ln=>{doc.text(ln,x,y);y+=lh});y+=lh*.6});return y}
-function signature(doc,P,x,y){const o=ORG();P.text('Attache de signature,',x,y,{s:10,a:'center'});P.text(o.repQualite||'',x,y+6,{s:10,a:'center',b:true});P.text([o.repPrenom,(o.repNom||'').toUpperCase()].filter(Boolean).join(' '),x,y+11.5,{s:10,a:'center'})}
-
-/* Notification d'évaluation défavorable (FI : texte corrigé ; FC : annexe 10) */
-function notifPages(s,pid){return [{orient:'p',draw:doc=>{
-  const P=pen(doc),M=20,W=170,p=participant(s,pid)||{};docHeader(doc,P,W,M);let y=52;
-  P.text('NOTIFICATION D’ÉVALUATION DÉFAVORABLE '+yearOf(s),M+W/2,y,{b:true,s:14,a:'center'});y+=6;
-  P.text(s.type==='FC'?'Formation continue':'Formation initiale',M+W/2,y,{s:10,a:'center',c:GREY});y+=14;
-  P.text(`${ORG().ville||''}, le ${docDate(s)}`,M+W,y,{s:10.5,a:'right'});y+=14;
-  P.text(nomComplet(p)+',',M,y,{s:11,b:true});y+=10;
-  y=paragraphs(doc,P,fillText(DB.settings.texts[s.type==='FC'?'notifFC':'notifFI'],s,p),M,y,W,10.5,5.2);
-  signature(doc,P,M+W*0.7,Math.max(y+12,200));
-  P.text(`${s.cursus} - ${ORG().code||''} - ${s.title||''}`,M,287,{s:7,c:GREY});}}]}
-
-/* Certificat de compétences (modèle générique) */
-function certificatePages(s,pid){return [{orient:'l',draw:doc=>{
-  const P=pen(doc),M=18,W=261,p=participant(s,pid)||{},u=ueOf(s.cursus),o=ORG();docHeader(doc,P,W,M);
-  doc.setDrawColor(0,43,107);doc.setLineWidth(.8);doc.rect(8,8,281,194);doc.setLineWidth(.25);
-  let y=46;P.text(u.cert,M+W/2,y,{b:true,s:17,a:'center',c:[0,43,107]});y+=12;
-  P.text(`${o.ville||''}, le ${docDate(s)}`,M+W,y,{s:10,a:'right'});y+=10;
-  const vus=['Vu le code de la sécurité intérieure, notamment les articles R.726-1 et suivants ;',
-    'Vu l’arrêté du 15 juin 2024 relatif à la filière opérationnelle de sécurité civile dans le domaine de la formation aux premiers secours ;',
-    `Vu l’arrêté du ${o.habilitation||'…'} portant habilitation de ${o.name||'…'} pour les formations aux premiers secours ;`,
-    `Vu le procès-verbal de l’équipe pédagogique n° ${s.pvNum||'…'}, établi en date du ${fmtDate(s.pvDate)||'…'} ;`];
-  vus.forEach(v=>{P.font(false,9);doc.splitTextToSize(PT(v),W-8).forEach((ln,i)=>{doc.text((i?'   ':'•  ')+ln,M,y);y+=4.6})});y+=6;
-  P.text(`${o.repQualite||'Le représentant légal'} de ${o.name||'l’organisme habilité'}, déclarant que`,M+W/2,y,{s:10.5,a:'center'});y+=9;
-  P.text(nomComplet(p)+',',M+W/2,y,{s:15,b:true,a:'center',c:[0,43,107]});y+=7;
-  if(neLe(p)){P.text(neLe(p),M+W/2,y,{s:10.5,a:'center'})}y+=10;
-  P.font(false,10.5);doc.splitTextToSize(PT(`remplit les conditions exigées pour l’obtention du ${u.certTxt}, conformément aux dispositions de l’arrêté du 15 juin 2024 susvisé,`),W-30).forEach(ln=>{doc.text(ln,M+W/2,y,{align:'center'});y+=5.2});
-  P.text(`délivre à ${nomComplet(p)} le présent certificat de compétences.`,M+W/2,y+1,{s:10.5,a:'center'});
-  signature(doc,P,M+W*0.78,y+16);
-  P.text(certNum(s,p),M,196,{s:9,b:true});}}]}
-
-/* Attestation de formation continue (modèle générique) */
-function attestationPages(s,pid){return [{orient:'l',draw:doc=>{
-  const P=pen(doc),M=18,W=261,p=participant(s,pid)||{},u=ueOf(s.cursus),o=ORG(),fc=s.fc||{};docHeader(doc,P,W,M);
-  doc.setDrawColor(0,43,107);doc.setLineWidth(.8);doc.rect(8,8,281,194);doc.setLineWidth(.25);
-  let y=42;P.text('ATTESTATION DE FORMATION CONTINUE',M+W/2,y,{b:true,s:16,a:'center',c:[0,43,107]});y+=7;
-  P.text(`${u.qualite.toUpperCase()} – ${s.cursus}`,M+W/2,y,{b:true,s:12,a:'center'});y+=6;P.text(`Programme ${fc.annee||yearOf(s)}`,M+W/2,y,{s:10,a:'center'});y+=9;
-  P.text(`${o.ville||''}, le ${docDate(s)}`,M+W,y,{s:10,a:'right'});y+=8;
-  ['Vu le code de la sécurité intérieure, notamment les articles R.726-1 et suivants ;','Vu l’arrêté du 21 décembre 2020 modifié portant organisation de la formation continue dans le domaine des premiers secours ;',
-   'Vu l’arrêté du 15 juin 2024 relatif à la filière opérationnelle de sécurité civile dans le domaine de la formation aux premiers secours ;',`Vu l’arrêté du ${o.habilitation||'…'} portant habilitation de ${o.name||'…'} pour les formations aux premiers secours ;`,
-   `Vu la circulaire du ${fc.circulaire||'…'} relative aux programmes ${fc.annee||yearOf(s)} pour les unités d’enseignements des premiers secours ;`,`Vu le procès-verbal de l’équipe pédagogique n° ${s.pvNum||'…'}, établi en date du ${fmtDate(s.pvDate)||'…'}.`]
-   .forEach(v=>{P.font(false,8.5);doc.splitTextToSize(PT(v),W-8).forEach((ln,i)=>{doc.text((i?'   ':'•  ')+ln,M,y);y+=4.2})});y+=4;
-  P.text(`${o.repQualite||'Le représentant légal'} de ${o.name||''}, atteste que`,M+W/2,y,{s:10,a:'center'});y+=7;
-  P.text(nomComplet(p)+',',M+W/2,y,{s:14,b:true,a:'center',c:[0,43,107]});y+=6;if(neLe(p))P.text(neLe(p),M+W/2,y,{s:10,a:'center'});y+=7;
-  const an=(+(fc.annee||yearOf(s)))+1;
-  y=paragraphs(doc,P,`a suivi une session de formation continue relative à l’unité d’enseignement « ${u.ue} » (${s.cursus}) qui s’est déroulée du ${fmtDate(s.start)} au ${fmtDate(s.end||s.start)}${s.lieu?', à '+s.lieu:''}.\n\nSes compétences de ${u.qualite} (${s.cursus}) peuvent s’exercer jusqu’à une prochaine formation continue ou au plus tard au 31 décembre inclus de l’année ${an}, sous l’égide d’un organisme habilité à la formation aux premiers secours conformément aux textes réglementaires en vigueur ou dans le cadre d’une activité professionnelle lorsque celles-ci sont exigées.\n\nEn foi de quoi, nous délivrons à l’intéressé(e) la présente attestation pour servir et valoir ce que de droit.`,M+10,y,W-20,9.5,4.6);
-  signature(doc,P,M+W*0.8,Math.min(y+2,178));
-  P.text(`FC ${s.cursus} - ${o.code||'ORGA'} - n° ${yearOf(s)}/${p.certNo||'____'}`,M,196,{s:9,b:true});}}]}
-
 /* Procès-verbal de l'équipe pédagogique */
 function resultOfPerson(s,p){const c=certOf(s.id,p.id);if(c)return verdict(c);const x=suiviOf(s.id,p.id);if(x)return suiviVerdict(x,s);return ''}
 function pvPages(s){return [{orient:'p',draw:doc=>{
-  const P=pen(doc),M=15,W=180,o=ORG(),u=ueOf(s.cursus),parts=s.participants.filter(p=>!p.archived);docHeader(doc,P,W,M);let y=44;
-  P.text('PROCÈS-VERBAL DE L’ÉQUIPE PÉDAGOGIQUE',M+W/2,y,{b:true,s:14,a:'center',c:[0,43,107]});y+=6;
+  const P=pen(doc),M=15,W=180,o=ORG(),parts=s.participants.filter(p=>!p.archived);docHeader(doc,P,W,M);let y=44;
+  P.text('PROCÈS-VERBAL DE L’ÉQUIPE PÉDAGOGIQUE',M+W/2,y,{b:true,s:14,a:'center',c:[31,56,100]});y+=6;
   P.text(`n° ${s.pvNum||'…'} du ${fmtDate(s.pvDate)||'…'}`,M+W/2,y,{s:10,a:'center'});y+=9;
-  const info=[['Unité d’enseignement',`${u.ue} (${s.cursus})`],['Type de formation',s.type==='FC'?'Formation continue':'Formation initiale'],['Organisme',o.name||''],['Dates',`du ${fmtDate(s.start)} au ${fmtDate(s.end||s.start)}`],['Lieu',s.lieu||''],['Équipe pédagogique',sessTrainers(s)]];
+  const info=[['Formation',`${s.title||s.cursus} (${s.cursus})`],['Organisme',o.name||''],['Dates',`du ${fmtDate(s.start)} au ${fmtDate(s.end||s.start)}`],['Lieu',s.lieu||''],['Équipe pédagogique',sessTrainers(s)]];
   info.forEach(([a,b])=>{P.cell(a,M,y,48,7,{s:8.5,b:true,fill:[227,234,245]});P.cell(b,M+48,y,W-48,7,{s:8.5});y+=7});y+=6;
-  const cols=[[10,'N°'],[42,'NOM'],[36,'Prénom'],[46,'Naissance'],[22,'Résultat'],[24,s.type==='FC'?'N° attestation':'N° certificat']];
-  let x=M;cols.forEach(([w,t])=>{P.cell(t,x,y,w,7,{b:true,s:8,a:'center',fill:[0,43,107],c:WHITE});x+=w});y+=7;
+  const cols=[[10,'N°'],[48,'NOM'],[42,'Prénom'],[52,'Naissance'],[28,'Résultat']];
+  let x=M;cols.forEach(([w,t])=>{P.cell(t,x,y,w,7,{b:true,s:8,a:'center',fill:[31,56,100],c:WHITE});x+=w});y+=7;
   let apte=0,inapte=0,att=0;
   parts.forEach((p,i)=>{const v=resultOfPerson(s,p);if(v==='apte')apte++;else if(v==='inapte')inapte++;else att++;
     if(y>262){doc.addPage('a4','p');y=20}
-    const res=v==='apte'?(s.type==='FC'?'FAVORABLE':'APTE'):v==='inapte'?(s.type==='FC'?'DÉFAVORABLE':'INAPTE'):'EN ATTENTE';
-    const vals=[String(i+1),(p.nom||'').toUpperCase(),p.prenom||'',[fmtDate(p.birthDate),p.birthPlace].filter(Boolean).join(' à '),res,v==='apte'&&p.certNo?`${yearOf(s)}/${p.certNo}`:''];
+    const res=v==='apte'?'VALIDÉ':v==='inapte'?'NON VALIDÉ':'EN ATTENTE';
+    const vals=[String(i+1),(p.nom||'').toUpperCase(),p.prenom||'',[fmtDate(p.birthDate),p.birthPlace].filter(Boolean).join(' à '),res];
     x=M;cols.forEach(([w],j)=>{P.cell(vals[j],x,y,w,7,{s:8,a:j===0||j>=4?'center':'left',b:j===4,c:j===4&&v==='inapte'?[180,20,30]:BLACK});x+=w});y+=7});
-  y+=5;P.text(`Participants : ${parts.length} · ${s.type==='FC'?'favorables':'aptes'} : ${apte} · ${s.type==='FC'?'défavorables':'inaptes'} : ${inapte}${att?' · en attente : '+att:''}`,M,y,{s:9.5,b:true});y+=8;
-  P.font(false,9);doc.splitTextToSize(PT(`L’équipe pédagogique soussignée certifie que les participants ci-dessus ont été évalués conformément au référentiel interne de formation et de certification ${s.cursus} de l’ANPS et à l’arrêté du 15 juin 2024.`),W).forEach(ln=>{doc.text(ln,M,y);y+=4.4});y+=6;
+  y+=5;P.text(`Participants : ${parts.length} · validés : ${apte} · non validés : ${inapte}${att?' · en attente : '+att:''}`,M,y,{s:9.5,b:true});y+=8;
+  P.font(false,9);doc.splitTextToSize(PT(`L’équipe pédagogique soussignée certifie que les participants ci-dessus ont été évalués conformément au référentiel interne d’organisation de la formation et de l’évaluation (RIOFE) du SDIS 78.`),W).forEach(ln=>{doc.text(ln,M,y);y+=4.4});y+=6;
   if(y>245){doc.addPage('a4','p');y=20}
   P.text('Signatures de l’équipe pédagogique',M,y,{s:9.5,b:true});y+=4;
   const tr=(s.trainerIds||[]).map(tName).filter(Boolean);const bw=W/Math.max(2,Math.min(4,tr.length+1));
@@ -1562,7 +1493,7 @@ function qcmPages(c,s){const st=qcmState(c,s);if(!st||!st.done)return [];const p
       P.font(true,8.4);lines.forEach((ln,j)=>doc.text(ln,M,y+3+j*3.6));
       const r=st.res[i];P.text(r==='ok'?'JUSTE':r==='ko'?'FAUX':'—',M+W,y+3,{s:8,b:true,a:'right',c:r==='ok'?[30,120,50]:r==='ko'?[180,20,30]:GREY});
       let yy=y+3+lines.length*3.6;
-      q.o.forEach((o,k)=>{const on=Array.isArray(a)&&a.includes(k);P.box(M+4,yy-1.6,2.8,on);P.font(o.ok,7.8,o.ok?[0,43,107]:BLACK);ols[k].forEach((ln,j)=>doc.text(ln,M+10,yy+.5+j*3.3));if(o.ok)P.text('(ok)',M+W,yy+.5,{s:7,a:'right',c:[30,120,50]});yy+=ols[k].length*3.3+.7});
+      q.o.forEach((o,k)=>{const on=Array.isArray(a)&&a.includes(k);P.box(M+4,yy-1.6,2.8,on);P.font(o.ok,7.8,o.ok?[31,56,100]:BLACK);ols[k].forEach((ln,j)=>doc.text(ln,M+10,yy+.5+j*3.3));if(o.ok)P.text('(ok)',M+W,yy+.5,{s:7,a:'right',c:[30,120,50]});yy+=ols[k].length*3.3+.7});
       y=yy+2;doc.setDrawColor(215);doc.line(M,y-1,M+W,y-1);doc.setDrawColor(0)}
     return i};
   // pagination : on mesure avec un document témoin
@@ -1575,7 +1506,7 @@ function qcmPages(c,s){const st=qcmState(c,s);if(!st||!st.done)return [];const p
 function satStats(s){const L=s.surveys||[];return SAT_CRITERIA.map((c,i)=>{const v=L.map(x=>x.scores[i]).filter(n=>n>=1);return {c,n:v.length,avg:v.length?v.reduce((a,b)=>a+b,0)/v.length:0,dist:[1,2,3,4].map(k=>v.filter(n=>n===k).length)}})}
 function satPages(s){return [{orient:'p',draw:doc=>{
   const P=pen(doc),M=16,W=178,L=s.surveys||[],st=satStats(s);docHeader(doc,P,W,M);let y=44;
-  P.text('ÉVALUATION DE LA FORMATION - SYNTHÈSE',M+W/2,y,{b:true,s:14,a:'center',c:[0,43,107]});y+=8;
+  P.text('ÉVALUATION DE LA FORMATION - SYNTHÈSE',M+W/2,y,{b:true,s:14,a:'center',c:[31,56,100]});y+=8;
   [['Intitulé de la formation',`${s.title||''} (${s.cursus}${s.type==='FC'?' - formation continue':''})`],['Lieu de la formation',s.lieu||''],['Date(s) de la formation',`du ${fmtDate(s.start)} au ${fmtDate(s.end||s.start)}`],['Questionnaires reçus',String(L.length)]]
     .forEach(([a,b])=>{P.cell(a,M,y,52,6.5,{s:8.5,b:true,fill:[227,234,245]});P.cell(b,M+52,y,W-52,6.5,{s:8.5});y+=6.5});y+=6;
   // cible (radar) comme sur le questionnaire papier
@@ -1587,7 +1518,7 @@ function satPages(s){return [{orient:'p',draw:doc=>{
   if(L.length){doc.setDrawColor(227,6,19);doc.setLineWidth(.8);const pts=st.map((x,i)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+R*x.avg/4*Math.cos(a),cy+R*x.avg/4*Math.sin(a)]});pts.forEach((pt,i)=>{const q=pts[(i+1)%n];doc.line(pt[0],pt[1],q[0],q[1])});doc.setLineWidth(.25);doc.setDrawColor(0)}
   y=cy+R+14;
   const cols=[[70,'Critère'],[18,'Moyenne'],[22,'1 Inadapté'],[22,'2 Insuffisant'],[22,'3 Bien'],[24,'4 Très bien']];
-  let x=M;cols.forEach(([w,t])=>{P.cell(t,x,y,w,6.5,{s:7.5,b:true,a:'center',fill:[0,43,107],c:WHITE});x+=w});y+=6.5;
+  let x=M;cols.forEach(([w,t])=>{P.cell(t,x,y,w,6.5,{s:7.5,b:true,a:'center',fill:[31,56,100],c:WHITE});x+=w});y+=6.5;
   st.forEach(r=>{x=M;[r.c,r.n?r.avg.toFixed(1).replace('.',','):'—',...r.dist.map(String)].forEach((v,j)=>{P.cell(v,x,y,cols[j][0],8,{s:7.5,a:j?'center':'left',b:j===1});x+=cols[j][0]});y+=8});
   y+=6;const com=[];L.forEach(x=>{Object.entries(x.why||{}).forEach(([i,t])=>{if(t)com.push(`${SAT_CRITERIA[i]} (${x.scores[i]}) : ${t}`)});if(x.comment)com.push('Commentaire : '+x.comment)});
   if(com.length){P.text('Justifications et commentaires',M,y,{b:true,s:9.5});y+=5;P.font(false,8);com.forEach(t=>{doc.splitTextToSize(PT('• '+t),W).forEach(ln=>{if(y>284){doc.addPage('a4','p');y=18}doc.text(ln,M,y);y+=3.8})})}
@@ -1869,19 +1800,11 @@ const A={
       if(d.v==='pv')return {files:[pdfFile(base+'_proces-verbal',pvPages(s))],title:'Procès-verbal'};
       if(d.v==='riofe-attest')return {files:parts.map(p=>pdfFile(`${s.cursus}_attestation-assiduite_${pslug(s,p.id)}`,riofeAttestPages(s,[p.id]))),title:'Attestations d’assiduité'};
       if(d.v==='riofe-somm'){const files=parts.map(p=>{const c=ensureCert(s,p.id);return pdfFile(`${s.cursus}_grille-sommative_${pslug(s,p.id)}`,riofeSommPages(c,s))});save();return {files,title:'Grilles sommatives'}}
-      const who=parts.filter(p=>resultOfPerson(s,p)===(d.v==='certs'?'apte':'inapte'));
-      const mk=p=>d.v==='certs'?(s.type==='FC'?attestationPages(s,p.id):certificatePages(s,p.id)):notifPages(s,p.id);
-      const kind=d.v==='certs'?(s.type==='FC'?'attestation-FC':'certificat'):'notification-defavorable';
-      return {files:who.map(p=>pdfFile(`${s.cursus}_${kind}_${pslug(s,p.id)}`,mk(p))),title:'Documents '+s.title}})},
+      return {files:[],title:'Documents'}})},
   pdoc:d=>{const s=curSess(),pid=S.pid,c=certOf(s.id,pid);
     if(d.v==='riofe-somm'||d.v==='riofe-attest'){runExport('Création du PDF…',()=>{const n=d.v==='riofe-somm'?'grille-sommative':'attestation-assiduite';
       const pg=d.v==='riofe-somm'?riofeSommPages(ensureCert(s,pid),s):riofeAttestPages(s,[pid]);if(d.v==='riofe-somm')save();return {files:[pdfFile(`${s.cursus}_${n}_${pslug(s,pid)}`,pg)],title:n}});return}
-    runExport('Création du PDF…',()=>{const pg=d.v==='cert'?(s.type==='FC'?attestationPages(s,pid):certificatePages(s,pid)):d.v==='notif'?notifPages(s,pid):qcmPages(c,s);
-      const n=d.v==='cert'?(s.type==='FC'?'attestation-FC':'certificat'):d.v==='notif'?'notification-defavorable':'qcm-corrige';return {files:[pdfFile(`${s.cursus}_${n}_${pslug(s,pid)}`,pg)],title:n}})},
-  'number-certs':()=>{const s=curSess(),o=DB.settings.org;let n=parseInt(o.nextCert,10)||1,k=0;
-    s.participants.filter(p=>!p.archived&&resultOfPerson(s,p)==='apte'&&!p.certNo).forEach(p=>{p.certNo=String(n++);k++});o.nextCert=String(n);save(true);render();
-    toast(k?`${k} numéro${k>1?'s':''} attribué${k>1?'s':''} (prochain : ${n})`:'Tous les participants aptes ont déjà un numéro')},
-  'texts-reset':()=>confirmBox('Rétablir les textes d’origine des notifications ?','Rétablir',()=>{DB.settings.texts=DOC_TEXTS();save(true);render()}),
+    runExport('Création du PDF…',()=>{const pg=qcmPages(c,s),n='qcm-corrige';return {files:[pdfFile(`${s.cursus}_${n}_${pslug(s,pid)}`,pg)],title:n}})},
   'pick-export':()=>pickExport(),
   expmode:d=>{S.expMode=d.v;try{localStorage.setItem('forssuap78-expmode',d.v)}catch(e){}const b=$('.box');if(b&&b.querySelector('.xp')){const sel=[...document.querySelectorAll('.xp')].map(x=>x.checked);const sep=$('#xp-sep').checked;pickExport();document.querySelectorAll('.xp').forEach((x,i)=>x.checked=sel[i]);$('#xp-sep').checked=sep}else exportMenu()},
   'xp-all':d=>document.querySelectorAll('.xp').forEach(x=>x.checked=d.v==='1'),
@@ -1982,9 +1905,9 @@ const scAll=()=>{const o=scUser();return [...SCENARIOS.map(x=>o.find(y=>y.id===x
 const scList=cur=>scAll().filter(x=>x.cur===cur).sort((a,b)=>(a.jour||'').localeCompare(b.jour||'')||(+a.n||0)-(+b.n||0));
 const scById=id=>scAll().find(x=>x.id===id);
 const scKind=c=>SCENARIOS.some(x=>x.id===c.id)?(scUser().some(y=>y.id===c.id)?'modifie':'fourni'):'perso';
-const scS=()=>S.scNoSess?null:curSess();
-const SC_CURS=()=>Object.keys(RIOFE_COURSES);
-const scCur=()=>{const s=scS();return S.sccur||(s&&SC_CURS().includes(s.cursus)?s.cursus:SC_CURS()[0])};
+const scS=()=>S.scNoSess?(S.space==='form'?fSess():null):curSess();
+const scCur=()=>{const s=scS();return S.sccur||(s&&F_COURSES.includes(s.cursus)?s.cursus:(S.space==='form'?fCur():'PS'))};
+const SC_CURS=()=>F_COURSES;
 const scPlan=s=>{s.plan=s.plan||[];return s.plan};
 const scPlanned=(s,id)=>scPlan(s).find(p=>p.id===id);
 const scDone=(s,id)=>DB.evals.some(e=>e.sessionId===s.id&&e.scenarioId===id);
@@ -1998,7 +1921,7 @@ function scMat(list){const g={lieu:[],maq:[],acc:[],sec:[]};
   list.forEach(c=>Object.keys(g).forEach(k=>(c.mat[k]||[]).forEach(x=>{let r=g[k].find(y=>y.t===x);if(!r)g[k].push(r={t:x,n:[]});r.n.push(c.n)})));return g}
 const MATLAB={lieu:'Lieu et décor',maq:'Maquillage et simulation de plaies',acc:'Accessoires et matériel de jeu',sec:'Matériel des sapeurs-pompiers'};
 function viewScPanel(s){const P=scPlan(s).map(p=>({p,c:scById(p.id)})).filter(x=>x.c).sort((a,b)=>a.c.n-b.c.n);
-  return `<section class="panel"><div class="hd"><h3>Scénarios de cas concrets</h3><span class="small muted num">${P.length} prévu${P.length>1?'s':''} · ${scList(s.cursus).length} disponibles</span></div>
+  return `<section class="panel"><div class="hd"><h3>Scénarios de MSP</h3><span class="small muted num">${P.length} prévu${P.length>1?'s':''} · ${scList(s.cursus).length} disponibles</span></div>
    <div class="bd stack" style="gap:8px"><div class="row"><button class="btn primary grow" data-act="open-scs">Choisir et préparer les scénarios</button>${P.length&&!EMBED?`<button class="btn" data-act="pdf-sc-mat">${I.pdf}Matériel</button>`:''}</div></div>
    ${P.length?`<div class="lines">${P.map(({p,c})=>`<button class="line" data-act="open-sc" data-id="${c.id}"><span class="grow"><b>${c.n}. ${esc(c.titre)}</b><span class="small muted" style="display:block">${esc(c.jour)} · ${esc(c.theme)}</span></span>${scDone(s,c.id)?'<span class="pill ok">Réalisé</span>':'<span class="pill wait">Prévu</span>'}${I.chev}</button>`).join('')}</div>`:''}</section>`}
 function viewScenarios(){const cur=scCur(),s0=scS(),s=s0&&s0.cursus===cur?s0:null;const all=scList(cur);
@@ -2009,11 +1932,11 @@ function viewScenarios(){const cur=scCur(),s0=scS(),s=s0&&s0.cursus===cur?s0:nul
       <span class="small muted" style="display:block">${esc(c.theme)}</span>
       <span class="small muted" style="display:block">${esc(c.jour)} · ${esc(c.etape)} · ${esc(NIV[c.niveau]||'')} · ${esc(c.duree.split('+')[0].trim())}</span>
       <span class="chips" style="margin-top:6px">${(c.cases||[]).map(k=>scTag(c.cur,k)?`<span class="pill neutral">${scTag(c.cur,k)}</span>`:'').join('')}${scKind(c)==='perso'?'<span class="pill ex">Personnel</span>':scKind(c)==='modifie'?'<span class="pill ex">Modifié</span>':''}${dn?'<span class="pill ok">Réalisé</span>':pl?'<span class="pill wait">Prévu</span>':''}</span></span>${I.chev}</button>
-      ${s?`<div class="bd" style="padding-top:0;display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm ${pl?'primary':''}" data-act="sc-plan" data-id="${c.id}">${pl?'✓ Au planning':'Ajouter au planning'}</button>${EMBED?'':`<button class="btn sm" data-act="new-sc-fiche" data-id="${c.id}">Évaluer ce cas</button>`}</div>`:''}</div>`};
+      ${s?`<div class="bd" style="padding-top:0;display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm ${pl?'primary':''}" data-act="sc-plan" data-id="${c.id}">${pl?'✓ Au planning':'Ajouter au planning'}</button>${EMBED?'':`<button class="btn sm" data-act="new-sc-fiche" data-id="${c.id}">Évaluer cette MSP</button>`}</div>`:''}</div>`};
   const nb=c=>scList(c).length;
-  return `<div class="stack"><div class="chips">${SC_CURS().map(c=>`<button class="chip ${cur===c?'on':''}" data-act="sccur" data-v="${c}">${esc(RIOFE_COURSES[c].name)} · ${nb(c)} scénarios</button>`).join('')}</div>
-    ${s0&&!s?`<div class="panel"><div class="bd small">Scénarios ${esc(RIOFE_COURSES[cur].name)} en consultation. Pour les mettre au planning ou les évaluer, ouvrez une formation ${esc(RIOFE_COURSES[cur].name)}.</div></div>`:''}
-    <p class="muted small" style="margin:0">Scénarios classés selon la progression de la formation (${esc(jours.join(', '))}). Ajoutez ceux que vous voulez jouer : l’application prépare la liste de matériel et les fiches de briefing à imprimer.</p>
+  return `<div class="stack"><div class="chips">${F_COURSES.map(c=>`<button class="chip ${cur===c?'on':''}" data-act="sccur" data-v="${c}">${esc(cName(c))} · ${nb(c)}</button>`).join('')}</div>
+    ${s0&&!s?`<div class="panel"><div class="bd small">Scénarios ${esc(cur)} en consultation. Pour les évaluer, choisissez une formation ${esc(cName(cur))} dans le planning de l’espace formation.</div></div>`:''}
+    <p class="muted small" style="margin:0">Scénarios de mises en situation professionnelle classés selon le planning (${esc(jours.join(', '))}). Chaque scénario est relié aux savoir-agir de la fiche MSP : « Évaluer cette MSP » ouvre la fiche pré-remplie.</p>
     <div class="row"><button class="btn red" data-act="sc-new">${I.plus}Créer un scénario</button>${scUser().length&&!EMBED?`<button class="btn" data-act="sc-share">${I.share}Partager mes scénarios (${scUser().length})</button>`:''}</div>
     <div class="chips">${[['all','Tous'],...jours.map(j=>[j,j]),...(s?[['plan','Au planning ('+scPlan(s).length+')']]:[])].map(([k,l])=>`<button class="chip ${f===k?'on':''}" data-act="scj" data-v="${k}">${esc(l)}</button>`).join('')}</div>
     ${L.length?`<div class="cards">${L.map(card).join('')}</div>`:'<div class="empty">Aucun scénario dans ce filtre.</div>'}</div>`}
@@ -2046,15 +1969,15 @@ function viewScLink(e){const c=scById(e.scenarioId);return `<section class="pane
   <div class="bd small"><b>Observer :</b><ul style="margin:4px 0 0;padding-left:20px;display:grid;gap:3px">${Object.entries(c.observe).map(([k,v])=>`<li><b>${esc(scObsLabel(c.cur,k).split(' · ')[0])}</b> ${esc(v)}</li>`).join('')}</ul></div></section>`}
 /* PDF : fiche animateur, briefings à remettre, liste de matériel */
 function scWriter(doc,P,title){const M=14,W=182;let y=0;
-  const top=()=>{doc.setFillColor(0,43,107);doc.rect(0,0,210,13,'F');P.font(true,10,WHITE);doc.text(PT(title),M,8.2);P.font(false,7.5,[200,210,230]);doc.text('FORSSUAP 78',196,8.2,{align:'right'});y=20};
+  const top=()=>{doc.setFillColor(31,56,100);doc.rect(0,0,210,13,'F');P.font(true,10,WHITE);doc.text(PT(title),M,8.2);P.font(false,7.5,[200,210,230]);doc.text('FORSSUAP 78',196,8.2,{align:'right'});y=20};
   const need=h=>{if(y+h>285){doc.addPage('a4','p');top()}};
   const w={top,need,get y(){return y},set y(v){y=v},
-   h(t){need(14);doc.setFillColor(...F_SHADE);doc.rect(M,y,W,6.2,'F');P.font(true,9.5,[0,43,107]);doc.text(PT(t),M+2,y+4.4);y+=9},
+   h(t){need(14);doc.setFillColor(...F_SHADE);doc.rect(M,y,W,6.2,'F');P.font(true,9.5,[31,56,100]);doc.text(PT(t),M+2,y+4.4);y+=9},
    p(t,o={}){const sz=o.s||9;P.font(o.b,sz,o.c);const ls=doc.splitTextToSize(PT(t),W-(o.x||0));ls.forEach(l=>{need(sz*.45);doc.text(l,M+(o.x||0),y+sz*.33);y+=sz*.45});y+=o.gap??1.2},
    li(t,o={}){const sz=o.s||9;P.font(false,sz);const ls=doc.splitTextToSize(PT(t),W-6);ls.forEach((l,i)=>{need(sz*.45);if(i===0){if(o.box){doc.setLineWidth(.25);doc.rect(M+.5,y-.2,3,3)}else doc.text('-',M+1.2,y+sz*.33)}doc.text(l,M+6,y+sz*.33);y+=sz*.45});y+=.8},
    lab(a,b){P.font(true,9);const aw=doc.getTextWidth(PT(a))+2;need(5);doc.text(PT(a),M,y+3);P.font(false,9);const ls=doc.splitTextToSize(PT(b),W-aw);ls.forEach((l,i)=>{if(i)need(4.2);doc.text(l,M+aw,y+3);y+=4.2});y+=.8}};
   top();return w}
-function scHead(w,c){w.p(c.titre,{b:true,s:15,c:[0,43,107],gap:1});w.p(`${c.cur} · ${c.jour} · ${NIV[c.niveau]||''} · ${c.duree}`,{s:8.5,c:GREY});w.lab('Thème : ',c.theme);w.lab('Lieu : ',c.lieu);w.lab('Équipe : ',c.equipe);w.y+=1.5}
+function scHead(w,c){w.p(c.titre,{b:true,s:15,c:[31,56,100],gap:1});w.p(`${c.cur} · ${c.jour} · ${NIV[c.niveau]||''} · ${c.duree}`,{s:8.5,c:GREY});w.lab('Thème : ',c.theme);w.lab('Lieu : ',c.lieu);w.lab('Équipe : ',c.equipe);w.y+=1.5}
 function scBriefPages(c){return [{orient:'p',draw:doc=>{const P=pen(doc);let first=true;
   const w=scWriter(doc,P,`${c.cur} · Briefing · ${c.titre}`);
   const page=(who,body)=>{if(!first){doc.addPage('a4','p');w.top()}first=false;scHead(w,c);w.h(who);body()};
@@ -2073,7 +1996,7 @@ function scFichePages(c){return [{orient:'p',draw:doc=>{const P=pen(doc);const w
   w.y+=3;P.font(false,6.5,GREY);doc.text(PT(stamp()),14,292)}}]}
 function scMatPages(s){const L=scPlan(s).map(p=>scById(p.id)).filter(Boolean).sort((a,b)=>a.n-b.n);
   return [{orient:'p',draw:doc=>{const P=pen(doc);const w=scWriter(doc,P,`${s.cursus} · Matériel des scénarios prévus`);
-    w.p(s.title||s.cursus,{b:true,s:14,c:[0,43,107],gap:1});w.p(L.length?`${L.length} scénario${L.length>1?'s':''} : `+L.map(c=>`n°${c.n} ${c.titre}`).join(' · '):'Aucun scénario au planning',{s:8.5,c:GREY});w.y+=2;
+    w.p(s.title||s.cursus,{b:true,s:14,c:[31,56,100],gap:1});w.p(L.length?`${L.length} scénario${L.length>1?'s':''} : `+L.map(c=>`n°${c.n} ${c.titre}`).join(' · '):'Aucun scénario au planning',{s:8.5,c:GREY});w.y+=2;
     const m=scMat(L);Object.keys(MATLAB).forEach(k=>{if(!m[k].length)return;w.h(MATLAB[k]);m[k].forEach(x=>w.li(`${x.t}  (scénario${x.n.length>1?'s':''} ${x.n.join(', ')})`,{box:true,s:8.5}))});
     P.font(false,6.5,GREY);doc.text(PT(stamp()),14,292)}}]}
 Object.assign(A,{
@@ -2081,13 +2004,97 @@ Object.assign(A,{
   'open-sc':d=>{S.scFrom=d.from||'';go('scenario',{scid:d.id})},
   'sc-plan':d=>{const s=scS();if(!s)return;const P=scPlan(s),i=P.findIndex(x=>x.id===d.id);if(i>=0)P.splice(i,1);else P.push({id:d.id,got:{}});s.updatedAt=Date.now();save(true);render()},
   'sc-got':(d,ev,el)=>{const s=scS();if(!s)return;let p=scPlanned(s,d.id);if(!p){scPlan(s).push(p={id:d.id,got:{}})}p.got=p.got||{};if(el.checked)p.got[d.k]=true;else delete p.got[d.k];s.updatedAt=Date.now();save();},
-  'new-sc-fiche':d=>{const s=scS(),c=scById(d.id);if(!s||s.cursus!==c.cur){toast('Ouvrez une formation '+c.cur+' pour évaluer ce cas');return}const T=formTpls(s.cursus).find(t=>!t.fiche);if(!T){toast('Aucune grille formative');return}
-    if(!scPlanned(s,c.id))scPlan(s).push({id:c.id,got:{}});
-    newFormative(s,T,S.pid,e=>{e.theme=c.titre+' - '+c.theme;e.scenarioId=c.id;if(T.riofe){e.theme=c.theme;e.missions=(c.objectifs||[]).join(' ; ');const m=String(c.etape||'').match(/MSP\s*\d+/);e.ref=(m?m[0]+' · ':'')+'scénario n°'+c.n}e.cases={};c.cases.forEach(k=>e.cases[k]=true);c.checks.forEach(k=>e.situations[k]=true)})},
+  'new-sc-fiche':d=>{const s=scS(),c=scById(d.id);if(!s||s.cursus!==c.cur){toast('Choisissez d’abord une formation '+cName(c.cur)+' (planning de l’espace formation)');return}
+    const T=formTpls(s.cursus).find(t=>c.tpl?t.sheet===c.tpl:!t.fiche)||formTpls(s.cursus).find(t=>!t.fiche);if(!T){toast('Aucune grille formative');return}
+    if(!scPlanned(s,c.id))scPlan(s).push({id:c.id,got:{}});S.sid=s.id;if(S.space==='form'){S.space='admin';S.tab='sessions';S.scNoSess=false}
+    if(T.riofe){newFormative(s,T,S.pid,e=>{e.theme=c.titre+' – '+c.theme;e.missions=c.missions||(c.objectifs||[]).join(' ; ');e.ref=c.ref||((String(c.etape||'').match(/MSP\s*\d+/)||[''])[0]);e.scenarioId=c.id});return}
+    newFormative(s,T,S.pid,e=>{e.theme=c.titre+' - '+c.theme;e.scenarioId=c.id;e.cases={};c.cases.forEach(k=>e.cases[k]=true);c.checks.forEach(k=>e.situations[k]=true)})},
   'pdf-sc':()=>{const c=scById(S.scid);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_scenario_${String(c.n).padStart(2,'0')}_${slug(c.titre)}`,scFichePages(c))],title:'Scénario'}))},
   'pdf-sc-brief':()=>{const c=scById(S.scid);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_briefings_${String(c.n).padStart(2,'0')}_${slug(c.titre)}`,scBriefPages(c))],title:'Briefings'}))},
   'pdf-sc-mat':()=>{const s=curSess();if(!scPlan(s).length){toast('Ajoutez d’abord des scénarios au planning');return}runExport('Création du PDF…',()=>({files:[pdfFile(`${s.cursus}_${slug(s.title||'formation')}_materiel-scenarios`,scMatPages(s))],title:'Matériel'}))}
 });
+/* =========================================================
+   Accueil : choix de l'espace (administratif / formation) ;
+   espace formation : planning, modules de séquences et d'ateliers (fiche + diaporama), scénarios de MSP
+   ========================================================= */
+const FORMATION=__FORMATION__;
+const F_COURSES=Object.keys(FORMATION.courses);
+const SLOT={seq:['Séquence','#6b7280'],app:['Atelier (APP)','#4caf50'],msp:['MSP','#e8700d'],admin:['Organisation','#94a3b8']};
+const fCur=()=>S.fcur&&FORMATION.courses[S.fcur]?S.fcur:(()=>{const s=S.sid&&curSess();return s&&FORMATION.courses[s.cursus]?s.cursus:'PS'})();
+const fData=cur=>FORMATION.courses[cur]||{planning:[],modules:[]};
+const modById=id=>{for(const c of F_COURSES){const m=fData(c).modules.find(x=>x.id===id);if(m)return Object.assign({cur:c},m)}return null};
+const fSessions=cur=>DB.sessions.filter(s=>s.cursus===cur&&!s.archived).sort((a,b)=>(b.start||'').localeCompare(a.start||''));
+const fSess=()=>{const cur=fCur(),L=fSessions(cur);let s=L.find(x=>x.id===S.fsid);if(!s&&S.fsid!=='none')s=L[0];return s||null};
+const cName=cur=>(RIOFE_COURSES[cur]||{}).name||cur;
+function viewHome(){
+  const tile=(v,ic,t,d,col)=>`<button class="space-tile" data-act="space" data-v="${v}" style="--c:${col}"><span class="ic">${ic}</span><span class="grow"><b>${t}</b><span class="small">${d}</span></span>${I.chev}</button>`;
+  return `<div class="home"><div class="home-hd">${MARK.startsWith('data:')?`<img src="${MARK}" alt="">`:''}<h1>FORSSUAP 78</h1><p class="muted">SDIS 78 · Groupement Formation · formation des équipiers SSUAP</p></div>
+    <div class="stack">${tile('admin',I.formation,'Espace administratif','Formations et participants, émargement, fiches d’évaluation MSP, grilles sommatives, attestations','var(--brand)')}
+    ${tile('form',I.scen,'Espace formation','Planning des journées, séquences et ateliers à présenter, scénarios de MSP reliés aux fiches d’évaluation','#e8700d')}</div>
+    <p class="small muted" style="text-align:center;margin-top:24px">Version ${APP_VERSION} · fonctionne hors ligne</p></div>`}
+function fCourseChips(act){return `<div class="chips">${F_COURSES.map(c=>`<button class="chip ${fCur()===c?'on':''}" data-act="${act}" data-v="${c}">${esc(cName(c))}</button>`).join('')}</div>`}
+function fSessPick(){const cur=fCur(),L=fSessions(cur),s=fSess();
+  return `<label class="f">Formation suivie (dates du planning, fiches MSP)<select data-act-change="fsess" id="f-sess"><option value="none" ${s?'':'selected'}>— Aucune (consultation) —</option>${L.map(x=>`<option value="${x.id}" ${s&&s.id===x.id?'selected':''}>${esc(x.title||x.cursus)} · ${esc(fmtDate(x.start))}</option>`).join('')}</select></label>`}
+function viewPlanning(){const cur=fCur(),D=fData(cur),s=fSess(),days=s?ensureDays(s):[];
+  const nd=Math.max(...D.planning.map(x=>x.j));const td=today();
+  let j=S.fday;if(!j){const k=days.findIndex(d=>d.date===td);j=k>=0?k+1:1}
+  const dlab=n=>{const d=days[n-1];return `J${n}${d&&d.date?' · '+fmtDate(d.date).slice(0,5):''}`};
+  const slot=x=>{const [lab,col]=SLOT[x.type]||SLOT.admin,c=x.type==='msp'?scById(x.ref):null,m=x.type!=='msp'&&x.ref?modById(x.ref):null;
+    const n=c&&s?DB.evals.filter(e=>e.sessionId===s.id&&e.scenarioId===c.id).length:0;
+    const act=c?`data-act="open-sc" data-id="${c.id}" data-from="planning"`:m?`data-act="open-mod" data-id="${m.id}" data-from="planning"`:'';
+    return `<div class="slot" style="--c:${col}"><div class="t num">${x.h0}<br><span class="muted">${x.h1}</span></div>
+      <${act?'button':'div'} class="b" ${act}><span class="small" style="color:${col};font-weight:700">${c?esc(/^MSP/i.test(c.ref)?c.ref:'MSP · '+c.ref):lab}</span><b>${esc(x.titre)}</b>
+      ${c?`<span class="small muted">${esc(c.titre)} · ${esc(c.theme)}</span>`:m?`<span class="small muted">${esc(m.duree)} · ${m.slides.length} diapositives</span>`:''}
+      ${n?`<span class="pill ok" style="align-self:flex-start">${n} fiche${n>1?'s':''} MSP</span>`:''}</${act?'button':'div'}>
+      ${c&&s&&!EMBED?`<button class="btn sm" data-act="new-sc-fiche" data-id="${c.id}">Évaluer</button>`:m?`<button class="btn sm" data-act="present" data-id="${m.id}" data-from="planning">${I.play||'▶'} Présenter</button>`:''}</div>`};
+  const L=D.planning.filter(x=>x.j===j);const am=L.filter(x=>x.h0<'12:30'),pm=L.filter(x=>x.h0>='12:30');
+  return `<div class="stack">${fCourseChips('fcur')}${fSessPick()}
+    <div class="chips">${Array.from({length:nd},(_,i)=>`<button class="chip ${j===i+1?'on':''}" data-act="fday" data-v="${i+1}">${dlab(i+1)}</button>`).join('')}</div>
+    <section class="panel"><div class="hd"><h3>Jour ${j}${days[j-1]&&days[j-1].date?' · '+esc(frLong(days[j-1].date)):''}</h3><span class="small muted">${esc(cName(cur))}</span></div>
+      <div class="bd stack" style="gap:8px">${am.map(slot).join('')}<div class="small muted" style="text-align:center">Pause déjeuner</div>${pm.map(slot).join('')}</div></section>
+    <p class="small muted">Source : ${esc(D.source)}. Touchez une séquence ou un atelier pour l’ouvrir, une MSP pour son scénario${s?' ; « Évaluer » ouvre la fiche MSP pré-remplie dans la formation choisie':''}.</p></div>`}
+function viewModules(){const cur=fCur(),D=fData(cur),f=S.fmk||'all';const L=D.modules.filter(m=>f==='all'||m.kind===f);
+  const days=[...new Set(L.map(m=>m.jour))].sort();
+  return `<div class="stack">${fCourseChips('fcur')}
+    <div class="chips">${[['all','Tout'],['seq','Séquences'],['app','Ateliers (APP)']].map(([k,l])=>`<button class="chip ${f===k?'on':''}" data-act="fmk" data-v="${k}">${l}</button>`).join('')}</div>
+    ${days.map(d=>`<section class="panel"><div class="hd"><h3>Jour ${d}</h3></div><div class="lines">${L.filter(m=>m.jour===d).map(m=>`<button class="line" data-act="open-mod" data-id="${m.id}" data-from="modules"><span class="av" style="background:${SLOT[m.kind][1]};color:#fff">${m.kind==='seq'?'S':'A'}</span><span class="grow"><b>${esc(m.code)} · ${esc(m.titre)}</b><span class="small muted" style="display:block">${esc(m.duree)} · ${m.slides.length} diapositives${m.valide?'':' · contenu à valider'}</span></span>${I.chev}</button>`).join('')}</div></section>`).join('')}</div>`}
+function viewModule(){const m=modById(S.mid);if(!m)return viewModules();
+  const row=(k,v)=>v?`<div class="mrow"><div class="k">${k}</div><div class="v">${v}</div></div>`:'';
+  const ul=a=>`<ul style="margin:0;padding-left:18px;display:grid;gap:4px">${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+  const P=fData(m.cur).planning.filter(x=>x.ref===m.id);
+  return `<div class="stack">
+    <div class="row"><button class="btn primary grow" data-act="present" data-id="${m.id}">${I.play||'▶'} Présenter la ${m.kind==='seq'?'séquence':'l’atelier'} (${m.slides.length} diapositives)</button></div>
+    ${m.valide?'':`<div class="panel"><div class="bd small" style="border-left:4px solid var(--t-orange)">Contenu proposé à partir du programme : à relire et valider par l’équipe pédagogique avant utilisation.</div></div>`}
+    <section class="panel"><div class="hd"><h3>Fiche ${m.kind==='seq'?'séquence':'atelier'}</h3><span class="small muted">${esc(cName(m.cur))}</span></div><div class="bd mtable">
+      ${row('Compétences visées',esc(m.competences))}${row('Jour · durée',`Jour ${m.jour} · ${esc(m.duree)}${P.length?' · '+P.map(x=>x.h0+'–'+x.h1).join(', '):''}`)}
+      ${row('Logistique globale',esc(m.logistique))}${row('Profil formateur',esc(m.profil))}${row('Présentation',ul(m.presentation))}
+      ${row('Documents formateurs',esc(m.docsFormateurs))}${row('Documents apprenants',esc(m.docsApprenants))}${row('Évaluation',esc(m.evaluation))}</div></section>
+    <section class="panel"><div class="hd"><h3>Diapositives</h3></div><div class="lines">${m.slides.map((x,i)=>`<button class="line" data-act="present" data-id="${m.id}" data-i="${i}"><span class="av">${i+1}</span><span class="grow"><b>${esc(x.titre)}</b><span class="small muted" style="display:block">${esc(x.points.slice(0,2).join(' · '))}</span></span>${I.chev}</button>`).join('')}</div></section>
+    ${m.msp.length?`<section class="panel"><div class="hd"><h3>MSP liées</h3></div><div class="lines">${m.msp.map(id=>scById(id)).filter(Boolean).map(c=>`<button class="line" data-act="open-sc" data-id="${c.id}" data-from="module"><span class="av" style="background:#e8700d;color:#fff">M</span><span class="grow"><b>${esc(c.ref)} · ${esc(c.titre)}</b><span class="small muted" style="display:block">${esc(c.theme)}</span></span>${I.chev}</button>`).join('')}</div></section>`:''}</div>`}
+function viewPresent(){const m=modById(S.mid);if(!m)return viewModules();const i=Math.max(0,Math.min(m.slides.length-1,S.si||0)),x=m.slides[i];
+  return `<div class="present" id="present"><div class="ph"><span class="small">${esc(m.code)} · ${esc(m.titre)}</span><button class="ibtn" data-act="present-exit" aria-label="Quitter la présentation">${I.x}</button></div>
+    <div class="pb"><h2>${esc(x.titre)}</h2><ul>${x.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>${x.note&&S.pnote?`<div class="pn">Note formateur : ${esc(x.note)}</div>`:''}</div>
+    <div class="pf"><button class="btn" data-act="slide" data-v="-1" ${i?'':'disabled'}>‹ Précédente</button><span class="num">${i+1} / ${m.slides.length}</span>
+      ${m.slides.some(s=>s.note)?`<button class="btn sm" data-act="pnote">${S.pnote?'Masquer':'Notes'}</button>`:''}<button class="btn primary" data-act="slide" data-v="1" ${i<m.slides.length-1?'':'disabled'}>Suivante ›</button></div></div>`}
+Object.assign(A,{
+  space:d=>{S.space=d.v;S.tab=d.v==='admin'?'sessions':'planning';if(d.v==='form'){S.scNoSess=true;S.scj='all'}go(S.tab)},
+  home:()=>{S.space=null;go('home')},
+  fcur:d=>{S.fcur=d.v;S.sccur=d.v;S.fday=0;S.fsid=null;render()},
+  fday:d=>{S.fday=+d.v;render()},
+  fmk:d=>{S.fmk=d.v;render()},
+  'open-mod':d=>{S.modFrom=d.from||'modules';go('module',{mid:d.id})},
+  present:d=>{S.mid=d.id;S.si=+(d.i||0);S.presFrom=d.from==='planning'?'planning':'module';go('present')},
+  'present-exit':()=>go(S.presFrom==='planning'?'planning':'module'),
+  slide:d=>{S.si=(S.si||0)+(+d.v);render()},
+  pnote:()=>{S.pnote=!S.pnote;render()}
+});
+document.addEventListener('change',ev=>{const el=ev.target;if(el&&el.id==='f-sess'){S.fsid=el.value;S.fday=0;render()}});
+document.addEventListener('keydown',ev=>{if(S.view!=='present')return;if(ev.key==='ArrowRight'||ev.key===' '){const m=modById(S.mid);if(m&&(S.si||0)<m.slides.length-1){S.si=(S.si||0)+1;render()}ev.preventDefault()}
+  else if(ev.key==='ArrowLeft'){if((S.si||0)>0){S.si--;render()}}else if(ev.key==='Escape')A['present-exit']()});
+(()=>{let x0=null;document.addEventListener('touchstart',e=>{if(S.view==='present')x0=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',e=>{if(S.view!=='present'||x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;const m=modById(S.mid);if(!m)return;
+    if(dx<-50&&(S.si||0)<m.slides.length-1){S.si=(S.si||0)+1;render()}else if(dx>50&&(S.si||0)>0){S.si--;render()}},{passive:true})})();
+
 
 /* ---- éditeur de scénarios ---- */
 const SC_BLANK=cur=>({id:'u'+uid(),cur,n:'',titre:'',theme:'',jour:'J1',etape:'',niveau:1,duree:'10 min + 15 min de débriefing',lieu:'',equipe:cur==='EQSUAP'?'Équipage VSAV : chef d’agrès, deux équipiers':'Équipier prompt secours seul, VSAV engagé',
@@ -2162,7 +2169,9 @@ const AI_CALL_MODEL='claude-sonnet-5-5';  // conversation : réponse la plus rap
 const EL_AGENT_DEFAULT='agent_4401m7ptk799fpxvzbprhgfr232b';
 function aiCfg(){const a=DB.settings.ai=Object.assign({mode:'key',key:'',relay:'',code:'',voice:true,engine:'eleven',elMode:'public',elAgent:''},DB.settings.ai||{});
   /* une seule fois : brancher l'agent de FORSSUAP 78 sur les appareils qui n'ont pas de relais configuré */
-  if(!a.elDefaulted){a.elDefaulted=true;if(!a.relay.trim())a.elMode='public';if(!a.elAgent)a.elAgent=EL_AGENT_DEFAULT}
+  if(!a.elDefaulted){a.elDefaulted=true;if(!a.relay.trim())a.elMode='public'}
+  /* agent de FORSSUAP 78 par défaut, y compris sur les appareils configurés avant sa création */
+  if(!a.elAgent.trim()&&EL_AGENT_DEFAULT)a.elAgent=EL_AGENT_DEFAULT
   return a}
 const aiReady=()=>{const a=aiCfg();return a.mode==='relay'?!!(a.relay.trim()&&a.code.trim()):!!a.key.trim()};
 function aiClient(){const a=aiCfg(),AN=window.Anthropic;if(!AN)throw new Error('module IA indisponible');
@@ -2364,7 +2373,7 @@ function viewAiSettings(){const a=aiCfg();
     ${a.engine==='eleven'?`<label class="f">Accès à ElevenLabs<select id="ai-elmode" ${bind('ai.elMode','settings')}><option value="relay" ${a.elMode==='relay'?'selected':''}>Par le serveur relais (recommandé : la clé reste sur le serveur)</option><option value="public" ${a.elMode==='public'?'selected':''}>Agent public (essai rapide, sans serveur)</option></select></label>
       ${a.elMode==='public'?`<label class="f">Identifiant de l’agent ElevenLabs<input type="text" id="ai-elagent" value="${esc(a.elAgent)}" placeholder="agent_…" ${bind('ai.elAgent','settings')}></label><p class="small muted" style="margin:0">Un agent public peut être utilisé par quiconque connaît son identifiant : limitez-le à votre adresse dans ElevenLabs (Security › Allowlist) et fixez un plafond de dépense. Pour un usage régulier, passez par le serveur relais.</p>`:''}`:''}
     <label class="f">Accès à Claude (correction du bilan${a.engine==='eleven'?'':' et régulateur'})<select id="ai-mode" ${bind('ai.mode','settings')}><option value="key" ${a.mode==='key'?'selected':''}>Clé API Anthropic enregistrée sur cet appareil</option><option value="relay" ${a.mode==='relay'?'selected':''}>Serveur relais de l’organisme</option></select></label>
-    ${(a.mode==='relay'||(a.engine==='eleven'&&a.elMode==='relay'))?`<label class="f">Adresse du serveur relais<input type="url" id="ai-relay" value="${esc(a.relay)}" placeholder="https://eval-relais.exemple.workers.dev" ${bind('ai.relay','settings')}></label>
+    ${(a.mode==='relay'||(a.engine==='eleven'&&a.elMode==='relay'))?`<label class="f">Adresse du serveur relais<input type="url" id="ai-relay" value="${esc(a.relay)}" placeholder="https://forssuap78-relais.exemple.workers.dev" ${bind('ai.relay','settings')}></label>
       <label class="f">Code d’accès<input type="password" id="ai-code" autocomplete="off" value="${esc(a.code)}" ${bind('ai.code','settings')}></label>
       <p class="small muted" style="margin:0">Le serveur relais garde les clés (Claude et ElevenLabs) ; les tablettes n’ont que le code d’accès (voir le dossier relay du projet).</p>`:''}
     ${a.mode==='key'?`<label class="f">Clé API (créée sur console.anthropic.com)<input type="password" id="ai-key" autocomplete="off" value="${esc(a.key)}" placeholder="sk-ant-…" ${bind('ai.key','settings')}></label>
@@ -2497,7 +2506,7 @@ Object.assign(A,{
   'pdf-call':()=>{const K=S.call,c=scById(K.scId);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_transmission-bilan_${String(c.n).padStart(2,'0')}_${slug(K.who||'apprenant')}_${K.date}`,callPages(K,c))],title:'Transmission du bilan'}))}
 });
 function callPages(K,c){const D=K.debrief;return [{orient:'p',draw:doc=>{const P=pen(doc);const w=scWriter(doc,P,`${c.cur} · Transmission du bilan au SAMU 15`);
-  w.p(c.titre,{b:true,s:15,c:[0,43,107],gap:1});w.p(`${c.cur} · scénario n°${c.n} · ${fmtDate(K.date)}${K.who?' · '+K.who:''} · niveau ${CALL_LEVELS[K.level]||''}`,{s:8.5,c:GREY});w.y+=2;
+  w.p(c.titre,{b:true,s:15,c:[31,56,100],gap:1});w.p(`${c.cur} · scénario n°${c.n} · ${fmtDate(K.date)}${K.who?' · '+K.who:''} · niveau ${CALL_LEVELS[K.level]||''}`,{s:8.5,c:GREY});w.y+=2;
   w.lab('Note : ',`${D.note}/10 - ${D.appreciation}`);w.lab('Proposition pour la fiche d’évaluation : ',`${D.suggestion_fiche} - ${D.justification} (le formateur décide)`);
   w.h('Critères');(D.criteres||[]).forEach(x=>w.li(`${x.critere} : ${x.niveau.toUpperCase()} - ${x.commentaire}`,{s:8.5}));
   w.h('Points forts');(D.points_forts||[]).forEach(x=>w.li(x));w.h('À améliorer');(D.a_ameliorer||[]).forEach(x=>w.li(x));
@@ -2527,11 +2536,11 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)save(true)}
 /* Bouton retour Android */
 if(NATIVE&&window.Capacitor.Plugins.App){window.Capacitor.Plugins.App.addListener('backButton',()=>{
   if($('#overlay').innerHTML){closeModal();return}
-  const m={session:'sessions',person:'session',sessionEdit:S.draftNew?'sessions':'session',formative:S.pid?'person':'session',cert:'person',tech:'person',suivi:'person',techs:'session',qcm:'cert',satis:'session',survey:'session',tpl:'tpls',scenarios:S.scNoSess?null:'session',call:'scenario',scEdit:S.scNew?'scenarios':'scenario',scenario:S.scFrom==='formative'?'formative':'scenarios'};
-  if(m[S.view])go(m[S.view]);else if(S.view!=='sessions'){S.tab='sessions';go('sessions')}else window.Capacitor.Plugins.App.exitApp();
+  const m={planning:'home',modules:'home',sessions:'home',tpls:'home',settings:'home',module:S.modFrom==='planning'?'planning':'modules',present:S.presFrom==='planning'?'planning':'module',session:'sessions',person:'session',sessionEdit:S.draftNew?'sessions':'session',formative:S.pid?'person':'session',cert:'person',tech:'person',suivi:'person',techs:'session',qcm:'cert',satis:'session',survey:'session',tpl:'tpls',scenarios:S.scNoSess?'home':'session',call:'scenario',scEdit:S.scNew?'scenarios':'scenario',scenario:S.scFrom==='formative'?'formative':S.scFrom==='planning'?'planning':S.scFrom==='module'?'module':'scenarios'};
+  if(S.view==='home')window.Capacitor.Plugins.App.exitApp();else if(m[S.view]){if(m[S.view]==='home')S.space=null;go(m[S.view])}else{S.tab='sessions';go('sessions')}
 })}
 window.__loadForms=loadForms;
-window.__app={DB:()=>DB,S,callSystem,debriefSystem,scById,ensureDays,formativePages,certPages,verdict,riofeAttestPages,riofeSommPages,recGet,recPurge,A,go,ensureSuivi,suiviPages,suiviGrid,suiviVerdict,ensureCert,qcmState,pvPages,certificatePages,notifPages,attestationPages,satPages,qcmPages,buildPdf,formativePages,certPages,techPages,dossierPages,sessionExport,certGrid};
+window.__app={DB:()=>DB,S,callSystem,debriefSystem,scById,ensureDays,formativePages,certPages,verdict,riofeAttestPages,riofeSommPages,recGet,recPurge,A,go,ensureSuivi,suiviPages,suiviGrid,suiviVerdict,ensureCert,qcmState,pvPages,satPages,qcmPages,buildPdf,formativePages,certPages,techPages,dossierPages,sessionExport,certGrid};
 render();
 })();
 </script>
