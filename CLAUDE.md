@@ -17,7 +17,7 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
   `cd mobile && npx cap sync android && cd android && ./gradlew assembleDebug --no-daemon -q --max-workers=2`
   puis copier `app/build/outputs/apk/debug/app-debug.apk` vers `docs/FORSSUAP78.apk`.
   Il faut un SDK Android (ANDROID_HOME) et JDK 17 ; dl.google.com est autorisé dans l'environnement.
-  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.2.0 (code 4).
+  Incrémenter `versionCode`/`versionName` (mobile/android/app/build.gradle) et `APP_VERSION` (src/app.html). Version actuelle : 1.2.1 (code 5).
 - `tools/brand.py` : toutes les images (logo PDF, icônes web, mipmaps, splash) depuis `brand/logo-sdis78-source.png`.
 - `vendor/` : jsPDF, SDK Anthropic (bundle esbuild), client ElevenLabs (bundle).
 - `relay/` : Cloudflare Worker (relais IA `/v1/messages` + `/eleven/session`), nom `forssuap78-relais`.
@@ -43,10 +43,12 @@ Langue : l'utilisateur travaille en **français** ; interface, PDF, messages de 
 - `observe` = savoirs-agir RIOFE (`c22`…`c32` PS, `c1`…`c15` SUAP) ; `cases` = thèmes en pastilles, propres au cursus (`SC_TAGS`).
 - « Évaluer ce cas » crée une fiche MSP (autoévaluation accompagnée) pré-remplie : thème, missions (objectifs), réf. MSP.
 
-## Régulation simulée (CTA-CODIS 78 → médecin régulateur SAMU 78)
-- `callSystem` / `debriefSystem` : l’IA joue l’opérateur CTA-CODIS (« CTA-CODIS des Yvelines, j’écoute. ») puis le médecin régulateur ;
-  appelant = prompt secours seul (PS) ou équipier / chef d’agrès VSAV (EQSUAP, niveau avancé). Proposition de niveau A / ECA / NA
-  sur C24 (PS) ou C4-C5 (SUAP).
+## Régulation simulée (SAMU 78 – CRRA 15 : bilan pompier)
+- **Pas de CTA-CODIS** (décision utilisateur). Accueil : « Le SAMU, j’écoute. » (`AI_GREETING`, identique au first message de l’agent).
+- `callSystem` : l’ARM (PARM) du CRRA 15 prend tout le bilan pompier ; il ne passe le médecin régulateur **qu’en cas de détresse
+  importante** (détresse vitale, signes de gravité, traumatisme grave, douleur thoracique, accouchement / nouveau-né, enfant grave,
+  plusieurs victimes graves). Appelant = prompt secours seul (PS) ou équipier / chef d’agrès VSAV (EQSUAP, niveau avancé).
+- `debriefSystem` : correction du bilan, proposition A / ECA / NA sur C24 (PS) ou C4-C5 (SUAP).
 - Agent ElevenLabs « SDIS 78 Régulation 15 » (voix Claire) : `EL_AGENT_DEFAULT='agent_4401m7ptk799fpxvzbprhgfr232b'` (mode « Agent public »).
   Il doit autoriser les surcharges par appel (prompt, first message, language) et être limité à forma-st.github.io et localhost.
 - Secret réseau ElevenLabs enregistré sur l’environnement « sdis78 » (hôte api.elevenlabs.io, en-tête xi-api-key), droits ElevenAgents

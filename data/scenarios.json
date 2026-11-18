@@ -10,7 +10,7 @@
   "niveau": 1,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Salle de restaurant : tables, chaises, clients",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "ova"
   ],
@@ -51,7 +51,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Désobstruction réalisée dans la minute",
@@ -59,7 +59,7 @@
    ],
    [
     "Gestes inefficaces au-delà de 2 minutes",
-    "La victime perd connaissance : allonger au sol, débuter la RCP, prévenir le CTA-CODIS."
+    "La victime perd connaissance : allonger au sol, débuter la RCP, prévenir le SAMU (15)."
    ],
    [
     "Pas de surveillance après la désobstruction",
@@ -71,12 +71,12 @@
    "Reconnaître l’obstruction grave : ne peut ni parler, ni tousser, ni respirer",
    "Donner 1 à 5 claques dans le dos puis 1 à 5 compressions abdominales, alterner",
    "Installer en position assise, rassurer, réaliser le bilan",
-   "Rendre compte au CTA-CODIS : compressions abdominales réalisées, victime à faire examiner"
+   "Rendre compte au SAMU (15) : compressions abdominales réalisées, victime à faire examiner"
   ],
   "observe": {
    "c23": "Fait écarter l’entourage, installe la victime en sécurité",
    "c26": "Reconnaît l’obstruction grave et enchaîne claques et compressions sans délai",
-   "c24": "Rend compte au CTA-CODIS : motif, gestes réalisés, état actuel",
+   "c24": "Rend compte au SAMU (15) : motif, gestes réalisés, état actuel",
    "c31": "Surveille la respiration et la conscience après la désobstruction"
   },
   "mat": {
@@ -100,7 +100,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -115,7 +115,7 @@
   "niveau": 2,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Appartement, salon avec tapis de jeu",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "ova",
    "pedia"
@@ -149,7 +149,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Gestes correctement enchaînés",
@@ -168,12 +168,12 @@
    "Prendre le nourrisson, tête plus basse que le thorax, sur l’avant-bras",
    "1 à 5 claques dans le dos, puis 1 à 5 compressions thoraciques avec deux doigts",
    "Vérifier la bouche, retirer l’objet visible",
-   "Bilan, surveillance, rendre compte au CTA-CODIS"
+   "Bilan, surveillance, rendre compte au SAMU (15)"
   ],
   "observe": {
    "c23": "Obtient le nourrisson de la mère et la rassure",
    "c26": "Gestes adaptés au nourrisson, sans compression abdominale",
-   "c24": "Message clair au CTA-CODIS",
+   "c24": "Message clair au SAMU (15)",
    "c31": "Surveillance de la respiration et de la coloration"
   },
   "mat": {
@@ -197,7 +197,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -212,7 +212,7 @@
   "niveau": 1,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Atelier municipal : établi, outils, sol encombré",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "hemo"
   ],
@@ -246,7 +246,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Compression efficace dans la minute",
@@ -265,7 +265,7 @@
    "Mettre des gants",
    "Compression directe immédiate, puis pansement compressif",
    "Allonger la victime, la couvrir",
-   "Bilan, oxygène si besoin selon protocole, rendre compte au CTA-CODIS"
+   "Bilan, oxygène si besoin selon protocole, rendre compte au SAMU (15)"
   ],
   "observe": {
    "c22": "Port des gants, gestion des souillures",
@@ -298,7 +298,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -313,7 +313,7 @@
   "niveau": 2,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Jardin pavillonnaire, bois coupé",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "hemo"
   ],
@@ -347,7 +347,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Garrot posé rapidement",
@@ -359,7 +359,7 @@
    ],
    [
     "Heure du garrot non notée",
-    "Le CTA-CODIS la demande."
+    "Le médecin régulateur la demande."
    ]
   ],
   "attendus": [
@@ -367,7 +367,7 @@
    "Compression immédiate puis garrot au-dessus de la plaie si inefficace ou impossible",
    "Noter l’heure de pose",
    "Allonger, couvrir, oxygène selon protocole",
-   "Rendre compte en urgence au CTA-CODIS (demande de renfort médical)"
+   "Rendre compte en urgence au SAMU (15) (demande de renfort médical)"
   ],
   "observe": {
    "c23": "Vérifie l’arrêt de la machine",
@@ -400,7 +400,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -415,7 +415,7 @@
   "niveau": 1,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Salle d’attente d’une mairie",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "malaise",
    "bilan"
@@ -451,7 +451,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Glycémie mesurée et sucre donné",
@@ -471,12 +471,12 @@
    "Interroger sur la maladie, les traitements, le dernier repas",
    "Mesurer la glycémie",
    "Donner du sucre si la victime est consciente et peut avaler",
-   "Rendre compte au CTA-CODIS et surveiller"
+   "Rendre compte au SAMU (15) et surveiller"
   ],
   "observe": {
    "c25": "Bilans complets et ordonnés, glycémie mesurée",
    "c28": "Prise en charge adaptée du malaise hypoglycémique",
-   "c24": "Message structuré au CTA-CODIS",
+   "c24": "Message structuré au SAMU (15)",
    "c31": "Surveillance de la conscience et réévaluation"
   },
   "mat": {
@@ -502,7 +502,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -517,7 +517,7 @@
   "niveau": 1,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Parc public, banc, allée",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "pc"
   ],
@@ -552,7 +552,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "PLS rapide",
@@ -570,7 +570,7 @@
   "attendus": [
    "Apprécier la conscience, libérer les voies aériennes, apprécier la respiration 10 s",
    "PLS",
-   "Alerter le CTA-CODIS",
+   "Alerter le SAMU (15)",
    "Bilan complémentaire, protection contre le froid, surveillance"
   ],
   "observe": {
@@ -597,7 +597,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -612,7 +612,7 @@
   "niveau": 2,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Salle de sport, tapis, haltères",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "acr"
   ],
@@ -645,7 +645,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "RCP et DAE en moins de 3 min",
@@ -662,7 +662,7 @@
   ],
   "attendus": [
    "Constater l’absence de conscience et de respiration",
-   "Alerter le CTA-CODIS",
+   "Alerter le SAMU (15)",
    "Compressions thoraciques 30/2 puis DAE dès disponible",
    "Organiser le relais avec le coach",
    "Après reprise : PLS, oxygène, surveillance"
@@ -695,7 +695,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -710,7 +710,7 @@
   "niveau": 2,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Chambre d’enfant",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "acr",
    "pedia"
@@ -743,7 +743,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "5 insufflations puis 15/2",
@@ -787,7 +787,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -802,7 +802,7 @@
   "niveau": 2,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Cage d’escalier d’un immeuble",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "trauma"
   ],
@@ -837,7 +837,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Maintien tête immédiat",
@@ -849,7 +849,7 @@
    ],
    [
     "Anticoagulant non recherché",
-    "Le CTA-CODIS le demande."
+    "Le médecin régulateur le demande."
    ]
   ],
   "attendus": [
@@ -887,7 +887,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -902,7 +902,7 @@
   "niveau": 3,
   "duree": "10 min + 15 min de débriefing",
   "lieu": "Carrefour, deux scooters au sol",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "smv",
    "trauma"
@@ -947,7 +947,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Balisage et tri rapides",
@@ -959,7 +959,7 @@
    ],
    [
     "Message sans nombre de victimes",
-    "Le CTA-CODIS demande le nombre et l’état des victimes."
+    "Le SAMU demande le nombre et l’état des victimes."
    ]
   ],
   "attendus": [
@@ -967,7 +967,7 @@
    "Identifier toutes les victimes, la détresse prioritaire",
    "Faire comprimer le blessé conscient",
    "Maintien tête et libération des voies aériennes du blessé inconscient",
-   "Message au CTA-CODIS : nombre de victimes, état, moyens nécessaires"
+   "Message au SAMU (15) : nombre de victimes, état, moyens nécessaires"
   ],
   "observe": {
    "c23": "Balisage et sécurité",
@@ -1000,7 +1000,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -1015,7 +1015,7 @@
   "niveau": 3,
   "duree": "15 min + 15 min de débriefing",
   "lieu": "Marché couvert",
-  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)",
+  "equipe": "Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur",
   "cases": [
    "malaise",
    "acr",
@@ -1051,7 +1051,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous rendez compte au CTA-CODIS par radio ou téléphone.",
+  "secouristes": "Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours (DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.",
   "evolution": [
    [
     "Repos strict, bilan et alerte rapides",
@@ -1062,8 +1062,8 @@
     "Effondrement plus précoce."
    ],
    [
-    "Aggravation non annoncée au CTA-CODIS",
-    "Le CTA-CODIS rappelle pour un point de situation."
+    "Aggravation non annoncée au SAMU",
+    "Le SAMU rappelle pour un point de situation."
    ]
   ],
   "attendus": [
@@ -1103,7 +1103,7 @@
   "debrief": [
    "Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?",
    "Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?",
-   "Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?",
+   "Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?",
    "Si c’était à refaire, que changeriez-vous ?"
   ]
  },
@@ -1154,7 +1154,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Maintien tête dès l’arrivée",
@@ -1257,7 +1257,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Retrait du casque coordonné",
@@ -1329,7 +1329,7 @@
   "objectifs": [
    "Réaliser le bilan complet",
    "Recueillir les antécédents et traitements",
-   "Transmettre le bilan au CTA-CODIS et à la régulation"
+   "Transmettre le bilan pompier au SAMU (15)"
   ],
   "message": "« VSAV Plaisir 1, départ pour malaise, 15 avenue de Saint-Germain à Plaisir, 2e étage. »",
   "contexte": "M. Rey (66 ans), diabétique sous insuline, a fait son injection mais a sauté le repas. Il est assis, en sueur, agité.",
@@ -1356,7 +1356,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Glycémie et resucrage",
@@ -1453,7 +1453,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Position assise et oxygène",
@@ -1550,7 +1550,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Équipier dans le véhicule qui parle à la victime",
@@ -1653,7 +1653,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Demande précoce du SMUR",
@@ -1761,7 +1761,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Préparation anticipée",
@@ -1859,7 +1859,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Ventilation efficace dans la minute",
@@ -1953,7 +1953,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Protection sans contention",
@@ -2049,7 +2049,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Adrénaline rapidement utilisée",
@@ -2144,7 +2144,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Refroidissement rapide et adapté",
@@ -2242,7 +2242,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Courant coupé avant approche",
@@ -2337,7 +2337,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Signes repérés et transmis discrètement",
@@ -2419,7 +2419,7 @@
     "maq": ""
    }
   ],
-  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).",
+  "secouristes": "Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.",
   "evolution": [
    [
     "Protocole respecté",

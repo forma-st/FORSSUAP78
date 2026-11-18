@@ -15,14 +15,14 @@ Usage : python3 tools/scenarios_sdis78.py
 import json, pathlib
 
 DEB = '10 min + 15 min de débriefing'
-PS_EQ = 'Équipier prompt secours seul (stagiaire), VSAV engagé par le CTA-CODIS (joué par le formateur)'
+PS_EQ = 'Équipier prompt secours seul (stagiaire), VSAV engagé ; régulation du SAMU (CRRA 15) jouée par le formateur'
 VSAV = 'Équipage VSAV : chef d’agrès (formateur ou stagiaire), deux équipiers stagiaires'
 PS_SEC = ('Vous êtes sapeur-pompier volontaire, engagé en prompt secours. Vous arrivez seul avec votre sac de prompt secours '
           '(DAE, oxygène, matériel de bilan, pansements, garrot, couverture). Le VSAV est engagé et arrivera dans une dizaine de minutes. '
-          'Vous rendez compte au CTA-CODIS par radio ou téléphone.')
+          'Vous transmettez votre bilan au SAMU (15) par radio ou téléphone.')
 VSAV_SEC = ('Vous êtes l’équipage du VSAV. Vous disposez de l’ensemble du lot VSAV (sac d’urgence, oxygène, DSA, matériel d’immobilisation, '
             'brancard et chaise de transport, matelas immobilisateur à dépression, plan dur, attelles, lot accouchement, lot brûlés). '
-            'Le chef d’agrès transmet le bilan au CTA-CODIS, qui le met en relation avec la régulation du SAMU (CRRA 15).')
+            'Le chef d’agrès transmet le bilan pompier au SAMU (CRRA 15) : l’ARM le prend, puis le médecin régulateur décide.')
 SAC_PS = ['Sac de prompt secours complet', 'DAE de formation', 'Bouteille d’oxygène de formation et masque haute concentration',
           'Oxymètre, tensiomètre, thermomètre, lecteur de glycémie (factices)', 'Gants, gel hydroalcoolique, sacs DASRI']
 LOT_VSAV = ['Sac d’urgence VSAV', 'Bouteille d’oxygène et masques', 'DSA de formation', 'Oxymètre, tensiomètre, thermomètre, lecteur de glycémie',
@@ -41,7 +41,7 @@ def T(nom, brief, jeu='', t='Tiers'):
     return dict(t=t, nom=nom, brief=brief, jeu=jeu, param=[], maq='')
 
 DEBRIEF_PS = ['Qu’avez-vous vu en arrivant ? Quels dangers avez-vous identifiés ?', 'Dans quel ordre avez-vous réalisé votre bilan, et pourquoi ?',
-              'Qu’avez-vous transmis au CTA-CODIS ? Qu’auriez-vous pu ajouter ?', 'Si c’était à refaire, que changeriez-vous ?']
+              'Qu’avez-vous transmis au SAMU ? Qu’auriez-vous pu ajouter ?', 'Si c’était à refaire, que changeriez-vous ?']
 DEBRIEF_SUAP = ['Comment l’équipage s’est-il réparti les missions dès l’arrivée ?', 'Le bilan transmis était-il complet, chiffré et hiérarchisé ?',
                 'Les règles d’hygiène et d’asepsie ont-elles été respectées du début à la fin ?', 'Qu’est-ce qui a bien fonctionné dans l’équipe ? Que changeriez-vous ?']
 
@@ -58,13 +58,13 @@ PS = [
      T('Serveur', 'Vous avez appelé les secours. Vous pouvez aider (dégager la salle, guider le VSAV).', 'Vous attendez qu’on vous donne une mission.')],
     PS_SEC,
     [('Désobstruction réalisée dans la minute', 'Le morceau est expulsé, la victime respire, tousse, reste anxieuse.'),
-     ('Gestes inefficaces au-delà de 2 minutes', 'La victime perd connaissance : allonger au sol, débuter la RCP, prévenir le CTA-CODIS.'),
+     ('Gestes inefficaces au-delà de 2 minutes', 'La victime perd connaissance : allonger au sol, débuter la RCP, prévenir le SAMU (15).'),
      ('Pas de surveillance après la désobstruction', 'La victime se plaint d’une douleur abdominale : le formateur interroge sur les compressions.')],
     ['Se présenter, faire écarter l’entourage', 'Reconnaître l’obstruction grave : ne peut ni parler, ni tousser, ni respirer',
      'Donner 1 à 5 claques dans le dos puis 1 à 5 compressions abdominales, alterner', 'Installer en position assise, rassurer, réaliser le bilan',
-     'Rendre compte au CTA-CODIS : compressions abdominales réalisées, victime à faire examiner'],
+     'Rendre compte au SAMU (15) : compressions abdominales réalisées, victime à faire examiner'],
     {'c23': 'Fait écarter l’entourage, installe la victime en sécurité', 'c26': 'Reconnaît l’obstruction grave et enchaîne claques et compressions sans délai',
-     'c24': 'Rend compte au CTA-CODIS : motif, gestes réalisés, état actuel', 'c31': 'Surveille la respiration et la conscience après la désobstruction'},
+     'c24': 'Rend compte au SAMU (15) : motif, gestes réalisés, état actuel', 'c31': 'Surveille la respiration et la conscience après la désobstruction'},
     {'lieu': ['Tables, chaises, couverts'], 'maq': [], 'acc': ['Assiette avec morceau de pain', 'Gilet de désobstruction si disponible'], 'sec': SAC_PS},
     'Les compressions abdominales ne sont jamais réalisées sur le figurant : gilet de désobstruction ou mime.', DEBRIEF_PS),
  sc('ps-02', 'PS', 2, 'Le bébé qui s’étouffe', 'Obstruction grave des voies aériennes chez le nourrisson', 'J1', 'Séquence 1 : le système ventilatoire · MSP OAVA', 2,
@@ -80,9 +80,9 @@ PS = [
      ('Nourrisson secoué ou compressions abdominales', 'Le formateur arrête et rappelle le geste dangereux.'),
      ('Gestes inefficaces', 'Le nourrisson perd connaissance : RCP nourrisson, alerte immédiate.')],
     ['Prendre le nourrisson, tête plus basse que le thorax, sur l’avant-bras', '1 à 5 claques dans le dos, puis 1 à 5 compressions thoraciques avec deux doigts',
-     'Vérifier la bouche, retirer l’objet visible', 'Bilan, surveillance, rendre compte au CTA-CODIS'],
+     'Vérifier la bouche, retirer l’objet visible', 'Bilan, surveillance, rendre compte au SAMU (15)'],
     {'c23': 'Obtient le nourrisson de la mère et la rassure', 'c26': 'Gestes adaptés au nourrisson, sans compression abdominale',
-     'c24': 'Message clair au CTA-CODIS', 'c31': 'Surveillance de la respiration et de la coloration'},
+     'c24': 'Message clair au SAMU (15)', 'c31': 'Surveillance de la respiration et de la coloration'},
     {'lieu': ['Tapis de jeu, jouets'], 'maq': [], 'acc': ['Mannequin nourrisson de désobstruction', 'Petite pièce de jeu'], 'sec': SAC_PS},
     'Utiliser exclusivement un mannequin.', DEBRIEF_PS),
  sc('ps-03', 'PS', 3, 'Coupure à l’atelier', 'Hémorragie externe du membre supérieur', 'J1', 'Séquence 2 : le système circulatoire · MSP hémorragie', 1,
@@ -97,7 +97,7 @@ PS = [
     PS_SEC,
     [('Compression efficace dans la minute', 'Le saignement s’arrête, FC 96/min.'), ('Victime laissée debout', 'Malaise : la victime s’assoit seule, FC 120/min.'),
      ('Pansement compressif inefficace', 'Le sang traverse le pansement : reprendre la compression, envisager le garrot.')],
-    ['Mettre des gants', 'Compression directe immédiate, puis pansement compressif', 'Allonger la victime, la couvrir', 'Bilan, oxygène si besoin selon protocole, rendre compte au CTA-CODIS'],
+    ['Mettre des gants', 'Compression directe immédiate, puis pansement compressif', 'Allonger la victime, la couvrir', 'Bilan, oxygène si besoin selon protocole, rendre compte au SAMU (15)'],
     {'c22': 'Port des gants, gestion des souillures', 'c26': 'Arrête l’hémorragie sans délai', 'c25': 'Bilan après arrêt du saignement : FC, coloration, conscience',
      'c24': 'Rend compte avec l’heure du pansement compressif', 'c31': 'Vérifie l’efficacité du pansement et l’état de la victime'},
     {'lieu': ['Établi, outils, tôle sans arête'], 'maq': ['Faux sang (pompe ou poche)', 'Cire ou plaie en silicone'], 'acc': ['Ceinture'], 'sec': SAC_PS + ['Pansements compressifs, garrot']},
@@ -112,9 +112,9 @@ PS = [
      T('Voisine', 'Vous avez appelé le 18. Vous avez coupé la tronçonneuse.', 'Vous pouvez comprimer si on vous montre comment.')],
     PS_SEC,
     [('Garrot posé rapidement', 'Hémorragie arrêtée, FC 115/min, la victime reste consciente.'), ('Compression seule prolongée', 'Le saignement continue : la victime devient somnolente.'),
-     ('Heure du garrot non notée', 'Le CTA-CODIS la demande.')],
+     ('Heure du garrot non notée', 'Le médecin régulateur la demande.')],
     ['Vérifier que la tronçonneuse est arrêtée', 'Compression immédiate puis garrot au-dessus de la plaie si inefficace ou impossible', 'Noter l’heure de pose',
-     'Allonger, couvrir, oxygène selon protocole', 'Rendre compte en urgence au CTA-CODIS (demande de renfort médical)'],
+     'Allonger, couvrir, oxygène selon protocole', 'Rendre compte en urgence au SAMU (15) (demande de renfort médical)'],
     {'c23': 'Vérifie l’arrêt de la machine', 'c26': 'Décision rapide du garrot', 'c25': 'Recherche les signes de détresse circulatoire',
      'c24': 'Message d’urgence : garrot et heure de pose', 'c31': 'Surveille conscience, respiration et pouls'},
     {'lieu': ['Bûches, branchages'], 'maq': ['Faux sang abondant', 'Plaie de cuisse en silicone'], 'acc': ['Tronçonneuse sans chaîne ou factice'], 'sec': SAC_PS + ['Garrot tourniquet, marqueur']},
@@ -132,9 +132,9 @@ PS = [
     [('Glycémie mesurée et sucre donné', 'Amélioration progressive, la victime redevient cohérente.'), ('Pas de recherche d’antécédents', 'La victime devient somnolente.'),
      ('Sucre donné à une victime somnolente', 'Le formateur arrête : risque de fausse route.')],
     ['Bilan circonstanciel puis d’urgence vitale', 'Interroger sur la maladie, les traitements, le dernier repas', 'Mesurer la glycémie',
-     'Donner du sucre si la victime est consciente et peut avaler', 'Rendre compte au CTA-CODIS et surveiller'],
+     'Donner du sucre si la victime est consciente et peut avaler', 'Rendre compte au SAMU (15) et surveiller'],
     {'c25': 'Bilans complets et ordonnés, glycémie mesurée', 'c28': 'Prise en charge adaptée du malaise hypoglycémique',
-     'c24': 'Message structuré au CTA-CODIS', 'c31': 'Surveillance de la conscience et réévaluation'},
+     'c24': 'Message structuré au SAMU (15)', 'c31': 'Surveillance de la conscience et réévaluation'},
     {'lieu': ['Chaises de salle d’attente'], 'maq': ['Brumisateur (sueurs)'], 'acc': ['Sac à main avec carnet de diabète et stylo à insuline factice', 'Sucres'], 'sec': SAC_PS},
     'Pas de sucre réellement avalé par le figurant s’il est diabétique.', DEBRIEF_PS),
  sc('ps-06', 'PS', 6, 'Inconscient dans le parc', 'Victime inconsciente qui respire', 'J2', 'Séquence 3 : le système nerveux · MSP victime inconsciente', 1,
@@ -148,7 +148,7 @@ PS = [
     PS_SEC,
     [('PLS rapide', 'La respiration devient calme, SpO2 95 % sous oxygène.'), ('Victime laissée sur le dos', 'Bruits de gargouillement : risque d’inhalation.'),
      ('Surveillance absente', 'Au bout de 6 min la victime ne respire plus : RCP.')],
-    ['Apprécier la conscience, libérer les voies aériennes, apprécier la respiration 10 s', 'PLS', 'Alerter le CTA-CODIS', 'Bilan complémentaire, protection contre le froid, surveillance'],
+    ['Apprécier la conscience, libérer les voies aériennes, apprécier la respiration 10 s', 'PLS', 'Alerter le SAMU (15)', 'Bilan complémentaire, protection contre le froid, surveillance'],
     {'c23': 'Sécurise la zone', 'c26': 'Libération des voies aériennes et PLS', 'c24': 'Alerte précoce', 'c31': 'Surveillance régulière de la respiration'},
     {'lieu': ['Banc, couverture au sol'], 'maq': [], 'acc': [], 'sec': SAC_PS},
     'Sol protégé (tapis), retournement en douceur.', DEBRIEF_PS),
@@ -163,7 +163,7 @@ PS = [
     PS_SEC,
     [('RCP et DAE en moins de 3 min', 'Choc délivré, reprise d’activité à la 6e minute.'), ('Pauses longues', 'Le formateur annonce l’absence de reprise.'),
      ('Relais par le coach non organisé', 'Fatigue : compressions moins efficaces.')],
-    ['Constater l’absence de conscience et de respiration', 'Alerter le CTA-CODIS', 'Compressions thoraciques 30/2 puis DAE dès disponible', 'Organiser le relais avec le coach',
+    ['Constater l’absence de conscience et de respiration', 'Alerter le SAMU (15)', 'Compressions thoraciques 30/2 puis DAE dès disponible', 'Organiser le relais avec le coach',
      'Après reprise : PLS, oxygène, surveillance'],
     {'c26': 'RCP de qualité et DAE posé sans délai', 'c24': 'Alerte immédiate', 'c32': 'Organise le relais et le passage de consignes au VSAV',
      'c31': 'Surveillance après reprise'},
@@ -193,7 +193,7 @@ PS = [
      T('Voisin', 'Vous voulez l’aider à se relever et l’asseoir sur une marche.', 'Vous obéissez si on vous explique.')],
     PS_SEC,
     [('Maintien tête immédiat', 'La victime reste stable.'), ('Victime mobilisée', 'Fourmillements dans les mains : le formateur rappelle le danger.'),
-     ('Anticoagulant non recherché', 'Le CTA-CODIS le demande.')],
+     ('Anticoagulant non recherché', 'Le médecin régulateur le demande.')],
     ['Interdire tout mouvement, maintien de la tête', 'Bilan : mécanisme, douleurs, motricité, sensibilité', 'Antécédents et traitements (anticoagulants)',
      'Couvrir, rendre compte, surveiller'],
     {'c23': 'Empêche la mobilisation par le voisin', 'c30': 'Maintien de la tête en position neutre', 'c25': 'Bilan traumatique complet',
@@ -211,9 +211,9 @@ PS = [
      T('Passant', 'Vous avez tout vu, vous êtes choqué, vous tremblez.', 'Vous aidez si on vous guide.', 'Témoin')],
     PS_SEC,
     [('Balisage et tri rapides', 'Le conducteur 2 comprime, le conducteur 1 est pris en charge.'), ('Fixation sur la victime qui crie', 'Le conducteur 1 aggrave sa respiration.'),
-     ('Message sans nombre de victimes', 'Le CTA-CODIS demande le nombre et l’état des victimes.')],
+     ('Message sans nombre de victimes', 'Le SAMU demande le nombre et l’état des victimes.')],
     ['Se protéger et baliser', 'Identifier toutes les victimes, la détresse prioritaire', 'Faire comprimer le blessé conscient', 'Maintien tête et libération des voies aériennes du blessé inconscient',
-     'Message au CTA-CODIS : nombre de victimes, état, moyens nécessaires'],
+     'Message au SAMU (15) : nombre de victimes, état, moyens nécessaires'],
     {'c23': 'Balisage et sécurité', 'c26': 'Priorise la détresse vitale', 'c24': 'Message de renseignement : nombre et état des victimes', 'c32': 'Accueille et oriente les renforts'},
     {'lieu': ['Cônes de balisage', 'Deux scooters ou silhouettes'], 'maq': ['Faux sang', 'Éraflures'], 'acc': ['Deux casques'], 'sec': SAC_PS + ['Triangle et gilet haute visibilité']},
     'Exercice hors circulation. Retrait du casque uniquement sur mannequin ou de façon simulée.', DEBRIEF_PS),
@@ -228,7 +228,7 @@ PS = [
      T('Épouse', 'Vous savez qu’il prend un traitement pour la tension et qu’il a déjà eu « un problème au cœur ».', 'Vous apportez les ordonnances si on vous le demande.')],
     PS_SEC,
     [('Repos strict, bilan et alerte rapides', 'Effondrement à la 8e minute : RCP et DAE immédiats.'), ('Victime laissée debout', 'Effondrement plus précoce.'),
-     ('Aggravation non annoncée au CTA-CODIS', 'Le CTA-CODIS rappelle pour un point de situation.')],
+     ('Aggravation non annoncée au SAMU', 'Le SAMU rappelle pour un point de situation.')],
     ['Mise au repos, bilans, recherche des antécédents', 'Rendre compte rapidement (douleur thoracique)', 'Préparer le DAE à proximité', 'Reconnaître l’arrêt et débuter la RCP sans délai',
      'Point de situation et relais au VSAV'],
     {'c25': 'Bilan complet de la douleur thoracique', 'c28': 'Prise en charge adaptée du malaise', 'c26': 'Réaction immédiate à l’arrêt cardiaque',
@@ -271,7 +271,7 @@ SUAP = [
     'Exercice hors circulation.', DEBRIEF_SUAP),
  sc('suap-03', 'EQSUAP', 3, 'Malaise de la personne diabétique', 'Bilan et malaise hypoglycémique', 'J1', 'MSP02 · Bilan et malaise', 1,
     'Appartement, cuisine', VSAV, ['bilan', 'malaise'],
-    ['Réaliser le bilan complet', 'Recueillir les antécédents et traitements', 'Transmettre le bilan au CTA-CODIS et à la régulation'],
+    ['Réaliser le bilan complet', 'Recueillir les antécédents et traitements', 'Transmettre le bilan pompier au SAMU (15)'],
     '« VSAV Plaisir 1, départ pour malaise, 15 avenue de Saint-Germain à Plaisir, 2e étage. »',
     'M. Rey (66 ans), diabétique sous insuline, a fait son injection mais a sauté le repas. Il est assis, en sueur, agité.',
     [V('M. Rey, 66 ans', 'Vous êtes confus, vous dites que tout va bien.', 'Vous vous améliorez après resucrage.',

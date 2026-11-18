@@ -252,7 +252,7 @@ input[type=color]{width:52px;height:40px;border:1px solid var(--line);border-rad
    Constantes et utilitaires
    ========================================================= */
 const KEY='forssuap78-v1';
-const APP_VERSION='1.2.0';
+const APP_VERSION='1.2.1';
 const LOGO='__LOGO__', MARK='__MARK__';
 const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
@@ -640,7 +640,7 @@ function seedSamples(d){
     participants:[P('q1','Sap 1CL','Exemple','Léa','CIS Exemple','2001-06-15'),P('q2','Sap 2CL','Démo','Hugo','CIS Démo','2003-11-08')],createdAt:Date.now(),updatedAt:Date.now()};
   pres(s2,{});d.sessions.push(s2);
   const SM=[['2026-11-23','Chute d’escabeau à domicile, suspicion de traumatisme du rachis','Sécuriser, bilan, immobilisation, relevage et brancardage jusqu’au VSAV.','MSP01','eqsuap-auto'],
-    ['2026-11-24','Malaise chez une personne diabétique à domicile','Réaliser le bilan, recueillir les éléments MHTA, transmettre le bilan au CTA-CODIS / SAMU.','MSP02','eqsuap-crit'],
+    ['2026-11-24','Malaise chez une personne diabétique à domicile','Réaliser le bilan, recueillir les éléments MHTA, transmettre le bilan pompier au SAMU (15).','MSP02','eqsuap-crit'],
     ['2026-11-25','Accident de la circulation, conducteur incarcéré','Sécuriser, bilan, participer à l’extraction avec l’équipe de désincarcération.','MSP03','eqsuap-crit'],
     ['2026-11-26','Brûlure thermique étendue – cuisine d’un restaurant','Refroidir, bilan, protéger, transmettre et surveiller pendant le transport.','MSP06','eqsuap-crit']];
   SM.forEach(([dt,th,mi,ref,tid],n)=>{mk(s2,tid,dt,th,mi,ref,n%2?'t-ex2':'t-ex1','q1','bon',n,'Travail en équipe efficace, bilan clair et transmis dans les temps.','Anticiper le conditionnement pour le transport.',true);
@@ -2151,7 +2151,7 @@ Object.assign(A,{
 });
 
 /* =========================================================
-   Régulation simulée par l'IA (Claude) : transmission du bilan au CTA-CODIS 78 puis au médecin régulateur du SAMU 78 (CRRA 15),
+   Régulation simulée par l'IA (Claude) : transmission du bilan pompier au SAMU 78 (CRRA 15 : l'ARM prend le bilan, le médecin régulateur seulement en cas de détresse importante),
    depuis un scénario, puis correction du bilan.
    Accès : clé API sur l'appareil, ou serveur relais (relay/) qui garde la clé. Rien n'est envoyé hors appel.
    Aucun nom de participant n'est transmis : seulement le scénario et ce qui est dit pendant l'appel.
@@ -2182,10 +2182,10 @@ async function aiAsk({system,messages,effort='low',max_tokens=4000,format}){
   if(r.stop_reason==='refusal')throw new Error('L’IA n’a pas pu répondre à cette demande');
   return r.content.filter(b=>b.type==='text').map(b=>b.text).join('').trim()}
 
-const AI_GREETING='CTA-CODIS des Yvelines, j’écoute.';
-const CALL_LEVELS={debutant:'Débutant : équipier en formation (opérateur et régulateur qui guident)',standard:'Standard : équipier (régulation réaliste)',certif:'Avancé : chef d’agrès VSAV (régulation exigeante)'};
+const AI_GREETING='Le SAMU, j’écoute.';
+const CALL_LEVELS={debutant:'Débutant : équipier en formation (ARM et médecin qui guident)',standard:'Standard : équipier (régulation réaliste)',certif:'Avancé : chef d’agrès VSAV (régulation exigeante)'};
 /* qui transmet le bilan : l'équipier prompt secours, seul, ou le chef d'agrès du VSAV */
-const CALL_ROLE={PS:'un sapeur-pompier volontaire engagé seul en prompt secours (Prompt Secours, module transverse de l’équipier SPV) : il est seul auprès de la victime avec son sac de prompt secours, un VSAV est engagé et il rend compte au CTA-CODIS en attendant son arrivée',
+const CALL_ROLE={PS:'un sapeur-pompier volontaire engagé seul en prompt secours (Prompt Secours, module transverse de l’équipier SPV) : il est seul auprès de la victime avec son sac de prompt secours, un VSAV est engagé ; il transmet son bilan au SAMU en attendant l’arrivée du VSAV',
   EQSUAP:'un équipier du VSAV en formation Équipier SUAP, qui transmet le bilan pour son équipage (chef d’agrès et équipiers) ; le VSAV est sur les lieux avec tout son matériel'};
 const scPromptData=c=>{
   const L=[`Formation : ${(RIOFE_COURSES[c.cur]||{}).name||c.cur}`,`Titre : ${c.titre}`,`Thème : ${c.theme}`,`Lieu : ${c.lieu}`,`Équipe : ${c.equipe}`,`Message de départ reçu : ${c.message}`,`Ce qui s’est passé : ${c.contexte}`];
@@ -2194,33 +2194,39 @@ const scPromptData=c=>{
   if((c.attendus||[]).length)L.push('Gestes et attitudes attendus : '+c.attendus.join(' ; '));
   return L.join('\n')};
 function callSystem(c,level){const who=CALL_ROLE[c.cur]||CALL_ROLE.EQSUAP;
-  const lv={debutant:`Niveau débutant. L’appelant débute. L’opérateur et le médecin restent réalistes mais bienveillants et pédagogues dans leur façon de questionner : ils le guident pas à pas (bilan circonstanciel, puis urgence vitale dans l’ordre XABCDE, puis complémentaire), reformulent brièvement pour l’aider à structurer, ne relèvent que les oublis importants et ne le déstabilisent pas.`,
-    standard:`Niveau standard. L’appelant est en formation. Tu te comportes comme une vraie salle opérationnelle et une vraie régulation : courtoises, efficaces, précises. Tu le laisses donner son bilan, puis tu relances sur ce qui manque ou reste flou, tu fais préciser les chiffres et demander les mesures qui manquent, sans le brusquer.`,
-    certif:`Niveau avancé. L’appelant joue le chef d’agrès du VSAV : c’est lui qui dirige l’équipage et fait le lien avec le CTA-CODIS et la régulation. Tu es exigeant, comme avec un chef d’agrès expérimenté. Le médecin dit « Je vous écoute » et attend un bilan complet et hiérarchisé sans aide : indicatif, adresse, bilan circonstanciel (mécanisme, nombre de victimes, risques, moyens sur place), bilan d’urgence vitale XABCDE, bilan complémentaire, gestes réalisés, puis ses demandes (renfort médical, moyens, orientation). Pas de guidage : questions ouvertes (« Autre chose ? », « Vos besoins ? »), incohérences relevées, chiffres exigés. Tu lui demandes des décisions de chef : moyens supplémentaires, répartition de l’équipage s’il y a plusieurs victimes, préparation du transport, délai du prochain bilan. À la fin, tu lui demandes de répéter les consignes (collationnement).`}[level]||'';
-  return `Tu joues la chaîne de traitement de l’alerte et de régulation du département des Yvelines (78) dans un exercice de formation des sapeurs-pompiers du SDIS 78. L’appelant est ${who}. Il s’entraîne à transmettre un bilan et à travailler avec la régulation médicale. Les sapeurs-pompiers réalisent le bilan circonstanciel, le bilan d’urgence vitale dans l’ordre XABCDE (X hémorragie eXsanguinante, A voies aériennes, B respiration, C circulation, D neurologique, E exposition), puis le bilan complémentaire et la surveillance. Tout est fictif, mais tu dois être aussi crédible qu’une vraie salle opérationnelle et une vraie régulation françaises.
+  const lv={debutant:`Niveau débutant. L’appelant débute. L’ARM (et le médecin s’il intervient) restent réalistes mais bienveillants et pédagogues dans leur façon de questionner : ils le guident pas à pas (bilan circonstanciel, puis urgence vitale dans l’ordre XABCDE, puis complémentaire), reformulent brièvement pour l’aider à structurer, ne relèvent que les oublis importants et ne le déstabilisent pas.`,
+    standard:`Niveau standard. L’appelant est en formation. Tu te comportes comme une vraie régulation médicale : courtoise, efficace, précise. Tu le laisses donner son bilan, puis tu relances sur ce qui manque ou reste flou, tu fais préciser les chiffres et demander les mesures qui manquent, sans le brusquer.`,
+    certif:`Niveau avancé. L’appelant joue le chef d’agrès du VSAV : c’est lui qui dirige l’équipage et transmet le bilan à la régulation médicale. Tu es exigeant, comme avec un chef d’agrès expérimenté. L’ARM dit « Je vous écoute » et attend un bilan complet et hiérarchisé sans aide : indicatif, adresse, bilan circonstanciel (mécanisme, nombre de victimes, risques, moyens sur place), bilan d’urgence vitale XABCDE, bilan complémentaire, gestes réalisés, puis ses demandes (renfort médical, moyens, orientation). Pas de guidage : questions ouvertes (« Autre chose ? », « Vos besoins ? »), incohérences relevées, chiffres exigés. Tu lui demandes des décisions de chef : moyens supplémentaires, répartition de l’équipage s’il y a plusieurs victimes, préparation du transport, délai du prochain bilan. À la fin, tu lui demandes de répéter les consignes (collationnement).`}[level]||'';
+  return `Tu joues la régulation médicale du SAMU des Yvelines (SAMU 78, CRRA 15) qui reçoit un bilan de sapeurs-pompiers, dans un exercice de formation du SDIS 78 : l’ARM prend le bilan et ne passe le médecin régulateur qu’en cas de détresse importante. L’appelant est ${who}. Il s’entraîne à transmettre un bilan et à travailler avec la régulation médicale. Les sapeurs-pompiers réalisent le bilan circonstanciel, le bilan d’urgence vitale dans l’ordre XABCDE (X hémorragie eXsanguinante, A voies aériennes, B respiration, C circulation, D neurologique, E exposition), puis le bilan complémentaire et la surveillance. Tout est fictif, mais tu dois être aussi crédible qu’une vraie régulation française.
 
 LA CONVERSATION
 C’est un appel téléphonique en direct : tout ce que tu écris est lu à voix haute aussitôt. Parle comme au téléphone : une à deux phrases courtes, sans liste, sans titre, sans mise en forme, sans émoji. Pose une question à la fois, ou deux questions liées. Ne répète pas ce que l’appelant vient de dire, n’annonce pas ce que tu vas faire : avance. Ce que dit l’appelant arrive par reconnaissance vocale : interprète au mieux et ne fais répéter que l’essentiel incompréhensible (adresse, chiffre, médicament). Si son message semble coupé, dis seulement « Oui ? » ou « Je vous écoute. ».
 
-TU AS DEUX RÔLES SUCCESSIFS
-1. L’opérateur du CTA-CODIS 78. Tu as décroché en disant « ${AI_GREETING} ». En quelques échanges rapides, tu obtiens : l’indicatif de l’engin ou du sapeur-pompier (par exemple « VSAV Versailles 1 » ou « prompt secours de Maule ») et son centre, l’adresse exacte et la confirmation que les moyens sont sur les lieux, le motif en une phrase et le nombre de victimes. Si c’est un prompt secours, tu confirmes que le VSAV est engagé et tu donnes un délai d’arrivée réaliste. Puis tu dis : « Je vous mets en relation avec le médecin régulateur du SAMU 78, ne quittez pas. »
-2. Le médecin régulateur du CRRA 15 (SAMU 78). Tu te présentes en une phrase (« Docteur Martin, médecin régulateur, je vous écoute. ») et tu mènes un véritable interrogatoire médical, en t’adaptant à chaque réponse :
-- circonstances et mécanisme : ce qui s’est passé, heure de début, cinétique ou hauteur de chute, témoins, perte de connaissance initiale ;
-- urgence vitale dans l’ordre XABCDE : hémorragie et ce qui a été fait (compression, pansement compressif, garrot et son heure) ; voies aériennes ; respiration (fréquence, amplitude, bruits, saturation, cyanose, sueurs, signes de lutte) ; circulation (pouls, régularité, pouls radial, tension, coloration, temps de recoloration, marbrures) ; neurologique (conscience, orientation, pupilles, motricité, sensibilité, glycémie) ; exposition (lésions, température, environnement) ;
-- plaintes : douleur (siège, type, intensité sur 10, irradiation, depuis quand) ;
-- antécédents, traitements (anticoagulants, insuline, traitements du cœur), allergies, grossesse si pertinent, dernier repas ;
-- gestes réalisés et leur effet : position, oxygène et débit, pansement ou garrot, immobilisations, RCP et nombre de chocs ;
-- évolution depuis l’arrivée.
-Si une réponse est vague, tu fais préciser. Si un chiffre manque, tu le demandes ; si une mesure n’a pas été faite, tu demandes de la faire et de te rappeler. Si deux informations se contredisent, tu le dis. Si un signe de gravité apparaît, tu le traites en priorité.
+TON RÔLE : L’ARM QUI PREND LE BILAN POMPIER
+Tu es l’assistant de régulation médicale (ARM, ou PARM) du CRRA 15. Tu as décroché en disant « ${AI_GREETING} ». C’est toi qui prends le bilan des sapeurs-pompiers, du début à la fin, sans passer le médecin sauf détresse importante (voir plus bas).
+- D’abord, en quelques échanges rapides : l’indicatif de l’engin ou du sapeur-pompier (par exemple « VSAV Versailles 1 » ou « prompt secours de Maule ») et son centre, l’adresse exacte, le motif en une phrase, le nombre de victimes, leur âge et leur sexe.
+- Puis le bilan, en t’adaptant à chaque réponse :
+  circonstances et mécanisme : ce qui s’est passé, heure de début, cinétique ou hauteur de chute, témoins, perte de connaissance initiale ;
+  urgence vitale dans l’ordre XABCDE : hémorragie et ce qui a été fait (compression, pansement compressif, garrot et son heure) ; voies aériennes ; respiration (fréquence, amplitude, bruits, saturation, cyanose, sueurs, signes de lutte) ; circulation (pouls, régularité, pouls radial, tension, coloration, temps de recoloration, marbrures) ; neurologique (conscience, orientation, pupilles, motricité, sensibilité, glycémie) ; exposition (lésions, température, environnement) ;
+  plaintes : douleur (siège, type, intensité sur 10, irradiation, depuis quand) ;
+  antécédents, traitements (anticoagulants, insuline, traitements du cœur), allergies, grossesse si pertinent, dernier repas ;
+  gestes réalisés et leur effet : position, oxygène et débit, pansement ou garrot, immobilisations, RCP et nombre de chocs ;
+  évolution depuis l’arrivée.
+Si une réponse est vague, tu fais préciser. Si un chiffre manque, tu le demandes ; si une mesure n’a pas été faite, tu demandes de la faire et de rappeler. Si deux informations se contredisent, tu le dis.
 
-TA DÉCISION
-Quand tu as ce qu’il te faut, tu annonces une décision réaliste et cohérente : envoi du SMUR, transport par le VSAV vers un service précis (urgences de l’hôpital le plus adapté des Yvelines, par exemple centre hospitalier de Versailles André-Mignot, de Poissy-Saint-Germain, de Mantes-la-Jolie, de Rambouillet), ou laissé sur place avec conseils. Pour un prompt secours seul, tu lui donnes les consignes d’attente du VSAV. Tu donnes des consignes précises et réalisables par des sapeurs-pompiers non médecins, conformes aux référentiels nationaux du secours d’urgence aux personnes : position, oxygène et débit, surveillance (quoi et à quel rythme), ce qu’il ne faut pas faire, éléments à emporter (ordonnances, traitements, papiers), et quand rappeler (bilan de surveillance ou aggravation). Tu ne prescris rien d’autre.
+QUAND TU PASSES LE MÉDECIN RÉGULATEUR
+Uniquement en cas de détresse importante : détresse vitale (hémorragie grave, détresse respiratoire, circulatoire ou neurologique, arrêt cardiaque), signes de gravité marqués, traumatisme grave ou à forte cinétique, douleur thoracique évocatrice, accouchement ou nouveau-né en difficulté, enfant ou nourrisson grave, ou plusieurs victimes graves. Tu le décides dès que la gravité apparaît, sans attendre la fin du bilan : « Je vous passe le médecin régulateur, ne quittez pas. »
+Tu deviens alors le médecin régulateur du CRRA 15 (SAMU 78) : tu te présentes en une phrase (« Docteur Martin, médecin régulateur, je vous écoute. »), tu fais compléter ou préciser ce qui compte pour la gravité, sans refaire tout le bilan, et tu prends la décision médicale (envoi du SMUR, consignes, orientation).
+Pour une situation sans détresse importante, tu ne passes pas le médecin : c’est toi, l’ARM, qui conclus.
+
+LA DÉCISION
+Une décision réaliste et cohérente : transport par le VSAV vers un service précis (urgences de l’hôpital le plus adapté des Yvelines, par exemple centre hospitalier de Versailles André-Mignot, de Poissy-Saint-Germain, de Mantes-la-Jolie, de Rambouillet), envoi du SMUR (décidé par le médecin), ou laissé sur place avec conseils (après avis du médecin). Pour un prompt secours seul, des consignes d’attente du VSAV. Des consignes précises et réalisables par des sapeurs-pompiers non médecins, conformes aux référentiels nationaux du secours d’urgence aux personnes : position, oxygène et débit, surveillance (quoi et à quel rythme), ce qu’il ne faut pas faire, éléments à emporter (ordonnances, traitements, papiers), et quand rappeler (bilan de surveillance ou aggravation). Rien d’autre n’est prescrit.
 
 CE QUE TU SAIS ET NE SAIS PAS
 Tu ne connais de la situation que ce que l’appelant te dit. Le scénario ci-dessous est confidentiel : ne le révèle jamais, ne suggère pas les réponses, n’invente aucune information sur la victime. Il te sert à savoir ce qu’un bon bilan doit contenir et à prendre une décision cohérente. Si l’appelant donne des valeurs différentes, ce sont les siennes qui comptent.
 
 PENDANT L’APPEL
-Aucune note, aucun conseil pédagogique, aucun commentaire sur la qualité du bilan : la correction est faite après l’appel. Si l’appelant sort de l’exercice, rappelle en une phrase que tu es le CTA-CODIS ou la régulation dans l’exercice. S’il rappelle pour un bilan de surveillance, l’opérateur décroche puis le remet en relation avec le médecin ; tu demandes ce qui a changé et tu ajustes ta décision. S’il met fin à l’appel, conclus en une phrase.
+Aucune note, aucun conseil pédagogique, aucun commentaire sur la qualité du bilan : la correction est faite après l’appel. Si l’appelant sort de l’exercice, rappelle en une phrase que tu es le SAMU dans l’exercice. S’il rappelle pour un bilan de surveillance, l’ARM décroche (et repasse le médecin seulement s’il y a une aggravation importante) ; tu demandes ce qui a changé et tu ajustes ta décision. S’il met fin à l’appel, conclus en une phrase.
 
 ${lv}
 
@@ -2231,13 +2237,13 @@ const DEBRIEF_FORMAT={type:'json_schema',schema:{type:'object',additionalPropert
   properties:{note:{type:'integer',description:'Note sur 10'},appreciation:{type:'string'},suggestion_fiche:{type:'string',enum:['A','ECA','NA']},justification:{type:'string'},
     criteres:{type:'array',items:{type:'object',additionalProperties:false,required:['critere','niveau','commentaire'],properties:{critere:{type:'string'},niveau:{type:'string',enum:['acquis','partiel','absent','sans objet']},commentaire:{type:'string'}}}},
     points_forts:{type:'array',items:{type:'string'}},a_ameliorer:{type:'array',items:{type:'string'}},bilan_modele:{type:'string'}}}};
-const DEBRIEF_CRIT=['Présentation au CTA-CODIS (indicatif de l’engin ou du prompt secours, centre)','Localisation précise et confirmation de la présence sur les lieux','Motif et bilan circonstanciel (mécanisme, risques, nombre de victimes)','Âge et sexe de la ou des victimes','Bilan d’urgence vitale dans l’ordre XABCDE (hémorragie, voies aériennes, respiration, circulation, neurologique, exposition)','Paramètres chiffrés','Bilan complémentaire (plaintes, examen, antécédents, traitements, allergies)','Gestes réalisés et leur effet','Demandes exprimées (renfort médical, moyens, orientation) et, pour un chef d’agrès, organisation de l’équipage','Clarté, ordre et concision du message','Réponses au médecin régulateur et collationnement des consignes reçues'];
+const DEBRIEF_CRIT=['Présentation à l’ARM (indicatif de l’engin ou du prompt secours, centre)','Localisation précise','Motif et bilan circonstanciel (mécanisme, risques, nombre de victimes)','Âge et sexe de la ou des victimes','Bilan d’urgence vitale dans l’ordre XABCDE (hémorragie, voies aériennes, respiration, circulation, neurologique, exposition)','Paramètres chiffrés','Bilan complémentaire (plaintes, examen, antécédents, traitements, allergies)','Gestes réalisés et leur effet','Demandes exprimées (renfort médical, moyens, orientation) et, pour un chef d’agrès, organisation de l’équipage','Clarté, ordre et concision du message','Réponses aux questions de l’ARM ou du médecin régulateur et collationnement des consignes reçues'];
 /* savoir-agir du RIOFE sur lequel porte la proposition de niveau */
 const CALL_SA={PS:'C24 « Alerter, informer »',EQSUAP:'C4 « Collaborer avec les personnels médicaux, paramédicaux » et C5 « Réaliser les bilans en vigueur »'};
 function debriefSystem(c,level){const lvl={debutant:'Niveau de l’exercice : débutant. Sois encourageant, valorise ce qui est acquis et concentre-toi sur deux ou trois priorités ; un bilan incomplet mais sûr et dans le bon ordre mérite une note correcte.',
     standard:'Niveau de l’exercice : standard. Attends un bilan complet dans l’ordre (circonstanciel, XABCDE, complémentaire), avec des chiffres, en restant bienveillant.',
     certif:'Niveau de l’exercice : avancé. L’apprenant joue le chef d’agrès du VSAV : attends un bilan complet et hiérarchisé, des demandes adaptées, des décisions de chef (organisation de l’équipage, transport) et le collationnement des consignes.'}[level]||'';
-  return `Tu es formateur de formateurs en secours d’urgence aux personnes au SDIS 78 (Groupement Formation). Tu corriges la transmission d’un bilan au CTA-CODIS et au médecin régulateur du SAMU réalisée par ${CALL_ROLE[c.cur]||CALL_ROLE.EQSUAP}, pendant une mise en situation professionnelle, à partir de la transcription de l’appel et du scénario joué. Vérifie l’ordre : bilan circonstanciel, bilan d’urgence vitale XABCDE, bilan complémentaire.
+  return `Tu es formateur de formateurs en secours d’urgence aux personnes au SDIS 78 (Groupement Formation). Tu corriges la transmission d’un bilan pompier au SAMU (ARM du CRRA 15, et médecin régulateur en cas de détresse importante) réalisée par ${CALL_ROLE[c.cur]||CALL_ROLE.EQSUAP}, pendant une mise en situation professionnelle, à partir de la transcription de l’appel et du scénario joué. Vérifie l’ordre : bilan circonstanciel, bilan d’urgence vitale XABCDE, bilan complémentaire.
 
 ${lvl}
 
@@ -2352,8 +2358,8 @@ async function elStart(K){const c=scById(K.scId),s=await elSession();if(!ELC())t
   throw new Error('Connexion vocale impossible'+(last?' : '+(last.message||last):''))}
 /* ---- écrans ---- */
 function viewAiSettings(){const a=aiCfg();
-  return `<section class="panel"><div class="hd"><h3>Régulation simulée (CTA-CODIS / SAMU) (IA)</h3><span class="pill ${(a.engine==='eleven'?elReady():true)&&aiReady()?'ok':'neutral'}">${(a.engine==='eleven'?elReady():true)&&aiReady()?'Prête':'À configurer'}</span></div><div class="bd stack">
-    <p class="small muted" style="margin:0">Depuis un scénario, « Transmettre le bilan » met l’apprenant en ligne avec le CTA-CODIS puis le médecin régulateur du SAMU, simulés par l’IA Claude, puis corrige son bilan. Il faut du réseau pendant l’appel. Seuls le scénario et ce qui est dit pendant l’appel sont envoyés, jamais les noms des participants.</p>
+  return `<section class="panel"><div class="hd"><h3>Régulation simulée (SAMU 15) (IA)</h3><span class="pill ${(a.engine==='eleven'?elReady():true)&&aiReady()?'ok':'neutral'}">${(a.engine==='eleven'?elReady():true)&&aiReady()?'Prête':'À configurer'}</span></div><div class="bd stack">
+    <p class="small muted" style="margin:0">Depuis un scénario, « Transmettre le bilan » met l’apprenant en ligne avec l’ARM du SAMU (CRRA 15), qui passe le médecin régulateur en cas de détresse importante, simulés par l’IA Claude, puis corrige son bilan. Il faut du réseau pendant l’appel. Seuls le scénario et ce qui est dit pendant l’appel sont envoyés, jamais les noms des participants.</p>
     <label class="f">Voix de l’appel<select id="ai-engine" ${bind('ai.engine','settings')}><option value="eleven" ${a.engine==='eleven'?'selected':''}>ElevenLabs : voix naturelle, conversation fluide (recommandé)</option><option value="phone" ${a.engine==='phone'?'selected':''}>Voix et reconnaissance du téléphone (sans compte)</option></select></label>
     ${a.engine==='eleven'?`<label class="f">Accès à ElevenLabs<select id="ai-elmode" ${bind('ai.elMode','settings')}><option value="relay" ${a.elMode==='relay'?'selected':''}>Par le serveur relais (recommandé : la clé reste sur le serveur)</option><option value="public" ${a.elMode==='public'?'selected':''}>Agent public (essai rapide, sans serveur)</option></select></label>
       ${a.elMode==='public'?`<label class="f">Identifiant de l’agent ElevenLabs<input type="text" id="ai-elagent" value="${esc(a.elAgent)}" placeholder="agent_…" ${bind('ai.elAgent','settings')}></label><p class="small muted" style="margin:0">Un agent public peut être utilisé par quiconque connaît son identifiant : limitez-le à votre adresse dans ElevenLabs (Security › Allowlist) et fixez un plafond de dépense. Pour un usage régulier, passez par le serveur relais.</p>`:''}`:''}
@@ -2376,17 +2382,17 @@ function viewCall(){const K=S.call;if(!K)return viewScenarios();const c=scById(K
   if(K.closed)return viewCallClosed(K,c);
   if(!K.started)return `<div class="stack">
     <section class="panel"><div class="hd"><h3>Avant l’appel</h3></div><div class="bd stack">
-      <p style="margin:0">L’apprenant appelle le CTA-CODIS et parle comme au téléphone : rien à toucher, rien à lire pendant l’appel. Le régulateur répond à voix haute quand l’apprenant marque une vraie pause. À la fin, « Raccrocher » : l’IA corrige la transmission.</p>
+      <p style="margin:0">L’apprenant appelle le 15 et parle comme au téléphone : rien à toucher, rien à lire pendant l’appel. Le régulateur répond à voix haute quand l’apprenant marque une vraie pause. À la fin, « Raccrocher » : l’IA corrige la transmission.</p>
       ${parts.length?`<label class="f">Apprenant qui appelle (reste sur cet appareil)<select id="call-who" ${bind('who','call')}><option value="">—</option>${parts.map(p=>`<option value="${esc(fullName(p))}" ${K.who===fullName(p)?'selected':''}>${esc(fullName(p))}</option>`).join('')}</select></label>`:''}
       ${voiceIn()?`<label class="f">Mode de l’appel<select id="call-mode" ${bind('mode','call')}><option value="voice" ${K.mode==='voice'?'selected':''}>À la voix, comme au téléphone</option><option value="text" ${K.mode==='text'?'selected':''}>Par écrit (salle bruyante, pas de micro)</option></select></label>`:''}
       ${useEleven()&&K.mode==='voice'?'':`<label class="f">Pause avant que le régulateur réponde<select id="call-pause" ${bind('ai.pause','settings')}>${Object.entries(PAUSES).map(([k,[,l]])=>`<option value="${k}" ${(aiCfg().pause||'normal')===k?'selected':''}>${l}</option>`).join('')}</select></label>`}
       <label class="f">Niveau du régulateur<select id="call-level" ${bind('level','call')}>${Object.entries(CALL_LEVELS).map(([k,l])=>`<option value="${k}" ${K.level===k?'selected':''}>${l}</option>`).join('')}</select></label>
       ${voiceIn()?'<p class="small muted" style="margin:0">Conseil : téléphone ou tablette sur haut-parleur, dans un endroit calme ; parlez normalement : les hésitations courtes ne coupent pas la parole ; si l’apprenant est souvent coupé, choisissez une pause plus longue.</p>':'<p class="small" style="color:var(--t-orange);margin:0">Pas de reconnaissance vocale sur ce navigateur : l’appel se fera par écrit (Chrome ou l’application Android permettent la voix).</p>'}
       ${aiCfg().record!==false&&recCan()?'<p class="small" style="margin:0">● L’appel à la voix est <b>enregistré</b> pour être réécouté au débriefing : le son reste sur cet appareil et s’efface automatiquement au bout de 30 minutes. Prévenez l’apprenant.</p>':''}
-      ${callReady(K)?'':`<div class="small" style="color:var(--t-orange)">${K.mode==='voice'&&useEleven()?'La voix ElevenLabs n’est pas configurée':'L’IA n’est pas configurée'} : renseignez l’accès dans Réglages › Régulation simulée (CTA-CODIS / SAMU).</div>`}
+      ${callReady(K)?'':`<div class="small" style="color:var(--t-orange)">${K.mode==='voice'&&useEleven()?'La voix ElevenLabs n’est pas configurée':'L’IA n’est pas configurée'} : renseignez l’accès dans Réglages › Régulation simulée (SAMU 15).</div>`}
       ${callReady(K)&&!aiReady()?'<div class="small muted">La correction du bilan demande aussi l’accès à Claude (Réglages) : sans lui, vous aurez la transcription et l’enregistrement, mais pas la note.</div>':''}
-      <button class="btn red" data-act="call-go" ${callReady(K)?'':'disabled'}>${I.phone}Appeler le CTA-CODIS</button></div></section></div>`;
-  const st={connecting:'Connexion au CTA-CODIS…',ended:'Appel terminé',talking:'Vous parlez…',listening:'À vous, parlez…',thinking:'Le régulateur réfléchit…',speaking:'Le régulateur parle…',muted:'Micro coupé',text:'Appel par écrit'}[K.phase]||'En ligne';
+      <button class="btn red" data-act="call-go" ${callReady(K)?'':'disabled'}>${I.phone}Appeler le 15</button></div></section></div>`;
+  const st={connecting:'Connexion au 15…',ended:'Appel terminé',talking:'Vous parlez…',listening:'À vous, parlez…',thinking:'Le régulateur réfléchit…',speaking:'Le régulateur parle…',muted:'Micro coupé',text:'Appel par écrit'}[K.phase]||'En ligne';
   const sec=Math.floor((Date.now()-K.t0)/1000);
   const bubbles=callLines(K).filter(m=>!m.hidden).map(m=>`<div class="bub ${m.r==='u'?'me':''}"><span class="small muted">${m.r==='u'?'Secouriste':'Régulateur'}</span>${esc(m.t.replace(/^\[[^\]]*\]\s*/,''))}</div>`).join('');
   return `<div class="stack">
@@ -2404,7 +2410,7 @@ function viewCall(){const K=S.call;if(!K)return viewScenarios();const c=scById(K
     ${K.mode==='text'?`<div class="row" style="align-items:stretch"><input type="text" id="call-in" class="grow" style="min-height:48px" placeholder="Votre message au régulateur" value="${esc(K.draft||'')}" ${K.busy?'disabled':''}><button class="btn primary" data-act="call-send" ${K.busy?'disabled':''}>Envoyer</button></div>`:''}
     ${K.mode==='text'?`<div class="calllog" id="calllog">${bubbles}</div>`:`<p class="small muted" style="margin:0;text-align:center">La transcription complète de l’appel s’affichera avec la correction.</p>`}</div>`}
 function viewCallClosed(K,c){return `<div class="stack">
-    <div class="panel"><div class="bd small">Appel terminé. ${aiReady()?'La correction n’a pas pu être faite : réessayez.':'Pour obtenir la note et la correction du bilan, renseignez l’accès à Claude dans Réglages › Régulation simulée (CTA-CODIS / SAMU).'}</div></div>
+    <div class="panel"><div class="bd small">Appel terminé. ${aiReady()?'La correction n’a pas pu être faite : réessayez.':'Pour obtenir la note et la correction du bilan, renseignez l’accès à Claude dans Réglages › Régulation simulée (SAMU 15).'}</div></div>
     ${aiReady()?'<button class="btn primary" data-act="call-redebrief">Corriger le bilan</button>':''}
     <section class="panel"><div class="hd"><h3>Réécouter l’appel</h3></div><div class="bd" id="call-audio"><span class="small muted">Chargement…</span></div></section>
     <section class="panel"><div class="hd"><h3>Transcription de l’appel</h3></div><div class="bd calllog">${callLines(K).filter(m=>!m.hidden).map(m=>`<div class="bub ${m.r==='u'?'me':''}"><span class="small muted">${m.r==='u'?'Secouriste':'Régulateur'}</span>${esc(m.t.replace(/^\[[^\]]*\]\s*/,''))}</div>`).join('')}</div></section>
@@ -2478,7 +2484,7 @@ Object.assign(A,{
   'call-mute':()=>{const K=S.call;K.muted=!K.muted;K.err='';if(K.engine==='eleven'){if(K.el)K.el.setMicMuted(K.muted);render();return}if(K.muted){stopListen();setPhase(K,'muted')}else{setPhase(K,'listening');callLoop(K)}},
   'call-interrupt':()=>{const K=S.call;K.cut=true;if(K.stream){try{K.stream.abort()}catch(e){}}hush();K.muted=false;if(!K.looping)callLoop(K);else setPhase(K,'listening')},
   'call-kb':()=>{const K=S.call;if(K.mode==='voice'){K.mode='text';stopListen();setPhase(K,'text')}else{K.mode='voice';K.muted=false;setPhase(K,'listening');callLoop(K)}},
-  'call-recall':()=>{const K=S.call;if(K.engine==='eleven'){if(K.el){K.msgs.push({r:'u',t:'(Rappel pour le bilan de surveillance.)'});K.el.sendUserMessage('[Quelques minutes plus tard, les sapeurs-pompiers rappellent le CTA-CODIS pour transmettre le bilan de surveillance.] Allô, je vous rappelle pour le bilan de surveillance.')}return}stopListen();callTurn('[Quelques minutes plus tard, les sapeurs-pompiers rappellent le CTA-CODIS pour transmettre le bilan de surveillance.] Allô, je vous rappelle pour le bilan de surveillance.').then(()=>{if(K.mode==='voice'&&!K.muted)callLoop(K)})},
+  'call-recall':()=>{const K=S.call;if(K.engine==='eleven'){if(K.el){K.msgs.push({r:'u',t:'(Rappel pour le bilan de surveillance.)'});K.el.sendUserMessage('[Quelques minutes plus tard, les sapeurs-pompiers rappellent le 15 pour transmettre le bilan de surveillance.] Allô, je vous rappelle pour le bilan de surveillance.')}return}stopListen();callTurn('[Quelques minutes plus tard, les sapeurs-pompiers rappellent le 15 pour transmettre le bilan de surveillance.] Allô, je vous rappelle pour le bilan de surveillance.').then(()=>{if(K.mode==='voice'&&!K.muted)callLoop(K)})},
   'call-end':async()=>{const K=S.call,c=scById(K.scId);const rs=recStop(K);endCallMedia(K);await rs;callSave(K);
     if(!aiReady()){K.closed=true;render();window.scrollTo(0,0);return}busy(true,'Correction du bilan…');
     try{const txt=await aiAsk({system:debriefSystem(c,K.level),messages:[{role:'user',content:'Transcription de l’appel :\n'+callTranscript(callLines(K))}],effort:'medium',max_tokens:16000,format:DEBRIEF_FORMAT});
@@ -2490,7 +2496,7 @@ Object.assign(A,{
   'call-open':d=>{const x=(DB.calls||[]).find(y=>y.id===d.id);if(!x)return;S.call=Object.assign({started:true,t0:0},clone(x));go('call')},
   'pdf-call':()=>{const K=S.call,c=scById(K.scId);runExport('Création du PDF…',()=>({files:[pdfFile(`${c.cur}_transmission-bilan_${String(c.n).padStart(2,'0')}_${slug(K.who||'apprenant')}_${K.date}`,callPages(K,c))],title:'Transmission du bilan'}))}
 });
-function callPages(K,c){const D=K.debrief;return [{orient:'p',draw:doc=>{const P=pen(doc);const w=scWriter(doc,P,`${c.cur} · Transmission du bilan (CTA-CODIS / SAMU)`);
+function callPages(K,c){const D=K.debrief;return [{orient:'p',draw:doc=>{const P=pen(doc);const w=scWriter(doc,P,`${c.cur} · Transmission du bilan au SAMU 15`);
   w.p(c.titre,{b:true,s:15,c:[0,43,107],gap:1});w.p(`${c.cur} · scénario n°${c.n} · ${fmtDate(K.date)}${K.who?' · '+K.who:''} · niveau ${CALL_LEVELS[K.level]||''}`,{s:8.5,c:GREY});w.y+=2;
   w.lab('Note : ',`${D.note}/10 - ${D.appreciation}`);w.lab('Proposition pour la fiche d’évaluation : ',`${D.suggestion_fiche} - ${D.justification} (le formateur décide)`);
   w.h('Critères');(D.criteres||[]).forEach(x=>w.li(`${x.critere} : ${x.niveau.toUpperCase()} - ${x.commentaire}`,{s:8.5}));
